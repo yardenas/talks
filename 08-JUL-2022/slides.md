@@ -334,23 +334,25 @@ Implementation of 4 different baseline algorithms
 </v-clicks>
 </div>
 
----
-layout: iframe-right
-url: https://www.youtube.com/embed/v6mZG8W7Qck?&autoplay=1&start=58
----
 
-# Outlook
+<!-- layout: iframe-right -->
+<!-- url: https://www.youtube.com/embed/v6mZG8W7Qck?&autoplay=1&start=58 -->
 
-Why is this problem interesting? Trajectory planning in spinal robotic surgeries 
 
-<v-clicks>
+
+<!-- # Outlook
+
+Why is this problem interesting? Trajectory planning in spinal robotic surgeries  -->
+
+<!-- <v-clicks>
 
 - Trajectory planning in the pre-operative stage is done manually by surgeon.
 - Patients come in "all shapes and sizes."
 - But still share a common structure.
 - Thus, a we need algorithms that use the _prior knowledge of common structure_ to adapt _quickly and safely_ to new patients.
 
-</v-clicks>
+</v-clicks> 
+-->
 
 ---
 layout: image-right
