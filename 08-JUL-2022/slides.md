@@ -104,14 +104,6 @@ $$
 
 <!-- TODO (yarden): create a Vue component of a tooltip that explains the different things. -->
 <div class="grid grid-cols-2 gap-x-4">
-<div class="relative">
-  <div v-click class="w-72 absolute inset-x-18 top-20 z-1">
-      <img src="/lambda-demo.svg">
-  </div>
-  <div v-click="2" clas="absolute inset-x-30 z-0">
-    <img src="/lambda-training-loop.svg" width="500">
-  </div>
-</div>
 <div>
 
 <v-clicks>
@@ -119,14 +111,30 @@ $$
 - Collect data on the real environment based on $\pi$
 - Use this data to fit a statistical model of the environment
 </v-clicks>
+
+<div v-click="3">
+
+<br>
+<br>
+
+## Planning
+</div>
 <ul>
-  <li v-click="7">Simulate the policy with the model. Backpropagate policy gradients through the model</li>
-  <li v-click="8">Solve the constrained problem with <i><b>the Augmented Lagrangian</b></i></li>
+  <li v-click="8">Simulate the policy with the model</li>
+  <li v-click="9">Solve the constrained problem with <i><b>the Augmented Lagrangian</b></i></li>
+  <li v-click="10">Backpropagate policy gradients through the model</li>
 </ul>
 
-<div v-click="6">
+</div>
 
-```python {all|2|7|all}
+<div>
+<div v-click-hide="3" clas="absolute inset-x-30 z-0">
+  <img src="/lambda-training-loop.svg" width="500">
+</div>
+
+<div v-click="3" class="absolute top-50">
+
+```python {all|2|7|9}
 def policy_loss(policy, model, initial_state, lagrangian):
   trajectory = model.simulate(policy, initial_state)
   # Use learned critics to **estimate** the 
@@ -139,6 +147,31 @@ policy_grads = grad(policy_loss)(...)
 ```
 </div>
 </div>
+</div>
+
+---
+
+# LAMBDA
+
+A probabilistic perspective
+
+<div class="opacity-80">
+
+- Maintain a posterior distribution over model parameters given previously seen data $\theta \sim p(\theta | \mathcal{D})$
+- Models track an underlying representation of the environment's state, given image observations (think non-linear Kalman filter)
+</div>
+
+<div class="text-center my-15"> 
+<v-clicks>
+
+#### This probabilistic modeling allows the agent to be robust for safety (through pessimism).
+#### But still discover new behaviors (through optimism).
+</v-clicks>
+</div>
+
+
+<div class="abs-br m-10">
+    <img src="https://imgur.com/W5n1wuV.gif" width="600">
 </div>
 
 ---
@@ -212,7 +245,7 @@ layout: statement
 
 # Meta-learning
 
-Solving multiple tasks
+Adapting to new tasks
 
 <div class="grid grid-cols-2 gap-x-4">
 <div class=opacity-80>
@@ -286,9 +319,12 @@ $$
 
 Previous work tends to look at _robustness to uncertainty_ over MDPs, but this typically comes with a price: reduction of performance
 
+Can we enforce strict safety only on meta-testing? This could fit well into our project's setting
+
 </v-clicks>
 
 </div>
+
 
 ---
 layout: section
@@ -363,9 +399,9 @@ image: https://source.unsplash.com/_0fXQrtNZEo/1920*2560
 <div class="opacity-80">
 
 - Constrained Markov decision processes.
+- Preliminary work.
 - Meta-reinforcement learning with constraints (?)
 - Current state of progress.
-- Application.
 
 </div>
 
