@@ -9,7 +9,8 @@
   "dependencies": {
     "@slidev/cli": "^0.34.2",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*"
+    "@slidev/theme-seriph": "*",
+    "endent": "^2.1.0"
   },
   "devDependencies": {
     "@iconify-json/fluent": "^1.1.13",
