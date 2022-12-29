@@ -1,7 +1,8 @@
-import { defineMermaidSetup } from '@slidev/types'
+import { defineMermaidSetup } from "@slidev/types";
 
 export default defineMermaidSetup(() => {
   return {
-    theme: 'neutral',
-  }
-})
+    theme: "neutral",
+    fontFamily: "sans",
+  };
+});
