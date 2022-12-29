@@ -128,7 +128,7 @@ $$
 </div>
 
 <div>
-<div v-click-hide="3" clas="absolute inset-x-30 z-0">
+<div v-click-hide="3" class="absolute inset-x-30 z-0">
   <img src="/lambda-training-loop.svg" width="500">
 </div>
 
