@@ -57,7 +57,6 @@ image: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/bin/RSRR-6-9-g0001.j
 <a href="https://www.dovepress.com/robotic-assisted-spine-surgery-history-efficacy-cost-and-future-trends-peer-reviewed-fulltext-article-RSRR" class="abs-br my-5 mx-5 text-white-sm text-right">Image: D’Souza et. al (2019) <br>Dove Medical Press Limited</a>
 
 
-
 ---
 
 # Taxonomy of Robotic Guided Spine Surgery
