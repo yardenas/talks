@@ -19,28 +19,37 @@ Yarden As
 
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">Jan. 10th 2023</div>
+    <div class="text-sm opacity-50">Jan. 12th 2023</div>
   </div>
 </div>
 
 
 ---
 
-# Yarden As
+# Updates
 
-<div class="leading-8 opacity-80">
-PhD student @ <a href="https://las.inf.ethz.ch/" target="_blank">Learning & Adaptive Systems</a>.<br>
-Working on safe reinforcement learning.<br>
-</div>
 
-<div class="my-10 grid grid-cols-[40px,1fr] w-min gap-y-4">
-  <ri-github-line class="opacity-50"/>
-  <div><a href="https://github.com/yardenas" target="_blank">yardenas</a></div>
-  <ri-twitter-line class="opacity-50"/>
-  <div><a href="https://twitter.com/yarden_as" target="_blank">yarden_as</a></div>
-</div>
+<v-click>
 
-<img src="https://media.licdn.com/dms/image/D4D03AQHADuIJ4YvLbQ/profile-displayphoto-shrink_800_800/0/1667507229540?e=1677715200&v=beta&t=xuWobJE3km97hXPcP0-zOrCN3VyVwg0gFr8wOjGdpPU" class="rounded-full w-40 abs-tr mt-16 mr-12"/>
+###### New Project: &ldquo;Meta-Learning for Model-Based Reinforcement Learning&rdquo;
+
+* Challenge: adapt efficiently to tasks with varying dynamics.
+* Goal: deploy on a real robotic system.
+* In collaboration with <a href="https://scholar.google.co.uk/citations?user=EfLpX8QAAAAJ&hl=en">Jonas Rothfuss</a>, <a href="https://las.inf.ethz.ch/people/bhavya-sukhija">Bhavya Sukhija</a>, and Arjun Bhardwaj.
+* Extension: apply to safety-critical tasks.
+
+</v-click>
+
+<br>
+<br>
+
+<v-click>
+
+###### Other
+* Mainly writing on my doctoral plan.
+* Understanding more closely the application. 
+
+</v-click>
 
 
 ---
@@ -52,9 +61,9 @@ image: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/bin/RSRR-6-9-g0001.j
 <br>
 
 
-<div class="opacity-50 my-25">And discussion towards concretizing the problem we aim to solve. </div>
+<div class="opacity-50 my-25">And discussion towards concretizing the problem we aim to solve.</div>
 
-<a href="https://www.dovepress.com/robotic-assisted-spine-surgery-history-efficacy-cost-and-future-trends-peer-reviewed-fulltext-article-RSRR" class="abs-br my-5 mx-5 text-white-sm text-right">Image: D’Souza et. al (2019) <br>Dove Medical Press Limited</a>
+<a href="https://www.dovepress.com/robotic-assisted-spine-surgery-history-efficacy-cost-and-future-trends-peer-reviewed-fulltext-article-RSRR" class="abs-br my-5 mx-5 text-white-sm text-right">SpineAssist Robotic Platform.<br>Image: D’Souza et. al (2019) <br>Dove Medical Press Limited</a>
 
 
 ---
@@ -66,7 +75,7 @@ image: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/bin/RSRR-6-9-g0001.j
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/" target="_blank">
 ```mermaid
 graph TB
-    can(Computer-Assisted Navigation) --> trad(Traditional)
+    can(Computer-Assisted Navigation) --> trad("Traditional (freehand)")
     can --> shared(Robotic, shared-control)
     shared --> open-loop("Only preoperative (open-loop)")
     open-loop --> spine-assist(Mazor SpineAssist)
@@ -87,7 +96,7 @@ graph TB
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/" target="_blank">
 ```mermaid
 graph TB
-    can(Computer-Assisted Navigation) --> trad(Traditional)
+    can(Computer-Assisted Navigation) --> trad("Traditional (freehand)")
     can --> shared(Robotic, shared-control)
     shared --> open-loop("Only preoperative (open-loop)")
     open-loop --> spine-assist(Mazor SpineAssist)
@@ -100,6 +109,9 @@ graph TB
 </a>
 </div>
 
+<!--
+* Using Computer Assisted Navigation to localize the operation tools' position and the patients body.
+-->
 
 ---
 
@@ -109,7 +121,7 @@ graph TB
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/" target="_blank">
 ```mermaid
 graph TB
-    can(Computer-Assisted Navigation) --> trad(Traditional)
+    can(Computer-Assisted Navigation) --> trad("Traditional (freehand)")
     can --> shared(Robotic, shared-control)
     shared --> open-loop("Only preoperative (open-loop)")
     open-loop --> spine-assist(Mazor SpineAssist)
@@ -131,7 +143,7 @@ graph TB
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/" target="_blank">
 ```mermaid
 graph TB
-    can(Computer-Assisted Navigation) --> trad(Traditional)
+    can(Computer-Assisted Navigation) --> trad("Traditional (freehand)")
     can --> shared(Robotic, shared-control)
     shared --> open-loop("Only preoperative (open-loop)")
     open-loop --> spine-assist(Mazor SpineAssist)
@@ -153,7 +165,7 @@ graph TB
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6844237/" target="_blank">
 ```mermaid
 graph TB
-    can(Computer-Assisted Navigation) --> trad(Traditional)
+    can(Computer-Assisted Navigation) --> trad("Traditional (freehand)")
     can --> shared(Robotic, shared-control)
     shared --> open-loop("Only preoperative (open-loop)")
     open-loop --> spine-assist(Mazor SpineAssist)
@@ -195,11 +207,39 @@ Mazor Robotics SpineAssist [^1]
 
 ---
 
+# Case Study
+Mazor Robotics SpineAssist [^1]
+
+<div class="flex">
+
+<div>
+
+- The physician follows the preoperative plan.
+- No online closed-loop guidance by the system. No online closed-loop guidance by the system.
+
+</div>
+
+<div class="max-w-xl relative left-10 -top-5">
+  <CaptionedImage image="/spine-assist.png" link="https://youtu.be/zWBVf5SQkxE"><p class="text-sm text-justify">SpineAssist during operation. Yellow overlay indicates the preoperative plan. Blue overlay indicates the registered tool.</p></CaptionedImage>
+</div>
+
+</div>
+
+[^1]: [SpineAssist](https://pubmed.ncbi.nlm.nih.gov/25146652/)
+
+
+---
+layout: image-right
+image: https://source.unsplash.com/_qzGiNQDVC8/1920*2880
+---
+
 # Questions
 
 <v-clicks>
 
-- Freehand/online methods.
-- Pre-operative robotic guided methods. [^1]
+- Do we have a specific system that we want to build upon?
+- What would be a realistic observation space? Intraoperative fluoroscopy + preoperative CT?
+- What would be a realistic action space? Joint positions? End-effector position & orientation?
+- Helping the surgeon follow the preoperative plan? Online planning? Only offline (manual) planning?
 
 </v-clicks>
