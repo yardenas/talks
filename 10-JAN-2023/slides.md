@@ -220,7 +220,7 @@ Mazor Robotics SpineAssist [^1]
 </div>
 
 <div class="max-w-xl relative left-10 -top-5">
-  <CaptionedImage image="/spine-assist.png" link="https://youtu.be/zWBVf5SQkxE"><p class="text-sm text-justify">SpineAssist during operation. Yellow overlay indicates the preoperative plan. Blue overlay indicates the registered tool.</p></CaptionedImage>
+  <CaptionedImage image="spine-assist.png" link="https://youtu.be/zWBVf5SQkxE"><p class="text-sm text-justify">SpineAssist during operation. Yellow overlay indicates the preoperative plan. Blue overlay indicates the registered tool.</p></CaptionedImage>
 </div>
 
 </div>
