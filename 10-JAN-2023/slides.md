@@ -215,8 +215,7 @@ Mazor Robotics SpineAssist [^1]
 <div>
 
 - The physician follows the preoperative plan.
-- No online closed-loop guidance by the system. No online closed-loop guidance by the system.
-
+- No online closed-loop guidance by the system.
 </div>
 
 <div class="max-w-xl relative left-10 -top-5">
