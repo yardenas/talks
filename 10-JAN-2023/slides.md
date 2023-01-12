@@ -10,7 +10,7 @@ info: |
   Yarden As
 title: Learn to Learn Safely
 fonts:
-  # basically the text
+  # Could also be `Inter`
   sans: 'Manrope'
 ---
 
