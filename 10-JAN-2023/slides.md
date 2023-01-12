@@ -9,6 +9,9 @@ info: |
 
   Yarden As
 title: Learn to Learn Safely
+fonts:
+  # basically the text
+  sans: 'Manrope'
 ---
 
 # Learn to Learn Safely
@@ -232,7 +235,7 @@ layout: image-right
 image: https://source.unsplash.com/_qzGiNQDVC8/1920*2880
 ---
 
-# Questions
+# Discussion Items
 
 <v-clicks>
 
@@ -240,5 +243,6 @@ image: https://source.unsplash.com/_qzGiNQDVC8/1920*2880
 - What would be a realistic observation space? Intraoperative fluoroscopy + preoperative CT?
 - What would be a realistic action space? Joint positions? End-effector position & orientation?
 - Helping the surgeon follow the preoperative plan? Online planning? Only offline (manual) planning?
+- How would an experiment using our methods would look like?
 
 </v-clicks>
