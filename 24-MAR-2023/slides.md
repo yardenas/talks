@@ -3,17 +3,17 @@ layout: cover
 download: true
 highlighter: shiki
 info: |
-  ## Online Safe Adaptation in Uncertain Constrained Markov Decision Processes
+  ## Safe Adaptation in Uncertain Constrained Markov Decision Processes
 
   Thesis Proposal
 
   Yarden As
-title: Online Safe Adaptation in Uncertain Constrained Markov Decision Processes
+title: Safe Adaptation in Uncertain Constrained Markov Decision Processes
 fonts:
   sans: Manrope
 ---
 
-# Online Safe Adaptation in Uncertain Constrained Markov Decision Processes
+# Safe Adaptation in Uncertain Constrained Markov Decision Processes
 THESIS PROPOSAL
 
 <div class="text-sm tracking-widest">
@@ -159,4 +159,35 @@ What if $P(s^\prime | s, a)$ or $R(s_t, a_t)$ vary <br> between trials?
 
 ---
 
-# Real-world examples
+# Real-World Examples
+Where do these challeges emerge?
+
+<div class="grid grid-cols-3">
+<v-clicks>
+<div>
+  <RoundedImage image="https://source.unsplash.com/HeqXGxnsnX4/640*960" title="Agriculture & Sustainability">
+
+  * Different weather regimes and soil compositions.
+  * Over-fertilization accelerates greenhouse effects.<Reference link="https://www.nature.com/articles/ngeo325">Erisman et al., (2008)</Reference>
+
+  
+  </RoundedImage>
+  </div>
+  <div>
+  <RoundedImage image="https://source.unsplash.com/cUmFjDhiTfc" title="Medical Applications">
+  
+  * Patients react differently to different treatments.
+  * Clinical setting requires safety.<Reference link="https://arxiv.org/abs/2203.08057">Pace et al., (2022)</Reference>
+
+  </RoundedImage>
+  </div>
+    <div>
+  <RoundedImage image="https://roboticsandautomationnews.com/wp-content/uploads/2021/03/basf-autonomous-robot-anymal-0.png" title="Robotics">
+  
+  * Robots should not harm themselves or their environment.
+  * Tasks and dynamics may vary.<Reference link="">Thrun et al., (2005)</Reference>
+
+  </RoundedImage>
+  </div>
+</v-clicks>
+</div>
