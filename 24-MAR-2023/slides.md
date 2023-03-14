@@ -96,7 +96,7 @@ $s_{t + 1}, r_{t}$
 
 <div class="absolute right-30 top-65">
 
-## <Reference link="http://incompleteideas.net/book/RLbook2020.pdf">Sutton & Barto (2018)</Reference>
+## <Reference link="http://incompleteideas.net/book/RLbook2020.pdf">Sutton & Barto (1992)</Reference>
 
 </div>
 
@@ -136,7 +136,7 @@ layout: statement
 
 <v-clicks>
 <div class="absolute -bottom-40 -left-25">
-<IdeaCircle color="bg-violet-50"><h3 class="absolute top-50 left-10 w-140">Is the reward enough to admit<br><em>safety</em> restrictions?</h3></IdeaCircle>
+<IdeaCircle color="bg-violet-50"><h3 class="absolute top-50 left-10 w-140">Is the reward enough to admit<br><em>safe</em> behavior?</h3></IdeaCircle>
 </div>
 
 <div class="absolute -bottom-65 left-110">
@@ -190,4 +190,45 @@ Where do these challeges emerge?
   </RoundedImage>
   </div>
 </v-clicks>
+</div>
+
+---
+
+
+# Related Work
+Safety in reinforcement learning
+
+
+<div class="flex justify-items-center">
+
+<div class="w-3/5">
+
+| **Paper** | **Approach** |
+|:---|:---:|
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="">Eysenbach et al., (2017)</Reference>  |   Ergodicity   |
+| <Reference text-size="text-0.8em" translate="" link="">Berkenkamp et al., (2017)</Reference>  |   Lyapunov Stability   |
+| <Reference text-size="text-0.8em" translate="" link="">Achiam et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="">Dalal et al., (2018)</Reference>  |   CMDP   |
+
+</div>
+
+<div class="w-2/5 ml-30">
+
+<div v-click>
+
+### <twemoji-warning class="animate-bounce" /> Limitation:<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
+
+</div>
+
+<br>
+<br>
+
+<div v-click>
+
+### <twemoji-check-mark-button class="animate-bounce" /> Strength:<br>(relatively) large body of literature, works well empirically.$
+
+</div>
+
+</div>
+
+
 </div>
