@@ -185,15 +185,34 @@ Where do these challeges emerge?
   <RoundedImage image="https://roboticsandautomationnews.com/wp-content/uploads/2021/03/basf-autonomous-robot-anymal-0.png" title="Robotics">
   
   * Robots should not harm themselves or their environment.
-  * Tasks and dynamics may vary.<Reference link="">Thrun et al., (2005)</Reference>
+  * Objectives and dynamics may vary.<Reference link="">Thrun et al., (2005)</Reference>
 
   </RoundedImage>
   </div>
 </v-clicks>
 </div>
 
+
 ---
 
+# Safety in Reinforcement Learning
+Three common approaches
+
+<div class="flex gap-25 container mx-auto w-max h-max mt-25">
+  <div v-click>
+    <ph-line-segments-bold class="text-8xl"/>
+    <p class="text-1.25em">Ergodicity</p>
+  </div>
+  <div v-click>
+    <ooui-map-trail class=" text-8xl"/>
+    <p class=" text-1.25em">Lyapunov Stability</p>
+  </div>
+  <div v-click>
+    <ph-arrow-line-down-left-bold class="text-8xl"/>
+    <p class="text-1.25em"> Constrained Markov<br>Decision Processes </p>
+  </div>
+</div>
+---
 
 # Related Work
 Safety in reinforcement learning
@@ -224,7 +243,7 @@ Safety in reinforcement learning
 
 <div v-click>
 
-### <twemoji-check-mark-button class="animate-bounce" /> Strength:<br>(relatively) large body of literature, works well empirically.$
+### <twemoji-check-mark-button class="animate-bounce" /> Strength:<br>(relatively) large body of literature, empirically works well.
 
 </div>
 
@@ -232,3 +251,66 @@ Safety in reinforcement learning
 
 
 </div>
+
+---
+
+# Related Work
+Safe adaptation via meta-learning
+
+
+<div class="flex justify-items-center">
+
+<div class="w-3/5">
+
+| **Paper** | **Approach** |
+|:---|:---:|
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="">Eysenbach et al., (2017)</Reference>  |   Ergodicity   |
+| <Reference text-size="text-0.8em" translate="" link="">Berkenkamp et al., (2017)</Reference>  |   Lyapunov Stability   |
+| <Reference text-size="text-0.8em" translate="" link="">Achiam et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="">Dalal et al., (2018)</Reference>  |   CMDP   |
+
+</div>
+
+<div class="w-2/5 ml-30">
+
+<div v-click>
+
+### <twemoji-warning class="animate-bounce" /> Limitation:<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
+
+</div>
+
+<br>
+<br>
+
+<div v-click>
+
+### <twemoji-check-mark-button class="animate-bounce" /> Strength:<br>(relatively) large body of literature, empirically works well.
+
+</div>
+
+</div>
+
+
+</div>
+
+---
+layout: image-right
+image: https://source.unsplash.com/_0fXQrtNZEo
+---
+# Recap
+
+- Constrained Markov decision processes.
+- Preliminary work.
+- Meta-reinforcement learning with constraints (?)
+- Current state of progress.
+
+<div class="abs-bl mx-14 my-12">
+
+## Thanks!
+
+</div>
+
+
+---
+layout: cover
+---
+# Appendix
