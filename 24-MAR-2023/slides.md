@@ -66,7 +66,7 @@ clicks: 2
 # Back to Basics
 Reinforcement learning: a data-driven approach for sequential decision-making
 
-<div class="relative bottom-5">
+<div class="relative bottom-10">
 
 <div v-click-hide="2" class="absolute ml-58 mt-40 text-right">
 
@@ -94,15 +94,13 @@ $s_{t + 1}, r_{t}$
 
 <img src="/rl-loop.svg" class="absolute">
 
-</div>
-
-
-<div class="absolute right-50 bottom-30">
+<div class="absolute right-30 top-65">
 
 ## <Reference link="http://incompleteideas.net/book/RLbook2020.pdf">Sutton & Barto (2018)</Reference>
 
 </div>
 
+</div>
 
 
 ---
@@ -129,3 +127,36 @@ layout: statement
 ---
 
 # Is it a perfect model?
+
+
+---
+
+# Some Open Challenges
+
+
+<v-clicks>
+<div class="absolute -bottom-40 -left-25">
+<IdeaCircle color="bg-violet-50"><h3 class="absolute top-50 left-10 w-140">Is the reward enough to admit<br><em>safety</em> restrictions?</h3></IdeaCircle>
+</div>
+
+<div class="absolute -bottom-65 left-110">
+<IdeaCircle color="bg-emerald-50"><h3 class="absolute top-2/5 left-6 w-140">
+
+What if $P(s^\prime | s, a)$ changes over time? 
+
+</h3></IdeaCircle>
+</div>
+
+<div class="absolute bottom-35 left-125">
+<IdeaCircle color="bg-blue-gray-50"><h3 class="absolute top-80 -left-8 w-140">
+
+What if $P(s^\prime | s, a)$ or $R(s_t, a_t)$ vary <br> between trials?
+
+</h3></IdeaCircle>
+</div>
+</v-clicks>
+
+
+---
+
+# Real-world examples
