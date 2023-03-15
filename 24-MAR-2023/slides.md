@@ -113,9 +113,10 @@ Interacting with the environment is modeled as a Markov Decision Process
 * Transition function: $s_{t + 1} \sim P(\cdot | s_t, a_t), P: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \rightarrow [0, 1]$
 * Reward function: $r_t = R(s_t, a_t), R: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$
 * Policy: $\pi: \mathcal{S} \times \mathcal{A} \rightarrow [0, 1]$
-* Trajectory $\tau = \left\{s_0, a_0, a_1, \dots, a_{T -1}, s_T \right\}$
+* Trajectory $\tau = \left\{s_0, a_0, a_1, \dots, a_{T -1}, s_T \right\}, 
+\tau \sim p(\tau) = p(s_0) \prod_{t = 1}^{T} \pi(a_t | s_t)P(s_{t + 1} | s_t, a_t)$
 
-<div v-click class="container mt-10 text-blue-gray-900 opacity-90">
+<div v-click class="container mt-10 text-blue-gray-900">
 
 #### Goal: find a policy $\pi(a_t | s_t)$
 $$\pi \in \arg\max_{\pi} \mathbb{E}_{\tau \sim p(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right]$$
@@ -219,13 +220,13 @@ Three common approaches
 # Constrained Markov Decision Processes (CMDP)
 A short introduction
 
-Idea: instantaneous cost signal $c_t$ together with the reward $r_t$.
+Idea: cost signal $c_t$ together with the reward $r_t$.
 
 * Cost function: $c_t = C(s_t, a_t), C: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$
 
 <div v-click class="container mt-10 text-blue-gray-900">
 
-#### Goal: find a policy $\pi(a_t | s_t)$ that solves the _constrainend_ problem
+#### Goal: find a policy $\pi(a_t | s_t)$ that solves the _constrained_ problem
 $$
 \begin{aligned}
   \max_{\pi} & \; \mathbb{E}_{\tau \sim p(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
@@ -250,20 +251,20 @@ Via meta-reinforcement learning
 <div class="flex flex-col justify-evenly h-full">
 
 
-* CMDP: $\mathcal{M}_i = \left(P_i(s^\prime | s, a, ), C_i(s, a), R_i(s, a)\right)$
+* CMDP (informally): $\mathcal{M}_i = \left(P_i(s^\prime | s, a, ), C_i(s, a), R_i(s, a)\right)$
 * “Meta-environment”: $\mathcal{M}_i \sim \mathcal{E}(\cdot)$
 
 <v-clicks>
 
-During training, interact with $\mathcal{M}_i, i = 1, \dots, M$ CMDPs.
+**During training:** interact with $\mathcal{M}_i, i = 1, \dots, M$ CMDPs.
 
 
-During testing, interact with $\tilde{\mathcal{M}}$
+**During testing:** interact with $\tilde{\mathcal{M}}$
 
 
-<div v-click class="container mt-2.5 text-blue-gray-900">
+<div v-click class="container text-blue-gray-900">
 
-Goal: solve the constrained problem induced by $\tilde{\mathcal{M}}$
+Goal: _adapt_ to the problem induced by $\tilde{\mathcal{M}}$ and solve
 $$
 \begin{aligned}
   \max_{\pi} & \; \mathbb{E}_{\tilde{\tau} \sim p(\tilde{\tau})} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
@@ -291,7 +292,6 @@ $$
 </div>
 
 
-
 ---
 
 # Related Work
@@ -314,7 +314,7 @@ Safety in reinforcement learning
 
 <div v-click>
 
-### <twemoji-warning class="animate-bounce" /> Limitation:<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
+### <twemoji-warning class="animate-bounce" /> **Limitation:**<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
 
 </div>
 
@@ -323,7 +323,7 @@ Safety in reinforcement learning
 
 <div v-click>
 
-### <twemoji-check-mark-button class="animate-bounce" /> Strength:<br>(relatively) large body of literature, empirically works well.
+### <twemoji-check-mark-button class="animate-bounce" /> **Strength:**<br>(relatively) large body of literature, empirically works well.
 
 </div>
 
@@ -331,6 +331,51 @@ Safety in reinforcement learning
 
 
 </div>
+
+---
+
+# Related Work
+Safe adaptation via meta-learning
+
+<div class="flex justify-items-center">
+
+<div class="w-3/5">
+
+| **Paper** | **Safety?** |
+|:---|:---:|
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1611.02779">Duan et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1703.03400">Finn et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1810.06784">Rothfuss et al. (2018)</Reference>,<Reference text-size="text-0.8em" translate="" link="URL https://arxiv.org/abs/1803.11347">Nagabandi et al. (2018)</Reference> and more...  |   <twemoji-cross-mark />   |
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
+
+</div>
+
+<div class="w-2/5 ml-30">
+
+<div v-click>
+
+### <twemoji-warning class="animate-bounce" /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
+
+</div>
+
+<br>
+<br>
+
+<div v-click>
+
+### <twemoji-check-mark-button class="animate-bounce" /> **Strength:**<br>(relatively) large body of literature, empirically works well.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+---
+layout: statement
+---
+# Takeway: strong foundation on safety and meta-learning,<br>_but not on their intersection_.
+
 
 ---
 layout: image-right
