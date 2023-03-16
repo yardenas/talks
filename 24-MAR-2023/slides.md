@@ -139,7 +139,8 @@ layout: statement
 <v-clicks>
 <div class="absolute -bottom-40 -left-25">
 <IdeaCircle color="bg-blue-gray-50">
-<h3 class="absolute top-50 left-10 w-140">
+<Reward class="absolute bottom-60 left-28" />
+<h3 class="absolute top-55 left-10 w-140">
 Is the reward enough to guarantee<br><em>safe</em> behavior?
 </h3>
 </IdeaCircle>
@@ -147,10 +148,8 @@ Is the reward enough to guarantee<br><em>safe</em> behavior?
 
 <div class="absolute bottom-35 left-125">
 <IdeaCircle color="bg-violet-50">
-<div class="absolute bottom-100">
-<VarP/>
-</div>
-<h3 class="absolute top-80 -left-8 w-140">
+<VarP class="absolute top-50 right-50"/>
+<h3 class="absolute top-80 -left-5 w-140">
 
 What if $P(s^\prime | s, a)$ or $R(s_t, a_t)$ vary <br> between trials?
 
