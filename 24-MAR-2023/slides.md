@@ -138,23 +138,24 @@ layout: statement
 
 <v-clicks>
 <div class="absolute -bottom-40 -left-25">
-<IdeaCircle color="bg-violet-50"><h3 class="absolute top-50 left-10 w-140">Is the reward enough to admit<br><em>safe</em> behavior?</h3></IdeaCircle>
-</div>
-
-<div class="absolute -bottom-65 left-110">
-<IdeaCircle color="bg-emerald-50"><h3 class="absolute top-2/5 left-6 w-140">
-
-What if $P(s^\prime | s, a)$ changes over time? 
-
-</h3></IdeaCircle>
+<IdeaCircle color="bg-blue-gray-50">
+<h3 class="absolute top-50 left-10 w-140">
+Is the reward enough to guarantee<br><em>safe</em> behavior?
+</h3>
+</IdeaCircle>
 </div>
 
 <div class="absolute bottom-35 left-125">
-<IdeaCircle color="bg-blue-gray-50"><h3 class="absolute top-80 -left-8 w-140">
+<IdeaCircle color="bg-violet-50">
+<div class="absolute bottom-100">
+<VarP/>
+</div>
+<h3 class="absolute top-80 -left-8 w-140">
 
 What if $P(s^\prime | s, a)$ or $R(s_t, a_t)$ vary <br> between trials?
 
-</h3></IdeaCircle>
+</h3>
+</IdeaCircle>
 </div>
 </v-clicks>
 
@@ -214,6 +215,7 @@ Three common approaches
     <p class="text-1.25em"> Constrained Markov<br>Decision Processes </p>
   </div>
 </div>
+
 
 ---
 
@@ -293,6 +295,14 @@ $$
 
 
 ---
+layout: quote
+---
+
+# Thesis Goal
+_Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery._
+
+
+---
 
 # Related Work
 Safety in reinforcement learning
@@ -306,7 +316,7 @@ Safety in reinforcement learning
 |:---|:---:|
 | <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1711.06782">Eysenbach et al., (2017)</Reference>  |   Ergodicity   |
 | <Reference text-size="text-0.8em" translate="" link="https://proceedings.neurips.cc/paper/2017/hash/766ebcd59621e305170616ba3d3dac32-Abstract.html">Berkenkamp et al., (2017)</Reference>  |   Lyapunov Stability   |
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>  |   CMDP   |
+| <Reference text-size="text-0.8em" translate="" link="https://www-sop.inria.fr/members/Eitan.Altman/TEMP/h.pdf">Altman, (1999)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>  |   CMDP   |
 
 </div>
 
@@ -314,7 +324,7 @@ Safety in reinforcement learning
 
 <div v-click>
 
-### <twemoji-warning class="animate-bounce" /> **Limitation:**<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
+### <twemoji-warning /> **Limitation:**<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
 
 </div>
 
@@ -323,7 +333,7 @@ Safety in reinforcement learning
 
 <div v-click>
 
-### <twemoji-check-mark-button class="animate-bounce" /> **Strength:**<br>(relatively) large body of literature, empirically works well.
+### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
 
 </div>
 
@@ -331,6 +341,7 @@ Safety in reinforcement learning
 
 
 </div>
+
 
 ---
 
@@ -352,7 +363,7 @@ Safe adaptation via meta-learning
 
 <div v-click>
 
-### <twemoji-warning class="animate-bounce" /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
+### <twemoji-warning /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
 
 </div>
 
@@ -361,7 +372,7 @@ Safe adaptation via meta-learning
 
 <div v-click>
 
-### <twemoji-check-mark-button class="animate-bounce" /> **Strength:**<br>(relatively) large body of literature, empirically works well.
+### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
 
 </div>
 
@@ -374,13 +385,127 @@ Safe adaptation via meta-learning
 ---
 layout: statement
 ---
+
 # Takeway: strong foundation on safety and meta-learning,<br>_but not on their intersection_.
 
 
 ---
-layout: image-right
-image: https://source.unsplash.com/_0fXQrtNZEo
+
+# Progress to Date
+On safe reinforcement learning
+
+
 ---
+clicks: 6
+---
+
+# LAMBDA
+
+[Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022, joint work with [Ilnura Usmanova](https://control.ee.ethz.ch/people/profile.ilnura-usmanova.html), [Sebastian Curi](https://las.inf.ethz.ch/people/sebastian-curi) and [Andreas Krause](https://las.inf.ethz.ch/krausea))
+
+
+<!-- TODO (yarden): create a Vue component of a tooltip that explains the different things. -->
+<div class="grid grid-cols-2 gap-x-4">
+<div>
+
+<v-clicks>
+
+- Collect data on the real environment based on $\pi$
+- Use this data to fit a statistical model of the environment
+</v-clicks>
+
+<div v-click="3">
+
+<br>
+<br>
+
+## Planning
+</div>
+<ul>
+  <li v-click="4">Simulate the policy with the model</li>
+  <li>Solve the constrained problem with <i><b>the Augmented Lagrangian</b></i></li>
+  <li>Backpropagate policy gradients through the model</li>
+</ul>
+
+</div>
+
+<div>
+
+<div v-click="3" class="absolute top-50">
+
+```python {all|2|7|9}
+def policy_loss(policy, model, initial_state, lagrangian):
+  trajectory = model.simulate(policy, initial_state)
+  # Use learned critics to **estimate** the 
+  # objective and constraints.
+  objective = reward_critic(trajectory).mean()
+  constraint = cost_critic(trajectory).mean()
+  return -objective + lagrangian * constraint
+
+policy_grads = grad(policy_loss)(...)
+```
+</div>
+</div>
+</div>
+
+
+---
+
+# LAMBDA
+
+A probabilistic perspective
+
+<div class="opacity-80">
+
+- Maintain a posterior distribution over model parameters given previously seen data $\theta \sim p(\theta | \mathcal{D})$
+- Models track an underlying representation of the environment's state, given image observations (think non-linear Kalman filter)
+</div>
+
+<div class="text-center my-15"> 
+<v-clicks>
+
+#### This probabilistic modeling allows the agent to be robust for safety (through pessimism).
+#### But still discover new behaviors (through optimism).
+</v-clicks>
+</div>
+
+
+<div class="abs-br m-10">
+    <img src="https://imgur.com/W5n1wuV.gif" width="600">
+</div>
+
+
+---
+
+# How well does it work?
+
+Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchmark suite
+
+
+<div class="flex flex-row">
+<div>
+  <img src="https://imgur.com/0G3VKle.gif" width="800">
+  <img src="https://imgur.com/zdyuRdN.gif" width="800">
+</div>
+
+<div>
+  <img src="/lambda-results.svg" class="w-65">
+</div>
+</div>
+
+<br>
+
+<div class="text-center mt-10">
+
+## Main takeaway: solves nicely <b><i>all tasks</i></b> with <b><i>all robots</i></b>.
+</div>
+
+
+---
+layout: image-right
+image: ./leg.svg
+---
+
 # Recap
 
 - Constrained Markov decision processes.
@@ -398,4 +523,19 @@ image: https://source.unsplash.com/_0fXQrtNZEo
 ---
 layout: cover
 ---
+
 # Appendix
+
+
+---
+layout: quote
+---
+
+# Thesis Objectives
+_Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery._
+
+* Derive a mathematical foundation for safe adaptation by applying meta-RL to solve randomly generated CMDPs. 
+* Answer how agents can summarize data generated from multiple CMDPs (in the form of trajectories) into a model that represents an informative prior for new CMDP samples of $\mathcal{E}$. Answer how agents can use this model upon deployment in M˜ to adapt their policy efficiently
+and safely.
+* Derive an algorithmic framework for controlling E to generate informative CMDPs, aiming to “teach” agents more efficiently and to improve their generalization in terms of safety and utility to test CMDPs.
+* Experimentally apply my findings on a problem that reflects a real challenge in robotic spine surgery. The experiment should be as close as possible to the real clinical setting, within the scope of my studies and available resources.
