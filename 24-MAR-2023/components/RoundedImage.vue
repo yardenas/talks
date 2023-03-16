@@ -11,7 +11,7 @@ const props = defineProps<{
     <figure>
       <img
         :src="props.image"
-        class="rounded-full h-50 w-50 border-2 border-slate-700 leading-50 inline-block m-auto object-cover"
+        class="rounded-full h-45 w-45 border-2 border-slate-700 leading-50 inline-block m-auto object-cover"
       />
     </figure>
     <figcaption>
