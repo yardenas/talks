@@ -186,16 +186,41 @@ Where do these challeges emerge?
 
   </RoundedImage>
   </div>
-    <div>
+  <div>
   <RoundedImage image="https://roboticsandautomationnews.com/wp-content/uploads/2021/03/basf-autonomous-robot-anymal-0.png" title="Robotics">
   
-  <VarP size="text-2xl" class="relative -left-38 top-1"/> Robots should not harm themselves or their environment.
+  <VarP size="text-2xl" class="relative -left-40 top-1"/> Objectives and dynamics may vary.<Reference link="">Thrun et al., (2005)</Reference>
 
-  <Reward size="text-2xl" class="relative -left-38 top-1"/> Objectives and dynamics may vary.<Reference link="">Thrun et al., (2005)</Reference>
+  <Reward size="text-2xl" class="relative -left-38 top-1"/> Robots should not harm themselves or their environment.
 
   </RoundedImage>
   </div>
 </v-clicks>
+</div>
+
+---
+layout: image-right
+image: /spine-surgery.png
+---
+
+# Automatic Spine Surgery
+Key challenges remain
+
+
+<div class="my-5 grid grid-cols-[50px,1fr] gap-y-4">
+  <VarP size="text-2xl"/>
+  <div><em>Orthopedic variation</em> of patients create similar, but different, planning problems.</div>
+  <Reward size="text-2xl"/>
+  <div>Clinical setting requires high-precision and safety.</div>
+</div>
+
+
+<div v-click class="mt-15">
+
+
+### $\implies$ _safe_ and _adaptive_ planning algorithms.
+
+
 </div>
 
 
@@ -204,18 +229,31 @@ Where do these challeges emerge?
 # Safety in Reinforcement Learning
 Three common approaches
 
-<div class="flex gap-25 container mx-auto w-max h-max mt-25">
-  <div v-click>
+<div class="flex gap-25 container mx-auto w-full h-max mt-25">
+  <div v-click class="text-center flex flex-col">
+  <div>
     <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
     <p class="text-1.25em">Ergodicity</p>
   </div>
-  <div v-click>
+    <div>
+    <Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference><Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1711.06782">Eysenbach et al., (2017)</Reference>
+    </div>
+  </div>
+  <div v-click class="text-center flex flex-col">
+  <div>
     <ooui-map-trail class=" text-8xl opacity-90 text-blue-gray-900"/>
     <p class=" text-1.25em">Lyapunov Stability</p>
   </div>
-  <div v-click>
+    <Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2017/hash/766ebcd59621e305170616ba3d3dac32-Abstract.html">Berkenkamp et al., (2017)</Reference>
+  </div>
+  <div v-click class="text-center flex flex-col">
+  <div>
     <ph-arrow-line-down-left-bold class="text-8xl opacity-90 text-blue-gray-900"/>
-    <p class="text-1.25em"> Constrained Markov<br>Decision Processes </p>
+    <p class="text-1.25em"> Constrained Markov<br>Decision Processes</p>
+  </div>
+    <div>
+    <Reference text-size="text-0.5em" translate="" link="https://www-sop.inria.fr/members/Eitan.Altman/TEMP/h.pdf">Altman, (1999)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>
+    </div>
   </div>
 </div>
 
@@ -238,6 +276,70 @@ $$
   \text{s.t.} &  \;\mathbb{E}_{\tau \sim p(\tau)} \left[\sum_{t = 0}^T C(s_t, a_t)\right] \le 0
 \end{aligned}
 $$
+
+</div>
+
+---
+
+# Meta-Learning
+A framework for data-efficient adaptation
+
+Central concept: use data from multiple, related, tasks to learn informative priors for future tasks.
+
+<div class="flex justify-items-center mt-5">
+
+<div class="w-3/5">
+
+* Meta-train data: $\mathcal{D}^k = \{x_i, y_i\}_{i = 1}^B$
+* $k = 1 \dots K$ tasks, typically $B \ll K$
+* $y_i^k = f^k(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$
+* $f^k \sim \mathcal{H}(f^k)$
+* Meta-test data: $\tilde{\mathcal{D}} = \{\tilde{x_i}, \tilde{y_i}\}_{i = 1}^B$
+* Goal: find prior that helps learning $\tilde{f}(\cdot)$ efficiently.
+
+
+</div>
+
+<div class="w-3/5">
+<img src="/sinusoid.svg"/>
+</div>
+
+</div>
+
+---
+
+# Safe adaptation via Meta-Learning
+
+<div class="flex justify-items-center">
+
+<div class="w-3/5">
+
+| **Paper** | **Safety?** |
+|:---|:---:|
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1611.02779">Duan et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1703.03400">Finn et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1810.06784">Rothfuss et al. (2018)</Reference>,<Reference text-size="text-0.8em" translate="" link="URL https://arxiv.org/abs/1803.11347">Nagabandi et al. (2018)</Reference> and more...  |   <twemoji-cross-mark />   |
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
+
+</div>
+
+<div class="w-2/5 ml-30">
+
+<div v-click>
+
+### <twemoji-warning /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
+
+</div>
+
+<br>
+<br>
+
+<div v-click>
+
+### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
+
+</div>
+
+</div>
+
 
 </div>
 
@@ -277,6 +379,9 @@ $$
 \end{aligned}
 $$
 
+<hr class="w-12 bg-red-400 h-1 relative bottom-10.5 left-49.5 border-top-red-400">
+<hr class="w-12 bg-red-400 h-1 relative bottom-28.75 left-49.5 border-top-red-400">
+
 </div>
 
 </v-clicks>
@@ -296,6 +401,12 @@ $$
 </div>
 </div>
 
+---
+layout: statement
+---
+
+# Takeway: strong foundation on safety and meta-learning,<br>_but not on their intersection_.
+
 
 ---
 layout: quote
@@ -304,92 +415,6 @@ layout: quote
 # Thesis Goal
 _Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery._
 
-
----
-
-# Related Work
-Safety in reinforcement learning
-
-
-<div class="flex justify-items-center">
-
-<div class="w-3/5">
-
-| **Paper** | **Approach** |
-|:---|:---:|
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1711.06782">Eysenbach et al., (2017)</Reference>  |   Ergodicity   |
-| <Reference text-size="text-0.8em" translate="" link="https://proceedings.neurips.cc/paper/2017/hash/766ebcd59621e305170616ba3d3dac32-Abstract.html">Berkenkamp et al., (2017)</Reference>  |   Lyapunov Stability   |
-| <Reference text-size="text-0.8em" translate="" link="https://www-sop.inria.fr/members/Eitan.Altman/TEMP/h.pdf">Altman, (1999)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>  |   CMDP   |
-
-</div>
-
-<div class="w-2/5 ml-30">
-
-<div v-click>
-
-### <twemoji-warning /> **Limitation:**<br>all methods assume a _single_ instance of $P(s^\prime | s, a)$
-
-</div>
-
-<br>
-<br>
-
-<div v-click>
-
-### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
-
-</div>
-
-</div>
-
-
-</div>
-
-
----
-
-# Related Work
-Safe adaptation via meta-learning
-
-<div class="flex justify-items-center">
-
-<div class="w-3/5">
-
-| **Paper** | **Safety?** |
-|:---|:---:|
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1611.02779">Duan et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1703.03400">Finn et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1810.06784">Rothfuss et al. (2018)</Reference>,<Reference text-size="text-0.8em" translate="" link="URL https://arxiv.org/abs/1803.11347">Nagabandi et al. (2018)</Reference> and more...  |   <twemoji-cross-mark />   |
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
-
-</div>
-
-<div class="w-2/5 ml-30">
-
-<div v-click>
-
-### <twemoji-warning /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
-
-</div>
-
-<br>
-<br>
-
-<div v-click>
-
-### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
-
-</div>
-
-</div>
-
-
-</div>
-
-
----
-layout: statement
----
-
-# Takeway: strong foundation on safety and meta-learning,<br>_but not on their intersection_.
 
 
 ---
@@ -529,6 +554,49 @@ layout: cover
 
 # Appendix
 
+
+---
+layout: image-right
+image: /spine-surgery.png
+---
+
+# Spine Surgeries & RL
+What's the motivation to use RL?
+
+Online planning and control from noisy observations problem.
+
+<div v-click>
+
+**Limitations**
+
+<div class="my-5 grid grid-cols-[30px,1fr] gap-y-4">
+  <healthicons-death-alt />
+  <div>Invasive imaging (CT, X-Ray).</div>
+  <healthicons-death-alt />
+  <div>Pre-operative planning, open-loop control.</div>
+  <healthicons-death-alt />
+  <div>~15% surgery complication rate.<Reference link="https://pubmed.ncbi.nlm.nih.gov/20672949/" translate="translate-y-[-4.5em] translate-x-65">Nasser et al. (2010)</Reference></div>
+</div>
+
+</div>
+
+<div v-click>
+
+**Can RL address these limitations?**
+
+<div class="my-5 grid grid-cols-[30px,1fr] gap-y-4">
+  <healthicons-doctor />
+  <div>Non-invasive but more noisy & complex observations (Ultrasound, RGBD).</div>
+  <healthicons-doctor />
+  <div>Closed-loop control, intra-operative planning.</div>
+</div>
+
+</div>
+
+<!--
+* pre-operative CT & intra-operative fluoroscopy (X-Ray)
+* Complication rate is bad because pre-operative planning cannot cope with intra-operative comlications---basically need to re-plan.
+-->
 
 ---
 layout: quote

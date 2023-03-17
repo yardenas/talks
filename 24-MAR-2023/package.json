@@ -17,6 +17,7 @@
   "devDependencies": {
     "@iconify-json/arcticons": "^1.1.45",
     "@iconify-json/fluent": "^1.1.13",
+    "@iconify-json/healthicons": "^1.1.6",
     "@iconify-json/ic": "^1.1.7",
     "@iconify-json/icon-park": "^1.1.10",
     "@iconify-json/maki": "^1.1.11",
