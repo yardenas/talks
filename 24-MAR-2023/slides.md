@@ -229,7 +229,7 @@ Key challenges remain
 # Safety in Reinforcement Learning
 Three common approaches
 
-<div class="flex gap-25 container mx-auto w-full h-max mt-25">
+<div class="flex container mx-auto gap-25 h-max mt-25">
   <div v-click class="text-center flex flex-col">
   <div>
     <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
@@ -290,18 +290,23 @@ Central concept: use data from multiple, related, tasks to learn informative pri
 
 <div class="w-3/5">
 
-* Meta-train data: $\mathcal{D}^k = \{x_i, y_i\}_{i = 1}^B$
-* $k = 1 \dots K$ tasks, typically $B \ll K$
-* $y_i^k = f^k(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$
-* $f^k \sim \mathcal{H}(f^k)$
-* Meta-test data: $\tilde{\mathcal{D}} = \{\tilde{x_i}, \tilde{y_i}\}_{i = 1}^B$
-* Goal: find prior that helps learning $\tilde{f}(\cdot)$ efficiently.
+<v-clicks>
 
+* Meta-train data: $\mathcal{D}_k = \{x_i, y_i\}_{i = 1}^N$
+* $k = 1 \dots K$ tasks, typically $N \ll K$
+* $y_i = f_{\theta^k}(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$ (regression)
+* Meta-test data: $\tilde{\mathcal{D}} = \{x_j, f_{\tilde{\theta}}(x_j) + \epsilon\}_{j = 1}^M$
+* Learn prior $p(\tilde{\theta})$ with $\mathcal{D}_{1:K}$. Use it with inferring $p(\tilde{\theta} | \tilde{\mathcal{D}})$.<Reference link="http://proceedings.mlr.press/v139/rothfuss21a/rothfuss21a.pdf">Rothfuss et al. (2021)</Reference>
+
+</v-clicks>
 
 </div>
 
 <div class="w-3/5">
-<img src="/sinusoid.svg"/>
+<img v-if="$slidev.nav.clicks < 3 && $slidev.nav.clicks > 0" src="/sinusoid-train-wo.svg"/>
+<img v-if="$slidev.nav.clicks == 3" src="/sinusoid-train-w.svg"/>
+<img v-if="$slidev.nav.clicks == 4" src="/sinusoid-wo.svg"/>
+<img v-if="$slidev.nav.clicks == 5" src="/sinusoid.svg"/>
 </div>
 
 </div>
@@ -560,7 +565,7 @@ layout: image-right
 image: /spine-surgery.png
 ---
 
-# Spine Surgeries & RL
+# Spine Surgery & RL
 What's the motivation to use RL?
 
 Online planning and control from noisy observations problem.
