@@ -465,7 +465,7 @@ Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcem
 
 <div v-if="$slidev.nav.clicks >= 3" v-click=3>
 
-**Idea:** log-barrier functions ensure feasibility of iterates.<Reference link="https://arxiv.org/abs/1912.09466" translate="translate-y-[-1.5em] translate-x-[0.7em]">Usmanova et al. (2020)</Reference>
+**Idea:** log-barrier functions ensure feasibility of policy update iterates.<Reference link="https://arxiv.org/abs/1912.09466" translate="translate-y-[-1.5em] translate-x-[0.7em]">Usmanova et al. (2020)</Reference>
 
 </div>
 
@@ -483,101 +483,30 @@ Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcem
 
 ---
 
-# Baselines
-
+# Progress to Date
 Creating a testbed for safe adaptation algorithms
 
 
-
-<div class="flex">
-<v-clicks>
+<div class="flex gap-x-10">
 <div>
 
 ### `safe-adaptation-gym`
 
 A benchmark suite for safe adaptation
 
-- 8 different tasks implemented
-- Each sampled task is subject to different dynamical properties
-- Number of obtacles and their sizes sampled randomly per task
-- CMDP constraint bound ($d$) sampled randomly per task
+- 8 different tasks.
+- Each sampled task is subject to different dynamical properties.
+- Number of obtacles and their sizes sampled randomly per task.
 </div>
 
-<div>
+<div v-click>
 
 ### `safe-adaptation-agents`
 
-Implementation of 4 different baseline algorithms
-
-- RL$^2$ ([Duan et al. 2016](https://arxiv.org/abs/1611.02779?context=cs)) combined with CPO ([Achiam et al. 2017](https://meta-world.github.io/))
-- MAML ([Finn et al. 2017](https://arxiv.org/abs/1703.03400?context=cs)) combined with PPO-Lagrangian ([Ray et al. 2019](https://cdn.openai.com/safexp-short.pdf))
-- LAMBDA ([As et al. 2022](https://arxiv.org/abs/2201.09802))
-- MAML ([Finn et al. 2017](https://arxiv.org/abs/1703.03400?context=cs)) combined with safe CEM-MPC ([Liu et al. 2021](https://arxiv.org/abs/2010.07968))
+* Implementation of 4 different baseline meta-RL algorithms.
+* Use common CMDP solvers for safety.
 
 </div>
-</v-clicks>
-</div>
-
-
----
-clicks: 7
----
-
-# LAMBDA
-
-[Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022, joint work with [Ilnura Usmanova](https://control.ee.ethz.ch/people/profile.ilnura-usmanova.html), [Sebastian Curi](https://las.inf.ethz.ch/people/sebastian-curi) and [Andreas Krause](https://las.inf.ethz.ch/krausea))
-
-
-
----
-
-# LAMBDA
-
-A probabilistic perspective
-
-<div class="opacity-80">
-
-- Maintain a posterior distribution over model parameters given previously seen data $\theta \sim p(\theta | \mathcal{D})$
-- Models track an underlying representation of the environment's state, given image observations (think non-linear Kalman filter)
-</div>
-
-<div class="text-center my-15"> 
-<v-clicks>
-
-#### This probabilistic modeling allows the agent to be robust for safety (through pessimism).
-#### But still discover new behaviors (through optimism).
-</v-clicks>
-</div>
-
-
-<div class="abs-br m-10">
-    <img src="https://imgur.com/W5n1wuV.gif" width="600">
-</div>
-
-
----
-
-# How well does it work?
-
-Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchmark suite
-
-
-<div class="flex flex-row">
-<div>
-  <img src="https://imgur.com/0G3VKle.gif" width="800">
-  <img src="https://imgur.com/zdyuRdN.gif" width="800">
-</div>
-
-<div>
-  <img src="/lambda-results.svg" class="w-65">
-</div>
-</div>
-
-<br>
-
-<div class="text-center mt-10">
-
-## Main takeaway: solves nicely <b><i>all tasks</i></b> with <b><i>all robots</i></b>.
 </div>
 
 
@@ -667,6 +596,69 @@ Using supervised-learning to accelerate
 <div class="">
   <img src="/mbrl-training-loop.svg">
 </div>
+</div>
+
+
+
+---
+clicks: 7
+---
+
+# LAMBDA
+
+[Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022, joint work with [Ilnura Usmanova](https://control.ee.ethz.ch/people/profile.ilnura-usmanova.html), [Sebastian Curi](https://las.inf.ethz.ch/people/sebastian-curi) and [Andreas Krause](https://las.inf.ethz.ch/krausea))
+
+
+
+---
+
+# LAMBDA
+
+A probabilistic perspective
+
+<div class="opacity-80">
+
+- Maintain a posterior distribution over model parameters given previously seen data $\theta \sim p(\theta | \mathcal{D})$
+- Models track an underlying representation of the environment's state, given image observations (think non-linear Kalman filter)
+</div>
+
+<div class="text-center my-15"> 
+<v-clicks>
+
+#### This probabilistic modeling allows the agent to be robust for safety (through pessimism).
+#### But still discover new behaviors (through optimism).
+</v-clicks>
+</div>
+
+
+<div class="abs-br m-10">
+    <img src="https://imgur.com/W5n1wuV.gif" width="600">
+</div>
+
+
+---
+
+# How well does it work?
+
+Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchmark suite
+
+
+<div class="flex flex-row">
+<div>
+  <img src="https://imgur.com/0G3VKle.gif" width="800">
+  <img src="https://imgur.com/zdyuRdN.gif" width="800">
+</div>
+
+<div>
+  <img src="/lambda-results.svg" class="w-65">
+</div>
+</div>
+
+<br>
+
+<div class="text-center mt-10">
+
+## Main takeaway: solves nicely <b><i>all tasks</i></b> with <b><i>all robots</i></b>.
 </div>
 
 ---
