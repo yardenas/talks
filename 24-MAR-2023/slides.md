@@ -229,7 +229,7 @@ Key challenges remain
 # Safety in Reinforcement Learning
 Three common approaches
 
-<div class="flex container mx-auto gap-25 h-max mt-25">
+<div class="flex container mx-auto gap-25 h-max mt-25 -ml-10">
   <div v-click class="text-center flex flex-col">
   <div>
     <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
@@ -294,9 +294,9 @@ Central concept: use data from multiple, related, tasks to learn informative pri
 
 * Meta-train data: $\mathcal{D}_k = \{x_i, y_i\}_{i = 1}^N$
 * $k = 1 \dots K$ tasks, typically $N \ll K$
-* $y_i = f_{\theta^k}(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$ (regression)
+* $y_i = f_{\theta^k}(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$
 * Meta-test data: $\tilde{\mathcal{D}} = \{x_j, f_{\tilde{\theta}}(x_j) + \epsilon\}_{j = 1}^M$
-* Learn prior $p(\tilde{\theta})$ with $\mathcal{D}_{1:K}$. Use it with inferring $p(\tilde{\theta} | \tilde{\mathcal{D}})$.<Reference link="http://proceedings.mlr.press/v139/rothfuss21a/rothfuss21a.pdf">Rothfuss et al. (2021)</Reference>
+* Learn prior $p(\tilde{\theta})$ with $\mathcal{D}_{1:K}$. Use it to infer $p(\tilde{\theta} | \tilde{\mathcal{D}})$ more efficiently.<Reference link="http://proceedings.mlr.press/v139/rothfuss21a/rothfuss21a.pdf">Rothfuss et al. (2021)</Reference>
 
 </v-clicks>
 
@@ -314,6 +314,7 @@ Central concept: use data from multiple, related, tasks to learn informative pri
 ---
 
 # Safe adaptation via Meta-Learning
+How can agents adapt efficiently and safely to new tasks?
 
 <div class="flex justify-items-center">
 
@@ -325,29 +326,14 @@ Central concept: use data from multiple, related, tasks to learn informative pri
 | <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
 
 </div>
-
-<div class="w-2/5 ml-30">
-
-<div v-click>
-
-### <twemoji-warning /> **Limitation:**<br>previous work on _safe_ adaptation is scarce
-
-</div>
-
-<br>
-<br>
-
-<div v-click>
-
-### <twemoji-check-mark-button /> **Strength:**<br>(relatively) large body of literature, empirically works well.
-
-</div>
-
 </div>
 
 
-</div>
+<div class="flex justify-center mt-15 text-center">
 
+## <twemoji-warning /> Current literature on _safe_ adaptation does not address most of its challenges.
+
+</div>
 
 ---
 clicks: 3
@@ -423,63 +409,124 @@ _Devise algorithms that address the key challenges of safe adaptation with the a
 
 
 ---
+clicks: 5
+---
 
 # Progress to Date
 On safe reinforcement learning
 
+Constrained Policy Optimization via Bayesian World Models<Reference link="https://arxiv.org/abs/2201.09802" translate="translate-y-[-1.5em] translate-x-[0.7em]">As et al. (2022)</Reference>
+
+<div class="grid grid-cols-[1fr,1fr] gap-x-10 mt-10">
+<div v-click=0>
+
+- Learn a Bayesian model of $P(s^\prime | s, a)$
+- Use it for policy optimization
+- Solve constrained problem via Augmented Lagrangian<Reference link="https://people.tamu.edu/~j-zhou//Constrained-Opt.pdf">Bertsekas, Dimitri P. (1996)</Reference>
+
+</div>
+
+<div v-click=1>
+
+```python {all|2,3,4,5|10|12|all}
+def policy_loss(policy, model, initial_state, lagrangian):
+  (
+    reward_optimistic_trajectory, 
+    cost_pessimistic_trajectory,
+  ) = model.simulate(policy, initial_state)
+  # Use learned critics to **estimate** the 
+  # objective and constraints.
+  objective = reward_critic(reward_optimistic_trajectory)
+  constraint = cost_critic(cost_pessimistic_trajectory)
+  return -objective + lagrangian * constraint
+
+policy_grads = grad(policy_loss)(policy, ...)
+```
+</div>
+</div>
+
 
 ---
-clicks: 6
+
+# Progress to Date
+On safe transfer learning
+
+
+Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcement Learning<Reference link="https://arxiv.org/abs/2201.09802" translate="translate-y-[-1.5em] translate-x-[0.7em]">Usmanova et al. (2022)</Reference>
+
+<div v-if="$slidev.nav.clicks < 3" v-click=1>
+
+**Challenge:** given an initially safe policy,
+
+</div>
+
+<div v-if="$slidev.nav.clicks < 3" v-click=1 class="leading-0">how to transfer it to a new task while maintaining safety?</div>
+
+
+<div v-if="$slidev.nav.clicks >= 3" v-click=3>
+
+**Idea:** log-barrier functions ensure feasibility of iterates.<Reference link="https://arxiv.org/abs/1912.09466" translate="translate-y-[-1.5em] translate-x-[0.7em]">Usmanova et al. (2020)</Reference>
+
+</div>
+
+
+
+<div class="flex justify-center mt-15">
+
+<RoundedImage v-if="$slidev.nav.clicks < 3" v-click=2 class="w-100" image="/easy.png" title=""></RoundedImage>
+<RoundedImage v-if="$slidev.nav.clicks < 3" v-click=2 class="w-100" image="/hard.png" title=""></RoundedImage>
+
+<img v-if="$slidev.nav.clicks == 3" v-click=3 src="/barrier.svg" class="-mt-8"/>
+
+</div>
+
+
+---
+
+# Baselines
+
+Creating a testbed for safe adaptation algorithms
+
+
+
+<div class="flex">
+<v-clicks>
+<div>
+
+### `safe-adaptation-gym`
+
+A benchmark suite for safe adaptation
+
+- 8 different tasks implemented
+- Each sampled task is subject to different dynamical properties
+- Number of obtacles and their sizes sampled randomly per task
+- CMDP constraint bound ($d$) sampled randomly per task
+</div>
+
+<div>
+
+### `safe-adaptation-agents`
+
+Implementation of 4 different baseline algorithms
+
+- RL$^2$ ([Duan et al. 2016](https://arxiv.org/abs/1611.02779?context=cs)) combined with CPO ([Achiam et al. 2017](https://meta-world.github.io/))
+- MAML ([Finn et al. 2017](https://arxiv.org/abs/1703.03400?context=cs)) combined with PPO-Lagrangian ([Ray et al. 2019](https://cdn.openai.com/safexp-short.pdf))
+- LAMBDA ([As et al. 2022](https://arxiv.org/abs/2201.09802))
+- MAML ([Finn et al. 2017](https://arxiv.org/abs/1703.03400?context=cs)) combined with safe CEM-MPC ([Liu et al. 2021](https://arxiv.org/abs/2010.07968))
+
+</div>
+</v-clicks>
+</div>
+
+
+---
+clicks: 7
 ---
 
 # LAMBDA
 
 [Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022, joint work with [Ilnura Usmanova](https://control.ee.ethz.ch/people/profile.ilnura-usmanova.html), [Sebastian Curi](https://las.inf.ethz.ch/people/sebastian-curi) and [Andreas Krause](https://las.inf.ethz.ch/krausea))
 
-
-<!-- TODO (yarden): create a Vue component of a tooltip that explains the different things. -->
-<div class="grid grid-cols-2 gap-x-4">
-<div>
-
-<v-clicks>
-
-- Collect data on the real environment based on $\pi$
-- Use this data to fit a statistical model of the environment
-</v-clicks>
-
-<div v-click="3">
-
-<br>
-<br>
-
-## Planning
-</div>
-<ul>
-  <li v-click="4">Simulate the policy with the model</li>
-  <li>Solve the constrained problem with <i><b>the Augmented Lagrangian</b></i></li>
-  <li>Backpropagate policy gradients through the model</li>
-</ul>
-
-</div>
-
-<div>
-
-<div v-click="3" class="absolute top-50">
-
-```python {all|2|7|9}
-def policy_loss(policy, model, initial_state, lagrangian):
-  trajectory = model.simulate(policy, initial_state)
-  # Use learned critics to **estimate** the 
-  # objective and constraints.
-  objective = reward_critic(trajectory).mean()
-  constraint = cost_critic(trajectory).mean()
-  return -objective + lagrangian * constraint
-
-policy_grads = grad(policy_loss)(...)
-```
-</div>
-</div>
-</div>
 
 
 ---
@@ -602,6 +649,25 @@ Online planning and control from noisy observations problem.
 * pre-operative CT & intra-operative fluoroscopy (X-Ray)
 * Complication rate is bad because pre-operative planning cannot cope with intra-operative comlications---basically need to re-plan.
 -->
+
+---
+
+# Model-Based Reinforcement Learning
+Using supervised-learning to accelerate 
+
+<div class="grid grid-cols-2 gap-x-4 mt-10">
+<div>
+
+- Collect data on the real environment.
+- Use this data to fit a statistical model of the environment.
+- Use the model to (inexpensive) simulate trajectories for policy learning or online control.
+
+</div>
+
+<div class="">
+  <img src="/mbrl-training-loop.svg">
+</div>
+</div>
 
 ---
 layout: quote
