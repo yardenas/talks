@@ -625,12 +625,9 @@ Some examples
 <!-- * If we could control the generation process, we can use it for active learning -- decide which tasks to sample. -->
 
 ---
-layout: statement
----
 
-# 
-
-
+# Simulated Teaching for Online Safe Adaptation
+Exploration via active learning
 
 
 ---
