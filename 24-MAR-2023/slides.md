@@ -229,7 +229,7 @@ Key challenges remain
 # Safety in Reinforcement Learning
 Three common approaches
 
-<div class="flex container mx-auto gap-25 h-max mt-25 -ml-10">
+<div class="flex justify-center mt-15 text-center">
   <div v-click class="text-center flex flex-col">
   <div>
     <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
@@ -263,7 +263,7 @@ Three common approaches
 # Constrained Markov Decision Processes (CMDP)
 A short introduction
 
-Idea: cost signal $c_t$ together with the reward $r_t$.
+**Idea:** cost signal $c_t$ together with the reward $r_t$.
 
 * Cost function: $c_t = C(s_t, a_t), C: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$
 
@@ -284,7 +284,7 @@ $$
 # Meta-Learning
 A framework for data-efficient adaptation
 
-Central concept: use data from multiple, related, tasks to learn informative priors for future tasks.
+**Central concept:** use data from multiple, related, tasks to learn informative priors for future tasks.
 
 <div class="flex justify-items-center mt-5">
 
@@ -473,8 +473,8 @@ Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcem
 
 <div class="flex justify-center mt-15">
 
-<RoundedImage v-if="$slidev.nav.clicks < 3" v-click=2 class="w-100" image="/easy.png" title=""></RoundedImage>
-<RoundedImage v-if="$slidev.nav.clicks < 3" v-click=2 class="w-100" image="/hard.png" title=""></RoundedImage>
+<img v-if="$slidev.nav.clicks < 3" v-click=2 src="/easy.png" class="rounded-full h-45 w-45 border-2 border-slate-700 leading-50 inline-block m-auto object-cover"/>
+<img v-if="$slidev.nav.clicks < 3" v-click=2 src="/hard.png" class="rounded-full h-45 w-45 border-2 border-slate-700 leading-50 inline-block m-auto object-cover"/>
 
 <img v-if="$slidev.nav.clicks == 3" v-click=3 src="/barrier.svg" class="-mt-8"/>
 
@@ -509,24 +509,82 @@ A benchmark suite for safe adaptation
 </div>
 </div>
 
+---
+
+# Safe Adaptation with Bayesian Models
+Taking a probabilistic approach
+
+<div class="flex justify-items-center gap-x-5">
+
+<div class="w-4/5 mt-10">
+
+#### **Question:** how can we use uncertainty to improve safety robustness and learning efficiency to new tasks?
+
+<div class="grid grid-cols-[1fr,60px] w-4/5 mt-4">
+
+#### **Idea:** infer a posterior distribution over $\tilde{\mathcal{M}}$
+<VarP size="text-2xl"/>
+</div>
+
+<v-clicks>
+
+In practice, this means collecting data and fitting a (Bayesian) model of $\tilde{P}(s^\prime | s, a), \tilde{C}(s, a), \tilde{R}(s, a)$.
+
+Can use existing methods for model inference in the multi-task setting.<Reference link="http://proceedings.mlr.press/v139/rothfuss21a/rothfuss21a.pdf">Rothfuss et al. (2021)</Reference>
+
+</v-clicks>
+
+</div>
+
+<div class="w-2/5">
+
+<img src="/meta-rl.svg" class="w-full"/>
+
+</div>
+</div>
+
+
+---
+
+# Safe Adaptation with Bayesian Models
+Using the posterior to safely adapt to new tasks
+
+
+<div class="grid grid-cols-[40px,1fr] mt-15">
+<Reward size="text-2xl"/>
+Given our model, we can solve
+</div>
+
+$$
+\begin{aligned}
+  \max_{\pi} & \; \mathbb{E}_{\tilde{\tau} \sim p(\tilde{\tau})} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
+  \text{s.t.} &  \;\mathbb{E}_{\tilde{\tau} \sim p(\tilde{\tau})} \left[\sum_{t = 0}^T C(s_t, a_t)\right] \le 0
+\end{aligned}
+$$
+<div class="grid grid-cols-[1fr,60px] w-4/5">
+
+by applying previous findings in <Reference link="https://arxiv.org/abs/2201.09802" translate="translate-y-[0em]" text-size="text-xs">As et al. (2022)</Reference> and <Reference link="https://arxiv.org/abs/2201.09802" translate="translate-y-[0em]" text-size="text-xs">Usmanova et al. (2022)</Reference>
+</div>
+
+
+
+---
+
+# Simulated Teaching for Online Safe Adaptation
+What
+
+---
+
+# Uncertain Constrained Markov Decision Processes for Robotic Spinal Surgery
+
+
 
 ---
 layout: image-right
 image: ./leg.svg
 ---
-
-# Recap
-
-- Constrained Markov decision processes.
-- Preliminary work.
-- Meta-reinforcement learning with constraints (?)
-- Current state of progress.
-
-<div class="abs-bl mx-14 my-12">
-
 ## Thanks!
 
-</div>
 
 
 ---
@@ -589,7 +647,7 @@ Using supervised-learning to accelerate
 
 - Collect data on the real environment.
 - Use this data to fit a statistical model of the environment.
-- Use the model to (inexpensive) simulate trajectories for policy learning or online control.
+- Use the model to (cheaply) simulate trajectories for policy learning or online control.
 
 </div>
 
@@ -601,32 +659,21 @@ Using supervised-learning to accelerate
 
 
 ---
-clicks: 7
+clicks: 2
 ---
 
 # LAMBDA
 
-[Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022, joint work with [Ilnura Usmanova](https://control.ee.ethz.ch/people/profile.ilnura-usmanova.html), [Sebastian Curi](https://las.inf.ethz.ch/people/sebastian-curi) and [Andreas Krause](https://las.inf.ethz.ch/krausea))
-
-
-
----
-
-# LAMBDA
-
-A probabilistic perspective
-
-<div class="opacity-80">
+[Constrained Policy Optimization via Bayesian World Models](https://arxiv.org/abs/2201.09802) (ICLR 2022), joint work with Ilnura Usmanova, Sebastian Curi and Andreas Krause
 
 - Maintain a posterior distribution over model parameters given previously seen data $\theta \sim p(\theta | \mathcal{D})$
 - Models track an underlying representation of the environment's state, given image observations (think non-linear Kalman filter)
-</div>
 
 <div class="text-center my-15"> 
 <v-clicks>
 
-#### This probabilistic modeling allows the agent to be robust for safety (through pessimism).
-#### But still discover new behaviors (through optimism).
+#### This probabilistic modeling allows the agent to be robust for safety (through pessimism);
+#### but still discover new behaviors (through optimism).
 </v-clicks>
 </div>
 
@@ -638,12 +685,11 @@ A probabilistic perspective
 
 ---
 
-# How well does it work?
-
+# LAMBDA
 Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchmark suite
 
 
-<div class="flex flex-row">
+<div class="flex flex-row mt-10">
 <div>
   <img src="https://imgur.com/0G3VKle.gif" width="800">
   <img src="https://imgur.com/zdyuRdN.gif" width="800">
@@ -655,11 +701,6 @@ Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchm
 </div>
 
 <br>
-
-<div class="text-center mt-10">
-
-## Main takeaway: solves nicely <b><i>all tasks</i></b> with <b><i>all robots</i></b>.
-</div>
 
 ---
 layout: quote
