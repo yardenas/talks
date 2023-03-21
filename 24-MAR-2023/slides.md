@@ -571,7 +571,67 @@ by applying previous findings in <Reference link="https://arxiv.org/abs/2201.098
 ---
 
 # Simulated Teaching for Online Safe Adaptation
-What
+Using simulators to prepare better to reality
+
+<div class="flex justify-items-center gap-x-5">
+
+<div class="w-4/5 mt-30">
+
+### **Question:** what if we could simulate and control the generation process $\mathcal{M}_i \sim \mathcal{E}(\cdot)$?
+
+</div>
+
+<div class="w-2/5">
+
+<img src="/meta-rl.svg" class="w-full"/>
+
+</div>
+</div>
+
+---
+clicks: 3
+---
+
+# Simulated Teaching for Online Safe Adaptation
+Some examples
+
+<div v-if="$slidev.nav.clicks < 1" class="mt-15">
+  <img src="/sim2real-1.png">
+  <Reference link="https://arxiv.org/pdf/1611.04201.pdf" text-size="text-xs" class="absolute top-40 right-2">Sadeghi & Levine (2016)</Reference>
+</div>
+
+<div v-if="$slidev.nav.clicks == 1" v-click=1 class="flex justify-center mt-10">
+  <img src="/sim2real-2.png" class="absolute w-95">
+  <Reference link="https://arxiv.org/abs/1703.06907" text-size="text-xs" class="absolute top-40 right-30">Tobin et al. (2017)</Reference>
+</div>
+
+<div v-if="$slidev.nav.clicks >= 2" class="flex justify-center text-center mt-25">
+
+
+<div v-click="2">
+
+## <twemoji-warning /> sampling tasks is done uniformally at random.
+
+</div>
+
+<div v-click="3" class="mt-35">
+
+## Can we do better?
+
+</div>
+
+</div>
+
+<!-- * If we could control the generation process, we can use it for active learning -- decide which tasks to sample. -->
+
+---
+layout: statement
+---
+
+# 
+
+
+
 
 ---
 
