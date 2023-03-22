@@ -5,9 +5,9 @@ const props = defineProps<{
   translate?: string;
 }>();
 
-const textSize = props.textSize ?? "text-0.4em";
+const textSize = props.textSize ?? "text-0.3em";
 const translate =
-  props.translate ?? "translate-y-[-1.5em] translate-x-[-0.3em]";
+  props.translate ?? "translate-y-[-1.5em] translate-x-[-0.25em]";
 </script>
 
 <template>

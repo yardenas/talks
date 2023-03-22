@@ -610,7 +610,7 @@ Some examples
 
 <div v-click="2">
 
-## <twemoji-warning /> sampling tasks is done uniformally at random.
+## <twemoji-warning /> sampling tasks is done uniformly at random.
 
 </div>
 
@@ -631,14 +631,24 @@ Exploration via active learning
 
 <div class="flex justify-items-center gap-x-5">
 
-<div class="w-4/5 mt-15">
+<div class="w-4/5 mt-5">
 
 ### **Idea:**
+
+<div class="grid grid-cols-[45px,1fr]">
+<VarP size="text-2xl" class="relative top-4"/>
+
 Assume $\mathcal{M}_i \sim \mathcal{E}(\cdot)$ are parameterized by $z_i \in \mathbb{R}^n$.
+</div>
+
+<div class="grid grid-cols-[40px,1fr]">
+<Reward size="text-2xl" class="relative top-5"/>
+
+Control $z_i$ to choose tasks that prepare the agent best to $\tilde{\mathcal{M}}$ in terms of safety and objective.
+</div>
+
 
 Apply existing frameworks for active learning, such as Optimal Experiment Design.<Reference link="https://epubs.siam.org/doi/abs/10.1137/1.9780898719109">Pukelsheim (2006)</Reference><Reference link="https://arxiv.org/abs/2206.14332">Mutn`y et al. (2022)</Reference>
-
-Control $z_i$ and actively choose the most informative tasks to learn $\mathcal{E}$.
 
 </div>
 
@@ -661,9 +671,30 @@ Control $z_i$ and actively choose the most informative tasks to learn $\mathcal{
 ---
 layout: image-right
 image: ./leg.svg
+clicks: 2
 ---
-## Thanks!
+# Summary
+<br>
 
+
+<div v-click="0" v-if="$slidev.nav.clicks < 1" class="mt-22">
+
+### Challenge
+###### Safe adaptation is a common, yet, open problem.
+
+</div>
+<div v-click="1" v-if="$slidev.nav.clicks == 1" class="mt-22">
+
+### Goal
+###### Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery.
+
+</div>
+<div v-click="2" v-if="$slidev.nav.clicks == 2" class="mt-22">
+
+### Approach
+###### Develop an algorithmic foundation and theory for safe adaptation. Apply it within the field of robotic spinal surgery.
+
+</div>
 
 
 ---
