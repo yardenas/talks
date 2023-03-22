@@ -661,11 +661,54 @@ Apply existing frameworks for active learning, such as Optimal Experiment Design
 
 
 
-
+---
+clicks: 1
 ---
 
 # Uncertain Constrained Markov Decision Processes for Robotic Spinal Surgery
+Outside of the laboratory
 
+<div class="flex justify-around mt-10">
+
+<div v-click-hide="1" class="w-3/7">
+
+## **So far**
+Contributions were mostly algorithmic...
+
+**Q:** can we apply our findings in the real world?
+
+**A:** in a full-blown clinical setting---probably not yet.
+</div>
+
+<div v-click="1" class="w-3/7">
+
+## **However**
+This thesis is part of a collaborating with researchers from [Balgrist Institute](https://www.balgristcampus.ch/).
+
+Thus, we can design a practical, yet realistic, experimental setting.
+
+</div>
+</div>
+
+<!-- For examply, use mannequin or cadavers to perform the surgery. -->
+
+
+---
+layout: image-right
+image: /spine-surgery-2.png
+---
+
+# Uncertain Constrained Markov Decision Processes for Robotic Spinal Surgery
+Outside of the laboratory
+
+<div class="mt-10">
+
+### **Concretely**
+
+* Couple project II with a high-fidelity simulator to learn informative priors.
+* When deployed outside of simulation (e.g., mannequin or cadaver), do posterior inference by applying the results of project I.
+
+</div>
 
 
 ---
@@ -680,7 +723,7 @@ clicks: 2
 <div v-click="0" v-if="$slidev.nav.clicks < 1" class="mt-22">
 
 ### Challenge
-###### Safe adaptation is a common, yet, open problem.
+###### Safe adaptation is a common, yet, an open problem.
 
 </div>
 <div v-click="1" v-if="$slidev.nav.clicks == 1" class="mt-22">
