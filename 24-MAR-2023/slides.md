@@ -108,8 +108,8 @@ $s_{t + 1}, r_{t}$
 # Recap
 Interacting with the environment is modeled as a Markov Decision Process
 
-* State space: $s_t \in \mathcal{S}$
-* Action space: $a_t \ \in \mathcal{A}$
+* State space (discrete): $s_t \in \mathcal{S}$
+* Action space (discrete): $a_t \ \in \mathcal{A}$
 * Transition function: $s_{t + 1} \sim P(\cdot | s_t, a_t), P: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \rightarrow [0, 1]$
 * Reward function: $r_t = R(s_t, a_t), R: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$
 * Policy: $\pi: \mathcal{S} \times \mathcal{A} \rightarrow [0, 1]$
@@ -118,7 +118,7 @@ Interacting with the environment is modeled as a Markov Decision Process
 
 <div v-click class="container mt-10 text-blue-gray-900">
 
-#### Goal: find a policy $\pi(a_t | s_t)$
+#### **Goal:** find a policy $\pi(a_t | s_t)$
 $$\pi \in \arg\max_{\pi} \mathbb{E}_{\tau \sim p(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right]$$
 
 </div>
@@ -269,7 +269,7 @@ A short introduction
 
 <div v-click class="container mt-10 text-blue-gray-900">
 
-#### Goal: find a policy $\pi(a_t | s_t)$ that solves the _constrained_ problem
+#### **Goal:** find a policy $\pi(a_t | s_t)$ that solves the _constrained_ problem
 $$
 \begin{aligned}
   \max_{\pi} & \; \mathbb{E}_{\tau \sim p(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
@@ -362,7 +362,7 @@ Via meta-reinforcement learning
 
 <div v-click class="container text-blue-gray-900">
 
-Goal: _adapt_ to the problem induced by $\tilde{\mathcal{M}}$ and solve
+**Goal:** _adapt_ to the problem induced by $\tilde{\mathcal{M}}$ and solve
 $$
 \begin{aligned}
   \max_{\pi} & \; \mathbb{E}_{\tilde{\tau} \sim p(\tilde{\tau})} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
@@ -628,6 +628,28 @@ Some examples
 
 # Simulated Teaching for Online Safe Adaptation
 Exploration via active learning
+
+<div class="flex justify-items-center gap-x-5">
+
+<div class="w-4/5 mt-15">
+
+### **Idea:**
+Assume $\mathcal{M}_i \sim \mathcal{E}(\cdot)$ are parameterized by $z_i \in \mathbb{R}^n$.
+
+Apply existing frameworks for active learning, such as Optimal Experiment Design.<Reference link="https://epubs.siam.org/doi/abs/10.1137/1.9780898719109">Pukelsheim (2006)</Reference><Reference link="https://arxiv.org/abs/2206.14332">Mutn`y et al. (2022)</Reference>
+
+Control $z_i$ and actively choose the most informative tasks to learn $\mathcal{E}$.
+
+</div>
+
+<div class="w-2/5">
+
+<img src="/meta-rl.svg" class="w-full"/>
+
+</div>
+</div>
+
+
 
 
 ---
