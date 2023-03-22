@@ -724,7 +724,7 @@ Online planning and control from noisy observations problem.
   <healthicons-death-alt />
   <div>Pre-operative planning, open-loop control.</div>
   <healthicons-death-alt />
-  <div>~15% surgery complication rate.<Reference link="https://pubmed.ncbi.nlm.nih.gov/20672949/" translate="translate-y-[-4.5em] translate-x-65">Nasser et al. (2010)</Reference></div>
+  <div>~15% surgery complication rate.<Reference link="https://pubmed.ncbi.nlm.nih.gov/20672949/" translate="translate-y-[-4.5em] translate-x-0">Nasser et al. (2010)</Reference></div>
 </div>
 
 </div>
