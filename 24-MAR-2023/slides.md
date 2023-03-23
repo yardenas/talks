@@ -226,40 +226,6 @@ Key challenges remain
 
 ---
 
-# Safety in Reinforcement Learning
-Three common approaches
-
-<div class="flex justify-center mt-15 text-center">
-  <div v-click class="text-center flex flex-col">
-  <div>
-    <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
-    <p class="text-1.25em">Ergodicity</p>
-  </div>
-    <div>
-    <Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference><Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1711.06782">Eysenbach et al., (2017)</Reference>
-    </div>
-  </div>
-  <div v-click class="text-center flex flex-col">
-  <div>
-    <ooui-map-trail class=" text-8xl opacity-90 text-blue-gray-900"/>
-    <p class=" text-1.25em">Lyapunov Stability</p>
-  </div>
-    <Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2017/hash/766ebcd59621e305170616ba3d3dac32-Abstract.html">Berkenkamp et al., (2017)</Reference>
-  </div>
-  <div v-click class="text-center flex flex-col">
-  <div>
-    <ph-arrow-line-down-left-bold class="text-8xl opacity-90 text-blue-gray-900"/>
-    <p class="text-1.25em"> Constrained Markov<br>Decision Processes</p>
-  </div>
-    <div>
-    <Reference text-size="text-0.5em" translate="" link="https://www-sop.inria.fr/members/Eitan.Altman/TEMP/h.pdf">Altman, (1999)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>
-    </div>
-  </div>
-</div>
-
-
----
-
 # Constrained Markov Decision Processes (CMDP)
 A short introduction
 
@@ -293,7 +259,7 @@ A framework for data-efficient adaptation
 <v-clicks>
 
 * Meta-train data: $\mathcal{D}_k = \{x_i, y_i\}_{i = 1}^N$
-* $k = 1 \dots K$ tasks, typically $N \ll K$
+* $k = 1 \dots K$ tasks
 * $y_i = f_{\theta^k}(x_i) + \epsilon, \epsilon \sim \mathcal{N}(0, \sigma)$
 * Meta-test data: $\tilde{\mathcal{D}} = \{x_j, f_{\tilde{\theta}}(x_j) + \epsilon\}_{j = 1}^M$
 * Learn prior $p(\tilde{\theta})$ with $\mathcal{D}_{1:K}$. Use it to infer $p(\tilde{\theta} | \tilde{\mathcal{D}})$ more efficiently.<Reference link="http://proceedings.mlr.press/v139/rothfuss21a/rothfuss21a.pdf">Rothfuss et al. (2021)</Reference>
@@ -311,29 +277,19 @@ A framework for data-efficient adaptation
 
 </div>
 
+
+---
+layout: statement
 ---
 
-# Safe adaptation via Meta-Learning
-How can agents adapt efficiently and safely to new tasks?
+# Strong foundation on safety and meta-learning,<br>_but not on their intersection_.
 
-<div class="flex justify-items-center">
+---
+layout: quote
+---
 
-<div class="w-3/5">
-
-| **Paper** | **Safety?** |
-|:---|:---:|
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1611.02779">Duan et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1703.03400">Finn et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1810.06784">Rothfuss et al. (2018)</Reference>,<Reference text-size="text-0.8em" translate="" link="URL https://arxiv.org/abs/1803.11347">Nagabandi et al. (2018)</Reference> and more...  |   <twemoji-cross-mark />   |
-| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
-
-</div>
-</div>
-
-
-<div class="flex justify-center mt-15 text-center">
-
-## <twemoji-warning /> Current literature on _safe_ adaptation does not address most of its challenges.
-
-</div>
+# Thesis Goal
+_Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery._
 
 ---
 clicks: 3
@@ -349,8 +305,8 @@ Via meta-reinforcement learning
 <div class="flex flex-col justify-evenly h-full">
 
 
-* CMDP (informally): $\mathcal{M}_i = \left(P_i(s^\prime | s, a, ), C_i(s, a), R_i(s, a)\right)$
 * “Meta-environment”: $\mathcal{M}_i \sim \mathcal{E}(\cdot)$
+* CMDP (informally): $\mathcal{M}_i = \left(P_i(s^\prime | s, a, ), C_i(s, a), R_i(s, a)\right)$
 
 <v-clicks>
 
@@ -392,21 +348,6 @@ $$
 </div>
 </div>
 
----
-layout: statement
----
-
-# Takeway: strong foundation on safety and meta-learning,<br>_but not on their intersection_.
-
-
----
-layout: quote
----
-
-# Thesis Goal
-_Devise algorithms that address the key challenges of safe adaptation with the aim of making them <br>applicable in the field of robotic spinal surgery._
-
-
 
 ---
 clicks: 5
@@ -420,13 +361,26 @@ Constrained Policy Optimization via Bayesian World Models<Reference link="https:
 <div class="grid grid-cols-[1fr,1fr] gap-x-10 mt-10">
 <div v-click=0>
 
+#### LAMBDA
 - Learn a Bayesian model of $P(s^\prime | s, a)$
 - Use it for policy optimization
 - Solve constrained problem via Augmented Lagrangian<Reference link="https://people.tamu.edu/~j-zhou//Constrained-Opt.pdf">Bertsekas, Dimitri P. (1996)</Reference>
 
 </div>
 
-<div v-click=1>
+<div v-if="$slidev.nav.clicks < 2" v-click=1>
+
+$$
+\begin{aligned}
+  \max_{\pi} & \max_{p_\theta^r} \; \mathbb{E}_{\tau \sim p_\theta^r(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
+  \text{s.t.} &  \;\max_{p_\theta^c}\mathbb{E}_{\tau \sim p_\theta^c(\tau)} \left[\sum_{t = 0}^T C(s_t, a_t)\right] \le 0
+\end{aligned}
+$$
+
+</div>
+
+
+<div v-if="$slidev.nav.clicks >= 2" v-click=2>
 
 ```python {all|2,3,4,5|10|12|all}
 def policy_loss(policy, model, initial_state, lagrangian):
@@ -480,34 +434,6 @@ Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcem
 
 </div>
 
-
----
-
-# Progress to Date
-Creating a testbed for safe adaptation algorithms
-
-
-<div class="flex gap-x-10">
-<div>
-
-### `safe-adaptation-gym`
-
-A benchmark suite for safe adaptation
-
-- 8 different tasks.
-- Each sampled task is subject to different dynamical properties.
-- Number of obtacles and their sizes sampled randomly per task.
-</div>
-
-<div v-click>
-
-### `safe-adaptation-agents`
-
-* Implementation of 4 different baseline meta-RL algorithms.
-* Use common CMDP solvers for safety.
-
-</div>
-</div>
 
 ---
 
@@ -690,7 +616,7 @@ Thus, we can design a practical, yet realistic, experimental setting.
 </div>
 </div>
 
-<!-- For examply, use mannequin or cadavers to perform the surgery. -->
+<!-- For examply, use manikin or cadavers to perform the surgery. -->
 
 
 ---
@@ -706,7 +632,7 @@ Outside of the laboratory
 ### **Concretely**
 
 * Couple project II with a high-fidelity simulator to learn informative priors.
-* When deployed outside of simulation (e.g., mannequin or cadaver), do posterior inference by applying the results of project I.
+* When deployed outside of simulation (e.g., manikin or cadaver), do posterior inference by applying the results of project I.
 
 </div>
 
@@ -739,6 +665,10 @@ clicks: 2
 
 </div>
 
+
+---
+layout: end
+---
 
 ---
 layout: cover
@@ -789,6 +719,63 @@ Online planning and control from noisy observations problem.
 * pre-operative CT & intra-operative fluoroscopy (X-Ray)
 * Complication rate is bad because pre-operative planning cannot cope with intra-operative comlications---basically need to re-plan.
 -->
+
+---
+
+# Safety in Reinforcement Learning
+Three common approaches
+
+<div class="flex justify-center mt-15 text-center">
+  <div v-click class="text-center flex flex-col">
+  <div>
+    <ph-line-segments class="text-8xl opacity-90 text-blue-gray-900"/>
+    <p class="text-1.25em">Ergodicity</p>
+  </div>
+    <div>
+    <Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1205.4810">Moldoven & Abeel (2012)</Reference><Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2016/file/9a49a25d845a483fae4be7e341368e36-Paper.pdf">Turchetta et al., (2016)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1711.06782">Eysenbach et al., (2017)</Reference>
+    </div>
+  </div>
+  <div v-click class="text-center flex flex-col">
+  <div>
+    <ooui-map-trail class=" text-8xl opacity-90 text-blue-gray-900"/>
+    <p class=" text-1.25em">Lyapunov Stability</p>
+  </div>
+    <Reference text-size="text-0.5em" translate="" link="https://proceedings.neurips.cc/paper/2017/hash/766ebcd59621e305170616ba3d3dac32-Abstract.html">Berkenkamp et al., (2017)</Reference>
+  </div>
+  <div v-click class="text-center flex flex-col">
+  <div>
+    <ph-arrow-line-down-left-bold class="text-8xl opacity-90 text-blue-gray-900"/>
+    <p class="text-1.25em"> Constrained Markov<br>Decision Processes</p>
+  </div>
+    <div>
+    <Reference text-size="text-0.5em" translate="" link="https://www-sop.inria.fr/members/Eitan.Altman/TEMP/h.pdf">Altman, (1999)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1705.10528">Achiam et al., (2017)</Reference><Reference text-size="text-0.5em" translate="" link="https://arxiv.org/abs/1801.08757">Dalal et al., (2018)</Reference>
+    </div>
+  </div>
+</div>
+
+---
+
+# Safe adaptation via Meta-Learning
+How can agents adapt efficiently and safely to new tasks?
+
+<div class="flex justify-items-center">
+
+<div class="w-3/5">
+
+| **Paper** | **Safety?** |
+|:---|:---:|
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1611.02779">Duan et al., (2016)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1703.03400">Finn et al., (2017)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/1810.06784">Rothfuss et al. (2018)</Reference>,<Reference text-size="text-0.8em" translate="" link="URL https://arxiv.org/abs/1803.11347">Nagabandi et al. (2018)</Reference> and more...  |   <twemoji-cross-mark />   |
+| <Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2008.06622">Zhang et al., (2020)</Reference>,<Reference text-size="text-0.8em" translate="" link="https://arxiv.org/abs/2112.03575">Luo et al., (2021)</Reference>   | <twemoji-check-mark-button />   |
+
+</div>
+</div>
+
+
+<div class="flex justify-center mt-15 text-center">
+
+## <twemoji-warning /> Current literature on _safe_ adaptation does not address most of its challenges.
+
+</div>
 
 ---
 
@@ -854,6 +841,34 @@ Testing LAMBDA with the [Safety Gym](https://openai.com/blog/safety-gym/) benchm
 </div>
 
 <br>
+
+---
+
+# Progress to Date
+Creating a testbed for safe adaptation algorithms
+
+
+<div class="flex gap-x-10">
+<div>
+
+### `safe-adaptation-gym`
+
+A benchmark suite for safe adaptation
+
+- 8 different tasks.
+- Each sampled task is subject to different dynamical properties.
+- Number of obtacles and their sizes sampled randomly per task.
+</div>
+
+<div v-click>
+
+### `safe-adaptation-agents`
+
+* Implementation of 4 different baseline meta-RL algorithms.
+* Use common CMDP solvers for safety.
+
+</div>
+</div>
 
 ---
 layout: quote
