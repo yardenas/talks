@@ -1,0 +1,8 @@
+p,
+ul {
+  @apply text-blue-gray-800;
+}
+
+p .katex-display {
+  @apply text-black;
+}

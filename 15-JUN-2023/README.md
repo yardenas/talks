@@ -1,0 +1,1 @@
+If fails to deploy apache server, make sure public_html has the following permissions https://stackoverflow.com/questions/18817744/change-all-files-and-folders-permissions-of-a-directory-to-644-755
