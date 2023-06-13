@@ -15,12 +15,12 @@ fonts:
 # Safe Adaptation in Uncertain Constrained Markov Decision Processes
 RESEARCH OUTLINE
 <div class="text-sm tracking-widest">
-Yarden As
+<a href="https://people.inf.ethz.ch/yardas/" target="_blank">Yarden As </a>
 </div>
 
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">Jun. 15th 2023</div>
+    <div class="text-sm opacity-50">Jun. 16th 2023</div>
   </div>
 </div>
 
@@ -342,7 +342,7 @@ $$
 
 
 ---
-clicks: 5
+clicks: 4
 ---
 
 # Solving CMDPs
@@ -360,16 +360,6 @@ Constrained Policy Optimization via Bayesian World Models<Reference link="https:
 
 </div>
 
-<div v-if="$slidev.nav.clicks < 2" v-click=1>
-
-$$
-\begin{aligned}
-  \max_{\pi} & \max_{p_\theta^r} \; \mathbb{E}_{\tau \sim p_\theta^r(\tau)} \left[\sum_{t = 0}^T R(s_t, a_t)\right] \\ 
-  \text{s.t.} &  \;\max_{p_\theta^c}\mathbb{E}_{\tau \sim p_\theta^c(\tau)} \left[\sum_{t = 0}^T C(s_t, a_t)\right] \le 0
-\end{aligned}
-$$
-
-</div>
 
 
 <div v-if="$slidev.nav.clicks >= 2" v-click=2>
@@ -425,100 +415,6 @@ Log Barriers for Safe Black-box Optimization with Application to Safe Reinforcem
 <img v-if="$slidev.nav.clicks == 3" v-click=3 src="/barrier.svg" class="-mt-8"/>
 
 </div>
-
-
-
----
-
-# Simulated Teaching for Online Safe Adaptation
-Using simulators to prepare better to reality
-
-<div class="flex justify-items-center gap-x-5">
-
-<div class="w-4/5 mt-30">
-
-### **Question:** what if we could simulate and control the generation process $\mathcal{M}_i \sim \mathcal{E}(\cdot)$?
-
-</div>
-
-<div class="w-2/5">
-
-<img src="/meta-rl.svg" class="w-full"/>
-
-</div>
-</div>
-
----
-clicks: 3
----
-
-# Simulated Teaching for Online Safe Adaptation
-Some examples
-
-<div v-if="$slidev.nav.clicks < 1" class="mt-15">
-  <img src="/sim2real-1.png">
-  <Reference link="https://arxiv.org/pdf/1611.04201.pdf" text-size="text-xs" class="absolute top-40 right-2">Sadeghi & Levine (2016)</Reference>
-</div>
-
-<div v-if="$slidev.nav.clicks == 1" v-click=1 class="flex justify-center mt-10">
-  <img src="/sim2real-2.png" class="absolute w-95">
-  <Reference link="https://arxiv.org/abs/1703.06907" text-size="text-xs" class="absolute top-40 right-30">Tobin et al. (2017)</Reference>
-</div>
-
-<div v-if="$slidev.nav.clicks >= 2" class="flex justify-center text-center mt-25">
-
-
-<div v-click="2">
-
-## <twemoji-warning /> sampling tasks is done uniformly at random.
-
-</div>
-
-<div v-click="3" class="mt-35">
-
-## Can we do better?
-
-</div>
-
-</div>
-
-<!-- * If we could control the generation process, we can use it for active learning -- decide which tasks to sample. -->
-
----
-
-# Simulated Teaching for Online Safe Adaptation
-Exploration via active learning
-
-<div class="flex justify-items-center gap-x-5">
-
-<div class="w-4/5 mt-5">
-
-### **Idea:**
-
-<div class="grid grid-cols-[45px,1fr]">
-<VarP size="text-2xl" class="relative top-4"/>
-
-Assume $\mathcal{M}_i \sim \mathcal{E}(\cdot)$ are parameterized by $z_i \in \mathbb{R}^n$.
-</div>
-
-<div class="grid grid-cols-[40px,1fr]">
-<Reward size="text-2xl" class="relative top-5"/>
-
-Control $z_i$ to choose tasks that prepare the agent best to $\tilde{\mathcal{M}}$ in terms of safety and objective.
-</div>
-
-
-Apply existing frameworks for active learning, such as Optimal Experiment Design.<Reference link="https://epubs.siam.org/doi/abs/10.1137/1.9780898719109">Pukelsheim (2006)</Reference><Reference link="https://arxiv.org/abs/2206.14332">Mutn`y et al. (2022)</Reference>
-
-</div>
-
-<div class="w-2/5">
-
-<img src="/meta-rl.svg" class="w-full"/>
-
-</div>
-</div>
-
 
 
 ---
