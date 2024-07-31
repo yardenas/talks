@@ -158,7 +158,7 @@ $o \sim p(o | s')$
 <div class="mt-25">
 
 $$
-    \max_{\pi} \; \underbrace{\mathbb{E_{\pi}} \left[\sum_{t}^{\infty} R(s_t, a_t)\right]}_{\text{objective}} \; \text{s.t.} \;\underbrace{\mathbb{E_{\pi}} \left[\sum_{t}^{\infty} C(s_t, a_t)\right] \le 0}_{\text{constraint}}
+    \max_{\pi \in \Pi} \; \underbrace{\mathbb{E_{\pi}} \left[\sum_{t}^{\infty} r(s_t, a_t)\right]}_{\doteq \; J(\pi) \; \text{(objective)}} \; \text{s.t.} \;\underbrace{\mathbb{E_{\pi}} \left[\sum_{t}^{\infty} c(s_t, a_t)\right] \le 0}_{\doteq \; C(\pi) \; \text{(constraint)}}
 $$
 </div>
 
@@ -184,8 +184,13 @@ $$
 
 <div v-click class="mt-10">
 
-## $\implies$ find $\pi$ in {simulation, human demonstrations, generative models, ...}
+<div class="text-center text-2xl">
 
+$\implies$ first learn $\pi$ in $\{$simulation, human demonstrations, generative model$\}$, 
+
+<twemoji-cherries/> then adapt safely.
+
+</div>
 </div>
 
 <!--
@@ -193,7 +198,57 @@ $$
   - RL is notoriously sample inneficient.
 
 -  => aka safely fine-tuning a policy from {simulation, human demonstrations, generative models,…}
+- Adapting requires _safe exploration_
 -->
+
+---
+
+# Safe Exploration: two key ingredients
+<!-- Two sides: one side discusses improving policies (show drawing of arrow get's closer to optimal policy) and another side discusses uncertainty quantification as a way to quantify the safe set. -->
+
+<div class="flex justify-center mt-15">
+<div class="flex w-full max-w-3xl">
+<div class="flex-1 text-center">
+  <h4>Uncertainty Quantification</h4>
+  <img src="/uncertainty-set.svg" class="w-80 mx-auto mt-8">
+  <div class="relative bottom-90 left-35">
+
+  $$\Pi$$
+
+  </div>
+  <div class="relative bottom-68 left-9">
+
+  $$\Pi_{\text{Pessimistic}}$$
+
+  </div>
+  <div class="relative bottom-72 right-10">
+
+  $$\pi_{\text{safe}}^\star$$
+
+  </div>
+  <div class="relative bottom-99 right-16">
+
+  $$\pi^\star$$
+
+  </div>
+</div>
+<div class="flex-1 text-center">
+  <h4>Policy Improvement</h4>
+  <img src="/policy-improvement.svg" class="w-40 mx-auto mt-8">
+  <div class="relative bottom-48 left-1">
+
+  $$\pi_{\text{safe}}^\star$$
+
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- - Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
+- Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. (Mark $\pi^\star$ somewhere outside of the initial safe set).
+- How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$ -->
 
 ---
 
