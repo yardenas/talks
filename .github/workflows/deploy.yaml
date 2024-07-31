@@ -32,6 +32,7 @@ jobs:
         run: nci
 
       - name: Build
+        working-directory: 06-JUL-2024
         run: nr build --base /${{github.event.repository.name}}/
 
       - name: Setup Pages
