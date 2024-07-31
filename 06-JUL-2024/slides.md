@@ -186,9 +186,9 @@ $$
 
 <div class="text-center text-2xl">
 
-$\implies$ first learn $\pi$ in $\{$simulation, human demonstrations, generative model$\}$, 
+$\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generative model$\}$, 
 
-<twemoji-cherries/> then adapt safely.
+<twemoji-cherries/> _then_ adapt safely.
 
 </div>
 </div>
