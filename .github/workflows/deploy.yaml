@@ -17,7 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: 06-JUL-2024
     steps:
       - uses: actions/checkout@v4
 
@@ -32,7 +34,6 @@ jobs:
         run: nci
 
       - name: Build
-        working-directory: 06-JUL-2024
         run: nr build --base /${{github.event.repository.name}}/
 
       - name: Setup Pages
