@@ -21,7 +21,7 @@ Theory and Apps
 </div>
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">Jul. 06 2024</div>
+    <div class="text-sm opacity-50">Aug. 06 2024</div>
   </div>
 </div>
 
