@@ -257,13 +257,13 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 <div class="container mx-auto mt--10">
   <div class="flex items-center justify-between">
   <div class="w-1/2 p-4">
-      <img src="./expansion.svg" alt="Full SVG" class="w-full h-auto">
+      <img src="./expansion.svg" alt="Expansion" class="w-full h-auto">
   </div>
   <div class="w-1/12 flex justify-center">
   </div>
   <div class="w-1/2 p-4 h-40 mt--50">
   <div class="w-[300px] h-[300px] overflow-hidden">
-      <img src="./expansion.svg" alt="Cropped SVG" class="w-[600px] h-300px object-none object-[20%_20%]">
+      <img src="./expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]">
   </div>
   <div class="relative bottom-55 right-19">
 
@@ -291,3 +291,38 @@ Need to expand the pessimistic safe set of policies!
 
 </div>
 </div>
+
+
+<!-- 
+- But what happens if the optimal policy is not within the safe set?
+- Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. 
+- need to try out new, safe policies (aka behaviors)
+
+- How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
+-->
+
+
+---
+
+# Expansion-exploration-exploitation
+
+<div class="flex justify-center mt-5">
+<div class="text-center mt-15">
+  <div  class="w-[300px] h-[300px] overflow-hidden">
+      <v-switch>
+      <template #0-1><img  src="./expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #1-2><img  src="./expansion-1.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #2-3><img  src="./expansion-2.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      </v-switch>
+  </div>
+  <div class="relative bottom-58 right-17">
+
+  $$\pi^\star$$
+
+  </div>
+</div>
+</div>
+
+<!-- 
+- Key idea: use regularity and problem structure to learn about what happens outside the pessimistic safe set, by trying things only within the safe set.
+ -->
