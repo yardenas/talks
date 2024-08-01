@@ -313,6 +313,8 @@ Need to expand the pessimistic safe set of policies!
       <template #0-1><img  src="./expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
       <template #1-2><img  src="./expansion-1.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
       <template #2-3><img  src="./expansion-2.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #3-4><img  src="./expansion-3.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #4-5><img  src="./expansion-4.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
       </v-switch>
   </div>
   <div class="relative bottom-58 right-17">
