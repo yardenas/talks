@@ -304,9 +304,9 @@ Need to expand the pessimistic safe set of policies!
 
 ---
 
-# Expansion-exploration-exploitation
+# Expansion-exploration-exploitation[^1]
 
-<div class="flex justify-center mt-5">
+<div class="flex justify-center">
 <div class="text-center mt-15">
   <div  class="w-[300px] h-[300px] overflow-hidden">
       <v-switch>
@@ -317,14 +317,55 @@ Need to expand the pessimistic safe set of policies!
       <template #4-5><img  src="/expansion-4.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
       </v-switch>
   </div>
-  <div class="relative bottom-58 right-17">
+  <div class="relative bottom-52 right-10.5">
 
   $$\pi^\star$$
 
   </div>
 </div>
 </div>
+<div v-if="$slidev.nav.clicks > 0" class="flex items-center absolute top-35 left-25">
+  <img  src="/traj.svg" class="w-3">
+  <p class="text-xl ml-4">Trajectory</p>
+</div>
 
+[^1]: Transductive Active Learning: Theory and Applications, Hübotter et al. (2024)
 <!-- 
 - Key idea: use regularity and problem structure to learn about what happens outside the pessimistic safe set, by trying things only within the safe set.
+
+- but how do we choose which policies to try?
  -->
+ 
+
+---
+
+# Expansion-exploration-exploitation: how to expand?
+
+<div class="flex items-center justify-center h-80">
+<div class="text-3xl">
+
+$$
+    \max_{\pi \in \Pi_{\text{Pessimistic}}} \; \mathbb{E} [\text{I}[\hphantom{ PP}; \hphantom{\pi} | \mathcal{D}]]
+$$
+</div>
+<div class="relative bottom-2 right-37">
+  <img src="/robotic-arm.png" class="w-12">
+</div>
+<div class="relative bottom-2 right-33">
+  <img src="/traj.svg" class="w-4">
+</div>
+</div>
+
+<div class="relative bottom-53 left-146">
+
+[^1]
+
+</div>
+
+<div class="text-center text-2xl relative bottom-25">
+
+“_Find a safe policy that maximizes the mutual information between the dynamics model and the current trajectory (observation), given all previously-seen data._”
+
+</div>
+
+[^1]: Optimistic Active Exploration of Dynamical Systems Sukhija et al. (2024)
