@@ -250,3 +250,44 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 - Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. (Mark $\pi^\star$ somewhere outside of the initial safe set).
 - How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$ -->
 
+
+---
+
+<br>
+<div class="container mx-auto mt--10">
+  <div class="flex items-center justify-between">
+  <div class="w-1/2 p-4">
+      <img src="./expansion.svg" alt="Full SVG" class="w-full h-auto">
+  </div>
+  <div class="w-1/12 flex justify-center">
+  </div>
+  <div class="w-1/2 p-4 h-40 mt--50">
+  <div class="w-[300px] h-[300px] overflow-hidden">
+      <img src="./expansion.svg" alt="Cropped SVG" class="w-[600px] h-300px object-none object-[20%_20%]">
+  </div>
+  <div class="relative bottom-55 right-19">
+
+  $$\pi^\star$$
+
+  </div>
+  <div class="relative bottom-45 right-7">
+
+  $$\pi_{\text{safe}}^\star$$
+
+  </div>
+  <div class="relative bottom-85 left-55 text-6xl">
+  ?
+  </div>
+  </div>
+  </div>
+</div>
+
+
+<div v-click>
+
+<div class="text-center text-2xl mt-10">
+
+Need to expand the pessimistic safe set of policies!
+
+</div>
+</div>
