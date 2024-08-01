@@ -257,13 +257,13 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 <div class="container mx-auto mt--10">
   <div class="flex items-center justify-between">
   <div class="w-1/2 p-4">
-      <img src="./expansion.svg" alt="Expansion" class="w-full h-auto">
+      <img src="/expansion.svg" alt="Expansion" class="w-full h-auto">
   </div>
   <div class="w-1/12 flex justify-center">
   </div>
   <div class="w-1/2 p-4 h-40 mt--50">
   <div class="w-[300px] h-[300px] overflow-hidden">
-      <img src="./expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]">
+      <img src="/expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]">
   </div>
   <div class="relative bottom-55 right-19">
 
@@ -310,11 +310,11 @@ Need to expand the pessimistic safe set of policies!
 <div class="text-center mt-15">
   <div  class="w-[300px] h-[300px] overflow-hidden">
       <v-switch>
-      <template #0-1><img  src="./expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
-      <template #1-2><img  src="./expansion-1.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
-      <template #2-3><img  src="./expansion-2.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
-      <template #3-4><img  src="./expansion-3.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
-      <template #4-5><img  src="./expansion-4.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #0-1><img  src="/expansion.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #1-2><img  src="/expansion-1.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #2-3><img  src="/expansion-2.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #3-4><img  src="/expansion-3.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
+      <template #4-5><img  src="/expansion-4.svg" alt="Expansion Zoom-in" class="w-[600px] h-300px object-none object-[20%_20%]"></template>
       </v-switch>
   </div>
   <div class="relative bottom-58 right-17">
