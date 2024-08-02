@@ -45,7 +45,7 @@ Working on safe reinforcement learning.
 <img src="/life.svg">
 </div>
 
-<img src="https://lh3.googleusercontent.com/a/AAcHTteBDvToW_9PaePyt6sAdzCep1nJD5zWhj-7633bcrs=s288-c-no" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
+<img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
 
 ---
 
@@ -85,7 +85,7 @@ Working on safe reinforcement learning.
   </div>
   <div class="flex items-center mb-5">
     <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://lh3.googleusercontent.com/a/AAcHTteBDvToW_9PaePyt6sAdzCep1nJD5zWhj-7633bcrs=s288-c-no" alt="Yarden As" class="object-cover">
+      <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" alt="Yarden As" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Yarden As <twemoji-waving-hand-medium-light-skin-tone/></div>
@@ -194,7 +194,7 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 <!--
-- Caveats: “cherry at the top of cake” (Yan Lecun’s Cake). Traning online is challenging
+- Caveats: “cherry at the top of cake” (Yan Lecun’s Cake). Training online is challenging
   - RL is notoriously sample inneficient.
 
 -  => aka safely fine-tuning a policy from {simulation, human demonstrations, generative models,…}
@@ -204,9 +204,8 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 ---
 
 # Safe Exploration: two key ingredients
-<!-- Two sides: one side discusses improving policies (show drawing of arrow get's closer to optimal policy) and another side discusses uncertainty quantification as a way to quantify the safe set. -->
 
-<div class="flex justify-center mt-15">
+<div class="flex justify-center mt-8">
 <div class="flex w-full max-w-3xl">
 <div class="flex-1 text-center">
   <h4>Uncertainty Quantification</h4>
@@ -232,8 +231,12 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 
   </div>
 </div>
-<div class="flex-1 text-center">
-  <h4>Policy Improvement</h4>
+<div class="flex-1 text-center mt--4">
+  <h4>
+  
+  Policy Improvement[^1]
+  
+  </h4>
   <img src="/policy-improvement.svg" class="w-40 mx-auto mt-8">
   <div class="relative bottom-48 left-1">
 
@@ -244,11 +247,14 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 </div>
 
+[^1]: Safe Exploration Using Bayesian World Models and Log-Barrier Optimization, As et al. (2024)
 
 
-<!-- - Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
-- Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. (Mark $\pi^\star$ somewhere outside of the initial safe set).
-- How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$ -->
+<!--
+- Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
+- Uncertainty quantification: we don't know how the environment behaves => must learn it => must "know what we don't know" aka (epistemic) uncertainty quantification
+
+-->
 
 
 ---
@@ -299,6 +305,7 @@ Need to expand the pessimistic safe set of policies!
 - need to try out new, safe policies (aka behaviors)
 
 - How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
+- If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. (Mark $\pi^\star$ somewhere outside of the initial safe set).
 -->
 
 
@@ -368,4 +375,70 @@ $$
 
 </div>
 
-[^1]: Optimistic Active Exploration of Dynamical Systems Sukhija et al. (2024)
+[^1]: Optimistic Active Exploration of Dynamical Systems, Sukhija et al. (2024)
+
+<!--
+- Key challenge: expansion-exploration-exploitation dilemma. 
+- How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
+-->
+
+---
+
+# Expansion-exploration-exploitation dilemma
+
+<div class="flex justify-center mt-15">
+<div class="flex w-full max-w-3xl">
+<div class="flex-1 text-center">
+  <h4>Expansion</h4>
+  <img src="/expansion-dilemma.svg" class="w-80 mx-auto mt-2">
+</div>
+<div class="flex-1 text-center text-6xl mt-30">
+?
+</div>
+<div class="flex-1 text-center">
+  <h4>Exploration-Exploitation</h4>
+  <img src="/exploration-exploitation.svg" class="w-40 mx-auto mt-2">
+</div>
+</div>
+</div>
+
+<div v-click>
+
+<div class="text-center text-2xl mt-10">
+
+First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.
+
+</div>
+</div>
+
+---
+layout: quote
+---
+
+# Outlook
+Sometimes the optimal solution is beyond reach. Keep expanding your horizons.
+
+<!-- 
+- We all operate under constraints
+- Sometimes the best behaviors is outside what is considered safe, the only way to find out is to continue learning, this will help expanding what you know is safe.
+- This form of learning should be independent of trying to maximize the original objective.
+-->
+
+
+---
+layout: center
+---
+
+# Thank You
+
+Let's talk.
+
+
+Yarden As
+
+<div class="my-10 grid grid-cols-[40px_1fr] w-min gap-y-4 items-center">
+  <carbon-logo-x class="opacity-50"/>
+  <div><a href="https://twitter.com/yarden_as" target="_blank" class="no-underline">yarden_as</a></div>
+  <ri-user-3-line class="opacity-50"/>
+  <div><a href="https://yas.pub" target="_blank">yas.pub</a></div>
+</div>
