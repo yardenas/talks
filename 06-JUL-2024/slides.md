@@ -425,14 +425,6 @@ $$
  -->
 
 
----
-
-# Expansion-exploration-exploitation dilemma
-<br>
-
-Theorem (informal):
-
-
 
 ---
 layout: quote
