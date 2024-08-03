@@ -386,7 +386,7 @@ $$
 
 # Expansion-exploration-exploitation dilemma
 
-<div class="flex justify-center mt-15">
+<div class="flex justify-center mt-8">
 <div class="flex w-full max-w-3xl">
 <div class="flex-1 text-center">
   <h4>Expansion</h4>
@@ -402,14 +402,37 @@ $$
 </div>
 </div>
 
-<div v-click>
 
-<div class="text-center text-2xl mt-10">
-
-First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.
+<div class="text-center text-2xl mt-5">
+  <v-switch>
+  <template #1>First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.</template>
+  <template #2>
+  <div>
+  
+  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(1)** safety during learning and **(2)** $\epsilon$-optimal performance after $N$ trajectory samples.
+  </div>
+  </template>
+  </v-switch>
 
 </div>
-</div>
+
+
+<!-- 
+- So I convinced you know that under some regularity assumptions, and assuming that we can choose any policy within \Pi, we can expand the safe set as much as we want.
+- But how much should we expand?
+- Turns out, if we first focus only on expanding, and only then solve the CMDP, we can find an optimal policy.
+- This can be even proven formally, if the dynamics, cost and reward are in the RKHS.
+ -->
+
+
+---
+
+# Expansion-exploration-exploitation dilemma
+<br>
+
+Theorem (informal):
+
+
 
 ---
 layout: quote
