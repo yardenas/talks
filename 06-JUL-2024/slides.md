@@ -226,12 +226,12 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
   $$\Pi_{\text{Pessimistic}}$$
 
   </div>
-  <div class="relative bottom-72 right-10">
+  <div class="relative bottom-82 right-10">
 
   $$\pi_{\text{safe}}^\star$$
 
   </div>
-  <div class="relative bottom-99 right-16">
+  <div class="relative bottom-109 right-16">
 
   $$\pi^\star$$
 
