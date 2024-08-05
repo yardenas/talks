@@ -309,6 +309,7 @@ Need to expand the pessimistic safe set of policies!
 <!-- 
 - But what happens if the optimal policy is not within the safe set?
 - Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. 
+- It's very limiting to restrict all learning to simulation or behavior data.
 - need to try out new, safe policies (aka behaviors)
 
 - How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
@@ -411,9 +412,7 @@ $$
 
 
 <div class="text-center text-2xl mt-5">
-  <v-switch>
-  <template #1>First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.</template>
-  </v-switch>
+  First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.
 
 </div>
 
