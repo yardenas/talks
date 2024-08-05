@@ -445,6 +445,10 @@ $$
 </v-switch>
 </div>
 
+<!-- 
+- Explain about the robots and the box
+- Explain the plots
+ -->
 ---
 layout: quote
 ---
