@@ -194,8 +194,9 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 <!--
+- It's very limiting to restrict all learning to simulation or behavior data.
 - Caveats: “cherry at the top of cake” (Yan Lecun’s Cake). Training online is challenging
-  - RL is notoriously sample inneficient.
+  - RL is notoriously sample inneficient it can take hours/days to train a single policy!
 
 -  => aka safely fine-tuning a policy from {simulation, human demonstrations, generative models,…}
 - Adapting requires _safe exploration_
@@ -215,7 +216,12 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
   $$\Pi$$
 
   </div>
-  <div class="relative bottom-68 left-9">
+  <div class="relative bottom-80">
+
+  $$\Pi_{\text{Safe}}$$
+
+  </div>
+  <div class="relative bottom-78.5 left-9">
 
   $$\Pi_{\text{Pessimistic}}$$
 
@@ -251,6 +257,7 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 
 
 <!--
+- Start by explaining the illustrations. Use the island example.
 - Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
 - Uncertainty quantification: we don't know how the environment behaves => must learn it => must "know what we don't know" aka (epistemic) uncertainty quantification
 
@@ -406,12 +413,6 @@ $$
 <div class="text-center text-2xl mt-5">
   <v-switch>
   <template #1>First expand sufficiently the safe set, then commit to it to find an optimal (and safe) policy.</template>
-  <template #2>
-  <div>
-  
-  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(1)** safety during learning and **(2)** $\epsilon$-optimal performance after $N$ trajectory samples.
-  </div>
-  </template>
   </v-switch>
 
 </div>
@@ -424,7 +425,26 @@ $$
 - This can be even proven formally, if the dynamics, cost and reward are in the RKHS.
  -->
 
+---
 
+# Results
+
+<div class="flex justify-center mt-8">
+<v-switch>
+  <template #1>
+  <div>
+  
+  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(i)** safety during learning and **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
+  </div>
+  </template>
+  <template #2>
+  <img src="/video.gif" class="w-80">
+  </template>
+  <template #3>
+  <img src="/learning-curves.png" class="w-150">
+  </template>
+</v-switch>
+</div>
 
 ---
 layout: quote
