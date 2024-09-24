@@ -48,70 +48,42 @@ Working on safe reinforcement learning.
 
 ---
 
-# Autonomous Robotic Surgery
-(a Hasler foundation project)
-
-<div class="grid grid-cols-3 gap-10 mt-20">
+# Collaborators
+<div class="flex justify-center">
+<div class="grid grid-cols-2 gap-15 mt-10">
   <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/09/andreas-krause.jpg" alt="Andreas Krause" class="object-cover">
-    </div>
-    <div class="flex flex-col space-y-1">
-      <div class="font-bold">Andreas Krause</div>
-      <div class="text-sm">ETH Zurich</div>
-      <div class="text-sm">Machine Learning</div>
-    </div>
-  </div>
-  <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://ee.ethz.ch/news-and-events/d-itet-news-channel/2016/10/new-at-d-itet-prof-benjamin-f-grewe/_jcr_content/wide_content/textimage/image.imageformat.lightbox.662382194.png" alt="Benjamin F. Grewe" class="object-cover">
-    </div>
-    <div class="flex flex-col space-y-1">
-      <div class="font-bold">Benjamin F. Grewe</div>
-      <div class="text-sm">ETH Zurich</div>
-      <div class="text-sm">Neuroscience & ML</div>
-    </div>
-  </div>
-  <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://rocs.balgrist.ch/fileadmin/_processed_/4/6/csm_Balgrist-Card-Fuernstahl_Philipp_b7b5dae5ca.jpg" alt="Philipp Fürnstahl" class="w-24 h-24 object-cover">
-    </div>
-    <div class="flex flex-col space-y-1">
-      <div class="font-bold">Philipp Fürnstahl</div>
-      <div class="text-sm">University Hospital Balgrist</div>
-      <div class="text-sm">Medical Robotics</div>
-    </div>
-  </div>
-  <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
+    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" alt="Yarden As" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Yarden As <twemoji-waving-hand-medium-light-skin-tone/></div>
-      <div class="text-sm">ETH Zurich</div>
-      <div class="text-sm">Machine Learning</div>
     </div>
   </div>
   <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://services.ini.uzh.ch/admin/extras/img_view.php?id=113226" alt="Yassine Taoudi-Benchekroun" class="object-cover h-24">
+    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+      <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/07/bhavya.jpg" alt="Bhavya Sukhija" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
-      <div class="font-bold text-sm">Yassine Taoudi-Benchekroun</div>
-      <div class="text-sm">ETH Zurich</div>
-      <div class="text-sm">Neuroscience & ML</div>
+      <div class="font-bold">Bhavya Sukhija</div>
     </div>
   </div>
   <div class="flex items-center mb-5">
-    <div class="w-24 h-24 overflow-hidden rounded-full mr-4">
-      <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/06/IMG_2874.jpg" alt="Yunke Ao" class="object-cover">
+    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+      <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/08/lenart.jpeg" alt="Lenart Treven" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
-      <div class="font-bold">Yunke Ao</div>
-      <div class="text-sm">University Hospital Balgrist</div>
-      <div class="text-sm">Medical Robotics</div>
+      <div class="font-bold">Lenart Treven</div>
     </div>
   </div>
+  <div class="flex items-center mb-5">
+    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+      <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/09/andreas-krause.jpg" alt="Andreas Krause" class="object-cover">
+    </div>
+    <div class="flex flex-col space-y-1">
+      <div class="font-bold">Andreas Krause</div>
+    </div>
+  </div>
+</div>
 </div>
 
 ---
@@ -176,9 +148,11 @@ $$
 
 </div>
 
-<!-- 
+<!--
 * why deep reinforcement learning is important? It is the most general framework we have to combining sequential decision-making and learning.
+* what's nice about CMDPs is that they allow us to more easily specify constraints, separately from the reward. This allows agents to learn how to tradeoff between the objective and safety on their own, without us hand-tuning/reward shaping -- it is actually cleaner than penalties.
 -->
+
 ---
 
 # Safe Reinforcement Learning (?)
