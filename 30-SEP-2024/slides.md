@@ -88,10 +88,11 @@ Working on safe reinforcement learning.
 
 ---
 
-# Failures
+# Safety Matters
 
 * Want to make the case for learning safely.
 * It's a group that works on autonomous driving, so might as well give an example from autonomous driving.
+* Maybe an image of Yudkowski
 <Youtube id="1pyC3k0U9z4?start=98&vq=hd1080&end=113" height="90%" width="90%"/>
 
 ---
