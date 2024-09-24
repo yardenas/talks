@@ -1,0 +1,28 @@
+p,
+ul {
+  @apply text-blue-gray-800;
+}
+
+p .katex-display {
+  @apply text-black;
+}
+
+.footnote-ref a {
+  @apply no-underline text-current cursor-default border-none;
+}
+
+.footnote-ref a:hover {
+  @apply no-underline text-current cursor-default border-none;
+}
+
+.footnotes {
+  @apply absolute bottom-0;
+}
+
+.footnotes-sep {
+  @apply absolute bottom-0;  
+}
+
+li.footnote-item::marker {
+  display: none;
+}
