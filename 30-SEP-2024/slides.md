@@ -19,7 +19,7 @@ fonts:
   <div><a href="https://yas.pub" target="_blank">yas.pub</a></div>
 </div>
 <div class="abs-bl mx-14 my-12 flex">
-  <div class="ml-3 flex flex-col text-left">
+  <div class="ml-3 flex foex-col text-left">
     <div class="text-sm opacity-50">Sep 30 2024</div>
   </div>
 </div>
@@ -113,6 +113,20 @@ Learning & Adaptive Systems Group @ ETH Zurich
 * Maybe an image of Yudkowski -->
 
 ---
+
+# Safety Matters
+In autonomous driving too
+
+
+<div class="flex justify-center text-center mt-30">
+
+## ~6.7 times less “injury-reported crashes” with Waymo ADS compared to humans[^1]
+
+</div>
+
+[^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
+
+---
 dragPos:
   action: 195,412,97,49
   square: 248,165,432,368
@@ -120,26 +134,42 @@ dragPos:
   observation: 421,105,123,60
 ---
 
-# Autonomous Robotic Surgery
+# Reinforcement Learning
+<div class="relative bottom-10">
+
+<div class="absolute ml-65 mt-35 text-right">
+
 <br>
 
-<div v-drag="'action'">
-
-$a \sim \pi(a | o)$
+$s_{t}$
 
 </div>
-<div v-drag="'state'">
 
-$s' \sim p(s' | s, a)$
+<div class="absolute ml-147 mt-35 text-left">
 
-</div>
-<div v-drag="'observation'">
+<br>
 
-$o \sim p(o | s')$
+$a_{t}$
 
 </div>
-<img v-drag="'square'" src="/loop.svg" class="w-80">
 
+<div class="absolute ml-73 mt-35 text-right">
+
+<br>
+
+$s_{t + 1}, r_{t}$
+
+</div>
+<img src="/rl-loop.svg" class="absolute">
+
+<div>
+<img src="/robotic-arm.png" class="w-15 relative top-45 left-115">
+</div>
+<div>
+<img src="/nn.png" class="w-15 relative top-3 left-85">
+</div>
+
+</div>
 <!--
 - Tell about the application (as a way to motivate research)
 - Can I find some statistics that motivate why it's important?
