@@ -49,8 +49,9 @@ Working on safe reinforcement learning.
 ---
 
 # Collaborators
+Learning & Adaptive Systems Group @ ETH Zurich
 <div class="flex justify-center">
-<div class="grid grid-cols-2 gap-15 mt-10">
+<div class="grid grid-cols-2 gap-20 mt-10">
   <div class="flex items-center mb-5">
     <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" alt="Yarden As" class="object-cover">
@@ -90,10 +91,26 @@ Working on safe reinforcement learning.
 
 # Safety Matters
 
-* Want to make the case for learning safely.
+<div class="container mx-auto p-8 bg-white">
+  <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
+  <!-- Upper Left Image (Nikita) -->
+  <div class="p-4 col-start-1 row-start-1">
+    <img src="/nikita.gif" alt="Nikita" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  <!-- Lower Right Image (Anymal) -->
+  <div v-click class="p-4 col-start-2 row-start-2">
+    <img src="/anymal.gif" alt="Anymal" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  </div>
+</div>
+
+<div class="abs-tr w-27">
+  <img src="/robot-abuse.png" alt="Anymal">
+</div>
+
+<!-- * Want to make the case for learning safely.
 * It's a group that works on autonomous driving, so might as well give an example from autonomous driving.
-* Maybe an image of Yudkowski
-<Youtube id="1pyC3k0U9z4?start=98&vq=hd1080&end=113" height="90%" width="90%"/>
+* Maybe an image of Yudkowski -->
 
 ---
 dragPos:
