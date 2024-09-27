@@ -459,11 +459,7 @@ _Given all the previously-seen data, which trajectories maximize the information
 <div class="flex justify-center mt-30 rounded-lg bg-gray-100 p-3">
   <div>
   
-  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability:
-
-   **(i)** safety during learning and 
-   
-   **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
+  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(i)** safety during learning and **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
   </div>
 </div>
 
