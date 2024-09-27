@@ -454,6 +454,25 @@ _Given all the previously-seen data, which trajectories maximize the information
 
 ---
 
+# Results
+
+<div class="flex justify-center mt-30 rounded-lg bg-gray-100 p-3">
+  <div>
+  
+  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability:
+
+   **(i)** safety during learning and 
+   
+   **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
+  </div>
+</div>
+
+<!-- 
+- Explain about the robots and the box
+- Explain the plots
+ -->
+---
+
 # The Cartpole Testbed
 
 <div class="p-4 flex justify-center mt-25 ml-60 relative">
@@ -472,29 +491,6 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
-# Results
-
-<div class="flex justify-center mt-8">
-<v-switch>
-  <template #1>
-  <div>
-  
-  **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(i)** safety during learning and **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
-  </div>
-  </template>
-  <template #2>
-  <img src="/video.gif" class="w-80">
-  </template>
-  <template #3>
-  <img src="/learning-curves.png" class="w-150">
-  </template>
-</v-switch>
-</div>
-
-<!-- 
-- Explain about the robots and the box
-- Explain the plots
- -->
 ---
 layout: quote
 ---
