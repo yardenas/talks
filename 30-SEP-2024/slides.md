@@ -325,13 +325,11 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 
-<div v-click>
 
 <div class="text-center text-2xl mt-10">
 
 Need to expand the pessimistic safe set of policies!
 
-</div>
 </div>
 
 
@@ -408,7 +406,7 @@ $$
 
 <div class="text-center text-2xl relative bottom-25">
 
-“_Find a safe policy that maximizes the mutual information between the dynamics model and the current trajectory (observation), given all previously-seen data._”
+_Given all the previously-seen data, which trajectories maximize the information about the environment?_
 
 </div>
 
@@ -453,6 +451,25 @@ $$
 - This can be even proven formally, if the dynamics, cost and reward are in the RKHS.
  -->
 
+
+---
+
+# The Cartpole Testbed
+
+<div class="p-4 flex justify-center mt-25 ml-60 relative">
+  <!-- Main cartpole-combined image -->
+  <img src="/cartpole-combined.png" alt="cartpole task" class="w-150 h-auto rounded-lg shadow-md max-w-full">
+</div>
+<!-- Unsafe gif with annotation -->
+<div class="absolute mt--24 ml-30 flex items-center">
+  <img src="/unsafe-cartpole.gif" alt="unsafe" class="w-26 h-auto rounded-lg shadow-md">
+  <span class="ml-2 text-black absolute right-30">Unsafe</span>
+</div>
+<!-- Safe gif with annotation -->
+<div class="absolute mt--48 ml-30 flex items-center">
+  <img src="/safe-cartpole.gif" alt="safe" class="w-26 h-auto rounded-lg shadow-md">
+  <span class="ml-2 text-black absolute right-30">Safe</span>
+</div>
 ---
 
 # Results
