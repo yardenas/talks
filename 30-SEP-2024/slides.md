@@ -19,7 +19,7 @@ fonts:
   <div><a href="https://yas.pub" target="_blank">yas.pub</a></div>
 </div>
 <div class="abs-bl mx-14 my-12 flex">
-  <div class="ml-3 flex flex-col text-left">
+  <div class="ml-3 flex foex-col text-left">
     <div class="text-sm opacity-50">Sep 30 2024</div>
   </div>
 </div>
@@ -49,8 +49,9 @@ Working on safe reinforcement learning.
 ---
 
 # Collaborators
+Learning & Adaptive Systems Group @ ETH Zurich
 <div class="flex justify-center">
-<div class="grid grid-cols-2 gap-15 mt-10">
+<div class="grid grid-cols-2 gap-20 mt-10">
   <div class="flex items-center mb-5">
     <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" alt="Yarden As" class="object-cover">
@@ -90,10 +91,40 @@ Working on safe reinforcement learning.
 
 # Safety Matters
 
-* Want to make the case for learning safely.
+<div class="container mx-auto p-8 bg-white">
+  <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
+  <!-- Upper Left Image (Nikita) -->
+  <div class="p-4 col-start-1 row-start-1">
+    <img src="/nikita.gif" alt="Nikita" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  <!-- Lower Right Image (Anymal) -->
+  <div v-click class="p-4 col-start-2 row-start-2">
+    <img src="/anymal.gif" alt="Anymal" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  </div>
+</div>
+
+<div class="abs-tr w-27">
+  <img src="/robot-abuse.png" alt="Anymal">
+</div>
+
+<!-- * Want to make the case for learning safely.
 * It's a group that works on autonomous driving, so might as well give an example from autonomous driving.
-* Maybe an image of Yudkowski
-<Youtube id="1pyC3k0U9z4?start=98&vq=hd1080&end=113" height="90%" width="90%"/>
+* Maybe an image of Yudkowski -->
+
+---
+
+# Safety Matters
+In autonomous driving too
+
+
+<div class="flex justify-center text-center mt-30">
+
+## ~6.7 times less “injury-reported crashes” with Waymo ADS compared to humans[^1]
+
+</div>
+
+[^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
 
 ---
 dragPos:
@@ -103,26 +134,42 @@ dragPos:
   observation: 421,105,123,60
 ---
 
-# Autonomous Robotic Surgery
+# Reinforcement Learning
+<div class="relative bottom-10">
+
+<div class="absolute ml-65 mt-35 text-right">
+
 <br>
 
-<div v-drag="'action'">
-
-$a \sim \pi(a | o)$
+$s_{t}$
 
 </div>
-<div v-drag="'state'">
 
-$s' \sim p(s' | s, a)$
+<div class="absolute ml-147 mt-35 text-left">
 
-</div>
-<div v-drag="'observation'">
+<br>
 
-$o \sim p(o | s')$
+$a_{t}$
 
 </div>
-<img v-drag="'square'" src="/loop.svg" class="w-80">
 
+<div class="absolute ml-73 mt-35 text-right">
+
+<br>
+
+$s_{t + 1}, r_{t}$
+
+</div>
+<img src="/rl-loop.svg" class="absolute">
+
+<div>
+<img src="/robotic-arm.png" class="w-15 relative top-45 left-115">
+</div>
+<div>
+<img src="/nn.png" class="w-15 relative top-3 left-85">
+</div>
+
+</div>
 <!--
 - Tell about the application (as a way to motivate research)
 - Can I find some statistics that motivate why it's important?
@@ -278,13 +325,11 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 
-<div v-click>
 
 <div class="text-center text-2xl mt-10">
 
 Need to expand the pessimistic safe set of policies!
 
-</div>
 </div>
 
 
@@ -361,7 +406,7 @@ $$
 
 <div class="text-center text-2xl relative bottom-25">
 
-“_Find a safe policy that maximizes the mutual information between the dynamics model and the current trajectory (observation), given all previously-seen data._”
+_Given all the previously-seen data, which trajectories maximize the information about the environment?_
 
 </div>
 
@@ -406,31 +451,49 @@ $$
 - This can be even proven formally, if the dynamics, cost and reward are in the RKHS.
  -->
 
+
 ---
 
 # Results
 
-<div class="flex justify-center mt-8">
-<v-switch>
-  <template #1>
+<div class="flex justify-center mt-30 rounded-lg bg-gray-100 p-3">
   <div>
   
   **Theorem (informal):** <br> under regularity assumptions on $p(s'|s,a)$ we have with high probability **(i)** safety during learning and **(ii)** $\epsilon$-optimal performance after $N(\epsilon)$ trajectory samples.
   </div>
-  </template>
-  <template #2>
-  <img src="/video.gif" class="w-80">
-  </template>
-  <template #3>
-  <img src="/learning-curves.png" class="w-150">
-  </template>
-</v-switch>
 </div>
 
 <!-- 
 - Explain about the robots and the box
 - Explain the plots
  -->
+---
+
+# The Cartpole Testbed
+
+<div class="p-4 flex justify-center mt-25 ml-60 relative">
+  <!-- Main cartpole-combined image -->
+  <img src="/cartpole-combined.png" alt="cartpole task" class="w-150 h-auto rounded-lg shadow-md max-w-full">
+</div>
+<!-- Unsafe gif with annotation -->
+<div class="absolute mt--24 ml-30 flex items-center">
+  <img src="/unsafe-cartpole.gif" alt="unsafe" class="w-26 h-auto rounded-lg shadow-md">
+  <span class="ml-2 text-black absolute right-30">Unsafe</span>
+</div>
+<!-- Safe gif with annotation -->
+<div class="absolute mt--48 ml-30 flex items-center">
+  <img src="/safe-cartpole.gif" alt="safe" class="w-26 h-auto rounded-lg shadow-md">
+  <span class="ml-2 text-black absolute right-30">Safe</span>
+</div>
+---
+
+# The Cartpole Testbed
+
+<div class="flex justify-center mt-15">
+  <img src="/learn-curves-cartpole-exploration.svg" class="w-110">
+</div>
+
+
 ---
 layout: quote
 ---

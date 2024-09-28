@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 06-JUL-2024
+        working-directory: 30-SEP-2024
     steps:
       - uses: actions/checkout@v4
 
