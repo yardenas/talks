@@ -51,42 +51,54 @@ Working on safe reinforcement learning.
 # Collaborators
 Learning & Adaptive Systems Group @ ETH Zurich
 <div class="flex justify-center">
-<div class="grid grid-cols-2 gap-20 mt-10">
+<div class="grid grid-cols-3 gap-5 mt-10">
   <div class="flex items-center mb-5">
-    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+    <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" alt="Yarden As" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Yarden As <twemoji-waving-hand-medium-light-skin-tone/></div>
+      <div class="text-sm text-gray-500">ETH Zurich</div>
     </div>
   </div>
   <div class="flex items-center mb-5">
-    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+    <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/07/bhavya.jpg" alt="Bhavya Sukhija" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Bhavya Sukhija</div>
+      <div class="text-sm text-gray-500">ETH Zurich</div>
     </div>
   </div>
   <div class="flex items-center mb-5">
-    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+    <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/08/lenart.jpeg" alt="Lenart Treven" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Lenart Treven</div>
+      <div class="text-sm text-gray-500">ETH Zurich</div>
     </div>
   </div>
   <div class="flex items-center mb-5">
-    <div class="w-32 h-32 overflow-hidden rounded-full mr-4">
+    <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
+      <img src="https://sferrazza.cc/img/headshot.jpg" alt="Carmelo Ferrazza" class="object-cover">
+    </div>
+    <div class="flex flex-col space-y-1">
+      <div class="font-bold">Carmelo Ferrazza</div>
+      <div class="text-sm text-gray-500">UC Berkeley</div>
+    </div>
+  </div>
+  <div class="flex items-center mb-5">
+    <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
       <img src="https://las.inf.ethz.ch/wp-content/uploads/2023/09/andreas-krause.jpg" alt="Andreas Krause" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
       <div class="font-bold">Andreas Krause</div>
+      <div class="text-sm text-gray-500">ETH Zurich</div>
     </div>
   </div>
 </div>
 </div>
-
 ---
 
 # Safety Matters
