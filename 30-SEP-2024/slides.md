@@ -487,6 +487,13 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
+# The Cartpole Testbed
+
+<div class="flex justify-center mt-15">
+  <img src="/learn-curves-cartpole-exploration.svg" class="w-110">
+</div>
+
+
 ---
 layout: quote
 ---
