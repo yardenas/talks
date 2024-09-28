@@ -211,7 +211,7 @@ $$
   <img src="https://opendatascience.com/wp-content/uploads/2018/01/cake.jpg" class="w-40">
 </div>
 
-<div v-click class="mt-10">
+<div class="mt-10">
 
 <div class="text-center text-2xl">
 
