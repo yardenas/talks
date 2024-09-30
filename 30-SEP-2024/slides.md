@@ -157,6 +157,7 @@ In autonomous driving too
 To answer this question, I know that you guys in the group care a lot about autonomous driving. So I added this fact from a recent paper by Waymo. 
 
 Roads are dangerous -- can we use RL to improve that?
+Why RL? because we don't have a perfect model, planning is not enough.
 -->
 
 ---
@@ -379,17 +380,11 @@ Need to expand the pessimistic safe set of policies!
 
 </div>
 
+<!--
+So how do we find optimal policies?
 
-<!-- 
-- But what happens if the optimal policy is not within the safe set?
-- Key challenge: expansion-exploration-exploitation dilemma. If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. 
-- It's very limiting to restrict all learning to simulation or behavior data.
-- need to try out new, safe policies (aka behaviors)
-
-- How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
-- If you don’t expand your safe set enough, you might not “see” enough to get the optimal solution within your safe set. (Mark $\pi^\star$ somewhere outside of the initial safe set).
+This of the autonomous driving example. Say that I give you initially only one policy of "doing nothing". Clearly this is safe, but will it be able to actually drive from Lower east side to Brooklyn? So we need to gradually add more and more policies/behaviors to what we know that is safe.
 -->
-
 
 ---
 
@@ -540,6 +535,9 @@ _Given all the previously-seen data, which trajectories maximize the information
   <img src="/learn-curves-cartpole-exploration.svg" class="w-110">
 </div>
 
+<!--
+Optimistic does not do any expansion.
+-->
 
 ---
 layout: quote
