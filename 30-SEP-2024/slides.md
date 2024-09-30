@@ -46,6 +46,11 @@ Working on safe reinforcement learning.
 
 <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
 
+<!--
+* Was born in Haifa, Israel, did there my Bechalor's in Mechanical engineering, focusing on control theory and robotics. I then became a robotics engineer in a Tel-Avivian startup company, developing planning and localization and mapping algorithms. Moved to Switzerland for my masters and then decided to continue for a PhD in RL x Robotics.
+* As you can see, a recurring thing is being involved in robotics for quite some time.
+-->
+
 ---
 
 # Collaborators
@@ -99,6 +104,11 @@ Learning & Adaptive Systems Group @ ETH Zurich
   </div>
 </div>
 </div>
+
+<!--
+Before diving into the details of the work, I want to acknowledge some of my collaborators in this project.
+-->
+
 ---
 
 # Safety Matters
@@ -120,9 +130,14 @@ Learning & Adaptive Systems Group @ ETH Zurich
   <img src="/robot-abuse.png" alt="Anymal">
 </div>
 
-<!-- * Want to make the case for learning safely.
-* It's a group that works on autonomous driving, so might as well give an example from autonomous driving.
-* Maybe an image of Yudkowski -->
+<!--
+* I want to make the case for robotics.
+* Here on the top left, you can see Nikita. Nikita is a robotics engineer and also practices parkour on he's free time in Zurich.
+* **click**
+* Now watch anymal, a robot running reinforcement learning policies onboard. Well you can see that it basically fails and hits the obstacles.
+* Now this could due to multiple reasons: it could be due to perception, but could also be due to wrong decision making.
+* The point is -- here's a cute problem -- no one was hurt. But what happens in other domains?
+-->
 
 ---
 
@@ -137,6 +152,12 @@ In autonomous driving too
 </div>
 
 [^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
+
+<!--
+To answer this question, I know that you guys in the group care a lot about autonomous driving. So I added this fact from a recent paper by Waymo. 
+
+Roads are dangerous -- can we use RL to improve that?
+-->
 
 ---
 dragPos:
@@ -182,12 +203,13 @@ $s_{t + 1}, r_{t}$
 </div>
 
 </div>
+
 <!--
-- Tell about the application (as a way to motivate research)
-- Can I find some statistics that motivate why it's important?
-- Pros: High precision (required in many types of surgeries), + cost, + letting surgeons to deal with tough cases.
-- challenges: safety is crucial and 3d ultra-sound/x-ray measurements
-- why deep reinforcement learning is important? classical methods are too specific. want to operate “end-to-end” like humans do, allows to learn sophisticated behaviors (”winning go grand champion RL”), from high-dimensional observations and safety within RL is well-studied.
+So what is reinforcement learning? I guess you guys know that very well.
+But essentially, we have an environment, here depicted by this robot and an agent that interacts with it.
+
+The goal of RL is to learn policies that maximize some notion of reward.
+RL is different than planning, in that *learning happens in the loop* so agents have to trade off between what to "learn" next, and just plainly maximizing the rewards. This is in contrast to planning, where we only care about maximizing the reward, because there's no learning -- the model is given.
 -->
 
 ---
@@ -209,7 +231,6 @@ $$
 </div>
 
 <!--
-* why deep reinforcement learning is important? It is the most general framework we have to combining sequential decision-making and learning.
 * what's nice about CMDPs is that they allow us to more easily specify constraints, separately from the reward. This allows agents to learn how to tradeoff between the objective and safety on their own, without us hand-tuning/reward shaping -- it is actually cleaner than penalties.
 -->
 
@@ -241,6 +262,20 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 
 -  => aka safely fine-tuning a policy from {simulation, human demonstrations, generative models,…}
 - Adapting requires _safe exploration_
+-->
+
+---
+
+# Safe Exploration
+
+<div class="flex justify-center mt-20">
+  <img src="/dora.png" class="w-100">  
+</div>
+
+<!--
+Adapting safely online requires us to explore safely.
+That is:
+figuring out what's safe and what's not  *and* searching for policies within what we are sure that is safe.
 -->
 
 ---
