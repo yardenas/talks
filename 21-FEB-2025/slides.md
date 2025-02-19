@@ -86,10 +86,10 @@ Learning & Adaptive Systems Group @ ETH Zurich
   </div>
   <div class="flex items-center mb-5">
     <div class="w-30 h-30 overflow-hidden rounded-full mr-4">
-      <img src="https://sferrazza.cc/img/headshot.jpg" alt="Carmelo Ferrazza" class="object-cover">
+      <img src="https://sferrazza.cc/img/headshot.jpg" alt="Carmelo Sferrazza" class="object-cover">
     </div>
     <div class="flex flex-col space-y-1">
-      <div class="font-bold">Carmelo Ferrazza</div>
+      <div class="font-bold">Carmelo Sferrazza</div>
       <div class="text-sm text-gray-500">UC Berkeley</div>
     </div>
   </div>
@@ -533,7 +533,7 @@ _Given all the previously-seen data, which trajectories maximize the information
 # The Cartpole Testbed
 Closer to theory (GPs)
 
-<div class="flex justify-center mt-15">
+<div class="flex justify-center mt-10">
   <img src="/pendulum-exploration.svg" class="w-170">
 </div>
 
