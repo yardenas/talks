@@ -671,3 +671,56 @@ We have access to an initial nonempty safe set $\mathcal{S}_0$ of policies, i.e.
 </MathStatementBlock> 
 
 </div>
+
+
+---
+
+# Theoretical assumptions (cont.)
+
+<div class="flex flex-col gap--10 justify-center mt--5">
+
+<MathStatementBlock type="Definition" number="4.4" title="All-time well-calibrated statistical model">
+
+Let $\mathcal{Z} := \mathcal{S} \times \mathcal{A}$.
+An all-time well-calibrated statistical model of the function $\bm{f}^*$ is a sequence $\{\mathcal{Q}_{n}(\delta)\}_{n \ge 0}$, where
+$$
+    \mathcal{Q}_n(\delta) := \left\{\bm{f}: \mathcal{Z} \to \mathbb{R}^{d_s} \mid  \forall \bm{z} \in \mathcal{Z}, \forall j \in \{1, \ldots, d_s\} : \lvert\mu_{n, j}(\bm{z}) - f_j(\bm{z})\rvert \leq \beta_n(\delta) \sigma_{n, j}(\bm{z})\right\},
+$$
+if, with probability at least $1-\delta$, we have $\bm{f}^* \in \bigcap_{n \ge 0}\mathcal{Q}_n(\delta)$.
+Here, $f_{j}$, $\mu_{n, j}$ and $\sigma_{n, j}$ denote the $j$-th element in the vector-valued functions $\bm{f}$, $\bm{\mu}_n$ and $\bm{\sigma}_n$ respectively, and $\beta_n(\delta) \in \mathbb{R}_{\geq 0}$ is sequence of scalar functions that depends on the confidence level $\delta \in (0, 1]$ and is monotonically increasing in $n$. 
+
+</MathStatementBlock>
+
+<MathStatementBlock type="Assumption" number="4.5">
+
+We assume that the functions $f^*_j$, $j=\{1, \dots, d_s\}$ lie in a RKHS with kernel $k$ and have a bounded norm $B$, that is $\bm{f}^* \in \mathcal{H}^{d_s}_{k, B}$, with $\mathcal{H}^{d_s}_{k, B} = \{\bm{f} \mid \lVert f_j \rVert_k \leq B, j=\{1, \dots, d_s\}\}$. Moreover, we assume that $k(\bm{z}, \bm{z}) \leq \sigma_{\max}$ for all $\bm{z} \in \mathcal{Z}$.
+
+</MathStatementBlock>
+</div>
+
+--- 
+
+# Pessimistic safe set
+
+<MathStatementBlock type="Definition" number="4.6">
+
+Let $\mathcal{M}_n := \mathcal{M}_{n-1} \cap \mathcal{Q}_{n}, \forall n \geq 1$  denote the set of plausible models, and  $P_{n}(\bm{\pi}) = \max_{\bm{f} \in \mathcal{M}_n} J_c(\bm{\pi}, \bm{f})$ our pessimistic estimate of the expected costs w.r.t.
+$\mathcal{M}_n$. Then, we define the safe set $\mathcal{S}_n$ as
+$$
+\mathcal{S}_n := \mathcal{S}_{n-1} \cup \left\{\bm{\pi} \in \Pi \setminus \mathcal{S}_{n-1};  
+\exists \bm{\pi}' \in \mathcal{S}_{n-1} \ \text{s.t.} \ P_n(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d\right\},
+$$
+where
+$$
+\begin{aligned}
+&D(\bm{\pi}, \bm{\pi}') = \\
+& \mathbb{E}_{\bm{\tau}^{\bm{\pi}'}} 
+\left[
+  \sum^{T-1}_{t=0}
+  \min\left\{L_c\lVert\bm{\pi}'(\bm{s}_t) - \bm{\pi}(\bm{s}_t)\rVert, 2C_{\max} \right\}
+ + TC_{\max} \min\left\{\frac{L_f\lVert\bm{\pi}'(\bm{s}_t) - \bm{\pi}(\bm{s}_t)\rVert}{\sigma}, 1\right\}
+\right]
+\end{aligned}
+$$
+
+</MathStatementBlock>

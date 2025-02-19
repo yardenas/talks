@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white p-3 rounded-lg shadow-sm border border-gray-200 my-2"
+    class="bg-white p-3 rounded-lg shadow-sm border border-gray-200 my-1"
   >
     <div>
       <div class="flex gap-2 items-baseline">
