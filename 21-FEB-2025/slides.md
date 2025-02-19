@@ -571,7 +571,7 @@ Navigation from first-person view with sparse rewards
     </div>
     <div class="flex items-center my-2">
       <div class="w-5 h-5 bg-[#ffd700] mr-4"></div>
-      <span>Box (to be moved to goal)</span>
+      <span>Box (to be pushed to goal)</span>
     </div>
     <div class="flex items-center my-2">
       <div class="w-5 h-5 bg-[#20B2AA] mr-4"></div>
