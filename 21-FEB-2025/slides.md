@@ -20,7 +20,7 @@ fonts:
 </div>
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex foex-col text-left">
-    <div class="text-sm opacity-50">Sep 30 2024</div>
+    <div class="text-sm opacity-50">Feb 21 2025</div>
   </div>
 </div>
 
@@ -277,6 +277,7 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 Adapting safely online requires us to explore safely.
 That is:
 figuring out what's safe and what's not  *and* searching for policies within what we are sure that is safe.
+Why this picture? Intuitively, a key component in safe exploration is being able to stand somewhere and determine which parts in your _local neighborhood_ are safe/unsafe and rewarding.
 -->
 
 ---
@@ -529,22 +530,62 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
-# The Cartpole Testbed
+# The Cartpole Testbed (GPs)
 
 <div class="flex justify-center mt-15">
-  <img src="/learn-curves-cartpole-exploration.svg" class="w-110">
+  <img src="/pendulum-exploration.svg" class="w-170">
+</div>
+
+--- 
+
+# The Cartpole Testbed (Vision Control)
+
+<div class="flex justify-center mt-15">
+  <img src="/learn-curves-cartpole-exploration.svg" class="w-100">
 </div>
 
 <!--
 Optimistic does not do any expansion.
 -->
 
+
+---
+
+# Harder Problems
+
+<div class="flex items-center items-start gap-4 p-4 mt-10 ml-40">
+  <div>
+    <img src="/point-push.gif" class="w-100 rounded-lg shadow-md max-w-full">
+  </div>
+  <div class="w-55 px-3 py-1 border border-gray-300 rounded-lg text-sm mt--33">
+    <div class="flex items-center my-2">
+      <div class="w-5 h-5 rounded-full bg-[#ff3030] mr-4"></div>
+      <span>Robot</span>
+    </div>
+    <div class="flex items-center my-2">
+      <div class="w-5 h-5 rounded-full bg-[#32CD32] mr-4"></div>
+      <span>Goal Position</span>
+    </div>
+    <div class="flex items-center my-2">
+      <div class="w-5 h-5 bg-[#ffd700] mr-4"></div>
+      <span>Box (to be moved to goal)</span>
+    </div>
+    <div class="flex items-center my-2">
+      <div class="w-5 h-5 bg-[#20B2AA] mr-4"></div>
+      <span>Obstacles</span>
+    </div>
+    <div class="flex items-center my-2">
+      <div class="w-5 h-5 rounded-full bg-[#4169E1] mr-4"></div>
+      <span>Obstacles</span>
+    </div>
+  </div>
+</div>
 ---
 layout: quote
 ---
 
 # Outlook
-Sometimes the optimal solution is beyond reach. Keep expanding your horizons.
+Keep expanding your horizons
 
 <!-- 
 - We all operate under constraints
