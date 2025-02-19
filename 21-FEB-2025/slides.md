@@ -111,7 +111,7 @@ Before diving into the details of the work, I want to acknowledge some of my col
 
 ---
 
-# Safety Matters
+# Safety matters
 
 <div class="container mx-auto p-8 bg-white">
   <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
@@ -141,7 +141,7 @@ Before diving into the details of the work, I want to acknowledge some of my col
 
 ---
 
-# Safety Matters
+# Safety matters
 In autonomous driving too
 
 
@@ -168,7 +168,7 @@ dragPos:
   observation: 421,105,123,60
 ---
 
-# Reinforcement Learning
+# Reinforcement learning
 <div class="relative bottom-10">
 
 <div class="absolute ml-65 mt-35 text-right">
@@ -215,7 +215,7 @@ RL is different than planning, in that *learning happens in the loop* so agents 
 
 ---
 
-# Safe Reinforcement Learning[^1]
+# Safe reinforcement learning[^1]
 <br>
 <div class="mt-25">
 
@@ -237,7 +237,7 @@ $$
 
 ---
 
-# Safe Reinforcement Learning (?)
+# Safe reinforcement learning (?)
 <br>
 
 <div class="flex justify-center">
@@ -267,7 +267,7 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 
 ---
 
-# Safe Exploration
+# Safe exploration
 
 <div class="flex justify-center mt-20">
   <img src="/dora.png" class="w-100">  
@@ -282,7 +282,7 @@ Why this picture? Intuitively, a key component in safe exploration is being able
 
 ---
 
-# Safe Exploration: two key ingredients
+# Safe exploration: two key ingredients
 
 <div class="flex justify-center mt-8">
 <div class="flex w-full max-w-3xl">
@@ -512,7 +512,7 @@ _Given all the previously-seen data, which trajectories maximize the information
  -->
 ---
 
-# The Cartpole Testbed
+# The Cartpole testbed
 
 <div class="p-4 flex justify-center mt-25 ml-60 relative">
   <!-- Main cartpole-combined image -->
@@ -530,7 +530,7 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
-# The Cartpole Testbed
+# The Cartpole testbed
 Closer to theory (GPs)
 
 <div class="flex justify-center mt-10">
@@ -539,7 +539,7 @@ Closer to theory (GPs)
 
 --- 
 
-# The Cartpole Testbed
+# The Cartpole testbed
 More practical (vision control)
 
 <div class="flex justify-center mt-10">
@@ -553,7 +553,7 @@ Optimistic does not do any expansion.
 
 ---
 
-# Harder Problems
+# Harder problems
 Navigation from first-person view with sparse rewards
 
 <div class="flex items-center items-start gap-4 p-4 mt-8 ml-40">
@@ -586,7 +586,7 @@ Navigation from first-person view with sparse rewards
 
 --- 
 
-# Harder Problems
+# Harder problems
 Navigation from first-person view with sparse rewards
 
 <div class="flex justify-center mt-5">
@@ -594,7 +594,7 @@ Navigation from first-person view with sparse rewards
 </div>
 ---
 
-# Harder Problems
+# Harder problems
 Humanoid
 
 <div class="flex justify-center mt-10">
@@ -639,3 +639,13 @@ Yarden As
   <ri-user-3-line class="opacity-50"/>
   <div><a href="https://yas.pub" target="_blank">yas.pub</a></div>
 </div>
+
+---
+layout: cover
+---
+
+# Appendix
+
+---
+
+# Theoretical assumptions
