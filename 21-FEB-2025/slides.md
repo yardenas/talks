@@ -724,3 +724,51 @@ $$
 $$
 
 </MathStatementBlock>
+
+---
+
+# Expansion
+
+<div class="flex flex-col items-center justify-center gap-5">
+<div>
+
+$$
+\begin{aligned}
+   \bm{\pi}_n,  \bm{f}_n &= \argmax_{\bm{\pi} \in \mathcal{S}_n, \bm{f} \in \mathcal{M}_n} \underbrace{\mathbb{E}_{\bm{\tau}^{\bm{\pi}, \bm{f}}}\left[\sum_{t=0}^{T-1} \lVert\bm{\sigma}_{n-1}(\hat{\bm{s}}_t, \bm{\pi}(\hat{\bm{s}}_t))\rVert\right]}_{:= J_{r_n}(\bm{\pi}, \bm{f})}     
+\end{aligned}
+$$
+</div>
+
+<div>
+
+  <img src="/expansion-stages.svg" class="w-180">
+</div>
+</div>
+
+---
+layout: center
+---
+
+<MathStatementBlock type="Theorem" number="4.8" title="Expansion">
+
+Let assumptions 4.1-4.3 and 4.5 hold. Then, we have with probability at least $1-\delta$ that $J_c(\bm{\pi}_n, \bm{f}^*) \leq d$ $\forall n \geq 0$, i.e., ActSafe is safe during all episodes. 
+Moreover, consider any $\epsilon > 0$ and define $\mathcal{R}^{\epsilon}_H(\bm{S}_0)$ as the reachable safe set after $H$ expansions 
+
+$$
+\begin{aligned}
+  \mathcal{R}^{\epsilon}_H(\mathcal{S}_0) &:= \mathcal{R}^{\epsilon}_{H-1}(\mathcal{S}_0) \cup \left\{\bm{\pi}\in \Pi\setminus \mathcal{R}^{\epsilon}_{H-1}(\bm{S}_0);  
+  \exists \mathcal{\pi}' \in \bm{R}^{\epsilon}_{H-1}(\bm{S}_0) \ \text{s.t.} \ J_c(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d - \epsilon\right\} \\
+  \mathcal{R}^{\epsilon}_0(\mathcal{S}_0) &:= \mathcal{S}_0.
+\end{aligned}
+$$
+Let $n^*$ be the smallest integer such that
+$$
+  \frac{n^*}{\gamma_{n^*}(k) \beta^4_{n^*}(\delta)} \geq \frac{(H + 1) T^{6} C^4\frac{d_s \sigma^2_0}{\log(1 + \sigma^{-2}\sigma^2_0)}}{\epsilon^2},
+$$
+
+where $C = (1 + \sqrt{d_s}) \max\{C_{\max}, R_{\max}, \sigma_0\}$, $\gamma_n(k)$  the maximum information gain, and $\tilde{\bm{\pi}}_n$ the solution to $\underset{\bm{\pi} \in \mathcal{S}_n}{\arg\max} \min_{\bm{f} \in \mathcal{M}_n} J_r(\bm{\pi}, \bm{f})$.
+Then we have $\forall n \geq n^{*}$ with probability at least $1-\delta$
+$$
+    \max_{\bm{\pi} \in \mathbb{R}^{\epsilon}_H(\mathcal{S}_0)} J_r(\bm{\pi}) - J_r(\tilde{\bm{\pi}}_n) \leq \epsilon.
+$$
+</MathStatementBlock>
