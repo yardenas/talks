@@ -649,3 +649,25 @@ layout: cover
 ---
 
 # Theoretical assumptions
+
+<div class="flex flex-col gap-1 justify-center mt-5">
+
+<MathStatementBlock type="Assumption" number="4.1" title="Lipschitz continuity">
+
+The dynamics model $\bm{f}^*$ is $L_{\bm{f}}$-Lipschitz, the cost $c$ is $L_c$-Lipschitz, and all $\bm{\pi} \in \Pi$ are continuous. 
+
+</MathStatementBlock>
+
+<MathStatementBlock type="Assumption" number="4.2" title="Process noise distribution">
+
+The process noise is i.i.d. Gaussian with variance $\sigma^2$, i.e., $\bm{w}_t \overset{\text{i.i.d}}{\sim} \mathcal{N}(0, \sigma^2\mathbb{I})$.
+
+</MathStatementBlock> 
+
+<MathStatementBlock type="Assumption" number="4.3" title="Initial safe seed">
+
+We have access to an initial nonempty safe set $\mathcal{S}_0$ of policies, i.e., $\forall \bm{\pi} \in \mathcal{S}_0: J_c(\bm{\pi}) \leq d$ and $\mathcal{S}_0 \neq \emptyset$. 
+
+</MathStatementBlock> 
+
+</div>
