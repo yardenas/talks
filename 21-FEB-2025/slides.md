@@ -530,7 +530,8 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
-# The Cartpole Testbed (GPs)
+# The Cartpole Testbed
+Closer to theory (GPs)
 
 <div class="flex justify-center mt-15">
   <img src="/pendulum-exploration.svg" class="w-170">
@@ -538,9 +539,10 @@ _Given all the previously-seen data, which trajectories maximize the information
 
 --- 
 
-# The Cartpole Testbed (Vision Control)
+# The Cartpole Testbed
+More practical (vision control)
 
-<div class="flex justify-center mt-15">
+<div class="flex justify-center mt-10">
   <img src="/learn-curves-cartpole-exploration.svg" class="w-100">
 </div>
 
@@ -552,8 +554,9 @@ Optimistic does not do any expansion.
 ---
 
 # Harder Problems
+Navigation from first-person view with sparse rewards
 
-<div class="flex items-center items-start gap-4 p-4 mt-10 ml-40">
+<div class="flex items-center items-start gap-4 p-4 mt-8 ml-40">
   <div>
     <img src="/point-push.gif" class="w-100 rounded-lg shadow-md max-w-full">
   </div>
@@ -580,6 +583,31 @@ Optimistic does not do any expansion.
     </div>
   </div>
 </div>
+
+--- 
+
+# Harder Problems
+Navigation from first-person view with sparse rewards
+
+<div class="flex justify-center mt-5">
+  <img src="/learning-curves-sparse.svg" class="w-170">
+</div>
+---
+
+# Harder Problems
+Humanoid
+
+<div class="flex justify-center mt-10">
+<div class="flex w-full max-w-3xl gap-10">
+<div class="text-center">
+  <img src="/humanoid-optimized.gif" class="rounded-lg shadow-md max-w-full">
+</div>
+<div class="text-center">
+  <img src="/humanoid.svg" class="w-110 mx-auto mt--4">
+</div>
+</div>
+</div>
+
 ---
 layout: quote
 ---
