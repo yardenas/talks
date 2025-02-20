@@ -757,7 +757,7 @@ Moreover, consider any $\epsilon > 0$ and define $\mathcal{R}^{\epsilon}_H(\bm{S
 $$
 \begin{aligned}
   \mathcal{R}^{\epsilon}_H(\mathcal{S}_0) &:= \mathcal{R}^{\epsilon}_{H-1}(\mathcal{S}_0) \cup \left\{\bm{\pi}\in \Pi\setminus \mathcal{R}^{\epsilon}_{H-1}(\bm{S}_0);  
-  \exists \mathcal{\pi}' \in \bm{R}^{\epsilon}_{H-1}(\bm{S}_0) \ \text{s.t.} \ J_c(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d - \epsilon\right\} \\
+  \exists \mathcal{\pi}' \in \mathcal{R}^{\epsilon}_{H-1}(\bm{S}_0) \ \text{s.t.} \ J_c(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d - \epsilon\right\} \\
   \mathcal{R}^{\epsilon}_0(\mathcal{S}_0) &:= \mathcal{S}_0.
 \end{aligned}
 $$
