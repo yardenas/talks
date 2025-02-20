@@ -778,14 +778,25 @@ $$
 # Pessimistic State Propagation
 
 
-<div class="flex flex-col items-center justify-center mt-20">
+<div class="flex flex-col items-center justify-center mt-10">
 <div>
 
 $$
   \max_{\bm{\pi} \in \Pi} \max_{\bm{f} \in \mathcal{Q}_n} J_n(\bm{\pi}, \bm{f}) \ \text{s.t.}\  \max_{\bm{f}' \in \mathcal{Q}_n} J_c(\bm{\pi}, \bm{f}') \leq d.
 $$
+
 </div>
-<div class="mt--15">
-<StatePropagation/>
+
+<div class="mt--20">
+  <StatePropagation/>
 </div>
+
+<div class="mt--20">
+
+$$
+    \max_{\bm{f}' \in \mathcal{Q}_n} J_c(\bm{\pi}, \bm{f}') \lessapprox J_{c -\lambda \bm{\sigma}}(\bm{\pi}_n) = \mathrm{E}_{\bm{\pi}_n}\left[\sum^{H}_{t=0}\gamma^t\left(c(\bm{s}_t, \bm{a}_t) + \lambda \textcolor{#059669}{\underbrace{\lVert\bm{\sigma}{_n}(\bm{s}_t, \bm{a}_t)\rVert}_{\text{disagreement}}}\right)\right]
+$$
 </div>
+
+</div>
+<!-- \textcolor{#059669}{disagreement} -->
