@@ -154,7 +154,8 @@ Learning & Adaptive Systems Group @ ETH Zurich
 </div>
 
 <!--
-Before diving into the details of the work, I want to acknowledge some of my collaborators in this project.
+* Bhavi did the theory. 
+* WE HAVE BACKUP SLIDES ABOUT THE THEORY AND I'LL DO MY BEST TO EXPLAIN THEM WELL
 -->
 
 ---
