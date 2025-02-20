@@ -233,6 +233,7 @@ $$
 
 <!--
 * what's nice about CMDPs is that they allow us to more easily specify constraints, separately from the reward. This allows agents to learn how to tradeoff between the objective and safety on their own, without us hand-tuning/reward shaping -- it is actually cleaner than penalties.
+* IS IT A PERFECT MODEL? (ASK THE AUDIENCE AND GIVE YOURSELF TIME TO BREATH)
 -->
 
 ---
@@ -428,8 +429,7 @@ Need to expand the pessimistic safe set of policies!
 </div>
 
 <!--
-So how do we find optimal policies?
-
+So how do we find optimal policies? (PAUSE, LET AUDIENCE REALLY THINK ABOUT THIS AND LET YOURSELF BREATH)
 This of the autonomous driving example. Say that I give you initially only one policy of "doing nothing". Clearly this is safe, but will it be able to actually drive from Lower east side to Brooklyn? So we need to gradually add more and more policies/behaviors to what we know that is safe.
 -->
 
