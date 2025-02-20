@@ -47,12 +47,11 @@ fonts:
 </div>
 
 <!--
-* I want to make the case for robotics.
-* Here on the top left, you can see Nikita. Nikita is a robotics engineer and also practices parkour on he's free time in Zurich.
+* I want to make the case for safety in robotics.
+* Nikita. Robotics engineer. Likes parkour
 * **click**
-* Now watch anymal, a robot running reinforcement learning policies onboard. Well you can see that it basically fails and hits the obstacles.
-* Now this could due to multiple reasons: it could be due to perception, but could also be due to wrong decision making.
-* The point is -- here's a cute problem -- no one was hurt. But what happens in other domains?
+* Failure. Fairly complex task.
+* Here's a cute problem NO ONE IS HURT. But what happens in other domains?
 -->
 
 ---
@@ -70,10 +69,9 @@ In autonomous driving too
 [^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
 
 <!--
-To answer this question, I know that you guys in the group care a lot about autonomous driving. So I added this fact from a recent paper by Waymo. 
-
-Roads are dangerous -- can we use RL to improve that?
-Why RL? because we don't have a perfect model, planning is not enough.
+* YOU INTERESTED IN AUTONOMOUS DRIVING
+* Roads are dangerous
+* CAN WE USE RL TO IMPROVE?
 -->
 
 ---
@@ -206,11 +204,8 @@ $s_{t + 1}, r_{t}$
 </div>
 
 <!--
-So what is reinforcement learning? I guess you guys know that very well.
-But essentially, we have an environment, here depicted by this robot and an agent that interacts with it.
-
-The goal of RL is to learn policies that maximize some notion of reward.
-RL is different than planning, in that *learning happens in the loop* so agents have to trade off between what to "learn" next, and just plainly maximizing the rewards. This is in contrast to planning, where we only care about maximizing the reward, because there's no learning -- the model is given.
+* What is reinforcement learning
+* only reward. IS IT ENOUGH FOR SAFETY?
 -->
 
 ---
@@ -232,8 +227,7 @@ $$
 </div>
 
 <!--
-* what's nice about CMDPs is that they allow us to more easily specify constraints, separately from the reward. This allows agents to learn how to tradeoff between the objective and safety on their own, without us hand-tuning/reward shaping -- it is actually cleaner than penalties.
-* IS IT A PERFECT MODEL? (ASK THE AUDIENCE AND GIVE YOURSELF TIME TO BREATH)
+* CMDPs. Allow Safety.
 -->
 
 ---
@@ -258,12 +252,13 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 <!--
-- It's very limiting to restrict all learning to simulation or behavior data.
-- Caveats: “cherry at the top of cake” (Yan Lecun’s Cake). Training online is challenging
-  - RL is notoriously sample inneficient it can take hours/days to train a single policy!
+* WHAT ARE THE LIMITATIONS OF RL?
+IS IT A PERFECT MODEL? (ASK THE AUDIENCE AND GIVE YOURSELF TIME TO BREATH)
 
--  => aka safely fine-tuning a policy from {simulation, human demonstrations, generative models,…}
-- Adapting requires _safe exploration_
+* Sample efficiency, Safe exploration
+* => Train in simulation.
+* Yan Lecun
+* ADAPT ONLINE => SAFE EXPLORATION
 -->
 
 ---
@@ -275,11 +270,11 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 </div>
 
 <!--
-Adapting safely online requires us to explore safely.
-That is:
-figuring out what's safe and what's not  *and* searching for policies within what we are sure that is safe.
-Why this picture? Intuitively, a key component in safe exploration is being able to stand somewhere and determine which parts in your _local neighborhood_ are safe/unsafe and rewarding.
+* DORA SAW MAP YESTERDAY
+* EXPLORE. CLIFFS. WATER.
+* LOOKING THROUGH THE BINOCULARS
 -->
+
 ---
 
 # Safe exploration in CMDPs
@@ -319,12 +314,10 @@ Why this picture? Intuitively, a key component in safe exploration is being able
 
 [^1]: Safe Exploration Using Bayesian World Models and Log-Barrier Optimization, As et al. (2024)
 
-
 <!--
-- Start by explaining the illustrations. Use the island example.
-- Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
-- Uncertainty quantification: we don't know how the environment behaves => must learn it => must "know what we don't know" aka (epistemic) uncertainty quantification
-
+* Safe exploration in the context of CMDPs
+* Easiest is to think about policies.
+* Construct a pessimistic set by learning a probabilistic model of the dynamics
 -->
 
 ---
@@ -380,14 +373,10 @@ Why this picture? Intuitively, a key component in safe exploration is being able
 
 [^1]: Safe Exploration Using Bayesian World Models and Log-Barrier Optimization, As et al. (2024)
 
-
 <!--
-- Start by explaining the illustrations. Use the island example.
-- Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
-- Uncertainty quantification: we don't know how the environment behaves => must learn it => must "know what we don't know" aka (epistemic) uncertainty quantification
-
+* HINTED BEFORE ABOUT UNCERTAINTY QUANTIFICATION
+* POLICY IMPROVEMENT (Ilnura, Tingting)
 -->
-
 
 ---
 
@@ -429,8 +418,8 @@ Need to expand the pessimistic safe set of policies!
 </div>
 
 <!--
-So how do we find optimal policies? (PAUSE, LET AUDIENCE REALLY THINK ABOUT THIS AND LET YOURSELF BREATH)
-This of the autonomous driving example. Say that I give you initially only one policy of "doing nothing". Clearly this is safe, but will it be able to actually drive from Lower east side to Brooklyn? So we need to gradually add more and more policies/behaviors to what we know that is safe.
+SO HOW CAN WE STILL REACH THE OPTIMAL POLICY?
+ (PAUSE, LET AUDIENCE REALLY THINK ABOUT THIS AND LET YOURSELF BREATH)
 -->
 
 ---
@@ -502,7 +491,6 @@ _Given all the previously-seen data, which trajectories maximize the information
 [^1]: Optimistic Active Exploration of Dynamical Systems, Sukhija et al. (2024)
 
 <!--
-- Key challenge: expansion-exploration-exploitation dilemma. 
 - How do we expand safely? forget about rewards and just focus on learning something new! Formally: $\max_{\Pi_{\text{safe}}} \mathbb{E} [\text{I}[P; \pi | \mathcal{D}]]$
 -->
 
@@ -532,14 +520,12 @@ _Given all the previously-seen data, which trajectories maximize the information
 
 </div>
 
-
-<!-- 
+<!--
 - So I convinced you know that under some regularity assumptions, and assuming that we can choose any policy within \Pi, we can expand the safe set as much as we want.
 - But how much should we expand?
 - Turns out, if we first focus only on expanding, and only then solve the CMDP, we can find an optimal policy.
 - This can be even proven formally, if the dynamics, cost and reward are in the RKHS.
- -->
-
+-->
 
 ---
 
@@ -583,7 +569,7 @@ Closer to theory (GPs)
   <img src="/pendulum-exploration.svg" class="w-170">
 </div>
 
---- 
+---
 
 # The Cartpole testbed
 More practical (vision control)
@@ -630,7 +616,7 @@ Navigation from first-person view with sparse rewards
   </div>
 </div>
 
---- 
+---
 
 # Harder problems
 Navigation from first-person view with sparse rewards
@@ -661,12 +647,11 @@ layout: quote
 # Outlook
 Keep expanding your horizons
 
-<!-- 
+<!--
 - We all operate under constraints
 - Sometimes the best behaviors is outside what is considered safe, the only way to find out is to continue learning, this will help expanding what you know is safe.
 - This form of learning should be independent of trying to maximize the original objective.
 -->
-
 
 ---
 layout: center
@@ -744,7 +729,7 @@ We assume that the functions $f^*_j$, $j=\{1, \dots, d_s\}$ lie in a RKHS with k
 </MathStatementBlock>
 </div>
 
---- 
+---
 
 # Pessimistic safe set
 
