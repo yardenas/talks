@@ -111,7 +111,7 @@ Before diving into the details of the work, I want to acknowledge some of my col
 
 ---
 
-# Safety Matters
+# Safety matters
 
 <div class="container mx-auto p-8 bg-white">
   <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
@@ -141,7 +141,7 @@ Before diving into the details of the work, I want to acknowledge some of my col
 
 ---
 
-# Safety Matters
+# Safety matters
 In autonomous driving too
 
 
@@ -168,7 +168,7 @@ dragPos:
   observation: 421,105,123,60
 ---
 
-# Reinforcement Learning
+# Reinforcement learning
 <div class="relative bottom-10">
 
 <div class="absolute ml-65 mt-35 text-right">
@@ -215,7 +215,7 @@ RL is different than planning, in that *learning happens in the loop* so agents 
 
 ---
 
-# Safe Reinforcement Learning[^1]
+# Safe reinforcement learning[^1]
 <br>
 <div class="mt-25">
 
@@ -237,7 +237,7 @@ $$
 
 ---
 
-# Safe Reinforcement Learning (?)
+# Safe reinforcement learning (?)
 <br>
 
 <div class="flex justify-center">
@@ -267,7 +267,7 @@ $\implies$ _first_ learn $\pi$ in $\{$simulation, human demonstrations, generati
 
 ---
 
-# Safe Exploration
+# Safe exploration
 
 <div class="flex justify-center mt-20">
   <img src="/dora.png" class="w-100">  
@@ -282,7 +282,7 @@ Why this picture? Intuitively, a key component in safe exploration is being able
 
 ---
 
-# Safe Exploration: two key ingredients
+# Safe exploration: two key ingredients
 
 <div class="flex justify-center mt-8">
 <div class="flex w-full max-w-3xl">
@@ -512,7 +512,7 @@ _Given all the previously-seen data, which trajectories maximize the information
  -->
 ---
 
-# The Cartpole Testbed
+# The Cartpole testbed
 
 <div class="p-4 flex justify-center mt-25 ml-60 relative">
   <!-- Main cartpole-combined image -->
@@ -530,7 +530,7 @@ _Given all the previously-seen data, which trajectories maximize the information
 </div>
 ---
 
-# The Cartpole Testbed
+# The Cartpole testbed
 Closer to theory (GPs)
 
 <div class="flex justify-center mt-10">
@@ -539,7 +539,7 @@ Closer to theory (GPs)
 
 --- 
 
-# The Cartpole Testbed
+# The Cartpole testbed
 More practical (vision control)
 
 <div class="flex justify-center mt-10">
@@ -553,7 +553,7 @@ Optimistic does not do any expansion.
 
 ---
 
-# Harder Problems
+# Harder problems
 Navigation from first-person view with sparse rewards
 
 <div class="flex items-center items-start gap-4 p-4 mt-8 ml-40">
@@ -571,7 +571,7 @@ Navigation from first-person view with sparse rewards
     </div>
     <div class="flex items-center my-2">
       <div class="w-5 h-5 bg-[#ffd700] mr-4"></div>
-      <span>Box (to be moved to goal)</span>
+      <span>Box (to be pushed to goal)</span>
     </div>
     <div class="flex items-center my-2">
       <div class="w-5 h-5 bg-[#20B2AA] mr-4"></div>
@@ -586,7 +586,7 @@ Navigation from first-person view with sparse rewards
 
 --- 
 
-# Harder Problems
+# Harder problems
 Navigation from first-person view with sparse rewards
 
 <div class="flex justify-center mt-5">
@@ -594,7 +594,7 @@ Navigation from first-person view with sparse rewards
 </div>
 ---
 
-# Harder Problems
+# Harder problems
 Humanoid
 
 <div class="flex justify-center mt-10">
@@ -639,3 +639,164 @@ Yarden As
   <ri-user-3-line class="opacity-50"/>
   <div><a href="https://yas.pub" target="_blank">yas.pub</a></div>
 </div>
+
+---
+layout: cover
+---
+
+# Appendix
+
+---
+
+# Theoretical assumptions
+
+<div class="flex flex-col gap-1 justify-center mt-5">
+
+<MathStatementBlock type="Assumption" number="4.1" title="Lipschitz continuity">
+
+The dynamics model $\bm{f}^*$ is $L_{\bm{f}}$-Lipschitz, the cost $c$ is $L_c$-Lipschitz, and all $\bm{\pi} \in \Pi$ are continuous. 
+
+</MathStatementBlock>
+
+<MathStatementBlock type="Assumption" number="4.2" title="Process noise distribution">
+
+The process noise is i.i.d. Gaussian with variance $\sigma^2$, i.e., $\bm{w}_t \overset{\text{i.i.d}}{\sim} \mathcal{N}(0, \sigma^2\mathbb{I})$.
+
+</MathStatementBlock> 
+
+<MathStatementBlock type="Assumption" number="4.3" title="Initial safe seed">
+
+We have access to an initial nonempty safe set $\mathcal{S}_0$ of policies, i.e., $\forall \bm{\pi} \in \mathcal{S}_0: J_c(\bm{\pi}) \leq d$ and $\mathcal{S}_0 \neq \emptyset$. 
+
+</MathStatementBlock> 
+
+</div>
+
+
+---
+
+# Theoretical assumptions (cont.)
+
+<div class="flex flex-col gap--10 justify-center mt--5">
+
+<MathStatementBlock type="Definition" number="4.4" title="All-time well-calibrated statistical model">
+
+Let $\mathcal{Z} := \mathcal{S} \times \mathcal{A}$.
+An all-time well-calibrated statistical model of the function $\bm{f}^*$ is a sequence $\{\mathcal{Q}_{n}(\delta)\}_{n \ge 0}$, where
+$$
+    \mathcal{Q}_n(\delta) := \left\{\bm{f}: \mathcal{Z} \to \mathbb{R}^{d_s} \mid  \forall \bm{z} \in \mathcal{Z}, \forall j \in \{1, \ldots, d_s\} : \lvert\mu_{n, j}(\bm{z}) - f_j(\bm{z})\rvert \leq \beta_n(\delta) \sigma_{n, j}(\bm{z})\right\},
+$$
+if, with probability at least $1-\delta$, we have $\bm{f}^* \in \bigcap_{n \ge 0}\mathcal{Q}_n(\delta)$.
+Here, $f_{j}$, $\mu_{n, j}$ and $\sigma_{n, j}$ denote the $j$-th element in the vector-valued functions $\bm{f}$, $\bm{\mu}_n$ and $\bm{\sigma}_n$ respectively, and $\beta_n(\delta) \in \mathbb{R}_{\geq 0}$ is sequence of scalar functions that depends on the confidence level $\delta \in (0, 1]$ and is monotonically increasing in $n$. 
+
+</MathStatementBlock>
+
+<MathStatementBlock type="Assumption" number="4.5">
+
+We assume that the functions $f^*_j$, $j=\{1, \dots, d_s\}$ lie in a RKHS with kernel $k$ and have a bounded norm $B$, that is $\bm{f}^* \in \mathcal{H}^{d_s}_{k, B}$, with $\mathcal{H}^{d_s}_{k, B} = \{\bm{f} \mid \lVert f_j \rVert_k \leq B, j=\{1, \dots, d_s\}\}$. Moreover, we assume that $k(\bm{z}, \bm{z}) \leq \sigma_{\max}$ for all $\bm{z} \in \mathcal{Z}$.
+
+</MathStatementBlock>
+</div>
+
+--- 
+
+# Pessimistic safe set
+
+<MathStatementBlock type="Definition" number="4.6">
+
+Let $\mathcal{M}_n := \mathcal{M}_{n-1} \cap \mathcal{Q}_{n}, \forall n \geq 1$  denote the set of plausible models, and  $P_{n}(\bm{\pi}) = \max_{\bm{f} \in \mathcal{M}_n} J_c(\bm{\pi}, \bm{f})$ our pessimistic estimate of the expected costs w.r.t.
+$\mathcal{M}_n$. Then, we define the safe set $\mathcal{S}_n$ as
+$$
+\mathcal{S}_n := \mathcal{S}_{n-1} \cup \left\{\bm{\pi} \in \Pi \setminus \mathcal{S}_{n-1};  
+\exists \bm{\pi}' \in \mathcal{S}_{n-1} \ \text{s.t.} \ P_n(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d\right\},
+$$
+where
+$$
+\begin{aligned}
+&D(\bm{\pi}, \bm{\pi}') = \\
+& \mathbb{E}_{\bm{\tau}^{\bm{\pi}'}} 
+\left[
+  \sum^{T-1}_{t=0}
+  \min\left\{L_c\lVert\bm{\pi}'(\bm{s}_t) - \bm{\pi}(\bm{s}_t)\rVert, 2C_{\max} \right\}
+ + TC_{\max} \min\left\{\frac{L_f\lVert\bm{\pi}'(\bm{s}_t) - \bm{\pi}(\bm{s}_t)\rVert}{\sigma}, 1\right\}
+\right]
+\end{aligned}
+$$
+
+</MathStatementBlock>
+
+---
+
+# Expansion
+
+<div class="flex flex-col items-center justify-center gap-5">
+<div>
+
+$$
+\begin{aligned}
+   \bm{\pi}_n,  \bm{f}_n &= \argmax_{\bm{\pi} \in \mathcal{S}_n, \bm{f} \in \mathcal{M}_n} \underbrace{\mathbb{E}_{\bm{\tau}^{\bm{\pi}, \bm{f}}}\left[\sum_{t=0}^{T-1} \lVert\bm{\sigma}_{n-1}(\hat{\bm{s}}_t, \bm{\pi}(\hat{\bm{s}}_t))\rVert\right]}_{:= J_{r_n}(\bm{\pi}, \bm{f})}     
+\end{aligned}
+$$
+</div>
+
+<div>
+
+  <img src="/expansion-stages.svg" class="w-180">
+</div>
+</div>
+
+---
+layout: center
+---
+
+<MathStatementBlock type="Theorem" number="4.8" title="Expansion">
+
+Let assumptions 4.1-4.3 and 4.5 hold. Then, we have with probability at least $1-\delta$ that $J_c(\bm{\pi}_n, \bm{f}^*) \leq d$ $\forall n \geq 0$, i.e., ActSafe is safe during all episodes. 
+Moreover, consider any $\epsilon > 0$ and define $\mathcal{R}^{\epsilon}_H(\bm{S}_0)$ as the reachable safe set after $H$ expansions 
+
+$$
+\begin{aligned}
+  \mathcal{R}^{\epsilon}_H(\mathcal{S}_0) &:= \mathcal{R}^{\epsilon}_{H-1}(\mathcal{S}_0) \cup \left\{\bm{\pi}\in \Pi\setminus \mathcal{R}^{\epsilon}_{H-1}(\bm{S}_0);  
+  \exists \mathcal{\pi}' \in \bm{R}^{\epsilon}_{H-1}(\bm{S}_0) \ \text{s.t.} \ J_c(\bm{\pi}') + D(\bm{\pi}, \bm{\pi}') \leq d - \epsilon\right\} \\
+  \mathcal{R}^{\epsilon}_0(\mathcal{S}_0) &:= \mathcal{S}_0.
+\end{aligned}
+$$
+Let $n^*$ be the smallest integer such that
+$$
+  \frac{n^*}{\gamma_{n^*}(k) \beta^4_{n^*}(\delta)} \geq \frac{(H + 1) T^{6} C^4\frac{d_s \sigma^2_0}{\log(1 + \sigma^{-2}\sigma^2_0)}}{\epsilon^2},
+$$
+
+where $C = (1 + \sqrt{d_s}) \max\{C_{\max}, R_{\max}, \sigma_0\}$, $\gamma_n(k)$  the maximum information gain, and $\tilde{\bm{\pi}}_n$ the solution to $\underset{\bm{\pi} \in \mathcal{S}_n}{\arg\max} \min_{\bm{f} \in \mathcal{M}_n} J_r(\bm{\pi}, \bm{f})$.
+Then we have $\forall n \geq n^{*}$ with probability at least $1-\delta$
+$$
+    \max_{\bm{\pi} \in \mathbb{R}^{\epsilon}_H(\mathcal{S}_0)} J_r(\bm{\pi}) - J_r(\tilde{\bm{\pi}}_n) \leq \epsilon.
+$$
+</MathStatementBlock>
+
+---
+
+# Pessimistic State Propagation
+
+
+<div class="flex flex-col items-center justify-center mt-10">
+<div>
+
+$$
+  \max_{\bm{\pi} \in \Pi} \max_{\bm{f} \in \mathcal{Q}_n} J_n(\bm{\pi}, \bm{f}) \ \text{s.t.}\  \max_{\bm{f}' \in \mathcal{Q}_n} J_c(\bm{\pi}, \bm{f}') \leq d.
+$$
+
+</div>
+
+<div class="mt--20">
+  <StatePropagation/>
+</div>
+
+<div class="mt--20">
+
+$$
+    \max_{\bm{f}' \in \mathcal{Q}_n} J_c(\bm{\pi}, \bm{f}') \lessapprox J_{c -\lambda \bm{\sigma}}(\bm{\pi}_n) = \mathrm{E}_{\bm{\pi}_n}\left[\sum^{H}_{t=0}\gamma^t\left(c(\bm{s}_t, \bm{a}_t) + \lambda \textcolor{#059669}{\underbrace{\lVert\bm{\sigma}{_n}(\bm{s}_t, \bm{a}_t)\rVert}_{\text{disagreement}}}\right)\right]
+$$
+</div>
+
+</div>
+<!-- \textcolor{#059669}{disagreement} -->
