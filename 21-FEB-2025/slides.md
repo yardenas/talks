@@ -845,4 +845,12 @@ $$
 </div>
 
 </div>
-<!-- \textcolor{#059669}{disagreement} -->
+
+
+---
+
+# Safe Adaptation Experiment
+
+<div class="text-center mt-10">
+  <img src="/adaptation-experiment.svg" class="w-160 mx-auto">
+</div>
