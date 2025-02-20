@@ -27,6 +27,57 @@ fonts:
 
 ---
 
+# Safety matters
+
+<div class="container mx-auto p-8 bg-white">
+  <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
+  <!-- Upper Left Image (Nikita) -->
+  <div class="p-4 col-start-1 row-start-1">
+    <img src="/nikita.gif" alt="Nikita" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  <!-- Lower Right Image (Anymal) -->
+  <div v-click class="p-4 col-start-2 row-start-2">
+    <img src="/anymal.gif" alt="Anymal" class="w-full h-auto rounded-lg shadow-md">
+  </div>
+  </div>
+</div>
+
+<div class="abs-tr w-27">
+  <img src="/robot-abuse.png" alt="Anymal">
+</div>
+
+<!--
+* I want to make the case for robotics.
+* Here on the top left, you can see Nikita. Nikita is a robotics engineer and also practices parkour on he's free time in Zurich.
+* **click**
+* Now watch anymal, a robot running reinforcement learning policies onboard. Well you can see that it basically fails and hits the obstacles.
+* Now this could due to multiple reasons: it could be due to perception, but could also be due to wrong decision making.
+* The point is -- here's a cute problem -- no one was hurt. But what happens in other domains?
+-->
+
+---
+
+# Safety matters
+In autonomous driving too
+
+
+<div class="flex justify-center text-center mt-30">
+
+## ~6.7 times less “injury-reported crashes” with Waymo ADS compared to humans[^1]
+
+</div>
+
+[^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
+
+<!--
+To answer this question, I know that you guys in the group care a lot about autonomous driving. So I added this fact from a recent paper by Waymo. 
+
+Roads are dangerous -- can we use RL to improve that?
+Why RL? because we don't have a perfect model, planning is not enough.
+-->
+
+---
+
 # Yarden As
 <style>
 p, ul {
@@ -107,57 +158,6 @@ Learning & Adaptive Systems Group @ ETH Zurich
 
 <!--
 Before diving into the details of the work, I want to acknowledge some of my collaborators in this project.
--->
-
----
-
-# Safety matters
-
-<div class="container mx-auto p-8 bg-white">
-  <div class="grid grid-cols-2 grid-rows-2 gap-10 h-80">
-  <!-- Upper Left Image (Nikita) -->
-  <div class="p-4 col-start-1 row-start-1">
-    <img src="/nikita.gif" alt="Nikita" class="w-full h-auto rounded-lg shadow-md">
-  </div>
-  <!-- Lower Right Image (Anymal) -->
-  <div v-click class="p-4 col-start-2 row-start-2">
-    <img src="/anymal.gif" alt="Anymal" class="w-full h-auto rounded-lg shadow-md">
-  </div>
-  </div>
-</div>
-
-<div class="abs-tr w-27">
-  <img src="/robot-abuse.png" alt="Anymal">
-</div>
-
-<!--
-* I want to make the case for robotics.
-* Here on the top left, you can see Nikita. Nikita is a robotics engineer and also practices parkour on he's free time in Zurich.
-* **click**
-* Now watch anymal, a robot running reinforcement learning policies onboard. Well you can see that it basically fails and hits the obstacles.
-* Now this could due to multiple reasons: it could be due to perception, but could also be due to wrong decision making.
-* The point is -- here's a cute problem -- no one was hurt. But what happens in other domains?
--->
-
----
-
-# Safety matters
-In autonomous driving too
-
-
-<div class="flex justify-center text-center mt-30">
-
-## ~6.7 times less “injury-reported crashes” with Waymo ADS compared to humans[^1]
-
-</div>
-
-[^1]: “Comparison of Waymo Rider-Only Crash Data to Human Benchmarks at 7.1 Million Miles” Kusano et al. 2023
-
-<!--
-To answer this question, I know that you guys in the group care a lot about autonomous driving. So I added this fact from a recent paper by Waymo. 
-
-Roads are dangerous -- can we use RL to improve that?
-Why RL? because we don't have a perfect model, planning is not enough.
 -->
 
 ---
@@ -278,6 +278,52 @@ Adapting safely online requires us to explore safely.
 That is:
 figuring out what's safe and what's not  *and* searching for policies within what we are sure that is safe.
 Why this picture? Intuitively, a key component in safe exploration is being able to stand somewhere and determine which parts in your _local neighborhood_ are safe/unsafe and rewarding.
+-->
+---
+
+# Safe exploration in CMDPs
+
+<div class="flex justify-center mt-8">
+<div class="flex w-full max-w-3xl">
+<div class="flex-1 text-center">
+  <img src="/uncertainty-set.svg" class="w-80 mx-auto mt-8">
+  <div class="relative bottom-90 left-35">
+
+  $$\Pi$$
+
+  </div>
+  <div class="relative bottom-80">
+
+  $$\Pi_{\text{Safe}}$$
+
+  </div>
+  <div class="relative bottom-78.5 left-9">
+
+  $$\Pi_{\text{Pessimistic}}$$
+
+  </div>
+  <div class="relative bottom-82 right-10">
+
+  $$\pi_{\text{safe}}^\star$$
+
+  </div>
+  <div class="relative bottom-109 right-16">
+
+  $$\pi^\star$$
+
+  </div>
+</div>
+</div>
+</div>
+
+[^1]: Safe Exploration Using Bayesian World Models and Log-Barrier Optimization, As et al. (2024)
+
+
+<!--
+- Start by explaining the illustrations. Use the island example.
+- Two key ingredients: uncertainty quantification + improving policies within what is known to be the safe set.
+- Uncertainty quantification: we don't know how the environment behaves => must learn it => must "know what we don't know" aka (epistemic) uncertainty quantification
+
 -->
 
 ---
@@ -424,7 +470,7 @@ This of the autonomous driving example. Say that I give you initially only one p
 
 ---
 
-# Expansion-exploration-exploitation: how to expand?
+# How to expand?
 
 <div class="flex items-center justify-center h-80">
 <div class="text-3xl">
