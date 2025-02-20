@@ -772,3 +772,20 @@ $$
     \max_{\bm{\pi} \in \mathbb{R}^{\epsilon}_H(\mathcal{S}_0)} J_r(\bm{\pi}) - J_r(\tilde{\bm{\pi}}_n) \leq \epsilon.
 $$
 </MathStatementBlock>
+
+---
+
+# Pessimistic State Propagation
+
+
+<div class="flex flex-col items-center justify-center mt-20">
+<div>
+
+$$
+  \max_{\bm{\pi} \in \Pi} \max_{\bm{f} \in \mathcal{Q}_n} J_n(\bm{\pi}, \bm{f}) \ \text{s.t.}\  \max_{\bm{f}' \in \mathcal{Q}_n} J_c(\bm{\pi}, \bm{f}') \leq d.
+$$
+</div>
+<div class="mt--15">
+<StatePropagation/>
+</div>
+</div>

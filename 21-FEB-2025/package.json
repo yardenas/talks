@@ -12,6 +12,7 @@
     "@slidev/theme-seriph": "^0.25.0",
     "apexcharts": "^3.53.0",
     "endent": "^2.1.0",
+    "gsap": "^3.12.7",
     "npm-check-updates": "^16.14.20",
     "vue3-apexcharts": "^1.6.0"
   },
