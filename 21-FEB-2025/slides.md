@@ -96,8 +96,7 @@ Working on safe reinforcement learning.
 <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
 
 <!--
-* Was born in Haifa, Israel, did there my Bechalor's in Mechanical engineering, focusing on control theory and robotics. I then became a robotics engineer in a Tel-Avivian startup company, developing planning and localization and mapping algorithms. Moved to Switzerland for my masters and then decided to continue for a PhD in RL x Robotics.
-* As you can see, a recurring thing is being involved in robotics for quite some time.
+PASSIONATE ABOUT ROBOTICS
 -->
 
 ---
