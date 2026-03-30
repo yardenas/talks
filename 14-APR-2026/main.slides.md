@@ -89,6 +89,7 @@ layout: quote
 
 # Markov Decision Processes: the Language of Sequential Decision-Making
 
+<!-- MDPs describe sequential decisions under consequences and uncertainty. -->
 ---
 
 # Cliff Daredevil
@@ -102,6 +103,23 @@ In pairs...
   />
 </div>
 
+
+<!-- 
+1. what does the robot need to know?
+2. If you were controlling this robot yourself, would you take the short path near the cliff, or the longer safer path?
+ -->
+
+---
+layout: cover
+---
+
+# Consolidation
+
+<!-- 
+1. MDPs let us describe sequential decision problems in terms of states, actions, rewards, and uncertain transitions.
+In the cliff world, the best policy depends not only on distance to the goal, but also on the probability and severity of bad outcomes.
+2. How does it relate to LLMs? For that you will have to take the course :)
+ -->
 
 ---
 layout: center
