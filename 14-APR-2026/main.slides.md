@@ -19,7 +19,6 @@ fonts:
 </div>
 
 
----
 layout: full
 ---
 
@@ -77,6 +76,32 @@ layout: full
     </h1>
   </div>
 </div>
+
+---
+layout: statement
+---
+
+# Artificial Intelligence <br> $\approx$ <br> Learning to solve sequential decision-making problems
+
+---
+layout: quote
+---
+
+# Markov Decision Processes: the Language of Sequential Decision-Making
+
+---
+
+# Cliff Daredevil
+In pairs...
+
+<div class="mt-8 flex w-full justify-center">
+  <img
+    class="h-auto w-80 max-w-full"
+    src="/qrcode.svg"
+    alt="QR code for hands-on activity"
+  />
+</div>
+
 
 ---
 layout: center
