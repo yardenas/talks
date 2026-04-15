@@ -18,7 +18,7 @@ fonts:
   </div>
 </div>
 
-
+---
 layout: full
 ---
 
@@ -103,6 +103,7 @@ In pairs...
   />
 </div>
 
+https://tinyurl.com/mpj575pa
 
 <!-- 
 1. what does the robot need to know?
