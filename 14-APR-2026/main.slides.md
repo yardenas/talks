@@ -89,7 +89,14 @@ layout: quote
 
 # Markov Decision Processes: the Language of Sequential Decision-Making
 
-<!-- MDPs describe sequential decisions under consequences and uncertainty. -->
+<!-- 
+
+MDPs describe sequential decisions under consequences and uncertainty.
+
+Suppose I give you a robot in a maze. What information would you need in order to decide what it should do?
+
+
+ -->
 ---
 
 # Cliff Daredevil
@@ -106,8 +113,14 @@ In pairs...
 https://tinyurl.com/mpj575pa
 
 <!-- 
+
+Now let’s turn a simple robot problem into an MDP ourselves. In pairs, open the Colab. Your job is to identify the states, choose sensible rewards, and then run the notebook to see what policy the algorithm finds.
+
+
 1. what does the robot need to know?
 2. If you were controlling this robot yourself, would you take the short path near the cliff, or the longer safer path?
+
+
  -->
 
 ---
