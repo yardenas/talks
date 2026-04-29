@@ -8,7 +8,7 @@ fonts:
 <h1>Yarden &lt;&gt; Nicolas</h1>
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">April 15th, 2026</div>
+    <div class="text-sm opacity-50">May 08, 2026</div>
   </div>
 </div>
 
@@ -167,7 +167,9 @@ Initial results
 </div>
 
 </div>
-
+<!--  
+Planner works on MJX, "real" runs on MuJoCo CPU
+-->
 ---
 
 # $\pi$-Expand / Dyna-MPO
@@ -287,7 +289,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
   </div>
 
   <div
-    class="absolute bottom-[3.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
+    class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
   >
     <div class="h-[17.4rem] min-w-0">
       <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
