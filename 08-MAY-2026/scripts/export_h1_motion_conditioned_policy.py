@@ -121,6 +121,7 @@ def build_reference_table(env, arrays: dict[str, np.ndarray], reset_frame: int) 
 def build_motion_conditioned_model(
     *,
     reference_obs: np.ndarray,
+    reset_live_obs: np.ndarray,
     mean: np.ndarray,
     std: np.ndarray,
     params: dict[str, dict[str, np.ndarray]],
@@ -129,7 +130,9 @@ def build_motion_conditioned_model(
     nodes: list[onnx.NodeProto] = []
     initializers: list[onnx.TensorProto] = [
         tensor("reference_obs", np.asarray(reference_obs, np.float32)),
+        tensor("reset_live_obs", np.asarray(reset_live_obs, np.float32)),
         tensor("time_step_shape", np.asarray([1], np.int64)),
+        tensor("zero_time_step", np.asarray([[0]], np.int64)),
         tensor("reference_length", np.asarray([reference_obs.shape[0]], np.int64)),
         tensor("normalizer_mean", np.asarray(mean, np.float32)),
         tensor("normalizer_std", np.asarray(std, np.float32)),
@@ -147,8 +150,10 @@ def build_motion_conditioned_model(
                 ["reference_frame"],
                 fmod=0,
             ),
+            helper.make_node("Equal", ["time_step_i64", "zero_time_step"], ["reset_live_mask"]),
+            helper.make_node("Where", ["reset_live_mask", "reset_live_obs", "live_obs"], ["selected_live_obs"]),
             helper.make_node("Gather", ["reference_obs", "reference_frame"], ["reference_row"], axis=0),
-            helper.make_node("Concat", ["live_obs", "reference_row"], ["obs"], axis=1),
+            helper.make_node("Concat", ["selected_live_obs", "reference_row"], ["obs"], axis=1),
             helper.make_node("Sub", ["obs", "normalizer_mean"], ["obs_centered"]),
             helper.make_node("Div", ["obs_centered", "normalizer_std"], ["normalized_obs"]),
         ]
@@ -260,6 +265,7 @@ def main() -> None:
 
     model = build_motion_conditioned_model(
         reference_obs=reference_obs,
+        reset_live_obs=reset_obs[:, :217],
         mean=np.asarray(normalizer.mean, np.float32),
         std=np.asarray(normalizer.std, np.float32),
         params=params,
@@ -279,13 +285,16 @@ def main() -> None:
     wrapped_session = rt.InferenceSession(str(args.output), providers=["CPUExecutionProvider"])
     wrapped = wrapped_session.run(
         None,
-        {"live_obs": live_obs, "time_step": np.asarray([[0]], dtype=np.float32)},
+        {"live_obs": np.zeros_like(live_obs), "time_step": np.asarray([[0]], dtype=np.float32)},
     )[0]
     np.testing.assert_allclose(wrapped, expected, rtol=1e-5, atol=1e-5)
 
     wrapped_loop = wrapped_session.run(
         None,
-        {"live_obs": live_obs, "time_step": np.asarray([[reference_obs.shape[0]]], dtype=np.float32)},
+        {
+            "live_obs": live_obs,
+            "time_step": np.asarray([[reference_obs.shape[0]]], dtype=np.float32),
+        },
     )[0]
     np.testing.assert_allclose(wrapped_loop, wrapped, rtol=1e-5, atol=1e-5)
 
@@ -301,6 +310,7 @@ def main() -> None:
     print("inputs live_obs [1, 217] time_step [1, 1]")
     print(f"output action [1, {env.action_size}]")
     print(f"reset_frame {reset_frame}")
+    print("reset_live_obs_override true")
     print(f"reset_action_minmax {float(wrapped.min()):.6f} {float(wrapped.max()):.6f}")
 
 

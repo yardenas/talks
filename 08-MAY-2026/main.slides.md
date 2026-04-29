@@ -14,12 +14,6 @@ fonts:
 
 
 ---
-layout: center
----
-
-# Introduction
-
----
 
 # $\pi$-Expand / Dyna-MPO
 MPO
@@ -179,20 +173,24 @@ Initial results
 # $\pi$-Expand / Dyna-MPO
 Next steps
 
-<div class="mt-10 grid grid-cols-[0.9fr_1.1fr] items-start gap-12">
+<div class="mt-10 grid grid-cols-[minmax(0,1fr)_18rem] items-start gap-10">
 
-<ul class="list-disc space-y-8 pl-8 pt-8 text-[1.45rem] leading-tight">
+<ul class="list-disc space-y-2 pl-8 pt-8 text-[1.45rem] leading-tight">
   <li>
     <span class="font-semibold">Harder tasks</span>
   </li>
   <li>
-    <span class="font-semibold">Flow-matching and Best-of-N</span>
+    <span class="font-semibold">New problem setting: co-train from offline data and a simulator</span>
+  </li>
+  <li>
+    <span class="font-semibold">Make it work on flow matching models</span>
   </li>
 </ul>
-
-<div class="h-[14rem] overflow-hidden rounded bg-white">
+<div
+  class="w-[18rem] justify-self-end overflow-hidden rounded-[0.35rem] bg-transparent"
+>
   <img
-    class="h-full w-full object-contain"
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
     src="/deck/ogbench_puzzle_task4_oracle.gif"
     alt="Oracle rollout for OGBench puzzle task 4"
   />
@@ -200,6 +198,9 @@ Next steps
 
 </div>
 
+<!-- 
+I have an implementation of MPO that works with flow matching models, I believe co-training could be an interesting angle.
+ -->
 ---
 
 <section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
@@ -214,15 +215,6 @@ Next steps
       alt="Robot setup with Realsense camera and cube pickup annotation"
     />
   </div>
-  <div
-    class="absolute right-[5.6%] top-[41%] z-[2] h-[27%] w-[24%]"
-  >
-    <img
-      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-      src="/deck/image5.png"
-      alt="Robot camera view of the cube pickup task"
-    />
-  </div>
 </section>
 
 ---
@@ -230,10 +222,10 @@ Next steps
 <section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
   <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Sim-to-real</h1>
 
-  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-[1.45fr_0.9fr] items-start gap-[2.2rem]">
+  <div class="mt-[2.1rem] grid h-[calc(100%-4.4rem)] grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
     <div>
-      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold text-[#5a4a91]">Sim:</strong> x512 environments (MJX)</div>
-      <div class="h-[23.2rem]">
+      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Sim:</strong> x512 environments (MJX)</div>
+      <div class="h-[18.4rem] w-[88%]">
         <img
           class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
           src="/deck/image7.png"
@@ -241,48 +233,16 @@ Next steps
         />
       </div>
     </div>
-    <div class="pt-[4.9rem]">
-      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold text-[#5a4a91]">Real:</strong> x1 robot (!)</div>
-      <div class="h-[13.9rem]">
+    <div>
+      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Real:</strong> x1 robot (!)</div>
+      <div class="w-[58%]">
         <img
-          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+          class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
           src="/deck/image4.png"
           alt="Real robot camera view"
         />
       </div>
     </div>
-  </div>
-</section>
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">H1 MuJoCo in browser</h1>
-
-  <div class="mt-[1.45rem] h-[25.2rem]">
-    <iframe
-      class="block h-full w-full rounded-[0.35rem] border border-slate-200 bg-slate-950 shadow-none"
-      src="/mjswan/index.html?scene=H1%20Mocap%20Tracking&policy=H1%20SAC%20motion-conditioned&panel=0&ref=0"
-      title="H1 MuJoCo simulation running in mjswan"
-      allow="fullscreen; xr-spatial-tracking"
-    ></iframe>
-  </div>
-  <div class="mt-[0.55rem] text-[0.92rem] leading-tight text-slate-500">
-    MuJoCo WASM via mjswan, H1 MJCF assets, SAC policy and reference motion baked into ONNX.
-  </div>
-</section>
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Visualization-first!</h1>
-
-  <div class="absolute left-[28%] top-[22%] h-[64%] w-[46%]">
-    <img
-      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/image14.png"
-      alt="RViz visualization of robot state and camera reconstruction"
-    />
   </div>
 </section>
 
@@ -347,12 +307,62 @@ Next steps
         </p>
       </SlidevVideo>
     </div>
-    <div class="h-[17.4rem] min-w-0">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image12.png"
-        alt="Return over time with cooldown periods"
-      />
+    <div class="flex h-[17.4rem] min-w-0 items-center">
+      <div class="relative mx-auto aspect-[1643/1005] w-full">
+        <img
+          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+          src="/deck/image12.png"
+          alt="Return over time with cooldown periods"
+        />
+        <svg
+          class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+          viewBox="0 0 100 100"
+          fill="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <marker
+              id="cooldown-arrowhead"
+              viewBox="0 0 4.2 4.2"
+              markerWidth="4.2"
+              markerHeight="4.2"
+              refX="3.8"
+              refY="2.1"
+              orient="auto"
+              markerUnits="userSpaceOnUse"
+            >
+              <path
+                d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
+                stroke="#111111"
+                stroke-width="0.65"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </marker>
+          </defs>
+          <path
+            d="M58 53 C48.2 47.8 39.6 39.4 36.4 20.2"
+            stroke="#111111"
+            stroke-width="0.85"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            marker-end="url(#cooldown-arrowhead)"
+          />
+          <path
+            d="M58 53 C69.2 47.2 80.4 37.6 98.4 15.8"
+            stroke="#111111"
+            stroke-width="0.85"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            marker-end="url(#cooldown-arrowhead)"
+          />
+        </svg>
+        <div
+          class="pointer-events-none absolute left-[58%] top-[57.5%] -translate-x-1/2 text-center text-[0.72rem] font-medium leading-[0.92] text-black"
+        >
+          Cooldown<br />breaks🔥
+        </div>
+      </div>
     </div>
   </div>
 </section>

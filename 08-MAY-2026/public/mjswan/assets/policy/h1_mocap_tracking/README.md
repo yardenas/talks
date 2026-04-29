@@ -4,7 +4,7 @@ The SAC checkpoint at `/Users/yardas/safe-learning/ckpt/gytlhnyk_step_latest`
 is exported in two forms:
 
 - `h1_policy.onnx`: original 434D observation policy.
-- `h1_policy_motion_conditioned.onnx`: browser policy with inputs
+- `h1_policy_motion_conditioned.onnx`: browser policy with closed-loop input
   `live_obs [1, 217]` and mjswan's generic `time_step [1, 1]`.
 
 `h1_reset_state.json` is a deterministic `H1MocapTracking.reset(PRNGKey(0))`
@@ -19,6 +19,12 @@ reference row, concatenates it with the browser-computed 217D live observation,
 and runs the SAC MLP. No mjswan `TrackingCommand` or motion `.npz` asset is
 used at runtime.
 
+At `time_step = 0`, the ONNX wrapper substitutes the exact training reset
+live-observation from `h1_reset_state.json`. The training reset has site
+features from the reset data before a MuJoCo forward pass, while the browser
+necessarily forwards the keyframe. After that first inference the policy uses
+the browser-computed `live_obs`, so control remains closed loop.
+
 Regenerate all motion-conditioned artifacts with:
 
 ```bash
@@ -26,6 +32,6 @@ Regenerate all motion-conditioned artifacts with:
 ```
 
 The exporter checks that `time_step = 0` reconstructs the reset-frame reference
-observation, that `time_step = trajectory_length` wraps back to frame 0, and
-that the wrapper action matches `h1_policy.onnx` on the reconstructed 434D reset
-observation.
+observation and reset live-observation, that `time_step = trajectory_length`
+wraps back to frame 0, and that the wrapper action matches `h1_policy.onnx` on
+the reconstructed 434D reset observation.
