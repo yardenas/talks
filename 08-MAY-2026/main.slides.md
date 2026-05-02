@@ -23,6 +23,44 @@ Three pillars of model-based RL
   <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
   <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
   <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
+  <v-switch at="0" class="absolute inset-0">
+    <template #1>
+      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1040 430" fill="none" aria-hidden="true">
+        <defs>
+          <marker
+            id="pillar-arrowhead"
+            viewBox="0 0 10 10"
+            markerWidth="8"
+            markerHeight="8"
+            refX="8.4"
+            refY="5"
+            orient="auto"
+          >
+            <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path
+          d="M255 226C345 150 615 145 760 226"
+          stroke="black"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#pillar-arrowhead)"
+        />
+        <path
+          d="M520 226C590 176 685 176 760 226"
+          stroke="black"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#pillar-arrowhead)"
+        />
+      </svg>
+      <div class="absolute left-[37%] top-[32%] -translate-x-1/2 text-[1.25rem] font-semibold leading-none text-black">
+        <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4831em;"></span><span class="mrel">≈</span></span></span></span> AlphaZero
+      </div>
+    </template>
+  </v-switch>
 </div>
 
 
