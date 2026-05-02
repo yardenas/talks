@@ -394,44 +394,23 @@ I have an implementation of MPO that works with flow matching models, I believe 
   </div>
 </section>
 
+
 ---
 
 <section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Theory</h1>
+  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">SOOPER</h1>
 
-  <div class="mt-[1.7rem] grid h-[calc(100%-5.1rem)] grid-rows-[auto_7.2rem] gap-[1.1rem]">
-    <ul class="m-0 w-[92%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
-      <li>
-        Split episodic regret into a term that relates to performance in the simulated MDP and the performance of an optimal policy on the real MDP under the augmented policy.
-      </li>
-      <li>
-        First term: invoke theory for online learning in non-linear RKHS dynamics due to Kakade 2020.
-      </li>
-      <li>
-        Second term: show that as the model improves, the algorithm need not fall back to the prior policy.
-      </li>
-    </ul>
-    <div class="mx-auto h-full w-[72%] self-end">
-      <img
-        class="block h-full w-full object-contain"
-        src="/deck/image9.png"
-        alt="Regret decomposition formula"
-      />
+  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-2 items-center gap-[2.2rem]">
+    <div class="h-[21.3rem] min-w-0">
+      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+        <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
+        <p>
+          Your browser does not support videos. You may download it
+          <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
+        </p>
+      </SlidevVideo>
     </div>
-  </div>
-</section>
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Key result: SOOPER</h1>
-
-  <div class="mt-[1.7rem] grid h-[calc(100%-5.1rem)] grid-rows-[auto_minmax(0,1fr)] gap-[1.15rem]">
-    <ul class="m-0 w-[88%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
-      <li>First of its kind result for cumulative regret for safe exploration.</li>
-      <li>Works under offline-to-online learning and model mismatch, and scales to vision tasks.</li>
-    </ul>
-    <div class="mx-auto h-full min-h-0 w-[72%]">
+    <div class="h-[21.3rem] min-w-0">
       <img
         class="block h-full w-full object-contain"
         src="/deck/image10.png"
@@ -479,6 +458,33 @@ I have an implementation of MPO that works with flow matching models, I believe 
           alt="MJX rollout animation"
         />
       </div>
+    </div>
+  </div>
+</section>
+
+---
+
+<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
+  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Theory</h1>
+
+  <div class="mt-[1.7rem] grid h-[calc(100%-5.1rem)] grid-rows-[auto_7.2rem] gap-[1.1rem]">
+    <ul class="m-0 w-[92%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
+      <li>
+        Split episodic regret into a term that relates to performance in the simulated MDP and the performance of an optimal policy on the real MDP under the augmented policy.
+      </li>
+      <li>
+        First term: invoke theory for online learning in non-linear RKHS dynamics due to Kakade 2020.
+      </li>
+      <li>
+        Second term: show that as the model improves, the algorithm need not fall back to the prior policy.
+      </li>
+    </ul>
+    <div class="mx-auto h-full w-[72%] self-end">
+      <img
+        class="block h-full w-full object-contain"
+        src="/deck/image9.png"
+        alt="Regret decomposition formula"
+      />
     </div>
   </div>
 </section>
