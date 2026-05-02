@@ -5,11 +5,21 @@ fonts:
   serif: Lusitana
 ---
 
-<h1>Yarden &lt;&gt; Nicolas</h1>
+# Yarden &lt;&gt; Nicolas
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
     <div class="text-sm opacity-50">May 08, 2026</div>
   </div>
+</div>
+
+
+---
+
+# $\pi$-Expansion
+Three pillars of model-based RL
+
+<div class="mt-8 h-[22.5rem]">
+  <img class="block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
 </div>
 
 
@@ -205,286 +215,262 @@ I have an implementation of MPO that works with flow matching models, I believe 
  -->
 ---
 
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Real-world reinforcement learning</h1>
+# Real-world reinforcement learning
 
-  <div
-    class="absolute left-[22%] top-[24%] z-[1] h-[60%] w-[47%]"
-  >
+<div class="mt-[2.3rem] h-[22rem]">
+  <img
+    class="mx-auto block h-full w-[47%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/image11.png"
+    alt="Robot setup with Realsense camera and cube pickup annotation"
+  />
+</div>
+
+---
+
+# Sim-to-real
+
+<div class="mt-[2.1rem] grid grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
+  <div>
+    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Sim:</strong> x512 environments (MJX)</div>
+    <div class="h-[18.4rem] w-[88%]">
+      <img
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+        src="/deck/image7.png"
+        alt="Many simulated robot environments running in parallel"
+      />
+    </div>
+  </div>
+  <div>
+    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Real:</strong> x1 robot (!)</div>
+    <div class="w-[58%]">
+      <img
+        class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+        src="/deck/image4.png"
+        alt="Real robot camera view"
+      />
+    </div>
+  </div>
+</div>
+
+---
+
+# Online learning
+
+<div class="mt-[2.3rem] grid grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
+  <div class="h-[19rem]">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/franka-learning.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="/videos/franka-learning.mp4">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="h-[18.3rem]">
     <img
       class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/image11.png"
-      alt="Robot setup with Realsense camera and cube pickup annotation"
+      src="/deck/image13.png"
+      alt="Online learning success plot comparing retained data and baseline"
     />
   </div>
-</section>
+</div>
 
 ---
 
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Sim-to-real</h1>
+# Unitree Go2
 
-  <div class="mt-[2.1rem] grid h-[calc(100%-4.4rem)] grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
-    <div>
-      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Sim:</strong> x512 environments (MJX)</div>
-      <div class="h-[18.4rem] w-[88%]">
-        <img
-          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-          src="/deck/image7.png"
-          alt="Many simulated robot environments running in parallel"
-        />
-      </div>
-    </div>
-    <div>
-      <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Real:</strong> x1 robot (!)</div>
-      <div class="w-[58%]">
-        <img
-          class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-          src="/deck/image4.png"
-          alt="Real robot camera view"
-        />
-      </div>
-    </div>
+<div
+  class="absolute right-[4.15rem] top-[2.15rem] h-[7.75rem] w-[5.8rem]"
+>
+  <img
+    class="block h-full w-full object-contain"
+    src="/deck/image3.png"
+    alt="Stop robot abuse sign"
+  />
+</div>
+
+<div
+  class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
+>
+  <div class="h-[17.4rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/base-4.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1q2C8FrhnTGLXLsyA6-0JVwe2DRDAb72T/view">here</a>.
+      </p>
+    </SlidevVideo>
   </div>
-</section>
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Online learning</h1>
-
-  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
-    <div class="h-[19rem]">
-      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-        <source src="/videos/franka-learning.mp4" type="video/mp4" />
-        <p>
-          Your browser does not support videos. You may download it
-          <a href="/videos/franka-learning.mp4">here</a>.
-        </p>
-      </SlidevVideo>
-    </div>
-    <div class="h-[18.3rem]">
+  <div class="h-[17.4rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/100K-2.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="flex h-[17.4rem] min-w-0 items-center">
+    <div class="relative mx-auto aspect-[1643/1005] w-full">
       <img
         class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image13.png"
-        alt="Online learning success plot comparing retained data and baseline"
+        src="/deck/image12.png"
+        alt="Return over time with cooldown periods"
       />
+      <svg
+        class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+        viewBox="0 0 100 100"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="cooldown-arrowhead"
+            viewBox="0 0 4.2 4.2"
+            markerWidth="4.2"
+            markerHeight="4.2"
+            refX="3.8"
+            refY="2.1"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path
+              d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
+              stroke="#111111"
+              stroke-width="0.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </marker>
+        </defs>
+        <path
+          d="M58 53 C48.2 47.8 39.6 39.4 36.4 20.2"
+          stroke="#111111"
+          stroke-width="0.85"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#cooldown-arrowhead)"
+        />
+        <path
+          d="M58 53 C69.2 47.2 80.4 37.6 98.4 15.8"
+          stroke="#111111"
+          stroke-width="0.85"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#cooldown-arrowhead)"
+        />
+      </svg>
+      <div
+        class="pointer-events-none absolute left-[58%] top-[57.5%] -translate-x-1/2 text-center text-[0.72rem] font-medium leading-[0.92] text-black"
+      >
+        Cooldown<br />breaks🔥
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 ---
 
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Unitree Go2</h1>
+# SOOPER
 
-  <div
-    class="absolute right-[4.15rem] top-[2.15rem] h-[7.75rem] w-[5.8rem]"
-  >
+<div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
+  <div class="h-[21.3rem] min-w-0">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/image3.png"
-      alt="Stop robot abuse sign"
+      src="/deck/image8.png"
+      alt="SOOPER safe exploration schematic and constraint equation"
     />
   </div>
-
-  <div
-    class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
-  >
-    <div class="h-[17.4rem] min-w-0">
-      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-        <source src="/videos/base-4.mp4" type="video/mp4" />
-        <p>
-          Your browser does not support videos. You may download it
-          <a href="http://drive.google.com/file/d/1q2C8FrhnTGLXLsyA6-0JVwe2DRDAb72T/view">here</a>.
-        </p>
-      </SlidevVideo>
-    </div>
-    <div class="h-[17.4rem] min-w-0">
-      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-        <source src="/videos/100K-2.mp4" type="video/mp4" />
-        <p>
-          Your browser does not support videos. You may download it
-          <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
-        </p>
-      </SlidevVideo>
-    </div>
-    <div class="flex h-[17.4rem] min-w-0 items-center">
-      <div class="relative mx-auto aspect-[1643/1005] w-full">
-        <img
-          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-          src="/deck/image12.png"
-          alt="Return over time with cooldown periods"
-        />
-        <svg
-          class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
-          viewBox="0 0 100 100"
-          fill="none"
-          aria-hidden="true"
-        >
-          <defs>
-            <marker
-              id="cooldown-arrowhead"
-              viewBox="0 0 4.2 4.2"
-              markerWidth="4.2"
-              markerHeight="4.2"
-              refX="3.8"
-              refY="2.1"
-              orient="auto"
-              markerUnits="userSpaceOnUse"
-            >
-              <path
-                d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
-                stroke="#111111"
-                stroke-width="0.65"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </marker>
-          </defs>
-          <path
-            d="M58 53 C48.2 47.8 39.6 39.4 36.4 20.2"
-            stroke="#111111"
-            stroke-width="0.85"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            marker-end="url(#cooldown-arrowhead)"
-          />
-          <path
-            d="M58 53 C69.2 47.2 80.4 37.6 98.4 15.8"
-            stroke="#111111"
-            stroke-width="0.85"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            marker-end="url(#cooldown-arrowhead)"
-          />
-        </svg>
-        <div
-          class="pointer-events-none absolute left-[58%] top-[57.5%] -translate-x-1/2 text-center text-[0.72rem] font-medium leading-[0.92] text-black"
-        >
-          Cooldown<br />breaks🔥
-        </div>
-      </div>
-    </div>
+  <div class="h-[21.3rem]">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1RsE_Z7R1L35YGs6OAk_kLwSXYu-kwE3m/view">here</a>.
+      </p>
+    </SlidevVideo>
   </div>
-</section>
+</div>
 
 ---
 
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">SOOPER</h1>
+# SOOPER
 
-  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
-    <div class="h-[21.3rem] min-w-0">
+<div class="mt-[2.3rem] grid grid-cols-2 items-center gap-[2.2rem]">
+  <div class="h-[21.3rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="h-[21.3rem] min-w-0">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/image10.png"
+      alt="SOOPER key result with performance plots and obstacle avoidance trajectory"
+    />
+  </div>
+</div>
+
+---
+layout: cover
+---
+# Appendix & Misc
+
+---
+
+# Libero -> MJX
+
+<div class="mt-[2.3rem] grid grid-cols-[1.3fr_0.75fr] items-center gap-[2.7rem]">
+  <div class="h-[21rem]">
+    <img
+      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+      src="/deck/image6.png"
+      alt="Throughput chart comparing CPU and MJX environments"
+    />
+  </div>
+  <div class="grid gap-[0.65rem]">
+    <div class="h-[12.1rem]">
       <img
-        class="block h-full w-full object-contain"
-        src="/deck/image8.png"
-        alt="SOOPER safe exploration schematic and constraint equation"
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+        src="/deck/image15.gif"
+        alt="Libero rollout animation"
       />
     </div>
-    <div class="h-[21.3rem]">
-      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-        <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
-        <p>
-          Your browser does not support videos. You may download it
-          <a href="http://drive.google.com/file/d/1RsE_Z7R1L35YGs6OAk_kLwSXYu-kwE3m/view">here</a>.
-        </p>
-      </SlidevVideo>
-    </div>
-  </div>
-</section>
-
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">SOOPER</h1>
-
-  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-2 items-center gap-[2.2rem]">
-    <div class="h-[21.3rem] min-w-0">
-      <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-        <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
-        <p>
-          Your browser does not support videos. You may download it
-          <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
-        </p>
-      </SlidevVideo>
-    </div>
-    <div class="h-[21.3rem] min-w-0">
+    <div class="h-[12.1rem]">
       <img
-        class="block h-full w-full object-contain"
-        src="/deck/image10.png"
-        alt="SOOPER key result with performance plots and obstacle avoidance trajectory"
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+        src="/deck/image16.gif"
+        alt="MJX rollout animation"
       />
     </div>
   </div>
-</section>
+</div>
 
 ---
 
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1
-    class="absolute left-[4.15rem] top-1/2 m-0 -translate-y-1/2 text-[4.2rem] font-medium leading-none tracking-normal"
-  >
-    Appendix &amp; Misc
-  </h1>
-</section>
+# Theory
 
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Libero -&gt; MJX</h1>
-
-  <div class="mt-[2.3rem] grid h-[calc(100%-4.4rem)] grid-cols-[1.3fr_0.75fr] items-center gap-[2.7rem]">
-    <div class="h-[21rem]">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image6.png"
-        alt="Throughput chart comparing CPU and MJX environments"
-      />
-    </div>
-    <div class="grid gap-[0.65rem]">
-      <div class="h-[12.1rem]">
-        <img
-          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-          src="/deck/image15.gif"
-          alt="Libero rollout animation"
-        />
-      </div>
-      <div class="h-[12.1rem]">
-        <img
-          class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-          src="/deck/image16.gif"
-          alt="MJX rollout animation"
-        />
-      </div>
-    </div>
+<div class="mt-[1.7rem] grid grid-rows-[auto_7.2rem] gap-[1.1rem]">
+  <ul class="m-0 w-[92%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
+    <li>
+      Split episodic regret into a term that relates to performance in the simulated MDP and the performance of an optimal policy on the real MDP under the augmented policy.
+    </li>
+    <li>
+      First term: invoke theory for online learning in non-linear RKHS dynamics due to Kakade 2020.
+    </li>
+    <li>
+      Second term: show that as the model improves, the algorithm need not fall back to the prior policy.
+    </li>
+  </ul>
+  <div class="mx-auto h-full w-[72%] self-end">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/image9.png"
+      alt="Regret decomposition formula"
+    />
   </div>
-</section>
-
----
-
-<section class="absolute inset-0 overflow-hidden bg-gradient-to-b from-white to-[#fafcfc] px-[4.15rem] py-[3.35rem] font-serif text-slate-900">
-  <h1 class="m-0 text-[3.15rem] font-medium leading-none tracking-normal">Theory</h1>
-
-  <div class="mt-[1.7rem] grid h-[calc(100%-5.1rem)] grid-rows-[auto_7.2rem] gap-[1.1rem]">
-    <ul class="m-0 w-[92%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
-      <li>
-        Split episodic regret into a term that relates to performance in the simulated MDP and the performance of an optimal policy on the real MDP under the augmented policy.
-      </li>
-      <li>
-        First term: invoke theory for online learning in non-linear RKHS dynamics due to Kakade 2020.
-      </li>
-      <li>
-        Second term: show that as the model improves, the algorithm need not fall back to the prior policy.
-      </li>
-    </ul>
-    <div class="mx-auto h-full w-[72%] self-end">
-      <img
-        class="block h-full w-full object-contain"
-        src="/deck/image9.png"
-        alt="Regret decomposition formula"
-      />
-    </div>
-  </div>
-</section>
+</div>
