@@ -28,136 +28,7 @@ Three pillars of model-based RL
 
 ---
 
-# $\pi$-Expand / Dyna-MPO
-MPO
-
-<div class="mt-10">
-
-<div class="text-center">
-
-
-### “$q(a | s)$ selects soft-optimal action for _one step_ and then commits to $\pi$“
-
-<br>
-</div>
-$$
-\begin{aligned}
-\max_q J(q,\pi)
-&= \max_q T_{\pi,q} Q_{\pi}(s,a) \\
-&= \max_q \mathbb{E}_{\mu(s)}
-\left[
-    \mathbb{E}_{q(\cdot | s)}
-    \left[
-        Q_{\pi}(s,a)
-    \right]
-    - \alpha \mathrm{KL}(q \| \pi)
-\right],
-\\[0.5em]
-\text{with}\quad
-T_{\pi,q}
-&=
-\mathbb{E}_{q(a | s)}
-\left[
-    r(s,a)
-    - \alpha \mathrm{KL}(q \| \pi)
-    + \gamma _{p(s' | s,a)}
-    \left[
-        V_{\pi}(s')
-    \right]
-\right]
-\end{aligned}
-$$
-</div>
-
----
-
-# $\pi$-Expand / Dyna-MPO
-TreePI
-
-<div class="mt-10">
-
-<div class="text-center">
-
-
-### “Tree expansion represents an improved $q(a|s)$ by searching over future actions“
-
-<br>
-</div>
-$$
-\begin{aligned}
-q_{K}^{*}(\cdot | s)
-&=
-\operatorname*{arg\,max}_{q_{1:K}}
-J(q_{K}, \pi)
-\\[0.5em]
-&=
-\operatorname*{arg\,max}_{q_{1:K}}
-\left(
-T_{\pi,q_1}
-T_{\pi,q_2}
-\cdots
-T_{\pi,q_K}
-V_{\pi}
-\right)(s)
-\\[0.5em]
-&=
-\operatorname*{arg\,max}_{q_{1:K}}
-\mathbb{E}_{q_{1:K}}
-\left[
-    \gamma^{K} V_{\pi}(s_{K+1})
-    +
-    \sum_{t=1}^{K}
-    \gamma^{t-1}
-    \left(
-        r_t
-        -
-        \alpha \mathrm{KL}_t
-    \right)
-\right]
-\end{aligned}
-$$
-</div>
-
-
----
-
-# $\pi$-Expand / Dyna-MPO
-
-
-<div class="mt-20">
-
-<div class="text-center">
-
-
-### “Retain the data of your lookahead$^*$ policies“
-
-<br>
-</div>
-$$
-\begin{aligned}
-\pi_{\text{new}}
-&=
-\operatorname*{arg\,max}_{\pi'}
-\mathbb{E}_{s \sim \mu_{\text{expand}}(s)}
-\left[
-    \mathbb{E}_{a \sim q_K^*(\cdot | s)}
-    [\log \pi'(a | s)]
-\right]
-\end{aligned}
-$$
-</div>
-
-<div class="absolute bottom-6 left-10 text-s">
-
-$^*$ MPC is amenable to GPUs (compared to tree expansion) and works surprisingly well on many robotic tasks.
-</div>
-
-<!-- 
-Key intution: find in simulation promising states, and supervise the policy with them before seeing them in the real-world.
- -->
----
-
-# $\pi$-Expand / Dyna-MPO
+# $\pi$-Expansion
 Initial results
 
 
@@ -185,7 +56,7 @@ Planner works on MJX, "real" runs on MuJoCo CPU
 -->
 ---
 
-# $\pi$-Expand / Dyna-MPO
+# $\pi$-Expansion
 Next steps
 
 <div class="mt-10 grid grid-cols-[minmax(0,1fr)_18rem] items-start gap-10">
@@ -425,7 +296,7 @@ layout: cover
 
 ---
 
-# Model-based RL algorithms
+# Taxonomy of MBRL Algorithms
 
 <div class="relative mx-auto mt-1 aspect-[1040/430] w-full max-w-[37rem]">
   <img class="absolute inset-0 block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
