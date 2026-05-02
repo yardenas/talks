@@ -15,7 +15,7 @@ fonts:
 
 ---
 
-# $\pi$-Expansion
+# $\pi^3$
 Three pillars of model-based RL
 
 <div class="relative mx-auto mt-4 aspect-[1040/430] w-full max-w-[60.5rem]">
@@ -66,7 +66,7 @@ Three pillars of model-based RL
 
 ---
 
-# $\pi$-Expansion
+# $\pi^3$
 Initial results
 
 
@@ -76,7 +76,7 @@ Initial results
   <img
     class="w-full h-[24rem] object-contain -translate-y-[5rem]"
     src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif"
-    alt="Pi-expansion trajectory rollout"
+    alt="pi cubed trajectory rollout"
   />
 </div>
 
@@ -84,7 +84,7 @@ Initial results
   <img
     class="w-full h-[24rem] object-contain rounded"
     src="/deck/h1_mpo_vs_pi_expansion.svg"
-    alt="Comparison plot of MPO versus pi-expansion"
+    alt="Comparison plot of MPO versus pi cubed"
   />
 </div>
 
@@ -92,33 +92,58 @@ Initial results
 <!--  
 Planner works on MJX, "real" runs on MuJoCo CPU
 -->
+
+
 ---
 
-# $\pi$-Expansion
-Next steps
+# $\pi^3$
+Initial results
 
-<div class="mt-10 grid grid-cols-[minmax(0,1fr)_18rem] items-start gap-10">
+<div class="mx-auto mt-2">
 
-<ul class="list-disc space-y-2 pl-8 pt-8 text-[1.45rem] leading-tight">
-  <li>
-    <span class="font-semibold">Harder tasks</span>
-  </li>
-  <li>
-    <span class="font-semibold">New problem setting: co-train from offline data and a simulator</span>
-  </li>
-  <li>
-    <span class="font-semibold">Make it work on flow matching models</span>
-  </li>
-</ul>
-<div
-  class="w-[18rem] justify-self-end overflow-hidden rounded-[0.35rem] bg-transparent"
->
+  ## Can scale up training to very complex scenes via MuJoCo Warp
+</div>
+
+<div class="mt-6 grid grid-cols-[0.86fr_1.14fr] items-center gap-0">
+
+<div class="h-[16.2rem] min-w-0 rounded-[0.35rem]">
   <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-    src="/deck/ogbench_puzzle_task4_oracle.gif"
-    alt="Oracle rollout for OGBench puzzle task 4"
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/ogbench_puzzle_parallel_tile.gif"
+    alt="Parallel OGBench puzzle rollouts"
   />
 </div>
+
+<div class="grid gap-3">
+  <img
+    class="block h-[7.65rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_ik_throughput.svg"
+    alt="Puzzle inverse kinematics throughput"
+  />
+  <img
+    class="block h-[7.65rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_mjx_backend_throughput.svg"
+    alt="Puzzle MJX backend throughput"
+  />
+</div>
+
+</div>
+
+---
+
+# $\pi^3$
+Next steps
+
+<div class="mt-10">
+
+<ul class="list-disc space-y-2 pl-8 pt-8 text-[1.55rem] leading-tight">
+  <li>
+    <span class="font-semibold">Co-train from offline data and a simulator</span>
+  </li>
+  <li>
+    <span class="font-semibold">Flow matching models</span>
+  </li>
+</ul>
 
 </div>
 
@@ -347,7 +372,7 @@ layout: cover
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-5 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>TreePI</span>
     <span>TD-MPC<br /><span class="text-[0.72rem]">(online, slow)</span></span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span>-Expansion</span>
+    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-5 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>TreePI<sup>*</sup></span>
@@ -355,12 +380,13 @@ layout: cover
     <span>Dreamer</span>
     <span class="basis-full">Stochastic Value Gradient</span>
     <span>MVE</span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span>-Expansion</span>
+    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-6 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>MBPO</span>
     <span>Dreamer</span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">π</span></span></span></span>-Expansion</span>
+    <span>TreePI<sup>*</sup></span>
+    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
   </div>
 </div>
 
