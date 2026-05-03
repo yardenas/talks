@@ -23,41 +23,13 @@ Three pillars of model-based RL
   <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
   <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
   <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
-  <v-switch at="0" class="absolute inset-0">
+  <v-switch at="1" class="absolute inset-0 overflow-visible">
     <template #1>
-      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1040 430" fill="none" aria-hidden="true">
-        <defs>
-          <marker
-            id="pillar-arrowhead"
-            viewBox="0 0 10 10"
-            markerWidth="8"
-            markerHeight="8"
-            refX="8.4"
-            refY="5"
-            orient="auto"
-          >
-            <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-          </marker>
-        </defs>
-        <path
-          d="M255 226C345 150 615 145 760 226"
-          stroke="black"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          marker-end="url(#pillar-arrowhead)"
-        />
-        <path
-          d="M520 226C590 176 685 176 760 226"
-          stroke="black"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          marker-end="url(#pillar-arrowhead)"
-        />
-      </svg>
-      <div class="absolute left-[37%] top-[32%] -translate-x-1/2 text-[1.25rem] font-semibold leading-none text-black">
-        <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4831em;"></span><span class="mrel">≈</span></span></span></span> AlphaZero
+      <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+        <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
+      </div>
+      <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+        <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
       </div>
     </template>
   </v-switch>
@@ -138,7 +110,7 @@ Next steps
 
 <ul class="list-disc space-y-2 pl-8 pt-8 text-[1.55rem] leading-tight">
   <li>
-    <span class="font-semibold">Augment offline data with simulation</span>
+    <span class="font-semibold">New problem setting: offline + simulation</span>
   </li>
   <li>
     <span class="font-semibold">Flow matching models</span>
@@ -405,16 +377,56 @@ layout: cover
   <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.84rem] font-semibold leading-none text-black">Lookahead policies</div>
   <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.84rem] font-semibold leading-none text-black">Value-expansion</div>
   <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.88rem] font-semibold leading-none text-black">Dyna</div>
+  <v-switch at="0" class="absolute inset-0">
+    <template #1>
+      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1040 430" fill="none" aria-hidden="true">
+        <defs>
+          <marker
+            id="taxonomy-pillar-arrowhead"
+            viewBox="0 0 10 10"
+            markerWidth="8"
+            markerHeight="8"
+            refX="8.4"
+            refY="5"
+            orient="auto"
+          >
+            <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path
+          d="M255 226C345 150 615 145 760 226"
+          stroke="black"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#taxonomy-pillar-arrowhead)"
+        />
+        <path
+          d="M520 226C590 176 685 176 760 226"
+          stroke="black"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#taxonomy-pillar-arrowhead)"
+        />
+      </svg>
+      <div class="absolute left-[37%] top-[32%] -translate-x-1/2 text-[0.82rem] font-semibold leading-none text-black">
+        <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4831em;"></span><span class="mrel">≈</span></span></span></span> AlphaZero
+      </div>
+    </template>
+  </v-switch>
 </div>
 
 <div class="mx-auto mt-3 grid w-[92%] grid-cols-[1fr_1.18fr_1fr] gap-5 text-[0.88rem] leading-none">
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-5 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>TreePI</span>
+    <span>AlphaZero</span>
     <span>TD-MPC<br /><span class="text-[0.72rem]">(online, slow)</span></span>
     <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-5 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>TreePI<sup>*</sup></span>
+    <span>AlphaZero</span>
     <span>TD-MPC</span>
     <span>Dreamer</span>
     <span class="basis-full">Stochastic Value Gradient</span>
@@ -423,6 +435,7 @@ layout: cover
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-6 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>MBPO</span>
+    <span>AlphaZero</span>
     <span>Dreamer</span>
     <span>TreePI<sup>*</sup></span>
     <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
