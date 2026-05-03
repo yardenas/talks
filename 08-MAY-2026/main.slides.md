@@ -101,12 +101,12 @@ Initial results
 
 <div class="mx-auto mt-2">
 
-  ## Can scale up training to very complex scenes via MuJoCo Warp
+  #### $\pi^3$ will leverage massively-parallel simulators, even on complex tasks
 </div>
 
-<div class="mt-6 grid grid-cols-[0.86fr_1.14fr] items-center gap-0">
+<div class="mt-6 grid grid-cols-[1.22fr_0.78fr] items-center gap-0">
 
-<div class="h-[16.2rem] min-w-0 rounded-[0.35rem]">
+<div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
     src="/deck/ogbench_puzzle_parallel_tile.gif"
@@ -116,12 +116,12 @@ Initial results
 
 <div class="grid gap-3">
   <img
-    class="block h-[7.65rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
     src="/deck/puzzle_ik_throughput.svg"
     alt="Puzzle inverse kinematics throughput"
   />
   <img
-    class="block h-[7.65rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
     src="/deck/puzzle_mjx_backend_throughput.svg"
     alt="Puzzle MJX backend throughput"
   />
@@ -138,7 +138,7 @@ Next steps
 
 <ul class="list-disc space-y-2 pl-8 pt-8 text-[1.55rem] leading-tight">
   <li>
-    <span class="font-semibold">Co-train from offline data and a simulator</span>
+    <span class="font-semibold">Augment offline data with simulation</span>
   </li>
   <li>
     <span class="font-semibold">Flow matching models</span>
@@ -150,6 +150,45 @@ Next steps
 <!-- 
 I have an implementation of MPO that works with flow matching models, I believe co-training could be an interesting angle.
  -->
+
+---
+
+# Flow Matching Policy Extraction
+
+<div class="mt-5 flex flex-col items-center">
+
+<div class="h-[7.8rem] w-full text-center text-[1.03rem] leading-tight">
+
+
+<v-switch at="0">
+  <template #1>
+    <div class="mt-4 flex justify-center">
+      <div class="py-3">
+        <KatexBlock expr="\begin{gathered}\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D}}\left[Q_{\phi}(s,a_K)\right]\\[0.4em]\text{s.t.}\;a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau),\quad \tau=\frac{k}{K},\quad k=0,\ldots,K-1,\quad a_0\sim\mathcal{N}(0,I)\end{gathered}" />
+      </div>
+    </div>
+  </template>
+  <template #2>
+    <div class="mt-4 flex justify-center">
+      <div class="py-3">
+        <KatexBlock expr="\begin{gathered}\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,\tau\sim U[0,1]}\left[Q_{\phi}\!\left(s,\operatorname{sg}(a_{\tau}),\operatorname{sg}(\tau),v_{\theta}\!\left(s,\operatorname{sg}(a_{\tau}),\operatorname{sg}(\tau)\right)\right)\right]\\[0.4em]\text{s.t.}\;a_{\tau}=(1-\tau)a_0+\tau a,\quad a_0\sim\mathcal{N}(0,I)\end{gathered}" />
+      </div>
+    </div>
+  </template>
+</v-switch>
+
+</div>
+
+<div class="mt-5 h-[14.5rem] w-[72%] min-w-0">
+  <img
+    class="block h-full w-full rounded-[0.35rem] object-contain"
+    src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
+    alt="Q-guided flow matching rollout"
+  />
+</div>
+
+</div>
+
 ---
 
 # Real-world reinforcement learning
