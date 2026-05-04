@@ -8,7 +8,7 @@ fonts:
 # Yarden &lt;&gt; Nicolas
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">May 08, 2026</div>
+    <div class="text-sm opacity-50">May 07, 2026</div>
   </div>
 </div>
 
