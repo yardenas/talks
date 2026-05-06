@@ -38,7 +38,7 @@ Three pillars of model-based RL
 
 ---
 
-# $\pi^3$
+# $\pi^3$ ~ SVG(1)
 Initial results
 
 
@@ -431,7 +431,7 @@ layout: cover
     <span>TD-MPC</span>
     <span>Dreamer</span>
     <span>SPO</span>
-    <span class="basis-full">Stochastic Value Gradient</span>
+    <span class="basis-full">SVG</span>
     <span>MVE</span>
     <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
   </div>
