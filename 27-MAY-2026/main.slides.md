@@ -139,14 +139,14 @@ I have an implementation of MPO that works with flow matching models, I believe 
   <template #1>
     <div class="mt-4 flex justify-center">
       <div class="py-3">
-        <KatexBlock expr="\begin{gathered}\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D}}\left[Q_{\phi}(s,a_K)\right]\\[0.4em]\text{s.t.}\;a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau),\quad \tau=\frac{k}{K},\quad k=0,\ldots,K-1,\quad a_0\sim\mathcal{N}(0,I)\end{gathered}" />
+        <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.35em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k),\quad \tau_k=\frac{k}{K}\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,a_0\sim\mathcal{N}(0,I)}\left[Q_{\phi}(s,a_K)\right]\end{gathered}" />
       </div>
     </div>
   </template>
   <template #2>
     <div class="mt-4 flex justify-center">
       <div class="py-3">
-        <KatexBlock expr="\begin{gathered}\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,\tau\sim U[0,1]}\left[Q_{\phi}\!\left(s,\operatorname{sg}(a_{\tau}),\operatorname{sg}(\tau),v_{\theta}\!\left(s,\operatorname{sg}(a_{\tau}),\operatorname{sg}(\tau)\right)\right)\right]\\[0.4em]\text{s.t.}\;a_{\tau}=(1-\tau)a_0+\tau a,\quad a_0\sim\mathcal{N}(0,I)\end{gathered}" />
+        <KatexBlock expr="\begin{gathered}a_t=\operatorname{sg}\!\left(\operatorname{ODE}_K(v_\theta,s,x_0,0,t)\right),\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.45em]\hat{a}=a_t+(1-t)v_{\theta}(s,a_t,t)\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,x_0,\,t}\left[Q_{\psi}(s,\hat{a})\right]\end{gathered}" />
       </div>
     </div>
   </template>
