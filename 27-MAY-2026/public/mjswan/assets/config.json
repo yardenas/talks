@@ -1,0 +1,26 @@
+{
+  "version": "0.5.1",
+  "projects": [
+    {
+      "name": "H1 MuJoCo",
+      "id": "mjswan",
+      "scenes": [
+        {
+          "name": "H1 Mocap Tracking",
+          "path": "scene/h1_mocap_tracking/h1.xml",
+          "policies": [
+            {
+              "name": "H1 pose hold",
+              "config": "policy/h1_mocap_tracking/h1_pose_hold.json",
+              "default": true
+            },
+            {
+              "name": "H1 SAC motion-conditioned",
+              "config": "policy/h1_mocap_tracking/h1_policy.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
