@@ -106,7 +106,7 @@ Initial results
 # Odyn
 Harder tasks
 
-<div class="grid min-h-[24rem] grid-cols-[1fr_0.34fr] items-center gap-8">
+<div class="mt--10 grid min-h-[24rem] grid-cols-[1fr_0.34fr] items-center gap-8">
 
   <img
     class="block h-[23rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
