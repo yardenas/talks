@@ -106,16 +106,19 @@ Initial results
 # Odyn
 Harder tasks
 
-<div class="mt-10">
+<div class="grid min-h-[24rem] grid-cols-[1fr_0.34fr] items-center gap-8">
 
-<ul class="list-disc space-y-2 pl-8 pt-8 text-[1.55rem] leading-tight">
-  <li>
-    <span class="font-semibold">New problem setting: offline + simulation</span>
-  </li>
-  <li>
-    <span class="font-semibold">Flow matching models</span>
-  </li>
-</ul>
+  <img
+    class="block h-[23rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_cube_dyna_bon_ablation_eval_success_puzzle_cube.svg"
+    alt="Puzzle cube Dyna best-of-N ablation success rate"
+  />
+
+  <img
+    class="block h-[10.5rem] w-[10.5rem] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/episode_0030_cpu_success.gif"
+    alt="Successful puzzle cube rollout"
+  />
 
 </div>
 
@@ -125,7 +128,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 
-# Flow Matching Policy Extraction
+# VLA Policy Extraction
 
 <div class="mt-5 flex flex-col items-center">
 
