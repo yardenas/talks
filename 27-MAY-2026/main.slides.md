@@ -103,6 +103,19 @@ Initial results
 
 ---
 
+# Puzzle WASM
+MuJoCo + ONNX in the browser
+
+<div class="mt-3 h-[24rem] w-full overflow-hidden rounded-[0.35rem] bg-slate-950">
+  <iframe
+    class="block h-full w-full border-0"
+    src="/mjswan/index.html?autoplay=1&speed=1"
+    title="OGBench puzzle MuJoCo WASM demo"
+  />
+</div>
+
+---
+
 # Odyn
 Harder tasks
 

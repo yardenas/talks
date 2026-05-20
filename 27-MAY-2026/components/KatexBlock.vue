@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import katex from 'katex'
+import 'katex/dist/katex.min.css'
 
 const props = withDefaults(
   defineProps<{
