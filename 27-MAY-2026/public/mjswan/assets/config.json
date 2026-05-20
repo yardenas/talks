@@ -7,9 +7,77 @@
       "metadata": {},
       "scenes": [
         {
+          "name": "Puzzle task1",
+          "metadata": {},
+          "path": "assets/scene/puzzle_task1/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.4,
+            "elevation": -28,
+            "azimuth": 132,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Puzzle task2",
+          "metadata": {},
+          "path": "assets/scene/puzzle_task2/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.4,
+            "elevation": -28,
+            "azimuth": 132,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Puzzle task3",
+          "metadata": {},
+          "path": "assets/scene/puzzle_task3/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.4,
+            "elevation": -28,
+            "azimuth": 132,
+            "enableShadows": true
+          }
+        },
+        {
           "name": "Puzzle task4",
           "metadata": {},
           "path": "assets/scene/puzzle_task4/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.4,
+            "elevation": -28,
+            "azimuth": 132,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Puzzle task5",
+          "metadata": {},
+          "path": "assets/scene/puzzle_task5/model.xml",
           "policies": [],
           "camera": {
             "lookat": [

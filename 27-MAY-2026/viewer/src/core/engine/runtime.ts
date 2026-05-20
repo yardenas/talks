@@ -1558,10 +1558,12 @@ export class mjswanRuntime {
 
   private computeDynamicBodyIds(mjModel: MjModel): Set<number> {
     const dynamic = new Set<number>();
+    const bodyMocapId = (mjModel as MjModel & { body_mocapid?: ArrayLike<number> }).body_mocapid;
     for (let bodyId = 1; bodyId < mjModel.nbody; bodyId++) {
       let current = bodyId;
       while (current > 0) {
-        if (mjModel.body_jntnum[current] > 0) {
+        const isMocapBody = bodyMocapId ? bodyMocapId[current] >= 0 : false;
+        if (mjModel.body_jntnum[current] > 0 || isMocapBody) {
           dynamic.add(bodyId);
           break;
         }

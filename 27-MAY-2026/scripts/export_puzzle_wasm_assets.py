@@ -189,6 +189,13 @@ def main() -> None:
         },
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
+    public_root = args.output_dir.parents[2] if len(args.output_dir.parents) >= 3 else args.output_dir.parent
+    asset_manifest = sorted(
+        path.relative_to(public_root).as_posix()
+        for path in args.output_dir.iterdir()
+        if path.is_file() and path.name != "index.json"
+    )
+    (args.output_dir / "index.json").write_text(json.dumps(asset_manifest, indent=2))
     print(f"saved {xml_path}")
     print(f"saved {mjb_path}")
     print(f"saved {manifest_path}")
