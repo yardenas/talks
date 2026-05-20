@@ -346,7 +346,8 @@ function ControlPanel(props: ControlPanelProps) {
 
       const key = event.key.toLowerCase();
       const isSpace = event.code === 'Space' || key === ' ' || key === 'spacebar';
-      if (key !== 'c' && key !== 'r' && !isSpace) {
+      const isResetKey = key === 'r' || event.code === 'Backspace';
+      if (key !== 'c' && !isResetKey && !isSpace) {
         return;
       }
 
@@ -358,7 +359,7 @@ function ControlPanel(props: ControlPanelProps) {
       event.preventDefault();
       if (key === 'c') {
         onVisibleChange(!visible);
-      } else if (key === 'r') {
+      } else if (isResetKey) {
         handleReset();
       } else if (onPausedChange) {
         onPausedChange(!paused);

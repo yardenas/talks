@@ -635,11 +635,16 @@ export class mjswanRuntime {
               ? manipEnv.stepOracle()
               : await manipEnv.step(this.puzzleController === 'onnx');
             this.applyManipVisuals();
-            this.emitStats(info);
-            if (info.done) {
+            if (info.success) {
+              this.paused = true;
+              this.mjData.xfrc_applied.fill(0.0);
+              this.emitStats(info);
+            } else if (info.done) {
               manipEnv.reset(0);
               this.applyManipVisuals();
               this.emitStats();
+            } else {
+              this.emitStats(info);
             }
           }
         } else {
