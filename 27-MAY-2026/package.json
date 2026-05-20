@@ -6,7 +6,8 @@
     "build": "npm run build:mjswan && slidev build main.slides.md",
     "build:mjswan": "vite build --config viewer/vite.config.ts",
     "dev": "slidev main.slides.md --open",
-    "export": "slidev export main.slides.md"
+    "export": "slidev export main.slides.md",
+    "test:ik": "vite-node scripts/check_ur5e_analytic_ik.ts"
   },
   "dependencies": {
     "@slidev/cli": "^52.11.0",

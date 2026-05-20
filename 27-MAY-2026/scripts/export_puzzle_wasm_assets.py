@@ -18,7 +18,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 DYNA_MPO = Path("/Users/yardas/dyna-mpo")
-DEFAULT_OUTPUT = ROOT / "viewer/public/assets/puzzle_task4"
+DEFAULT_OUTPUT = ROOT / "viewer/public/assets/scene/puzzle_task4"
 DEFAULT_ENV_NAME = "puzzle-3x3-singletask-task4-v0"
 
 
@@ -74,17 +74,36 @@ def main() -> None:
     args = _parse_args()
     sys.path.insert(0, str(args.dyna_mpo))
 
-    from envs.ogbench_puzzle_mjx import OGBenchPuzzle3x3
+    import gymnasium
+    import ogbench  # noqa: F401
 
-    env = OGBenchPuzzle3x3(config_overrides={"env_name": args.env_name})
-    state = env.reset(jax.random.PRNGKey(args.seed))
-    model = env.mj_model
-    data = mujoco.MjData(model)
-    mujoco.mj_resetData(model, data)
-    data.qpos[:] = np.asarray(jax.device_get(state.data.qpos), dtype=np.float64)
-    data.qvel[:] = np.asarray(jax.device_get(state.data.qvel), dtype=np.float64)
-    data.ctrl[:] = np.asarray(jax.device_get(state.data.ctrl), dtype=np.float64)
-    mujoco.mj_forward(model, data)
+    gym_env = gymnasium.make(args.env_name)
+    observation, _ = gym_env.reset(seed=args.seed)
+    env = gym_env.unwrapped
+    model = env._model
+    data = env._data
+
+    arm_joint_ids = np.asarray(env._arm_joint_ids, dtype=np.int32)
+    arm_qposadr = np.asarray([model.jnt_qposadr[joint_id] for joint_id in arm_joint_ids], dtype=np.int32)
+    arm_dofadr = np.asarray([model.jnt_dofadr[joint_id] for joint_id in arm_joint_ids], dtype=np.int32)
+    gripper_opening_qposadr = int(model.jnt_qposadr[env._gripper_opening_joint_id])
+    button_qposadr = np.asarray(
+        [model.jnt_qposadr[model.joint(f"buttonbox_joint_{i}").id] for i in range(env._num_buttons)],
+        dtype=np.int32,
+    )
+    button_dofadr = np.asarray(
+        [model.jnt_dofadr[model.joint(f"buttonbox_joint_{i}").id] for i in range(env._num_buttons)],
+        dtype=np.int32,
+    )
+    toggle_matrix = np.zeros((env._num_buttons, env._num_buttons), dtype=np.int32)
+    for row in range(env._num_rows):
+        for col in range(env._num_cols):
+            pressed = row * env._num_cols + col
+            for drow, dcol in ((0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)):
+                neighbor_row = row + drow
+                neighbor_col = col + dcol
+                if 0 <= neighbor_row < env._num_rows and 0 <= neighbor_col < env._num_cols:
+                    toggle_matrix[pressed, neighbor_row * env._num_cols + neighbor_col] = 1
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     xml_path = args.output_dir / "model.xml"
@@ -98,6 +117,7 @@ def main() -> None:
     manifest = {
         "version": 1,
         "source": str(Path(__file__).resolve()),
+        "source_backend": "ogbench",
         "env_name": args.env_name,
         "seed": args.seed,
         "model": {
@@ -113,23 +133,23 @@ def main() -> None:
             "nlight": int(model.nlight),
         },
         "timing": {
-            "sim_dt": float(env._config.sim_dt),
-            "ctrl_dt": float(env._config.ctrl_dt),
-            "n_substeps": int(round(float(env._config.ctrl_dt) / float(env._config.sim_dt))),
-            "episode_length": int(env._config.episode_length),
+            "sim_dt": float(env._physics_timestep),
+            "ctrl_dt": float(env._control_timestep),
+            "n_substeps": int(env._n_steps),
+            "episode_length": int(gym_env.spec.max_episode_steps or 500),
         },
         "ids": {
-            "arm_joint_ids": _json_array(env._arm_joint_ids),
-            "arm_qposadr": _json_array(env._arm_qposadr),
-            "arm_dofadr": _json_array(env._arm_dofadr),
+            "arm_joint_ids": _json_array(arm_joint_ids),
+            "arm_qposadr": _json_array(arm_qposadr),
+            "arm_dofadr": _json_array(arm_dofadr),
             "arm_actuator_ids": _json_array(env._arm_actuator_ids),
             "gripper_actuator_ids": _json_array(env._gripper_actuator_ids),
-            "gripper_opening_qposadr": int(env._gripper_opening_qposadr),
+            "gripper_opening_qposadr": gripper_opening_qposadr,
             "pinch_site_id": int(env._pinch_site_id),
             "attach_site_id": int(env._attach_site_id),
-            "right_pad_body_id": int(env._right_pad_body_id),
-            "button_qposadr": _json_array(env._button_qposadr),
-            "button_dofadr": _json_array(env._button_dofadr),
+            "right_pad_body_id": int(model.body("ur5e/robotiq/right_pad").id),
+            "button_qposadr": _json_array(button_qposadr),
+            "button_dofadr": _json_array(button_dofadr),
             "button_site_ids": _json_array(env._button_site_ids),
         },
         "names": {
@@ -142,29 +162,30 @@ def main() -> None:
             "camera": _name_list(model, "camera", model.ncam),
         },
         "reset": {
-            "qpos": _json_array(state.data.qpos),
-            "qvel": _json_array(state.data.qvel),
-            "ctrl": _json_array(state.data.ctrl),
-            "button_states": _json_array(state.info["button_states"]),
-            "target_button_states": _json_array(state.info["target_button_states"]),
-            "prev_button_qpos": _json_array(state.info["prev_button_qpos"]),
-            "observation": _json_array(state.obs),
+            "qpos": _json_array(data.qpos),
+            "qvel": _json_array(data.qvel),
+            "ctrl": _json_array(data.ctrl),
+            "button_states": _json_array(env._cur_button_states),
+            "target_button_states": _json_array(env._target_button_states),
+            "prev_button_qpos": _json_array(data.qpos[button_qposadr]),
+            "observation": _json_array(observation),
         },
         "constants": {
-            "action_low": [-0.05, -0.05, -0.05, -0.3, -1.0],
-            "action_high": [0.05, 0.05, 0.05, 0.3, 1.0],
+            "action_low": _json_array(env.action_low),
+            "action_high": _json_array(env.action_high),
             "down_quat": [0.0, 1.0, 0.0, 0.0],
             "xyz_center": [0.425, 0.0, 0.0],
-            "t_pa_pos": _json_array(env._t_pa_pos),
-            "t_pa_quat": _json_array(env._t_pa_quat),
-            "ctrl_low": _json_array(env._ctrl_low),
-            "ctrl_high": _json_array(env._ctrl_high),
-            "toggle_matrix": _json_array(env._toggle_matrix),
-            "observation_size": int(np.asarray(jax.device_get(state.obs)).shape[0]),
-            "action_size": int(env.action_size),
-            "gripper_limit_contact_threshold": float(env._config.gripper_limit_contact_threshold),
-            "gripper_limit_contact_gain": float(env._config.gripper_limit_contact_gain),
-            "gripper_limit_contact_max": float(env._config.gripper_limit_contact_max),
+            "t_pa_pos": _json_array(env._T_pa.translation()),
+            "t_pa_quat": _json_array(env._T_pa.rotation().wxyz),
+            "ctrl_low": _json_array(model.actuator_ctrlrange[:, 0]),
+            "ctrl_high": _json_array(model.actuator_ctrlrange[:, 1]),
+            "arm_sampling_bounds": _json_array(env._arm_sampling_bounds),
+            "toggle_matrix": _json_array(toggle_matrix),
+            "observation_size": int(np.asarray(observation).shape[0]),
+            "action_size": int(env.action_space.shape[0]),
+            "gripper_limit_contact_threshold": 0.7718,
+            "gripper_limit_contact_gain": 32.5,
+            "gripper_limit_contact_max": 0.38,
         },
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))

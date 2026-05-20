@@ -556,7 +556,7 @@ export class mjswanRuntime {
 
       if (this.mjModel && this.mjData) {
         if (this.puzzleEnv) {
-          const info = await this.puzzleEnv.step(true);
+          const info = this.puzzleEnv.stepOracle();
           if (info.done) {
             this.puzzleEnv.reset(0);
           }

@@ -1,7 +1,7 @@
 <mujoco model="button_inner">
   <compiler angle="radian"/>
 
-  <option timestep="0.005" impratio="10" integrator="implicitfast" cone="elliptic" iterations="5" ls_iterations="1"/>
+  <option impratio="10" integrator="implicitfast" cone="elliptic"/>
 
   <visual>
     <global azimuth="180" elevation="-20" offwidth="200" offheight="200"/>
@@ -489,6 +489,6 @@
     <general name="ur5e/wrist_1" class="ur5e/size1" joint="ur5e/wrist_1_joint" gainprm="2000 0 -200" biasprm="0 -2000"/>
     <general name="ur5e/wrist_2" class="ur5e/size1" joint="ur5e/wrist_2_joint" gainprm="2000 0 -200" biasprm="0 -2000"/>
     <general name="ur5e/wrist_3" class="ur5e/size1" joint="ur5e/wrist_3_joint" gainprm="500 0 -50"/>
-    <general name="ur5e/robotiq/fingers_actuator" class="ur5e/robotiq/2f85" tendon="ur5e/robotiq/split" ctrlrange="0 255" forcerange="-12.75 12.75" gainprm="0.313725" biasprm="0 -100 -10"/>
+    <general name="ur5e/robotiq/fingers_actuator" class="ur5e/robotiq/2f85" tendon="ur5e/robotiq/split" ctrlrange="0 255" forcerange="-5 5" gainprm="0.313725" biasprm="0 -100 -10"/>
   </actuator>
 </mujoco>

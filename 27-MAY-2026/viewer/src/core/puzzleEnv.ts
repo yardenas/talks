@@ -1,13 +1,9 @@
 import * as ort from "onnxruntime-web";
 import {
   clamp,
-  mat3ToQuat,
   quatFromZRadians,
-  quatInv,
   quatMul,
   quatRotate,
-  quatToAxisAngle,
-  solveLinearSystem,
   yawFromMat,
 } from "./puzzleMath";
 import { SeededRng } from "./rng";
@@ -17,7 +13,7 @@ export type Manifest = {
   timing: { sim_dt: number; ctrl_dt: number; n_substeps: number; episode_length: number };
   ids: Record<string, number[] | number>;
   reset: Record<string, number[]>;
-  constants: Record<string, number[] | number>;
+  constants: Record<string, number | number[] | number[][]>;
 };
 
 type StepInfo = {
@@ -27,27 +23,170 @@ type StepInfo = {
   step: number;
   policyLoaded: boolean;
   ikNoSolution: boolean;
+  controller: "policy" | "oracle" | "zero";
 };
 
 function vec3(values: ArrayLike<number>, offset: number) {
   return [values[offset], values[offset + 1], values[offset + 2]];
 }
 
-function cross(a: number[], b: number[]) {
-  return [
-    a[1] * b[2] - a[2] * b[1],
-    a[2] * b[0] - a[0] * b[2],
-    a[0] * b[1] - a[1] * b[0],
-  ];
-}
-
 function finite(values: number[]) {
   return values.every(Number.isFinite);
+}
+
+function norm(values: number[]) {
+  return Math.hypot(...values);
+}
+
+function shapeDiff(diff: number[], minNorm = 0.4) {
+  const diffNorm = norm(diff);
+  if (diffNorm >= minNorm) return diff;
+  const scale = minNorm / (diffNorm + 1e-6);
+  return diff.map((value) => value * scale);
+}
+
+function toggleMatrix3x3() {
+  const matrix = Array.from({ length: 9 }, () => Array(9).fill(0));
+  for (let row = 0; row < 3; row += 1) {
+    for (let col = 0; col < 3; col += 1) {
+      const pressed = row * 3 + col;
+      for (const [drow, dcol] of [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const neighborRow = row + drow;
+        const neighborCol = col + dcol;
+        if (neighborRow >= 0 && neighborRow < 3 && neighborCol >= 0 && neighborCol < 3) {
+          matrix[pressed][neighborRow * 3 + neighborCol] = 1;
+        }
+      }
+    }
+  }
+  return matrix;
+}
+
+function solvePuzzle3x3Presses(buttonStates: number[], targetButtonStates: number[]) {
+  const toggle = toggleMatrix3x3();
+  const delta = targetButtonStates.map((target, i) => (target - buttonStates[i] + 2) % 2);
+  let best: number[] | null = null;
+  for (let mask = 0; mask < 1 << 9; mask += 1) {
+    const presses = Array.from({ length: 9 }, (_, idx) => (mask >> idx) & 1);
+    const outcome = Array(9).fill(0);
+    for (let pressed = 0; pressed < 9; pressed += 1) {
+      if (!presses[pressed]) continue;
+      for (let j = 0; j < 9; j += 1) outcome[j] = (outcome[j] + toggle[pressed][j]) % 2;
+    }
+    if (outcome.every((value, i) => value === delta[i])) {
+      const sequence = presses.map((value, idx) => (value ? idx : -1)).filter((idx) => idx >= 0);
+      if (best === null || sequence.length < best.length) best = sequence;
+    }
+  }
+  if (!best) throw new Error("No 3x3 puzzle oracle solution.");
+  return best;
+}
+
+class PuzzleButtonOracle {
+  private targetButton: number | null = null;
+  private targetButtonState: number | null = null;
+  private finalPos = [0.42, 0, 0.24];
+  private finalYaw = 0;
+
+  constructor(
+    private readonly rng: SeededRng,
+    private readonly armSamplingBounds: number[][],
+  ) {}
+
+  reset() {
+    this.targetButton = null;
+    this.targetButtonState = null;
+    this.finalPos = this.sampleFinalPos();
+    this.finalYaw = this.sampleUniform(-Math.PI, Math.PI);
+  }
+
+  selectAction(env: PuzzleEnv) {
+    const { current, target } = env.buttons();
+
+    if (this.targetButton !== null && this.targetButtonState !== null) {
+      if (current[this.targetButton] === this.targetButtonState) {
+        this.targetButton = null;
+        this.targetButtonState = null;
+      }
+    }
+
+    if (this.targetButton === null) {
+      if (current.every((value, i) => value === target[i])) {
+        return new Float32Array(5);
+      }
+      const sequence = solvePuzzle3x3Presses(current, target);
+      this.targetButton = sequence[0];
+      this.targetButtonState = 1 - current[this.targetButton];
+      this.finalPos = this.sampleFinalPos();
+      this.finalYaw = this.sampleUniform(-Math.PI, Math.PI);
+    }
+
+    return Float32Array.from(this.selectButtonAction(env, this.targetButton, this.targetButtonState!));
+  }
+
+  private selectButtonAction(env: PuzzleEnv, targetButton: number, targetState: number) {
+    const info = env.oracleInfo();
+    const effectorPos = info.effectorPos;
+    const effectorYaw = info.effectorYaw;
+    const buttonTop = info.buttonTopPositions[targetButton];
+    const buttonTargetTop = [buttonTop[0], buttonTop[1], buttonTop[2] + 0.06];
+    const buttonTargetBottom = [buttonTop[0], buttonTop[1], buttonTop[2] - 0.022];
+    const buttonState = info.buttonStates[targetButton];
+
+    const aboveThreshold = 0.16;
+    const above = effectorPos[2] > aboveThreshold;
+    const xyAligned = norm([buttonTargetTop[0] - effectorPos[0], buttonTargetTop[1] - effectorPos[1]]) <= 0.04;
+    const targetAchieved = buttonState === targetState;
+    const finalPosAligned = norm(this.finalPos.map((value, i) => value - effectorPos[i])) <= 0.04;
+    const gainPos = 5;
+    const gainYaw = 3;
+    const action = [0, 0, 0, 0, 0];
+
+    if (!targetAchieved) {
+      const target = xyAligned ? buttonTargetBottom : buttonTargetTop;
+      const diff = shapeDiff(target.map((value, i) => value - effectorPos[i]));
+      action[0] = diff[0] * gainPos;
+      action[1] = diff[1] * gainPos;
+      action[2] = diff[2] * gainPos;
+      action[4] = 1;
+    } else if (!above) {
+      const diff = shapeDiff([buttonTargetTop[0], buttonTargetTop[1], aboveThreshold * 2].map((value, i) => value - effectorPos[i]));
+      action[0] = diff[0] * gainPos;
+      action[1] = diff[1] * gainPos;
+      action[2] = diff[2] * gainPos;
+      action[3] = (this.finalYaw - effectorYaw) * gainYaw;
+      action[4] = -1;
+    } else {
+      const diff = shapeDiff(this.finalPos.map((value, i) => value - effectorPos[i]));
+      action[0] = diff[0] * gainPos;
+      action[1] = diff[1] * gainPos;
+      action[2] = diff[2] * gainPos;
+      action[3] = (this.finalYaw - effectorYaw) * gainYaw;
+      action[4] = -1;
+      if (finalPosAligned) {
+        this.targetButton = null;
+        this.targetButtonState = null;
+      }
+    }
+
+    return action.map((value) => clamp(value, -1, 1));
+  }
+
+  private sampleFinalPos() {
+    const lower = this.armSamplingBounds[0] ?? [0.25, -0.35, 0.16];
+    const upper = this.armSamplingBounds[1] ?? [0.6, 0.35, 0.35];
+    return lower.map((lo, i) => this.sampleUniform(lo, upper[i] ?? lo));
+  }
+
+  private sampleUniform(low: number, high: number) {
+    return low + this.rng.uniform() * (high - low);
+  }
 }
 
 export class PuzzleEnv {
   private policy: ort.InferenceSession | null = null;
   private rng = new SeededRng(0);
+  private oracle = new PuzzleButtonOracle(this.rng, [[0.25, -0.35, 0.16], [0.6, 0.35, 0.35]]);
   private noiseDim = 10;
   private stepCount = 0;
   private buttonStates: number[];
@@ -63,6 +202,7 @@ export class PuzzleEnv {
     this.buttonStates = [...manifest.reset.button_states];
     this.targetButtonStates = [...manifest.reset.target_button_states];
     this.prevButtonQpos = [...manifest.reset.prev_button_qpos];
+    this.oracle = new PuzzleButtonOracle(this.rng, this.armSamplingBounds());
     this.reset(0);
   }
 
@@ -89,6 +229,8 @@ export class PuzzleEnv {
     this.copyInto(this.data.ctrl, this.manifest.reset.ctrl);
     this.buttonStates = [...this.manifest.reset.button_states];
     this.prevButtonQpos = [...this.manifest.reset.prev_button_qpos];
+    this.oracle = new PuzzleButtonOracle(this.rng, this.armSamplingBounds());
+    this.oracle.reset();
     this.mujoco.mj_forward(this.model, this.data);
   }
 
@@ -105,6 +247,7 @@ export class PuzzleEnv {
       step: this.stepCount,
       policyLoaded: this.policy !== null,
       ikNoSolution: false,
+      controller: this.policy ? "policy" : "zero",
     };
   }
 
@@ -126,7 +269,11 @@ export class PuzzleEnv {
 
   async step(policyEnabled: boolean) {
     const action = policyEnabled ? await this.policyAction() : new Float32Array(5);
-    return this.stepWithAction(action);
+    return { ...this.stepWithAction(action), controller: policyEnabled && this.policy ? "policy" as const : "zero" as const };
+  }
+
+  stepOracle() {
+    return { ...this.stepWithAction(this.oracle.selectAction(this)), controller: "oracle" as const };
   }
 
   stepWithAction(action: ArrayLike<number>) {
@@ -137,6 +284,7 @@ export class PuzzleEnv {
     for (let i = 0; i < this.manifest.timing.n_substeps; i += 1) {
       this.mujoco.mj_step(this.model, this.data);
     }
+    this.mujoco.mj_rnePostConstraint?.(this.model, this.data);
     this.updateButtonStates(prevButtonStates, prevButtonQpos, this.buttonQpos());
     this.prevButtonQpos = prevButtonQpos;
     this.stepCount += 1;
@@ -178,6 +326,26 @@ export class PuzzleEnv {
       obs.push(this.data.qvel[buttonDof[i]]);
     }
     return obs;
+  }
+
+  oracleInfo() {
+    const ids = this.manifest.ids;
+    const pinchSite = ids.pinch_site_id as number;
+    const buttonSiteIds = ids.button_site_ids as number[];
+    return {
+      buttonStates: [...this.buttonStates],
+      targetButtonStates: [...this.targetButtonStates],
+      effectorPos: vec3(this.data.site_xpos, pinchSite * 3),
+      effectorYaw: yawFromMat(this.data.site_xmat, pinchSite * 9),
+      gripperOpening: clamp(this.data.qpos[ids.gripper_opening_qposadr as number] / 0.8, 0, 1),
+      buttonTopPositions: buttonSiteIds.map((siteId) => vec3(this.data.site_xpos, siteId * 3)),
+    };
+  }
+
+  private armSamplingBounds() {
+    const bounds = this.manifest.constants.arm_sampling_bounds as number[][] | undefined;
+    if (Array.isArray(bounds) && bounds.length === 2) return bounds;
+    return [[0.25, -0.35, 0.16], [0.6, 0.35, 0.35]];
   }
 
   private copyInto(dst: ArrayLike<number>, src: number[]) {
@@ -224,12 +392,19 @@ export class PuzzleEnv {
     const ctrlHigh = this.manifest.constants.ctrl_high as number[];
     const gripperOpening = clamp(this.data.qpos[ids.gripper_opening_qposadr as number] / 0.8, 0, 1);
     const gripperTarget = clamp(gripperOpening + action[4], 0, 1);
+    const nextCtrl = Array.from(this.data.ctrl);
     for (let i = 0; i < armActuators.length; i += 1) {
       const actuator = armActuators[i];
-      this.data.ctrl[actuator] = clamp(qpos[i], ctrlLow[actuator], ctrlHigh[actuator]);
+      nextCtrl[actuator] = clamp(qpos[i], ctrlLow[actuator], ctrlHigh[actuator]);
     }
     for (const actuator of gripperActuators) {
-      this.data.ctrl[actuator] = clamp(255.0 * gripperTarget, ctrlLow[actuator], ctrlHigh[actuator]);
+      nextCtrl[actuator] = clamp(255.0 * gripperTarget, ctrlLow[actuator], ctrlHigh[actuator]);
+    }
+    if (!nextCtrl.every(Number.isFinite)) {
+      return true;
+    }
+    for (let i = 0; i < nextCtrl.length; i += 1) {
+      this.data.ctrl[i] = nextCtrl[i];
     }
     return failed;
   }
@@ -237,42 +412,53 @@ export class PuzzleEnv {
   private solveIk(targetPos: number[], targetQuat: number[]) {
     const ids = this.manifest.ids;
     const armQpos = ids.arm_qposadr as number[];
-    const armJointIds = ids.arm_joint_ids as number[];
+    const armDof = ids.arm_dofadr as number[];
     const attachSite = ids.attach_site_id as number;
     const original = armQpos.map((idx) => this.data.qpos[idx]);
     let q = [...original];
     let failed = !finite(targetPos) || !finite(targetQuat);
-    for (let iter = 0; iter < 12 && !failed; iter += 1) {
+
+    for (let iter = 0; iter < 20 && !failed; iter += 1) {
       for (let i = 0; i < armQpos.length; i += 1) this.data.qpos[armQpos[i]] = q[i];
-      this.mujoco.mj_forward(this.model, this.data);
+      this.mujoco.mj_kinematics(this.model, this.data);
+      this.mujoco.mj_comPos(this.model, this.data);
+
       const currentPos = vec3(this.data.site_xpos, attachSite * 3);
-      const currentQuat = mat3ToQuat(this.data.site_xmat, attachSite * 9);
       const posError = targetPos.map((v, i) => v - currentPos[i]);
-      const quatError = quatMul(targetQuat, quatInv(currentQuat));
-      const rotError = quatToAxisAngle(quatError);
+      const currentQuat = [0, 0, 0, 0];
+      const currentQuatInv = [0, 0, 0, 0];
+      const quatError = [0, 0, 0, 0];
+      const rotError = [0, 0, 0];
+      this.mujoco.mju_mat2Quat(currentQuat, Array.from(this.data.site_xmat.slice(attachSite * 9, attachSite * 9 + 9)));
+      this.mujoco.mju_negQuat(currentQuatInv, currentQuat);
+      this.mujoco.mju_mulQuat(quatError, targetQuat, currentQuatInv);
+      this.mujoco.mju_quat2Vel(rotError, quatError, 1.0);
       const error = [...posError, ...rotError];
+      if (Math.hypot(...posError) <= 1e-4 && Math.hypot(...rotError) <= 1e-4) break;
+
+      const nv = this.model.nv as number;
+      const jacp = new Float64Array(3 * nv);
+      const jacr = new Float64Array(3 * nv);
+      this.mujoco.mj_jacSite(this.model, this.data, jacp, jacr, attachSite);
       const jac = Array.from({ length: 6 }, () => Array(q.length).fill(0));
       for (let j = 0; j < q.length; j += 1) {
-        const jointId = armJointIds[j];
-        const axis = vec3(this.data.xaxis, jointId * 3);
-        const anchor = vec3(this.data.xanchor, jointId * 3);
-        const rel = currentPos.map((v, i) => v - anchor[i]);
-        const jp = cross(axis, rel);
-        jac[0][j] = jp[0];
-        jac[1][j] = jp[1];
-        jac[2][j] = jp[2];
-        jac[3][j] = axis[0];
-        jac[4][j] = axis[1];
-        jac[5][j] = axis[2];
+        const dof = armDof[j];
+        jac[0][j] = jacp[dof];
+        jac[1][j] = jacp[nv + dof];
+        jac[2][j] = jacp[2 * nv + dof];
+        jac[3][j] = jacr[dof];
+        jac[4][j] = jacr[nv + dof];
+        jac[5][j] = jacr[2 * nv + dof];
       }
+
       const h = Array.from({ length: 6 }, (_, r) =>
         Array.from({ length: 6 }, (_, c) => {
-          let sum = r === c ? 1e-8 : 0;
+          let sum = r === c ? 1e-12 : 0;
           for (let j = 0; j < q.length; j += 1) sum += jac[r][j] * jac[c][j];
           return sum;
         }),
       );
-      const solved = solveLinearSystem(h, error);
+      const solved = this.solveLinearSystem(h, error);
       const update = q.map((_, j) => jac.reduce((sum, row, r) => sum + row[j] * solved[r], 0));
       const maxUpdate = Math.max(...update.map(Math.abs));
       const scale = maxUpdate > Math.PI / 4 ? (Math.PI / 4) / maxUpdate : 1.0;
@@ -282,6 +468,26 @@ export class PuzzleEnv {
     for (let i = 0; i < armQpos.length; i += 1) this.data.qpos[armQpos[i]] = original[i];
     this.mujoco.mj_forward(this.model, this.data);
     return { qpos: failed ? original : q, failed };
+  }
+
+  private solveLinearSystem(a: number[][], b: number[]) {
+    const n = b.length;
+    const m = a.map((row, i) => [...row, b[i]]);
+    for (let col = 0; col < n; col += 1) {
+      let pivot = col;
+      for (let row = col + 1; row < n; row += 1) {
+        if (Math.abs(m[row][col]) > Math.abs(m[pivot][col])) pivot = row;
+      }
+      [m[col], m[pivot]] = [m[pivot], m[col]];
+      const denom = Math.abs(m[col][col]) < 1e-12 ? 1e-12 : m[col][col];
+      for (let j = col; j <= n; j += 1) m[col][j] /= denom;
+      for (let row = 0; row < n; row += 1) {
+        if (row === col) continue;
+        const factor = m[row][col];
+        for (let j = col; j <= n; j += 1) m[row][j] -= factor * m[col][j];
+      }
+    }
+    return m.map((row) => row[n]);
   }
 
   private buttonQpos() {
