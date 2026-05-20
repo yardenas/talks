@@ -571,6 +571,7 @@ export async function loadSceneFromURL(
     mesh.castShadow = ignoreDragForce ? false : g !== 0;
     mesh.receiveShadow = type !== mujoco.mjtGeom.mjGEOM_MESH.value;
     mesh.bodyID = b;
+    mesh.userData.geomID = g;
     mesh.userData.ignoreDragForce = ignoreDragForce;
     bodies[b].userData.ignoreDragForce = ignoreDragForce;
     bodies[b].add(mesh);

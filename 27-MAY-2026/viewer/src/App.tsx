@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MantineProvider } from '@mantine/core';
 import MjswanViewer from './components/MjswanViewer';
 import ControlPanel from './ControlPanel';
-import type { mjswanRuntime } from './core/engine/runtime';
+import type { mjswanRuntime, RuntimeStats } from './core/engine/runtime';
 import type { SplatConfig } from './core/scene/splat';
 import { theme } from './AppTheme';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
@@ -307,6 +307,8 @@ function AppContent() {
   const [panelVisible, setPanelVisible] = useState(() =>
     isPanelVisibleFromSearch(window.location.search)
   );
+  const [runtimeInstance, setRuntimeInstance] = useState<mjswanRuntime | null>(null);
+  const [runtimeStats, setRuntimeStats] = useState<RuntimeStats | null>(null);
   const runtimeRef = useRef<mjswanRuntime | null>(null);
   const { showLoading, hideLoading, setLoadingMessage } = useLoading();
 
@@ -452,6 +454,19 @@ function AppContent() {
 
   const handleRuntimeReady = useCallback((runtime: mjswanRuntime) => {
     runtimeRef.current = runtime;
+    setRuntimeInstance(runtime);
+  }, []);
+
+  useEffect(() => {
+    if (!runtimeInstance) {
+      return undefined;
+    }
+    return runtimeInstance.addStatsListener(setRuntimeStats);
+  }, [runtimeInstance]);
+
+  const handlePausedChange = useCallback((paused: boolean) => {
+    runtimeRef.current?.setPaused(paused);
+    setRuntimeStats((stats) => stats ? { ...stats, paused } : stats);
   }, []);
 
   useEffect(() => {
@@ -677,6 +692,10 @@ function AppContent() {
           showReferenceMotion={showReferenceMotion}
           onShowReferenceMotionChange={handleShowReferenceChange}
           commandsEnabled={!!policyConfigPath}
+          paused={runtimeStats?.paused ?? false}
+          onPausedChange={handlePausedChange}
+          accumulatedReward={runtimeStats?.accumulatedReward ?? 0}
+          rewardTrace={runtimeStats?.rewardTrace ?? [0]}
         />
         <MjswanViewer
           scenePath={scenePath}

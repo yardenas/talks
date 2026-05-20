@@ -80,24 +80,6 @@ export function quatFromZRadians(theta: number) {
   return [Math.cos(half), 0, 0, Math.sin(half)];
 }
 
-export function quatToMat(qRaw: number[]) {
-  const [w, x, y, z] = quatNormalize(qRaw);
-  const xx = x * x;
-  const yy = y * y;
-  const zz = z * z;
-  const xy = x * y;
-  const xz = x * z;
-  const yz = y * z;
-  const wx = w * x;
-  const wy = w * y;
-  const wz = w * z;
-  return [
-    [1 - 2 * (yy + zz), 2 * (xy - wz), 2 * (xz + wy)],
-    [2 * (xy + wz), 1 - 2 * (xx + zz), 2 * (yz - wx)],
-    [2 * (xz - wy), 2 * (yz + wx), 1 - 2 * (xx + yy)],
-  ];
-}
-
 export function quatRotate(q: number[], v: number[]) {
   const r = quatMul(quatMul(q, [0, v[0], v[1], v[2]]), quatInv(q));
   return [r[1], r[2], r[3]];
@@ -113,24 +95,4 @@ export function quatToAxisAngle(qRaw: number[]) {
 
 export function clamp(value: number, low: number, high: number) {
   return Math.max(low, Math.min(high, value));
-}
-
-export function solveLinearSystem(a: number[][], b: number[]) {
-  const n = b.length;
-  const m = a.map((row, i) => [...row, b[i]]);
-  for (let col = 0; col < n; col += 1) {
-    let pivot = col;
-    for (let row = col + 1; row < n; row += 1) {
-      if (Math.abs(m[row][col]) > Math.abs(m[pivot][col])) pivot = row;
-    }
-    [m[col], m[pivot]] = [m[pivot], m[col]];
-    const denom = Math.abs(m[col][col]) < 1e-12 ? 1e-12 : m[col][col];
-    for (let j = col; j <= n; j += 1) m[col][j] /= denom;
-    for (let row = 0; row < n; row += 1) {
-      if (row === col) continue;
-      const factor = m[row][col];
-      for (let j = col; j <= n; j += 1) m[row][j] -= factor * m[col][j];
-    }
-  }
-  return m.map((row) => row[n]);
 }

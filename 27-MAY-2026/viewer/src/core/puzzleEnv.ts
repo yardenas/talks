@@ -1,9 +1,12 @@
 import * as ort from "onnxruntime-web";
 import {
   clamp,
+  mat3ToQuat,
   quatFromZRadians,
+  quatInv,
   quatMul,
   quatRotate,
+  quatToAxisAngle,
   yawFromMat,
 } from "./puzzleMath";
 import { SeededRng } from "./rng";
@@ -18,6 +21,8 @@ export type Manifest = {
 
 type StepInfo = {
   reward: number;
+  accumulatedReward: number;
+  rewardTrace: number[];
   success: boolean;
   done: boolean;
   step: number;
@@ -36,6 +41,14 @@ function finite(values: number[]) {
 
 function norm(values: number[]) {
   return Math.hypot(...values);
+}
+
+function cross(a: number[], b: number[]) {
+  return [
+    a[1] * b[2] - a[2] * b[1],
+    a[2] * b[0] - a[0] * b[2],
+    a[0] * b[1] - a[1] * b[0],
+  ];
 }
 
 function shapeDiff(diff: number[], minNorm = 0.4) {
@@ -189,6 +202,8 @@ export class PuzzleEnv {
   private oracle = new PuzzleButtonOracle(this.rng, [[0.25, -0.35, 0.16], [0.6, 0.35, 0.35]]);
   private noiseDim = 10;
   private stepCount = 0;
+  private accumulatedReward = 0;
+  private rewardTrace = [0];
   private buttonStates: number[];
   private prevButtonQpos: number[];
   private readonly targetButtonStates: number[];
@@ -224,6 +239,8 @@ export class PuzzleEnv {
   reset(seed = 0) {
     this.rng = new SeededRng(seed);
     this.stepCount = 0;
+    this.accumulatedReward = 0;
+    this.rewardTrace = [0];
     this.copyInto(this.data.qpos, this.manifest.reset.qpos);
     this.copyInto(this.data.qvel, this.manifest.reset.qvel);
     this.copyInto(this.data.ctrl, this.manifest.reset.ctrl);
@@ -242,6 +259,8 @@ export class PuzzleEnv {
     const success = this.buttonStates.every((value, i) => value === this.targetButtonStates[i]);
     return {
       reward: this.denseReward(),
+      accumulatedReward: this.accumulatedReward,
+      rewardTrace: [...this.rewardTrace],
       success,
       done: success || this.stepCount >= this.manifest.timing.episode_length,
       step: this.stepCount,
@@ -253,6 +272,13 @@ export class PuzzleEnv {
 
   buttons() {
     return { current: [...this.buttonStates], target: [...this.targetButtonStates] };
+  }
+
+  rewardHistory() {
+    return {
+      accumulatedReward: this.accumulatedReward,
+      rewardTrace: [...this.rewardTrace],
+    };
   }
 
   async policyAction() {
@@ -288,7 +314,14 @@ export class PuzzleEnv {
     this.updateButtonStates(prevButtonStates, prevButtonQpos, this.buttonQpos());
     this.prevButtonQpos = prevButtonQpos;
     this.stepCount += 1;
-    return { ...this.info(), ikNoSolution };
+    const reward = this.denseReward();
+    this.accumulatedReward += reward;
+    this.rewardTrace.push(this.accumulatedReward);
+    const maxTraceLength = this.manifest.timing.episode_length + 1;
+    if (this.rewardTrace.length > maxTraceLength) {
+      this.rewardTrace = this.rewardTrace.slice(this.rewardTrace.length - maxTraceLength);
+    }
+    return { ...this.info(), reward, ikNoSolution };
   }
 
   getObservation() {
@@ -412,48 +445,42 @@ export class PuzzleEnv {
   private solveIk(targetPos: number[], targetQuat: number[]) {
     const ids = this.manifest.ids;
     const armQpos = ids.arm_qposadr as number[];
-    const armDof = ids.arm_dofadr as number[];
+    const armJointIds = ids.arm_joint_ids as number[];
     const attachSite = ids.attach_site_id as number;
     const original = armQpos.map((idx) => this.data.qpos[idx]);
     let q = [...original];
     let failed = !finite(targetPos) || !finite(targetQuat);
 
-    for (let iter = 0; iter < 20 && !failed; iter += 1) {
+    for (let iter = 0; iter < 12 && !failed; iter += 1) {
       for (let i = 0; i < armQpos.length; i += 1) this.data.qpos[armQpos[i]] = q[i];
-      this.mujoco.mj_kinematics(this.model, this.data);
-      this.mujoco.mj_comPos(this.model, this.data);
+      this.mujoco.mj_forward(this.model, this.data);
 
       const currentPos = vec3(this.data.site_xpos, attachSite * 3);
       const posError = targetPos.map((v, i) => v - currentPos[i]);
-      const currentQuat = [0, 0, 0, 0];
-      const currentQuatInv = [0, 0, 0, 0];
-      const quatError = [0, 0, 0, 0];
-      const rotError = [0, 0, 0];
-      this.mujoco.mju_mat2Quat(currentQuat, Array.from(this.data.site_xmat.slice(attachSite * 9, attachSite * 9 + 9)));
-      this.mujoco.mju_negQuat(currentQuatInv, currentQuat);
-      this.mujoco.mju_mulQuat(quatError, targetQuat, currentQuatInv);
-      this.mujoco.mju_quat2Vel(rotError, quatError, 1.0);
+      const currentQuat = mat3ToQuat(this.data.site_xmat, attachSite * 9);
+      const quatError = quatMul(targetQuat, quatInv(currentQuat));
+      const rotError = quatToAxisAngle(quatError);
       const error = [...posError, ...rotError];
       if (Math.hypot(...posError) <= 1e-4 && Math.hypot(...rotError) <= 1e-4) break;
 
-      const nv = this.model.nv as number;
-      const jacp = new Float64Array(3 * nv);
-      const jacr = new Float64Array(3 * nv);
-      this.mujoco.mj_jacSite(this.model, this.data, jacp, jacr, attachSite);
       const jac = Array.from({ length: 6 }, () => Array(q.length).fill(0));
       for (let j = 0; j < q.length; j += 1) {
-        const dof = armDof[j];
-        jac[0][j] = jacp[dof];
-        jac[1][j] = jacp[nv + dof];
-        jac[2][j] = jacp[2 * nv + dof];
-        jac[3][j] = jacr[dof];
-        jac[4][j] = jacr[nv + dof];
-        jac[5][j] = jacr[2 * nv + dof];
+        const jointId = armJointIds[j];
+        const axis = vec3(this.data.xaxis, jointId * 3);
+        const anchor = vec3(this.data.xanchor, jointId * 3);
+        const rel = currentPos.map((value, i) => value - anchor[i]);
+        const jp = cross(axis, rel);
+        jac[0][j] = jp[0];
+        jac[1][j] = jp[1];
+        jac[2][j] = jp[2];
+        jac[3][j] = axis[0];
+        jac[4][j] = axis[1];
+        jac[5][j] = axis[2];
       }
 
       const h = Array.from({ length: 6 }, (_, r) =>
         Array.from({ length: 6 }, (_, c) => {
-          let sum = r === c ? 1e-12 : 0;
+          let sum = r === c ? 1e-8 : 0;
           for (let j = 0; j < q.length; j += 1) sum += jac[r][j] * jac[c][j];
           return sum;
         }),

@@ -6,6 +6,7 @@ import {
   Button,
   Checkbox,
   Divider,
+  Group,
   Image,
   Menu,
   Modal,
@@ -16,7 +17,7 @@ import {
   Tooltip,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown, IconRefresh, IconX } from '@tabler/icons-react';
+import { IconChevronDown, IconPlayerPause, IconPlayerPlay, IconRefresh, IconX } from '@tabler/icons-react';
 import type { SplatConfig } from '../core/scene/splat';
 import { MJSWAN_VERSION, GITHUB_CONTRIBUTORS, type Contributor } from '../Version';
 import FloatingPanel from './FloatingPanel';
@@ -68,6 +69,10 @@ interface ControlPanelProps {
   commandsEnabled?: boolean;
   /** Callback when reset button is pressed */
   onReset?: () => void;
+  paused?: boolean;
+  onPausedChange?: (paused: boolean) => void;
+  accumulatedReward?: number;
+  rewardTrace?: number[];
 }
 
 function isEditableElement(element: Element | null): boolean {
@@ -94,6 +99,45 @@ function formatGroupName(groupName: string): string {
     .split('_')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+function RewardSparkline({ values }: { values: number[] }) {
+  const width = 220;
+  const height = 48;
+  const padding = 4;
+  const series = values.length > 0 ? values : [0];
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  const span = Math.max(1e-6, max - min);
+  const points = series
+    .map((value, idx) => {
+      const denom = Math.max(1, series.length - 1);
+      const x = padding + (idx / denom) * (width - padding * 2);
+      const y = height - padding - ((value - min) / span) * (height - padding * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(' ');
+
+  return (
+    <Box
+      component="svg"
+      viewBox={`0 0 ${width} ${height}`}
+      w="100%"
+      h={height}
+      mt={4}
+      style={{ display: 'block' }}
+      aria-label="Accumulated reward"
+    >
+      <polyline
+        points={points}
+        fill="none"
+        stroke="var(--mantine-color-blue-5)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Box>
+  );
 }
 
 /**
@@ -212,6 +256,10 @@ function ControlPanel(props: ControlPanelProps) {
     onShowReferenceMotionChange,
     commandsEnabled = false,
     onReset,
+    paused = false,
+    onPausedChange,
+    accumulatedReward = 0,
+    rewardTrace = [0],
   } = props;
 
   const [aboutModalOpened, { open: openAbout, close: closeAbout }] = useDisclosure(false);
@@ -644,6 +692,44 @@ function ControlPanel(props: ControlPanelProps) {
           {/* Reset Button - always at bottom */}
           <Divider mb="xs" mx="xs" />
           <Box px="xs" pb="xs">
+            {onPausedChange && (
+              <Group grow gap="xs" mb="xs">
+                <Button
+                  variant={!paused ? 'filled' : 'light'}
+                  color="green"
+                  size="xs"
+                  leftSection={<IconPlayerPlay size={14} />}
+                  onClick={() => onPausedChange(false)}
+                >
+                  Play
+                </Button>
+                <Button
+                  variant={paused ? 'filled' : 'light'}
+                  color="gray"
+                  size="xs"
+                  leftSection={<IconPlayerPause size={14} />}
+                  onClick={() => onPausedChange(true)}
+                >
+                  Pause
+                </Button>
+              </Group>
+            )}
+            <Box
+              mb="xs"
+              px="xs"
+              py={6}
+              style={{
+                border: '1px solid var(--mantine-color-default-border)',
+                borderRadius: 4,
+                background: 'var(--mantine-color-body)',
+              }}
+            >
+              <Group justify="space-between" gap="xs">
+                <Text size="xs" c="dimmed">Return</Text>
+                <Text size="xs" fw={600}>{accumulatedReward.toFixed(1)}</Text>
+              </Group>
+              <RewardSparkline values={rewardTrace} />
+            </Box>
             <Button
               variant="light"
               color="red"

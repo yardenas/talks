@@ -87,6 +87,20 @@ type BodyState = {
   quaternion: THREE.Quaternion;
 };
 
+export type RuntimeStats = {
+  paused: boolean;
+  accumulatedReward: number;
+  rewardTrace: number[];
+  reward: number;
+  success: boolean;
+  done: boolean;
+  step: number;
+  controller: 'policy' | 'oracle' | 'zero' | null;
+};
+
+const BUTTON_ZERO_RGBA = [0.96, 0.26, 0.33, 1.0] as const;
+const BUTTON_ONE_RGBA = [0.35, 0.55, 0.91, 1.0] as const;
+
 export class mjswanRuntime {
   private mujoco: MainModule;
   private container: HTMLElement;
@@ -149,6 +163,8 @@ export class mjswanRuntime {
   private colliderMesh: THREE.Group | null;
   private cameraState: ViewerState;
   private puzzleEnv: PuzzleEnv | null;
+  private paused: boolean;
+  private statsListeners: Set<(stats: RuntimeStats) => void>;
 
   constructor(mujoco: MainModule, container: HTMLElement, options: RuntimeOptions = {}) {
     this.mujoco = mujoco;
@@ -253,6 +269,8 @@ export class mjswanRuntime {
     this.colliderMesh = null;
     this.cameraState = { trackBodyId: null, prevBodyPos: null };
     this.puzzleEnv = null;
+    this.paused = false;
+    this.statsListeners = new Set();
 
     // Initialize cache system (singleton shared across runtime instances)
     this.sceneCacheManager = SceneCacheManager.getInstance(this.mujoco);
@@ -339,8 +357,10 @@ export class mjswanRuntime {
 
     this.applyViewerConfig(cameraConfig);
 
+    this.paused = false;
     this.running = true;
     void this.startLoop();
+    this.emitStats();
   }
 
   /**
@@ -372,8 +392,10 @@ export class mjswanRuntime {
   resetSimulation(): void {
     if (this.puzzleEnv) {
       this.puzzleEnv.reset(0);
+      this.applyPuzzleButtonColors();
       this.lastSimState.bodies.clear();
       this.updateCachedState();
+      this.emitStats();
       console.log('[mjswanRuntime] Puzzle environment reset');
       return;
     }
@@ -540,6 +562,34 @@ export class mjswanRuntime {
     }
   }
 
+  setPaused(paused: boolean): void {
+    this.paused = paused;
+    if (paused && this.mjData) {
+      this.mjData.xfrc_applied.fill(0.0);
+    }
+    if (!paused && !this.loopPromise && this.mjModel && this.mjData) {
+      void this.startLoop();
+    }
+    this.emitStats();
+  }
+
+  togglePaused(): boolean {
+    this.setPaused(!this.paused);
+    return this.paused;
+  }
+
+  getPaused(): boolean {
+    return this.paused;
+  }
+
+  addStatsListener(listener: (stats: RuntimeStats) => void): () => void {
+    this.statsListeners.add(listener);
+    listener(this.buildStats());
+    return () => {
+      this.statsListeners.delete(listener);
+    };
+  }
+
   async stop(): Promise<void> {
     this.running = false;
     const pending = this.loopPromise;
@@ -556,14 +606,21 @@ export class mjswanRuntime {
 
       if (this.mjModel && this.mjData) {
         if (this.puzzleEnv) {
-          const info = this.puzzleEnv.stepOracle();
-          if (info.done) {
-            this.puzzleEnv.reset(0);
+          if (!this.paused) {
+            this.applyDragForces();
+            const info = this.puzzleEnv.stepOracle();
+            this.applyPuzzleButtonColors();
+            this.emitStats(info);
+            if (info.done) {
+              this.puzzleEnv.reset(0);
+              this.applyPuzzleButtonColors();
+              this.emitStats();
+            }
           }
         } else {
           this.mujoco.mj_forward(this.mjModel, this.mjData);
         }
-        if (!this.puzzleEnv && this.policyRunner && this.policyStateBuilder) {
+        if (!this.paused && !this.puzzleEnv && this.policyRunner && this.policyStateBuilder) {
           const state = this.policyStateBuilder.build();
           const obs = this.policyRunner.collectObservationsByKey(state);
           await this.runOnnxInference(obs);
@@ -584,13 +641,13 @@ export class mjswanRuntime {
           }
           this.policyDebugCounter += 1;
         }
-        if (!this.puzzleEnv) {
+        if (!this.paused && !this.puzzleEnv) {
           this.executeSimulationSteps();
         }
         this.updateCachedState();
 
         // Evaluate termination conditions after simulation step
-        if (this.terminationManager && this.policyStateBuilder) {
+        if (!this.paused && this.terminationManager && this.policyStateBuilder) {
           const postState = this.policyStateBuilder.build();
           const result = this.terminationManager.evaluate(postState);
           if (result.done) {
@@ -606,7 +663,9 @@ export class mjswanRuntime {
         // Commands are updated after the physics step to match mjlab training-time semantics:
         // the policy sees command values from the previous step, consistent with how mjlab
         // computes observations before stepping the environment.
-        getCommandManager().update(target);
+        if (!this.paused) {
+          getCommandManager().update(target);
+        }
         getCommandManager().updateDebugVisuals();
       }
 
@@ -777,8 +836,10 @@ export class mjswanRuntime {
     this.timestep = this.mjModel.opt.timestep || manifest.timing.sim_dt || 0.001;
     this.decimation = Math.max(1, manifest.timing.n_substeps ?? Math.round(manifest.timing.ctrl_dt / this.timestep));
     this.mujoco.mj_forward(this.mjModel, this.mjData);
+    this.applyPuzzleButtonColors();
     this.lastSimState.bodies.clear();
     this.updateCachedState();
+    this.emitStats();
     console.log('[mjswanRuntime] Puzzle environment loaded', {
       envName: manifest.env_name,
       obsSize: puzzleEnv.getObservation().length,
@@ -1184,6 +1245,84 @@ export class mjswanRuntime {
     } finally {
       this.onnxInferencing = false;
     }
+  }
+
+  private buildStats(info?: Partial<RuntimeStats>): RuntimeStats {
+    const envInfo = this.puzzleEnv?.info();
+    return {
+      paused: this.paused,
+      accumulatedReward: info?.accumulatedReward ?? envInfo?.accumulatedReward ?? 0,
+      rewardTrace: info?.rewardTrace ?? envInfo?.rewardTrace ?? [0],
+      reward: info?.reward ?? envInfo?.reward ?? 0,
+      success: info?.success ?? envInfo?.success ?? false,
+      done: info?.done ?? envInfo?.done ?? false,
+      step: info?.step ?? envInfo?.step ?? 0,
+      controller: info?.controller ?? envInfo?.controller ?? null,
+    };
+  }
+
+  private emitStats(info?: Partial<RuntimeStats>): void {
+    if (this.statsListeners.size === 0) {
+      return;
+    }
+    const stats = this.buildStats(info);
+    for (const listener of this.statsListeners) {
+      listener(stats);
+    }
+  }
+
+  private applyPuzzleButtonColors(): void {
+    if (!this.puzzleEnv || !this.mjModel || !this.mujocoRoot) {
+      return;
+    }
+
+    const { current } = this.puzzleEnv.buttons();
+    const geomColors = new Map<number, readonly [number, number, number, number]>();
+
+    for (let idx = 0; idx < current.length; idx += 1) {
+      let geomId: number | null = null;
+      try {
+        geomId = this.mjModel.geom(`btngeom_${idx}`).id;
+      } catch {
+        geomId = null;
+      }
+      if (geomId === null || geomId < 0) {
+        continue;
+      }
+
+      const color = current[idx] === 1 ? BUTTON_ONE_RGBA : BUTTON_ZERO_RGBA;
+      geomColors.set(geomId, color);
+      for (let channel = 0; channel < 4; channel += 1) {
+        this.mjModel.geom_rgba[geomId * 4 + channel] = color[channel];
+      }
+    }
+
+    if (geomColors.size === 0) {
+      return;
+    }
+
+    this.mujocoRoot.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) {
+        return;
+      }
+      const geomId = object.userData.geomID;
+      if (typeof geomId !== 'number' || !geomColors.has(geomId)) {
+        return;
+      }
+      const color = geomColors.get(geomId)!;
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      for (const material of materials) {
+        const tintable = material as THREE.Material & {
+          color?: THREE.Color;
+          opacity?: number;
+          transparent?: boolean;
+        };
+        tintable.color?.setRGB(color[0], color[1], color[2]);
+        tintable.opacity = color[3];
+        tintable.transparent = color[3] < 1;
+        tintable.needsUpdate = true;
+      }
+    });
   }
 
   private applyDragForces(): void {
