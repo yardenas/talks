@@ -38,6 +38,7 @@ import { EventManager } from '../event/EventManager';
 import { Events } from '../event/events';
 import type { TerrainData } from '../event/EventBase';
 import { type Manifest, PuzzleEnv } from '../puzzleEnv';
+import { type CubeManifest, CubeEnv } from '../cubeEnv';
 
 type RuntimeOptions = {
   baseUrl?: string;
@@ -167,6 +168,7 @@ export class mjswanRuntime {
   private colliderMesh: THREE.Group | null;
   private cameraState: ViewerState;
   private puzzleEnv: PuzzleEnv | null;
+  private cubeEnv: CubeEnv | null;
   private puzzleController: PuzzleController;
   private paused: boolean;
   private statsListeners: Set<(stats: RuntimeStats) => void>;
@@ -274,6 +276,7 @@ export class mjswanRuntime {
     this.colliderMesh = null;
     this.cameraState = { trackBodyId: null, prevBodyPos: null };
     this.puzzleEnv = null;
+    this.cubeEnv = null;
     this.puzzleController = 'oracle';
     this.paused = false;
     this.statsListeners = new Set();
@@ -359,7 +362,10 @@ export class mjswanRuntime {
     }
 
     await this.loadPolicyConfig(policyConfigPath);
+    this.puzzleEnv = null;
+    this.cubeEnv = null;
     await this.loadPuzzleEnvironment(scenePath);
+    await this.loadCubeEnvironment(scenePath);
 
     this.applyViewerConfig(cameraConfig);
 
@@ -396,13 +402,14 @@ export class mjswanRuntime {
    * Can be called from UI components via the CommandManager
    */
   resetSimulation(): void {
-    if (this.puzzleEnv) {
-      this.puzzleEnv.reset(0);
-      this.applyPuzzleButtonColors();
+    const manipEnv = this.puzzleEnv ?? this.cubeEnv;
+    if (manipEnv) {
+      manipEnv.reset(0);
+      this.applyManipVisuals();
       this.lastSimState.bodies.clear();
       this.updateCachedState();
       this.emitStats();
-      console.log('[mjswanRuntime] Puzzle environment reset');
+      console.log('[mjswanRuntime] Manipulation environment reset');
       return;
     }
     this.resetSimulationState();
@@ -620,24 +627,25 @@ export class mjswanRuntime {
       const target = this.timestep * this.decimation;
 
       if (this.mjModel && this.mjData) {
-        if (this.puzzleEnv) {
+        const manipEnv = this.puzzleEnv ?? this.cubeEnv;
+        if (manipEnv) {
           if (!this.paused) {
             this.applyDragForces();
             const info = this.puzzleController === 'oracle'
-              ? this.puzzleEnv.stepOracle()
-              : await this.puzzleEnv.step(this.puzzleController === 'onnx');
-            this.applyPuzzleButtonColors();
+              ? manipEnv.stepOracle()
+              : await manipEnv.step(this.puzzleController === 'onnx');
+            this.applyManipVisuals();
             this.emitStats(info);
             if (info.done) {
-              this.puzzleEnv.reset(0);
-              this.applyPuzzleButtonColors();
+              manipEnv.reset(0);
+              this.applyManipVisuals();
               this.emitStats();
             }
           }
         } else {
           this.mujoco.mj_forward(this.mjModel, this.mjData);
         }
-        if (!this.paused && !this.puzzleEnv && this.policyRunner && this.policyStateBuilder) {
+        if (!this.paused && !manipEnv && this.policyRunner && this.policyStateBuilder) {
           const state = this.policyStateBuilder.build();
           const obs = this.policyRunner.collectObservationsByKey(state);
           await this.runOnnxInference(obs);
@@ -658,7 +666,7 @@ export class mjswanRuntime {
           }
           this.policyDebugCounter += 1;
         }
-        if (!this.paused && !this.puzzleEnv) {
+        if (!this.paused && !manipEnv) {
           this.executeSimulationSteps();
         }
         this.updateCachedState();
@@ -853,13 +861,48 @@ export class mjswanRuntime {
     this.timestep = this.mjModel.opt.timestep || manifest.timing.sim_dt || 0.001;
     this.decimation = Math.max(1, manifest.timing.n_substeps ?? Math.round(manifest.timing.ctrl_dt / this.timestep));
     this.mujoco.mj_forward(this.mjModel, this.mjData);
-    this.applyPuzzleButtonColors();
+    this.applyManipVisuals();
     this.lastSimState.bodies.clear();
     this.updateCachedState();
     this.emitStats();
     console.log('[mjswanRuntime] Puzzle environment loaded', {
       envName: manifest.env_name,
       obsSize: puzzleEnv.getObservation().length,
+      decimation: this.decimation,
+    });
+  }
+
+  private async loadCubeEnvironment(scenePath: string): Promise<void> {
+    this.cubeEnv = null;
+    if (!this.mjModel || !this.mjData || this.puzzleEnv) {
+      return;
+    }
+
+    const sceneDir = scenePath.replace(/\\/g, '/').replace(/\/[^/]*$/, '');
+    const manifestUrl = this.resolveAssetUrl(`${sceneDir}/env_manifest.json`);
+    const response = await fetch(manifestUrl, { cache: 'no-store' });
+    if (!response.ok) {
+      return;
+    }
+
+    const manifest = (await response.json()) as CubeManifest;
+    if (!manifest.env_name?.includes('cube')) {
+      return;
+    }
+
+    const cubeEnv = new CubeEnv(this.mujoco, this.mjModel, this.mjData, manifest);
+    await cubeEnv.loadPolicy(this.resolveAssetUrl(`${sceneDir}/policy.onnx`));
+    this.cubeEnv = cubeEnv;
+    this.timestep = this.mjModel.opt.timestep || manifest.timing.sim_dt || 0.001;
+    this.decimation = Math.max(1, manifest.timing.n_substeps ?? Math.round(manifest.timing.ctrl_dt / this.timestep));
+    this.mujoco.mj_forward(this.mjModel, this.mjData);
+    this.applyManipVisuals();
+    this.lastSimState.bodies.clear();
+    this.updateCachedState();
+    this.emitStats();
+    console.log('[mjswanRuntime] Cube environment loaded', {
+      envName: manifest.env_name,
+      obsSize: cubeEnv.getObservation().length,
       decimation: this.decimation,
     });
   }
@@ -1265,7 +1308,8 @@ export class mjswanRuntime {
   }
 
   private buildStats(info?: Partial<RuntimeStats>): RuntimeStats {
-    const envInfo = this.puzzleEnv?.info();
+    const envInfo = this.puzzleEnv?.info() ?? this.cubeEnv?.info();
+    const hasManipEnv = this.puzzleEnv !== null || this.cubeEnv !== null;
     const selectedPuzzleController = this.puzzleController === 'onnx'
       ? (envInfo?.policyLoaded ? 'policy' : 'zero')
       : this.puzzleController;
@@ -1277,7 +1321,7 @@ export class mjswanRuntime {
       success: info?.success ?? envInfo?.success ?? false,
       done: info?.done ?? envInfo?.done ?? false,
       step: info?.step ?? envInfo?.step ?? 0,
-      controller: info?.controller ?? (this.puzzleEnv ? selectedPuzzleController : envInfo?.controller ?? null),
+      controller: info?.controller ?? (hasManipEnv ? selectedPuzzleController : envInfo?.controller ?? null),
       puzzleController: this.puzzleController,
       policyLoaded: info?.policyLoaded ?? envInfo?.policyLoaded ?? false,
     };
@@ -1290,6 +1334,15 @@ export class mjswanRuntime {
     const stats = this.buildStats(info);
     for (const listener of this.statsListeners) {
       listener(stats);
+    }
+  }
+
+  private applyManipVisuals(): void {
+    if (this.puzzleEnv) {
+      this.applyPuzzleButtonColors();
+    }
+    if (this.cubeEnv) {
+      this.applyCubeColors();
     }
   }
 
@@ -1313,6 +1366,50 @@ export class mjswanRuntime {
       }
 
       const color = current[idx] === 1 ? BUTTON_ONE_RGBA : BUTTON_ZERO_RGBA;
+      geomColors.set(geomId, color);
+      for (let channel = 0; channel < 4; channel += 1) {
+        this.mjModel.geom_rgba[geomId * 4 + channel] = color[channel];
+      }
+    }
+
+    if (geomColors.size === 0) {
+      return;
+    }
+
+    this.mujocoRoot.traverse((object) => {
+      if (!(object instanceof THREE.Mesh)) {
+        return;
+      }
+      const geomId = object.userData.geomID;
+      if (typeof geomId !== 'number' || !geomColors.has(geomId)) {
+        return;
+      }
+      const color = geomColors.get(geomId)!;
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      for (const material of materials) {
+        const tintable = material as THREE.Material & {
+          color?: THREE.Color;
+          opacity?: number;
+          transparent?: boolean;
+        };
+        tintable.color?.setRGB(color[0], color[1], color[2]);
+        tintable.opacity = color[3];
+        tintable.transparent = color[3] < 1;
+        tintable.needsUpdate = true;
+      }
+    });
+  }
+
+  private applyCubeColors(): void {
+    if (!this.cubeEnv || !this.mjModel || !this.mujocoRoot) {
+      return;
+    }
+
+    const geomColors = new Map<number, readonly [number, number, number, number]>();
+    for (const { geomId, color } of this.cubeEnv.visualGeomColors()) {
+      if (geomId < 0) {
+        continue;
+      }
       geomColors.set(geomId, color);
       for (let channel = 0; channel < 4; channel += 1) {
         this.mjModel.geom_rgba[geomId * 4 + channel] = color[channel];
