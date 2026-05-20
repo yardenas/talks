@@ -71,7 +71,7 @@ interface ControlPanelProps {
   onReset?: () => void;
   paused?: boolean;
   onPausedChange?: (paused: boolean) => void;
-  accumulatedReward?: number;
+  rewardValue?: number;
   rewardTrace?: number[];
 }
 
@@ -126,7 +126,7 @@ function RewardSparkline({ values }: { values: number[] }) {
       h={height}
       mt={4}
       style={{ display: 'block' }}
-      aria-label="Accumulated reward"
+      aria-label="Running reward"
     >
       <polyline
         points={points}
@@ -258,7 +258,7 @@ function ControlPanel(props: ControlPanelProps) {
     onReset,
     paused = false,
     onPausedChange,
-    accumulatedReward = 0,
+    rewardValue = 0,
     rewardTrace = [0],
   } = props;
 
@@ -338,7 +338,8 @@ function ControlPanel(props: ControlPanelProps) {
       }
 
       const key = event.key.toLowerCase();
-      if (key !== 'c' && key !== 'r') {
+      const isSpace = event.code === 'Space' || key === ' ' || key === 'spacebar';
+      if (key !== 'c' && key !== 'r' && !isSpace) {
         return;
       }
 
@@ -350,8 +351,10 @@ function ControlPanel(props: ControlPanelProps) {
       event.preventDefault();
       if (key === 'c') {
         onVisibleChange(!visible);
-      } else {
+      } else if (key === 'r') {
         handleReset();
+      } else if (onPausedChange) {
+        onPausedChange(!paused);
       }
     };
 
@@ -359,7 +362,7 @@ function ControlPanel(props: ControlPanelProps) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [visible, onVisibleChange, handleReset]);
+  }, [visible, paused, onVisibleChange, onPausedChange, handleReset]);
 
   const getValueCommandsForGroup = (groupName: string): CommandDefinition[] => {
     return commands.filter(
@@ -721,12 +724,12 @@ function ControlPanel(props: ControlPanelProps) {
               style={{
                 border: '1px solid var(--mantine-color-default-border)',
                 borderRadius: 4,
-                background: 'var(--mantine-color-body)',
+                background: 'transparent',
               }}
             >
               <Group justify="space-between" gap="xs">
-                <Text size="xs" c="dimmed">Return</Text>
-                <Text size="xs" fw={600}>{accumulatedReward.toFixed(1)}</Text>
+                <Text size="xs" c="dimmed">Reward</Text>
+                <Text size="xs" fw={600}>{rewardValue.toFixed(1)}</Text>
               </Group>
               <RewardSparkline values={rewardTrace} />
             </Box>

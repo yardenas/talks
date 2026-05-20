@@ -263,8 +263,9 @@ export default function FloatingPanel({
     >
       <Paper
         radius="xs"
-        shadow="0.1em 0 1em 0 rgba(0,0,0,0.1)"
+        shadow="none"
         style={{
+          background: 'transparent',
           boxSizing: 'border-box',
           width: width,
           zIndex: 10,

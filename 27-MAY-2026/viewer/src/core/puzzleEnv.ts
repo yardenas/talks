@@ -203,7 +203,7 @@ export class PuzzleEnv {
   private noiseDim = 10;
   private stepCount = 0;
   private accumulatedReward = 0;
-  private rewardTrace = [0];
+  private rewardTrace: number[] = [];
   private buttonStates: number[];
   private prevButtonQpos: number[];
   private readonly targetButtonStates: number[];
@@ -240,7 +240,7 @@ export class PuzzleEnv {
     this.rng = new SeededRng(seed);
     this.stepCount = 0;
     this.accumulatedReward = 0;
-    this.rewardTrace = [0];
+    this.rewardTrace = [];
     this.copyInto(this.data.qpos, this.manifest.reset.qpos);
     this.copyInto(this.data.qvel, this.manifest.reset.qvel);
     this.copyInto(this.data.ctrl, this.manifest.reset.ctrl);
@@ -316,8 +316,8 @@ export class PuzzleEnv {
     this.stepCount += 1;
     const reward = this.denseReward();
     this.accumulatedReward += reward;
-    this.rewardTrace.push(this.accumulatedReward);
-    const maxTraceLength = this.manifest.timing.episode_length + 1;
+    this.rewardTrace.push(reward);
+    const maxTraceLength = this.manifest.timing.episode_length;
     if (this.rewardTrace.length > maxTraceLength) {
       this.rewardTrace = this.rewardTrace.slice(this.rewardTrace.length - maxTraceLength);
     }

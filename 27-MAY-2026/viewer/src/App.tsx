@@ -694,7 +694,7 @@ function AppContent() {
           commandsEnabled={!!policyConfigPath}
           paused={runtimeStats?.paused ?? false}
           onPausedChange={handlePausedChange}
-          accumulatedReward={runtimeStats?.accumulatedReward ?? 0}
+          rewardValue={runtimeStats?.reward ?? 0}
           rewardTrace={runtimeStats?.rewardTrace ?? [0]}
         />
         <MjswanViewer
