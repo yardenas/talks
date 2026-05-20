@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { MantineProvider } from '@mantine/core';
 import MjswanViewer from './components/MjswanViewer';
 import ControlPanel from './ControlPanel';
-import type { mjswanRuntime, RuntimeStats } from './core/engine/runtime';
+import type { mjswanRuntime, PuzzleController, RuntimeStats } from './core/engine/runtime';
 import type { SplatConfig } from './core/scene/splat';
 import { theme } from './AppTheme';
 import { LoadingProvider, useLoading } from './contexts/LoadingContext';
@@ -469,6 +469,11 @@ function AppContent() {
     setRuntimeStats((stats) => stats ? { ...stats, paused } : stats);
   }, []);
 
+  const handlePuzzleControllerChange = useCallback((controller: PuzzleController) => {
+    runtimeRef.current?.setPuzzleController(controller);
+    setRuntimeStats((stats) => stats ? { ...stats, puzzleController: controller } : stats);
+  }, []);
+
   useEffect(() => {
     setSelectedMotion(pickMotion(selectedPolicyConfig, null));
     setShowReferenceMotion(Boolean(selectedPolicyConfig?.motions?.length));
@@ -694,6 +699,9 @@ function AppContent() {
           commandsEnabled={!!policyConfigPath}
           paused={runtimeStats?.paused ?? false}
           onPausedChange={handlePausedChange}
+          puzzleController={runtimeStats?.puzzleController ?? 'oracle'}
+          onPuzzleControllerChange={handlePuzzleControllerChange}
+          puzzlePolicyLoaded={runtimeStats?.policyLoaded ?? false}
           rewardValue={runtimeStats?.reward ?? 0}
           rewardTrace={runtimeStats?.rewardTrace ?? [0]}
         />

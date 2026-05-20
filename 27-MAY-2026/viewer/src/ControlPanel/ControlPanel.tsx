@@ -24,6 +24,7 @@ import FloatingPanel from './FloatingPanel';
 import { LabeledInput } from './LabeledInput';
 import { CommandSection } from './CommandSection';
 import { SplatSection } from './SplatSection';
+import type { PuzzleController } from '../core/engine/runtime';
 import {
   getCommandInputId,
   getCommandManager,
@@ -71,6 +72,9 @@ interface ControlPanelProps {
   onReset?: () => void;
   paused?: boolean;
   onPausedChange?: (paused: boolean) => void;
+  puzzleController?: PuzzleController;
+  onPuzzleControllerChange?: (controller: PuzzleController) => void;
+  puzzlePolicyLoaded?: boolean;
   rewardValue?: number;
   rewardTrace?: number[];
 }
@@ -258,6 +262,9 @@ function ControlPanel(props: ControlPanelProps) {
     onReset,
     paused = false,
     onPausedChange,
+    puzzleController = 'oracle',
+    onPuzzleControllerChange,
+    puzzlePolicyLoaded = false,
     rewardValue = 0,
     rewardTrace = [0],
   } = props;
@@ -695,6 +702,32 @@ function ControlPanel(props: ControlPanelProps) {
           {/* Reset Button - always at bottom */}
           <Divider mb="xs" mx="xs" />
           <Box px="xs" pb="xs">
+            {onPuzzleControllerChange && (
+              <LabeledInput id="puzzle-controller-select" label="Control">
+                <Select
+                  id="puzzle-controller-select"
+                  placeholder="Select controller"
+                  data={[
+                    { value: 'oracle', label: 'Oracle' },
+                    { value: 'onnx', label: puzzlePolicyLoaded ? 'ONNX' : 'ONNX (missing)' },
+                    { value: 'zero', label: 'Zero' },
+                  ]}
+                  value={puzzleController}
+                  onChange={(value) => {
+                    if (value === 'oracle' || value === 'onnx' || value === 'zero') {
+                      onPuzzleControllerChange(value);
+                    }
+                  }}
+                  size="xs"
+                  radius="xs"
+                  clearable={false}
+                  styles={{
+                    input: { minHeight: '1.625rem', height: '1.625rem', padding: '0.5em' },
+                  }}
+                  comboboxProps={{ zIndex: 1000 }}
+                />
+              </LabeledInput>
+            )}
             {onPausedChange && (
               <Group grow gap="xs" mb="xs">
                 <Button

@@ -87,6 +87,8 @@ type BodyState = {
   quaternion: THREE.Quaternion;
 };
 
+export type PuzzleController = 'oracle' | 'onnx' | 'zero';
+
 export type RuntimeStats = {
   paused: boolean;
   accumulatedReward: number;
@@ -96,6 +98,8 @@ export type RuntimeStats = {
   done: boolean;
   step: number;
   controller: 'policy' | 'oracle' | 'zero' | null;
+  puzzleController: PuzzleController;
+  policyLoaded: boolean;
 };
 
 const BUTTON_ZERO_RGBA = [0.96, 0.26, 0.33, 1.0] as const;
@@ -163,6 +167,7 @@ export class mjswanRuntime {
   private colliderMesh: THREE.Group | null;
   private cameraState: ViewerState;
   private puzzleEnv: PuzzleEnv | null;
+  private puzzleController: PuzzleController;
   private paused: boolean;
   private statsListeners: Set<(stats: RuntimeStats) => void>;
 
@@ -269,6 +274,7 @@ export class mjswanRuntime {
     this.colliderMesh = null;
     this.cameraState = { trackBodyId: null, prevBodyPos: null };
     this.puzzleEnv = null;
+    this.puzzleController = 'oracle';
     this.paused = false;
     this.statsListeners = new Set();
 
@@ -582,6 +588,15 @@ export class mjswanRuntime {
     return this.paused;
   }
 
+  setPuzzleController(controller: PuzzleController): void {
+    this.puzzleController = controller;
+    this.emitStats();
+  }
+
+  getPuzzleController(): PuzzleController {
+    return this.puzzleController;
+  }
+
   addStatsListener(listener: (stats: RuntimeStats) => void): () => void {
     this.statsListeners.add(listener);
     listener(this.buildStats());
@@ -608,7 +623,9 @@ export class mjswanRuntime {
         if (this.puzzleEnv) {
           if (!this.paused) {
             this.applyDragForces();
-            const info = this.puzzleEnv.stepOracle();
+            const info = this.puzzleController === 'oracle'
+              ? this.puzzleEnv.stepOracle()
+              : await this.puzzleEnv.step(this.puzzleController === 'onnx');
             this.applyPuzzleButtonColors();
             this.emitStats(info);
             if (info.done) {
@@ -1249,6 +1266,9 @@ export class mjswanRuntime {
 
   private buildStats(info?: Partial<RuntimeStats>): RuntimeStats {
     const envInfo = this.puzzleEnv?.info();
+    const selectedPuzzleController = this.puzzleController === 'onnx'
+      ? (envInfo?.policyLoaded ? 'policy' : 'zero')
+      : this.puzzleController;
     return {
       paused: this.paused,
       accumulatedReward: info?.accumulatedReward ?? envInfo?.accumulatedReward ?? 0,
@@ -1257,7 +1277,9 @@ export class mjswanRuntime {
       success: info?.success ?? envInfo?.success ?? false,
       done: info?.done ?? envInfo?.done ?? false,
       step: info?.step ?? envInfo?.step ?? 0,
-      controller: info?.controller ?? envInfo?.controller ?? null,
+      controller: info?.controller ?? (this.puzzleEnv ? selectedPuzzleController : envInfo?.controller ?? null),
+      puzzleController: this.puzzleController,
+      policyLoaded: info?.policyLoaded ?? envInfo?.policyLoaded ?? false,
     };
   }
 
