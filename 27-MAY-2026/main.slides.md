@@ -238,7 +238,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 <div class="mt-5 flex flex-col items-center">
 
-<div class="h-[7.8rem] w-full text-center text-[1.03rem] leading-tight">
+<div class="h-[10.2rem] w-full text-center text-[1.03rem] leading-tight">
 
 
 <v-switch at="0">
@@ -250,9 +250,14 @@ I have an implementation of MPO that works with flow matching models, I believe 
     </div>
   </template>
   <template #2>
-    <div class="mt-4 flex justify-center">
-      <div class="py-3">
-        <KatexBlock expr="\begin{gathered}a_t=\operatorname{sg}\!\left(\operatorname{ODE}_K(v_\theta,s,x_0,0,t)\right),\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.45em]\hat{a}=a_t+(1-t)v_{\theta}(s,a_t,t)\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,x_0,\,t}\left[Q_{\psi}(s,\hat{a})\right]\end{gathered}" />
+    <div class="mt-1 grid w-full grid-cols-[0.98fr_1.02fr] items-start gap-2 text-[0.73rem] leading-tight">
+      <div class="py-2">
+        <div class="mb-1 text-[0.62rem] font-semibold uppercase tracking-[0.08em] opacity-65">BC flow matching</div>
+        <KatexBlock expr="\begin{gathered}(s,a_1)\sim\mathcal{D},\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.35em]a_t=(1-t)x_0+t a_1,\quad u_t=a_1-x_0\quad\Longleftrightarrow\quad a_1=a_t+(1-t)u_t\\[0.45em]\min_{\theta}\;\mathbb{E}\left[\left\|v_{\theta}(s,a_t,t)-u_t\right\|_2^2\right]\end{gathered}" />
+      </div>
+      <div class="py-2">
+        <div class="mb-1 text-[0.62rem] font-semibold uppercase tracking-[0.08em] opacity-65">GradFlow</div>
+        <KatexBlock expr="\begin{gathered}a_t=\operatorname{sg}\!\left(\operatorname{ODE}_K(v_\theta,s,x_0,0,t)\right),\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.45em]\hat{a}=a_t+(1-t)v_{\theta}(s,a_t,t)\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,x_0,\,t}\left[Q_{\phi}(s,\hat{a})\right]\end{gathered}" />
       </div>
     </div>
   </template>
@@ -260,7 +265,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 </div>
 
-<div class="mt-5 h-[14.5rem] w-[72%] min-w-0">
+<div class="mt-4 h-[12.4rem] w-[72%] min-w-0">
   <img
     class="block h-full w-full rounded-[0.35rem] object-contain"
     src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
@@ -532,7 +537,7 @@ layout: cover
     <span>AlphaZero</span>
     <span>SPO</span>
     <span>TD-MPC<br /><span class="text-[0.72rem]">(online, slow)</span></span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
+    <span>Odyn</span>
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-5 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>TreePI<sup>*</sup></span>
@@ -542,7 +547,7 @@ layout: cover
     <span>SPO</span>
     <span class="basis-full">SVG</span>
     <span>MVE</span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
+    <span>Odyn</span>
   </div>
   <div class="flex h-[8.1rem] flex-wrap content-center justify-center gap-x-6 gap-y-3 rounded-[0.35rem] border-[2px] border-black px-5 py-3 text-center">
     <span>MBPO</span>
@@ -550,7 +555,7 @@ layout: cover
     <span>Dreamer</span>
     <span>SPO</span>
     <span>TreePI<sup>*</sup></span>
-    <span><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span>
+    <span>Odyn</span>
   </div>
 </div>
 
