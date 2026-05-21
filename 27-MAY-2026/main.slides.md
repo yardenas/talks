@@ -15,6 +15,58 @@ fonts:
 
 ---
 
+# About
+
+<div class="mt-6 grid grid-cols-[1.05fr_0.95fr] items-start gap-8">
+
+<div class="space-y-5 text-[1.18rem] leading-snug">
+  <div>
+    PhD student @ <a href="https://ai.ethz.ch/" target="_blank">ETH AI Center</a>
+    &amp; <a href="https://las.inf.ethz.ch/" target="_blank">Learning &amp; Adaptive Systems</a>.
+  </div>
+
+  <div>
+    Working on reinforcement learning for systems that need to adapt after deployment.
+  </div>
+
+  <div>
+    I care about making robot learning less of a lab ritual and more of a thing that survives contact with the world.
+  </div>
+
+  <div class="text-[0.98rem] opacity-55">
+    King Gizzard and the Lizard Wizard Fan
+  </div>
+</div>
+
+<div class="mt-1 rounded-[0.35rem] border border-black/10 px-6 py-5">
+  <div class="text-[0.82rem] uppercase tracking-[0.12em] opacity-45">Research arc</div>
+  <div class="mt-5 space-y-4 text-[1.05rem] leading-tight">
+    <div class="flex items-center gap-3">
+      <div class="h-2.5 w-2.5 rounded-full bg-[#5f4b9b]"></div>
+      <div>safe reinforcement learning</div>
+    </div>
+    <div class="ml-[0.3rem] h-7 border-l border-black/20"></div>
+    <div class="flex items-center gap-3">
+      <div class="h-2.5 w-2.5 rounded-full bg-[#22709d]"></div>
+      <div>offline-to-online adaptation</div>
+    </div>
+    <div class="ml-[0.3rem] h-7 border-l border-black/20"></div>
+    <div class="flex items-center gap-3">
+      <div class="h-2.5 w-2.5 rounded-full bg-[#0e8b62]"></div>
+      <div>real-world robot learning</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="abs-bl mx-14 my-10 text-sm opacity-50">
+  <a href="https://yas.pub/" target="_blank">yas.pub</a>
+</div>
+
+
+---
+
 # Odyn: Offline-to-online Dyna
 Three pillars of model-based RL
 
