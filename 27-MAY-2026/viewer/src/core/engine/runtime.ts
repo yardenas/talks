@@ -105,6 +105,7 @@ export type RuntimeStats = {
 
 const BUTTON_ZERO_RGBA = [0.96, 0.26, 0.33, 1.0] as const;
 const BUTTON_ONE_RGBA = [0.35, 0.55, 0.91, 1.0] as const;
+const MANIP_TERMINAL_HOLD_MS = 1400;
 
 export class mjswanRuntime {
   private mujoco: MainModule;
@@ -171,6 +172,7 @@ export class mjswanRuntime {
   private cubeEnv: CubeEnv | null;
   private puzzleController: PuzzleController;
   private paused: boolean;
+  private manipAutoResetAt: number | null;
   private statsListeners: Set<(stats: RuntimeStats) => void>;
 
   constructor(mujoco: MainModule, container: HTMLElement, options: RuntimeOptions = {}) {
@@ -279,6 +281,7 @@ export class mjswanRuntime {
     this.cubeEnv = null;
     this.puzzleController = 'oracle';
     this.paused = false;
+    this.manipAutoResetAt = null;
     this.statsListeners = new Set();
 
     // Initialize cache system (singleton shared across runtime instances)
@@ -370,6 +373,7 @@ export class mjswanRuntime {
     this.applyViewerConfig(cameraConfig);
 
     this.paused = false;
+    this.manipAutoResetAt = null;
     this.running = true;
     void this.startLoop();
     this.emitStats();
@@ -403,6 +407,7 @@ export class mjswanRuntime {
    */
   resetSimulation(): void {
     const manipEnv = this.puzzleEnv ?? this.cubeEnv;
+    this.manipAutoResetAt = null;
     if (manipEnv) {
       manipEnv.reset(0);
       this.applyManipVisuals();
@@ -576,6 +581,7 @@ export class mjswanRuntime {
   }
 
   setPaused(paused: boolean): void {
+    this.manipAutoResetAt = null;
     this.paused = paused;
     if (paused && this.mjData) {
       this.mjData.xfrc_applied.fill(0.0);
@@ -629,20 +635,22 @@ export class mjswanRuntime {
       if (this.mjModel && this.mjData) {
         const manipEnv = this.puzzleEnv ?? this.cubeEnv;
         if (manipEnv) {
-          if (!this.paused) {
+          if (this.manipAutoResetAt !== null && performance.now() >= this.manipAutoResetAt) {
+            this.manipAutoResetAt = null;
+            manipEnv.reset(0);
+            this.applyManipVisuals();
+            this.lastSimState.bodies.clear();
+            this.updateCachedState();
+            this.paused = false;
+            this.emitStats();
+          } else if (!this.paused) {
             this.applyDragForces();
             const info = this.puzzleController === 'oracle'
               ? manipEnv.stepOracle()
               : await manipEnv.step(this.puzzleController === 'onnx');
             this.applyManipVisuals();
-            if (info.success) {
-              this.paused = true;
-              this.mjData.xfrc_applied.fill(0.0);
-              this.emitStats(info);
-            } else if (info.done) {
-              manipEnv.reset(0);
-              this.applyManipVisuals();
-              this.emitStats();
+            if (info.success || info.done) {
+              this.holdAndAutoResetManipulation(info);
             } else {
               this.emitStats(info);
             }
@@ -1340,6 +1348,13 @@ export class mjswanRuntime {
     for (const listener of this.statsListeners) {
       listener(stats);
     }
+  }
+
+  private holdAndAutoResetManipulation(info: Partial<RuntimeStats>): void {
+    this.paused = true;
+    this.manipAutoResetAt = performance.now() + MANIP_TERMINAL_HOLD_MS;
+    this.mjData?.xfrc_applied.fill(0.0);
+    this.emitStats(info);
   }
 
   private applyManipVisuals(): void {

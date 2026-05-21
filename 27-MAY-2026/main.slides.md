@@ -1,11 +1,11 @@
 ---
-title: Yarden <> Mark
+title: Yarden <> Marc
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Yarden &lt;&gt; Mark
+# Yarden &lt;&gt; Marc
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
     <div class="text-sm opacity-50">May 27, 2026</div>
@@ -55,7 +55,7 @@ Initial results
 <div>
   <img
     class="w-full h-[24rem] object-contain rounded"
-    src="/deck/h1_mpo_vs_pi_expansion.svg"
+    src="/deck/h1_mpo_vs_odyn.svg"
     alt="Comparison plot of MPO versus pi cubed"
   />
 </div>
