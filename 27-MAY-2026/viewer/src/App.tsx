@@ -61,6 +61,7 @@ interface AppConfig {
 
 const PANEL_QUERY_PARAM = 'panel';
 const REF_QUERY_PARAM = 'ref';
+const ONNX_POLICY_QUERY_PARAM = 'onnx_policy';
 
 function getProjectIdFromLocation(): string | null {
   const base = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '/');
@@ -292,6 +293,18 @@ function updateUrlParams({
   window.history.replaceState({}, '', newUrl);
 }
 
+function updateOnnxPolicyUrlParam(policyId: string | null) {
+  const params = new URLSearchParams(window.location.search);
+  if (policyId) {
+    params.set(ONNX_POLICY_QUERY_PARAM, policyId);
+  } else {
+    params.delete(ONNX_POLICY_QUERY_PARAM);
+  }
+  const search = params.toString();
+  const newUrl = window.location.pathname + (search ? `?${search}` : '') + window.location.hash;
+  window.history.replaceState({}, '', newUrl);
+}
+
 function AppContent() {
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [currentProject, setCurrentProject] = useState<ProjectConfig | null>(null);
@@ -472,6 +485,14 @@ function AppContent() {
   const handlePuzzleControllerChange = useCallback((controller: PuzzleController) => {
     runtimeRef.current?.setPuzzleController(controller);
     setRuntimeStats((stats) => stats ? { ...stats, puzzleController: controller } : stats);
+  }, []);
+
+  const handleManipulationOnnxPolicyChange = useCallback((policyId: string | null) => {
+    if (!policyId) {
+      return;
+    }
+    updateOnnxPolicyUrlParam(policyId);
+    void runtimeRef.current?.setManipulationOnnxPolicy(policyId);
   }, []);
 
   useEffect(() => {
@@ -702,6 +723,12 @@ function AppContent() {
           puzzleController={runtimeStats?.puzzleController ?? 'oracle'}
           onPuzzleControllerChange={handlePuzzleControllerChange}
           puzzlePolicyLoaded={runtimeStats?.policyLoaded ?? false}
+          onnxPolicyOptions={runtimeStats?.onnxPolicyOptions.map((policy) => ({
+            value: policy.id,
+            label: policy.label,
+          })) ?? []}
+          onnxPolicyValue={runtimeStats?.onnxPolicyId ?? null}
+          onOnnxPolicyChange={handleManipulationOnnxPolicyChange}
           rewardValue={runtimeStats?.reward ?? 0}
           rewardTrace={runtimeStats?.rewardTrace ?? [0]}
         />

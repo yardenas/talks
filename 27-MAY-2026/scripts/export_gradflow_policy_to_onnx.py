@@ -16,8 +16,8 @@ from onnx import TensorProto, helper, numpy_helper
 
 ROOT = Path(__file__).resolve().parents[1]
 DYNA_MPO = Path("/Users/yardas/dyna-mpo")
-DEFAULT_MANIFEST = ROOT / "viewer/public/assets/puzzle_task4/env_manifest.json"
-DEFAULT_OUTPUT = ROOT / "viewer/public/assets/puzzle_task4/policy.onnx"
+DEFAULT_MANIFEST = ROOT / "viewer/public/assets/scene/puzzle_task4/env_manifest.json"
+DEFAULT_OUTPUT = ROOT / "viewer/public/assets/scene/puzzle_task4/policy.onnx"
 
 
 def _tensor(name: str, value: np.ndarray) -> onnx.TensorProto:
@@ -32,13 +32,20 @@ def _dense(
     params: dict[str, np.ndarray],
     *,
     activate: bool,
+    weight_prefix: str | None = None,
+    initialized_weights: set[str] | None = None,
 ) -> str:
-    kernel = f"{layer_name}_kernel"
-    bias = f"{layer_name}_bias"
+    initializer_prefix = weight_prefix or layer_name
+    kernel = f"{initializer_prefix}_kernel"
+    bias = f"{initializer_prefix}_bias"
     mm = f"{layer_name}_matmul"
     out = f"{layer_name}_out"
-    initializers.append(_tensor(kernel, np.asarray(params["kernel"], dtype=np.float32)))
-    initializers.append(_tensor(bias, np.asarray(params["bias"], dtype=np.float32)))
+    if initialized_weights is None or kernel not in initialized_weights:
+        initializers.append(_tensor(kernel, np.asarray(params["kernel"], dtype=np.float32)))
+        initializers.append(_tensor(bias, np.asarray(params["bias"], dtype=np.float32)))
+        if initialized_weights is not None:
+            initialized_weights.add(kernel)
+            initialized_weights.add(bias)
     nodes.append(helper.make_node("MatMul", [input_name, kernel], [mm]))
     nodes.append(helper.make_node("Add", [mm, bias], [out]))
     if not activate:
@@ -65,6 +72,7 @@ def _actor_flow(
     time_name: str,
     params: dict[str, dict[str, np.ndarray]],
     prefix: str,
+    initialized_weights: set[str] | None = None,
 ) -> str:
     current = f"{prefix}_input"
     nodes.append(helper.make_node("Concat", [obs_name, action_name, time_name], [current], axis=1))
@@ -77,6 +85,8 @@ def _actor_flow(
             f"{prefix}_{layer_name}",
             params[layer_name],
             activate=index < len(layer_names) - 1,
+            weight_prefix=f"actor_{layer_name}",
+            initialized_weights=initialized_weights,
         )
     return current
 
@@ -88,6 +98,7 @@ def build_model(
     full_action_dim: int,
     action_dim: int,
     flow_steps: int,
+    output_full_action: bool = False,
 ) -> onnx.ModelProto:
     nodes: list[onnx.NodeProto] = []
     initializers: list[onnx.TensorProto] = [
@@ -95,11 +106,17 @@ def build_model(
         _tensor("gelu_one", np.asarray(1.0, dtype=np.float32)),
         _tensor("gelu_inv_sqrt2", np.asarray(1.0 / np.sqrt(2.0), dtype=np.float32)),
         _tensor("step_size", np.asarray(1.0 / float(flow_steps), dtype=np.float32)),
-        _tensor("slice_starts", np.asarray([0], dtype=np.int64)),
-        _tensor("slice_ends", np.asarray([action_dim], dtype=np.int64)),
-        _tensor("slice_axes", np.asarray([1], dtype=np.int64)),
-        _tensor("slice_steps", np.asarray([1], dtype=np.int64)),
     ]
+    if not output_full_action:
+        initializers.extend(
+            [
+                _tensor("slice_starts", np.asarray([0], dtype=np.int64)),
+                _tensor("slice_ends", np.asarray([action_dim], dtype=np.int64)),
+                _tensor("slice_axes", np.asarray([1], dtype=np.int64)),
+                _tensor("slice_steps", np.asarray([1], dtype=np.int64)),
+            ]
+        )
+    initialized_weights: set[str] = set()
 
     action_name = "noise"
     for step in range(flow_steps):
@@ -116,16 +133,18 @@ def build_model(
             time_name,
             actor_params,
             f"flow_{step}",
+            initialized_weights=initialized_weights,
         )
         nodes.append(helper.make_node("Mul", [velocity, "step_size"], [scaled_velocity]))
         nodes.append(helper.make_node("Add", [action_name, scaled_velocity], [next_action]))
         action_name = next_action
 
+    clipped_action = "action" if output_full_action else "clipped_full_action"
     nodes.append(
         helper.make_node(
             "Clip",
             [action_name, "clip_min", "clip_max"],
-            ["clipped_full_action"],
+            [clipped_action],
         )
     )
     initializers.extend(
@@ -134,13 +153,14 @@ def build_model(
             _tensor("clip_max", np.asarray(1.0, dtype=np.float32)),
         ]
     )
-    nodes.append(
-        helper.make_node(
-            "Slice",
-            ["clipped_full_action", "slice_starts", "slice_ends", "slice_axes", "slice_steps"],
-            ["action"],
+    if not output_full_action:
+        nodes.append(
+            helper.make_node(
+                "Slice",
+                ["clipped_full_action", "slice_starts", "slice_ends", "slice_axes", "slice_steps"],
+                ["action"],
+            )
         )
-    )
     graph = helper.make_graph(
         nodes,
         "gradflow_policy_unrolled",
@@ -148,7 +168,13 @@ def build_model(
             helper.make_tensor_value_info("obs", TensorProto.FLOAT, [1, obs_dim]),
             helper.make_tensor_value_info("noise", TensorProto.FLOAT, [1, full_action_dim]),
         ],
-        [helper.make_tensor_value_info("action", TensorProto.FLOAT, [1, action_dim])],
+        [
+            helper.make_tensor_value_info(
+                "action",
+                TensorProto.FLOAT,
+                [1, full_action_dim if output_full_action else action_dim],
+            )
+        ],
         initializer=initializers,
     )
     model = helper.make_model(
@@ -184,12 +210,16 @@ def _np_policy(
     *,
     action_dim: int,
     flow_steps: int,
+    output_full_action: bool = False,
 ) -> np.ndarray:
     action = noise.astype(np.float32)
     for step in range(flow_steps):
         time = np.full((obs.shape[0], 1), step / float(flow_steps), dtype=np.float32)
         action = action + _np_actor_flow(obs, action, time, params) / float(flow_steps)
-    return np.clip(action, -1.0, 1.0)[:, :action_dim]
+    action = np.clip(action, -1.0, 1.0)
+    if output_full_action:
+        return action
+    return action[:, :action_dim]
 
 
 def _parse_args() -> argparse.Namespace:

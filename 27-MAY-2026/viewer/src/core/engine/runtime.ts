@@ -90,6 +90,14 @@ type BodyState = {
 
 export type PuzzleController = 'oracle' | 'onnx' | 'zero';
 
+export type ManipulationPolicyOption = {
+  id: string;
+  label: string;
+  path: string;
+  default?: boolean;
+  metadata?: Record<string, unknown>;
+};
+
 export type RuntimeStats = {
   paused: boolean;
   accumulatedReward: number;
@@ -101,11 +109,38 @@ export type RuntimeStats = {
   controller: 'policy' | 'oracle' | 'zero' | null;
   puzzleController: PuzzleController;
   policyLoaded: boolean;
+  onnxPolicyOptions: Array<{ id: string; label: string }>;
+  onnxPolicyId: string | null;
+  onnxPolicyLabel: string | null;
+  error: string | null;
 };
 
 const BUTTON_ZERO_RGBA = [0.96, 0.26, 0.33, 1.0] as const;
 const BUTTON_ONE_RGBA = [0.35, 0.55, 0.91, 1.0] as const;
 const MANIP_TERMINAL_HOLD_MS = 1400;
+const BEST_MANIPULATION_POLICY_ID = 'mpo_awr_prior_dyna_bon';
+const BEST_MANIPULATION_POLICY_LABEL = 'Odyn';
+const BEST_MANIPULATION_POLICY_PATH = 'policy_mpo_awr_prior_dyna_bon.onnx';
+
+function controllerFromSearch(search: string): PuzzleController {
+  const value = new URLSearchParams(search).get('controller')?.toLowerCase();
+  if (value === 'onnx' || value === 'policy') {
+    return 'onnx';
+  }
+  if (value === 'zero') {
+    return 'zero';
+  }
+  return 'oracle';
+}
+
+function manipulationSeedFromSearch(search: string): number {
+  const value = Number(new URLSearchParams(search).get('seed') ?? 0);
+  return Number.isFinite(value) && value >= 0 ? Math.trunc(value) : 0;
+}
+
+function formatRuntimeError(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
 
 export class mjswanRuntime {
   private mujoco: MainModule;
@@ -173,6 +208,12 @@ export class mjswanRuntime {
   private puzzleController: PuzzleController;
   private paused: boolean;
   private manipAutoResetAt: number | null;
+  private manipulationSceneDir: string | null;
+  private manipulationPolicyOptions: ManipulationPolicyOption[];
+  private selectedManipulationPolicyId: string | null;
+  private manipulationPolicyLoadSerial: number;
+  private lastManipulationError: string | null;
+  private manipulationSeed: number;
   private statsListeners: Set<(stats: RuntimeStats) => void>;
 
   constructor(mujoco: MainModule, container: HTMLElement, options: RuntimeOptions = {}) {
@@ -279,9 +320,15 @@ export class mjswanRuntime {
     this.cameraState = { trackBodyId: null, prevBodyPos: null };
     this.puzzleEnv = null;
     this.cubeEnv = null;
-    this.puzzleController = 'oracle';
+    this.puzzleController = controllerFromSearch(window.location.search);
     this.paused = false;
     this.manipAutoResetAt = null;
+    this.manipulationSceneDir = null;
+    this.manipulationPolicyOptions = [];
+    this.selectedManipulationPolicyId = null;
+    this.manipulationPolicyLoadSerial = 0;
+    this.lastManipulationError = null;
+    this.manipulationSeed = manipulationSeedFromSearch(window.location.search);
     this.statsListeners = new Set();
 
     // Initialize cache system (singleton shared across runtime instances)
@@ -306,6 +353,12 @@ export class mjswanRuntime {
       this.eventManager = null;
     }
     await this.stop();
+    this.manipulationSceneDir = null;
+    this.manipulationPolicyOptions = [];
+    this.selectedManipulationPolicyId = null;
+    this.manipulationPolicyLoadSerial += 1;
+    this.lastManipulationError = null;
+    this.manipAutoResetAt = null;
 
     // Dispose previous splat/collider before switching scenes
     if (this.splatMesh) {
@@ -408,8 +461,9 @@ export class mjswanRuntime {
   resetSimulation(): void {
     const manipEnv = this.puzzleEnv ?? this.cubeEnv;
     this.manipAutoResetAt = null;
+    this.lastManipulationError = null;
     if (manipEnv) {
-      manipEnv.reset(0);
+      manipEnv.reset(this.manipulationSeed);
       this.applyManipVisuals();
       this.lastSimState.bodies.clear();
       this.updateCachedState();
@@ -603,11 +657,33 @@ export class mjswanRuntime {
 
   setPuzzleController(controller: PuzzleController): void {
     this.puzzleController = controller;
+    if (controller === 'onnx') {
+      void this.loadSelectedManipulationPolicyForCurrentScene();
+    }
     this.emitStats();
   }
 
   getPuzzleController(): PuzzleController {
     return this.puzzleController;
+  }
+
+  async setManipulationOnnxPolicy(policyId: string | null): Promise<void> {
+    const option = this.findManipulationPolicyOption(policyId) ?? this.defaultManipulationPolicyOption();
+    this.selectedManipulationPolicyId = option?.id ?? null;
+    await this.loadSelectedManipulationPolicy();
+    const manipEnv = this.puzzleEnv ?? this.cubeEnv;
+    if (manipEnv) {
+      manipEnv.reset(this.manipulationSeed);
+      this.manipAutoResetAt = null;
+      this.applyManipVisuals();
+      this.lastSimState.bodies.clear();
+      this.updateCachedState();
+    }
+    this.emitStats();
+  }
+
+  getManipulationOnnxPolicyOptions(): Array<{ id: string; label: string }> {
+    return this.manipulationPolicyOptions.map(({ id, label }) => ({ id, label }));
   }
 
   addStatsListener(listener: (stats: RuntimeStats) => void): () => void {
@@ -637,22 +713,31 @@ export class mjswanRuntime {
         if (manipEnv) {
           if (this.manipAutoResetAt !== null && performance.now() >= this.manipAutoResetAt) {
             this.manipAutoResetAt = null;
-            manipEnv.reset(0);
+            manipEnv.reset(this.manipulationSeed);
             this.applyManipVisuals();
             this.lastSimState.bodies.clear();
             this.updateCachedState();
             this.paused = false;
             this.emitStats();
           } else if (!this.paused) {
-            this.applyDragForces();
-            const info = this.puzzleController === 'oracle'
-              ? manipEnv.stepOracle()
-              : await manipEnv.step(this.puzzleController === 'onnx');
-            this.applyManipVisuals();
-            if (info.success || info.done) {
-              this.holdAndAutoResetManipulation(info);
-            } else {
-              this.emitStats(info);
+            try {
+              this.applyDragForces();
+              const info = this.puzzleController === 'oracle'
+                ? manipEnv.stepOracle()
+                : await manipEnv.step(this.puzzleController === 'onnx');
+              this.lastManipulationError = null;
+              this.applyManipVisuals();
+              if (info.success || info.done) {
+                this.holdAndAutoResetManipulation(info);
+              } else {
+                this.emitStats(info);
+              }
+            } catch (error) {
+              this.lastManipulationError = formatRuntimeError(error);
+              this.paused = true;
+              this.mjData.xfrc_applied.fill(0.0);
+              console.error('[mjswanRuntime] Manipulation step failed:', error);
+              this.emitStats();
             }
           }
         } else {
@@ -850,6 +935,106 @@ export class mjswanRuntime {
     }
   }
 
+  private async loadManipulationPolicyManifest(sceneDir: string): Promise<void> {
+    this.manipulationSceneDir = sceneDir;
+    this.manipulationPolicyOptions = [];
+    this.selectedManipulationPolicyId = null;
+
+    const manifestUrl = this.resolveAssetUrl(`${sceneDir}/policy_manifest.json`);
+    try {
+      const response = await fetch(manifestUrl, { cache: 'no-store' });
+      if (response.ok) {
+        const manifest = await response.json() as {
+          default?: string;
+          policies?: ManipulationPolicyOption[];
+        };
+        if (Array.isArray(manifest.policies)) {
+          const policies = manifest.policies
+            .filter((policy) => policy && typeof policy.id === 'string' && typeof policy.path === 'string')
+            .map((policy) => ({
+              ...policy,
+              label: typeof policy.label === 'string' ? policy.label : policy.id,
+            }));
+          const selected =
+            policies.find((policy) => policy.id === BEST_MANIPULATION_POLICY_ID) ??
+            policies.find((policy) => policy.id === manifest.default) ??
+            policies.find((policy) => policy.default) ??
+            policies[0] ??
+            null;
+          this.manipulationPolicyOptions = selected ? [{ ...selected, default: true }] : [];
+          this.selectedManipulationPolicyId = selected?.id ?? null;
+          return;
+        }
+      }
+    } catch (error) {
+      console.warn('[mjswanRuntime] Failed to load policy manifest:', error);
+    }
+
+    this.manipulationPolicyOptions = [
+      {
+        id: BEST_MANIPULATION_POLICY_ID,
+        label: BEST_MANIPULATION_POLICY_LABEL,
+        path: BEST_MANIPULATION_POLICY_PATH,
+        default: true,
+      },
+    ];
+    this.selectedManipulationPolicyId = BEST_MANIPULATION_POLICY_ID;
+  }
+
+  private async loadSelectedManipulationPolicyForCurrentScene(): Promise<void> {
+    if (!this.manipulationSceneDir) {
+      return;
+    }
+    if (this.manipulationPolicyOptions.length === 0) {
+      await this.loadManipulationPolicyManifest(this.manipulationSceneDir);
+    }
+    await this.loadSelectedManipulationPolicy();
+  }
+
+  private findManipulationPolicyOption(policyId: string | null): ManipulationPolicyOption | null {
+    if (!policyId) {
+      return null;
+    }
+    const normalized = policyId.trim().toLowerCase().replace(/[ -]/g, '_');
+    return this.manipulationPolicyOptions.find((policy) => {
+      const id = policy.id.toLowerCase();
+      const label = policy.label.toLowerCase().replace(/[ -]/g, '_');
+      return id === normalized || label === normalized;
+    }) ?? null;
+  }
+
+  private defaultManipulationPolicyOption(): ManipulationPolicyOption | null {
+    return (
+      this.manipulationPolicyOptions.find((policy) => policy.default) ??
+      this.manipulationPolicyOptions[0] ??
+      null
+    );
+  }
+
+  private selectedManipulationPolicyOption(): ManipulationPolicyOption | null {
+    return this.findManipulationPolicyOption(this.selectedManipulationPolicyId);
+  }
+
+  private async loadSelectedManipulationPolicy(): Promise<void> {
+    const manipEnv = this.puzzleEnv ?? this.cubeEnv;
+    if (!manipEnv) {
+      return;
+    }
+    const loadSerial = ++this.manipulationPolicyLoadSerial;
+    const option = this.selectedManipulationPolicyOption();
+    if (!option || !this.manipulationSceneDir) {
+      await manipEnv.loadPolicy(null);
+      if (loadSerial === this.manipulationPolicyLoadSerial) {
+        this.emitStats();
+      }
+      return;
+    }
+    await manipEnv.loadPolicy(this.resolveAssetUrl(`${this.manipulationSceneDir}/${option.path}`));
+    if (loadSerial === this.manipulationPolicyLoadSerial) {
+      this.emitStats();
+    }
+  }
+
   private async loadPuzzleEnvironment(scenePath: string): Promise<void> {
     this.puzzleEnv = null;
     if (!this.mjModel || !this.mjData) {
@@ -869,8 +1054,12 @@ export class mjswanRuntime {
     }
 
     const puzzleEnv = new PuzzleEnv(this.mujoco, this.mjModel, this.mjData, manifest);
-    await puzzleEnv.loadPolicy(this.resolveAssetUrl(`${sceneDir}/policy.onnx`));
+    puzzleEnv.reset(this.manipulationSeed);
     this.puzzleEnv = puzzleEnv;
+    this.manipulationSceneDir = sceneDir;
+    if (this.puzzleController === 'onnx') {
+      void this.loadSelectedManipulationPolicyForCurrentScene();
+    }
     this.timestep = this.mjModel.opt.timestep || manifest.timing.sim_dt || 0.001;
     this.decimation = Math.max(1, manifest.timing.n_substeps ?? Math.round(manifest.timing.ctrl_dt / this.timestep));
     this.mujoco.mj_forward(this.mjModel, this.mjData);
@@ -904,8 +1093,12 @@ export class mjswanRuntime {
     }
 
     const cubeEnv = new CubeEnv(this.mujoco, this.mjModel, this.mjData, manifest);
-    await cubeEnv.loadPolicy(this.resolveAssetUrl(`${sceneDir}/policy.onnx`));
+    cubeEnv.reset(this.manipulationSeed);
     this.cubeEnv = cubeEnv;
+    this.manipulationSceneDir = sceneDir;
+    if (this.puzzleController === 'onnx') {
+      void this.loadSelectedManipulationPolicyForCurrentScene();
+    }
     this.timestep = this.mjModel.opt.timestep || manifest.timing.sim_dt || 0.001;
     this.decimation = Math.max(1, manifest.timing.n_substeps ?? Math.round(manifest.timing.ctrl_dt / this.timestep));
     this.mujoco.mj_forward(this.mjModel, this.mjData);
@@ -1323,6 +1516,7 @@ export class mjswanRuntime {
   private buildStats(info?: Partial<RuntimeStats>): RuntimeStats {
     const envInfo = this.puzzleEnv?.info() ?? this.cubeEnv?.info();
     const hasManipEnv = this.puzzleEnv !== null || this.cubeEnv !== null;
+    const selectedOnnxPolicy = this.selectedManipulationPolicyOption();
     const selectedPuzzleController = this.puzzleController === 'onnx'
       ? (envInfo?.policyLoaded ? 'policy' : 'zero')
       : this.puzzleController;
@@ -1337,14 +1531,22 @@ export class mjswanRuntime {
       controller: info?.controller ?? (hasManipEnv ? selectedPuzzleController : envInfo?.controller ?? null),
       puzzleController: this.puzzleController,
       policyLoaded: info?.policyLoaded ?? envInfo?.policyLoaded ?? false,
+      onnxPolicyOptions: this.getManipulationOnnxPolicyOptions(),
+      onnxPolicyId: selectedOnnxPolicy?.id ?? null,
+      onnxPolicyLabel: selectedOnnxPolicy?.label ?? null,
+      error: this.lastManipulationError,
     };
   }
 
   private emitStats(info?: Partial<RuntimeStats>): void {
-    if (this.statsListeners.size === 0) {
-      return;
-    }
     const stats = this.buildStats(info);
+    if (typeof window !== 'undefined') {
+      (window as unknown as { __mjswanStats?: RuntimeStats }).__mjswanStats = stats;
+      document.documentElement.dataset.mjswanStep = String(stats.step);
+      document.documentElement.dataset.mjswanPaused = String(stats.paused);
+      document.documentElement.dataset.mjswanController = stats.controller ?? '';
+      document.documentElement.dataset.mjswanError = stats.error ?? '';
+    }
     for (const listener of this.statsListeners) {
       listener(stats);
     }

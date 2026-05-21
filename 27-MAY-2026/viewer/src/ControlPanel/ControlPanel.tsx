@@ -75,6 +75,9 @@ interface ControlPanelProps {
   puzzleController?: PuzzleController;
   onPuzzleControllerChange?: (controller: PuzzleController) => void;
   puzzlePolicyLoaded?: boolean;
+  onnxPolicyOptions?: SelectOption[];
+  onnxPolicyValue?: string | null;
+  onOnnxPolicyChange?: (policyId: string | null) => void;
   rewardValue?: number;
   rewardTrace?: number[];
 }
@@ -265,6 +268,9 @@ function ControlPanel(props: ControlPanelProps) {
     puzzleController = 'oracle',
     onPuzzleControllerChange,
     puzzlePolicyLoaded = false,
+    onnxPolicyOptions = [],
+    onnxPolicyValue = null,
+    onOnnxPolicyChange,
     rewardValue = 0,
     rewardTrace = [0],
   } = props;
@@ -722,6 +728,25 @@ function ControlPanel(props: ControlPanelProps) {
                   size="xs"
                   radius="xs"
                   clearable={false}
+                  styles={{
+                    input: { minHeight: '1.625rem', height: '1.625rem', padding: '0.5em' },
+                  }}
+                  comboboxProps={{ zIndex: 1000 }}
+                />
+              </LabeledInput>
+            )}
+            {onOnnxPolicyChange && onnxPolicyOptions.length > 1 && (
+              <LabeledInput id="onnx-policy-select" label="Algo">
+                <Select
+                  id="onnx-policy-select"
+                  placeholder="Select policy"
+                  data={onnxPolicyOptions}
+                  value={onnxPolicyValue}
+                  onChange={onOnnxPolicyChange}
+                  size="xs"
+                  radius="xs"
+                  clearable={false}
+                  disabled={puzzleController !== 'onnx'}
                   styles={{
                     input: { minHeight: '1.625rem', height: '1.625rem', padding: '0.5em' },
                   }}

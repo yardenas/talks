@@ -10,6 +10,7 @@ import {
   yawFromMat,
 } from "./puzzleMath";
 import { SeededRng } from "./rng";
+import { solveUr5eIkWithStatus } from "./ur5eAnalyticIk";
 
 export type Manifest = {
   env_name: string;
@@ -30,6 +31,26 @@ type StepInfo = {
   ikNoSolution: boolean;
   controller: "policy" | "oracle" | "zero";
 };
+
+function metadataDim(session: ort.InferenceSession, name: string, axis: number) {
+  const metadata = (session as unknown as { inputMetadata?: unknown }).inputMetadata;
+  if (Array.isArray(metadata)) {
+    const entry = metadata.find((item) => item && typeof item === "object" && (item as { name?: unknown }).name === name);
+    const shape = (entry as { shape?: unknown[] } | undefined)?.shape;
+    const dim = shape?.[axis];
+    return typeof dim === "number" && dim > 0 ? dim : null;
+  }
+  if (metadata && typeof metadata === "object") {
+    const entry = (metadata as Record<string, { dimensions?: unknown[]; shape?: unknown[] }>)[name];
+    const dim = (entry?.dimensions ?? entry?.shape)?.[axis];
+    return typeof dim === "number" && dim > 0 ? dim : null;
+  }
+  return null;
+}
+
+function firstTensor(result: ort.InferenceSession.ReturnType, preferred: string) {
+  return result[preferred] ?? result[Object.keys(result)[0]];
+}
 
 function vec3(values: ArrayLike<number>, offset: number) {
   return [values[offset], values[offset + 1], values[offset + 2]];
@@ -198,6 +219,7 @@ class PuzzleButtonOracle {
 
 export class PuzzleEnv {
   private policy: ort.InferenceSession | null = null;
+  private policyActionQueue: Float32Array[] = [];
   private rng = new SeededRng(0);
   private oracle = new PuzzleButtonOracle(this.rng, [[0.25, -0.35, 0.16], [0.6, 0.35, 0.35]]);
   private noiseDim = 10;
@@ -221,15 +243,18 @@ export class PuzzleEnv {
     this.reset(0);
   }
 
-  async loadPolicy(url: string) {
+  async loadPolicy(url: string | null) {
+    this.policyActionQueue = [];
+    if (!url) {
+      this.policy = null;
+      return;
+    }
     try {
       this.policy = await ort.InferenceSession.create(url, {
         executionProviders: ["wasm"],
         graphOptimizationLevel: "all",
       });
-      const meta = (this.policy as any).inputMetadata?.noise;
-      const dim = meta?.dimensions?.[1];
-      if (typeof dim === "number" && dim > 0) this.noiseDim = dim;
+      this.noiseDim = metadataDim(this.policy, "noise", 1) ?? this.noiseDim;
     } catch (error) {
       console.warn("Policy unavailable; using zero actions.", error);
       this.policy = null;
@@ -241,6 +266,7 @@ export class PuzzleEnv {
     this.stepCount = 0;
     this.accumulatedReward = 0;
     this.rewardTrace = [];
+    this.policyActionQueue = [];
     this.copyInto(this.data.qpos, this.manifest.reset.qpos);
     this.copyInto(this.data.qvel, this.manifest.reset.qvel);
     this.copyInto(this.data.ctrl, this.manifest.reset.ctrl);
@@ -253,6 +279,7 @@ export class PuzzleEnv {
 
   reseed(seed: number) {
     this.rng = new SeededRng(seed);
+    this.policyActionQueue = [];
   }
 
   info(): StepInfo {
@@ -282,7 +309,11 @@ export class PuzzleEnv {
   }
 
   async policyAction() {
-    if (!this.policy) return new Float32Array(5);
+    const actionDim = (this.manifest.constants.action_low as number[]).length;
+    if (!this.policy) return new Float32Array(actionDim);
+    const queued = this.policyActionQueue.shift();
+    if (queued) return queued;
+
     const obs = Float32Array.from(this.getObservation());
     const noise = new Float32Array(this.noiseDim);
     for (let i = 0; i < noise.length; i += 1) noise[i] = this.rng.normal();
@@ -290,7 +321,14 @@ export class PuzzleEnv {
       obs: new ort.Tensor("float32", obs, [1, obs.length]),
       noise: new ort.Tensor("float32", noise, [1, noise.length]),
     });
-    return result.action.data as Float32Array;
+    const raw = firstTensor(result, "action").data;
+    const actionChunk = ArrayBuffer.isView(raw)
+      ? new Float32Array(raw as Float32Array)
+      : Float32Array.from(raw as unknown as number[]);
+    for (let offset = 0; offset + actionDim <= actionChunk.length; offset += actionDim) {
+      this.policyActionQueue.push(actionChunk.slice(offset, offset + actionDim));
+    }
+    return this.policyActionQueue.shift() ?? new Float32Array(actionDim);
   }
 
   async step(policyEnabled: boolean) {
@@ -445,56 +483,8 @@ export class PuzzleEnv {
   private solveIk(targetPos: number[], targetQuat: number[]) {
     const ids = this.manifest.ids;
     const armQpos = ids.arm_qposadr as number[];
-    const armJointIds = ids.arm_joint_ids as number[];
-    const attachSite = ids.attach_site_id as number;
     const original = armQpos.map((idx) => this.data.qpos[idx]);
-    let q = [...original];
-    let failed = !finite(targetPos) || !finite(targetQuat);
-
-    for (let iter = 0; iter < 12 && !failed; iter += 1) {
-      for (let i = 0; i < armQpos.length; i += 1) this.data.qpos[armQpos[i]] = q[i];
-      this.mujoco.mj_forward(this.model, this.data);
-
-      const currentPos = vec3(this.data.site_xpos, attachSite * 3);
-      const posError = targetPos.map((v, i) => v - currentPos[i]);
-      const currentQuat = mat3ToQuat(this.data.site_xmat, attachSite * 9);
-      const quatError = quatMul(targetQuat, quatInv(currentQuat));
-      const rotError = quatToAxisAngle(quatError);
-      const error = [...posError, ...rotError];
-      if (Math.hypot(...posError) <= 1e-4 && Math.hypot(...rotError) <= 1e-4) break;
-
-      const jac = Array.from({ length: 6 }, () => Array(q.length).fill(0));
-      for (let j = 0; j < q.length; j += 1) {
-        const jointId = armJointIds[j];
-        const axis = vec3(this.data.xaxis, jointId * 3);
-        const anchor = vec3(this.data.xanchor, jointId * 3);
-        const rel = currentPos.map((value, i) => value - anchor[i]);
-        const jp = cross(axis, rel);
-        jac[0][j] = jp[0];
-        jac[1][j] = jp[1];
-        jac[2][j] = jp[2];
-        jac[3][j] = axis[0];
-        jac[4][j] = axis[1];
-        jac[5][j] = axis[2];
-      }
-
-      const h = Array.from({ length: 6 }, (_, r) =>
-        Array.from({ length: 6 }, (_, c) => {
-          let sum = r === c ? 1e-8 : 0;
-          for (let j = 0; j < q.length; j += 1) sum += jac[r][j] * jac[c][j];
-          return sum;
-        }),
-      );
-      const solved = this.solveLinearSystem(h, error);
-      const update = q.map((_, j) => jac.reduce((sum, row, r) => sum + row[j] * solved[r], 0));
-      const maxUpdate = Math.max(...update.map(Math.abs));
-      const scale = maxUpdate > Math.PI / 4 ? (Math.PI / 4) / maxUpdate : 1.0;
-      q = q.map((value, i) => value + update[i] * scale);
-      failed = failed || !finite(q);
-    }
-    for (let i = 0; i < armQpos.length; i += 1) this.data.qpos[armQpos[i]] = original[i];
-    this.mujoco.mj_forward(this.model, this.data);
-    return { qpos: failed ? original : q, failed };
+    return solveUr5eIkWithStatus(original, targetPos, targetQuat);
   }
 
   private solveLinearSystem(a: number[][], b: number[]) {
