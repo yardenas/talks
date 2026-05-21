@@ -305,6 +305,40 @@ function updateOnnxPolicyUrlParam(policyId: string | null) {
   window.history.replaceState({}, '', newUrl);
 }
 
+function RewardHud({ stats }: { stats: RuntimeStats | null }) {
+  if (!stats || stats.controller === null) {
+    return null;
+  }
+
+  const width = 118;
+  const height = 30;
+  const padding = 3;
+  const series = (stats.rewardTrace.length > 0 ? stats.rewardTrace : [stats.reward]).slice(-80);
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  const span = Math.max(1e-6, max - min);
+  const points = series
+    .map((value, idx) => {
+      const denom = Math.max(1, series.length - 1);
+      const x = padding + (idx / denom) * (width - padding * 2);
+      const y = height - padding - ((value - min) / span) * (height - padding * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(' ');
+
+  return (
+    <div className="reward-hud" aria-label="Running reward">
+      <div className="reward-hud-header">
+        <span>reward</span>
+        <strong>{stats.reward.toFixed(1)}</strong>
+      </div>
+      <svg className="reward-hud-sparkline" viewBox={`0 0 ${width} ${height}`}>
+        <polyline points={points} />
+      </svg>
+    </div>
+  );
+}
+
 function AppContent() {
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [currentProject, setCurrentProject] = useState<ProjectConfig | null>(null);
@@ -729,8 +763,6 @@ function AppContent() {
           })) ?? []}
           onnxPolicyValue={runtimeStats?.onnxPolicyId ?? null}
           onOnnxPolicyChange={handleManipulationOnnxPolicyChange}
-          rewardValue={runtimeStats?.reward ?? 0}
-          rewardTrace={runtimeStats?.rewardTrace ?? [0]}
         />
         <MjswanViewer
           scenePath={scenePath}
@@ -747,6 +779,7 @@ function AppContent() {
           onStatusChange={handleViewerStatus}
           onRuntimeReady={handleRuntimeReady}
         />
+        <RewardHud stats={runtimeStats} />
       </div>
     </MantineProvider>
   );

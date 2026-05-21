@@ -7,7 +7,6 @@ import {
   Checkbox,
   Divider,
   Group,
-  Image,
   Menu,
   Modal,
   Select,
@@ -78,8 +77,6 @@ interface ControlPanelProps {
   onnxPolicyOptions?: SelectOption[];
   onnxPolicyValue?: string | null;
   onOnnxPolicyChange?: (policyId: string | null) => void;
-  rewardValue?: number;
-  rewardTrace?: number[];
 }
 
 function isEditableElement(element: Element | null): boolean {
@@ -106,45 +103,6 @@ function formatGroupName(groupName: string): string {
     .split('_')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-}
-
-function RewardSparkline({ values }: { values: number[] }) {
-  const width = 220;
-  const height = 48;
-  const padding = 4;
-  const series = values.length > 0 ? values : [0];
-  const min = Math.min(...series);
-  const max = Math.max(...series);
-  const span = Math.max(1e-6, max - min);
-  const points = series
-    .map((value, idx) => {
-      const denom = Math.max(1, series.length - 1);
-      const x = padding + (idx / denom) * (width - padding * 2);
-      const y = height - padding - ((value - min) / span) * (height - padding * 2);
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    })
-    .join(' ');
-
-  return (
-    <Box
-      component="svg"
-      viewBox={`0 0 ${width} ${height}`}
-      w="100%"
-      h={height}
-      mt={4}
-      style={{ display: 'block' }}
-      aria-label="Running reward"
-    >
-      <polyline
-        points={points}
-        fill="none"
-        stroke="var(--mantine-color-blue-5)"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </Box>
-  );
 }
 
 /**
@@ -271,8 +229,6 @@ function ControlPanel(props: ControlPanelProps) {
     onnxPolicyOptions = [],
     onnxPolicyValue = null,
     onOnnxPolicyChange,
-    rewardValue = 0,
-    rewardTrace = [0],
   } = props;
 
   const [aboutModalOpened, { open: openAbout, close: closeAbout }] = useDisclosure(false);
@@ -400,7 +356,6 @@ function ControlPanel(props: ControlPanelProps) {
       styles={{ body: { textAlign: 'center' } }}
     >
       <Stack gap="md" align="center">
-        <Image src="./logo-color.svg" style={{ width: '8em', height: 'auto' }} />
         <Text size="xl" fw={700}>powered by mjswan</Text>
         <Text size="sm" c="dimmed">version {MJSWAN_VERSION}</Text>
         <Text size="sm" c="dimmed">MuJoco Simulation on Web Assembly with Neural netwroks</Text>
@@ -449,18 +404,6 @@ function ControlPanel(props: ControlPanelProps) {
       hiddenButtonTooltip="Show controls (C)"
     >
       <FloatingPanel.Handle>
-        <Tooltip label={`mjswan ${MJSWAN_VERSION}`}>
-          <Box
-            component="a"
-            onClick={(e) => { e.stopPropagation(); openAbout(); }}
-            onMouseDown={(e) => e.stopPropagation()}
-            onTouchStart={(e) => e.stopPropagation()}
-            style={{ position: "absolute", cursor: "pointer", display: "flex", top: "0.8em", left: "0.9em" }}
-          >
-            <Image src="./logo.svg" style={{ width: "1.2em", height: "auto" }} />
-          </Box>
-        </Tooltip>
-        <div style={{ width: "1.1em" }} />
         <FloatingPanel.HideWhenCollapsed>
           <Box
             px="xs"
@@ -776,22 +719,6 @@ function ControlPanel(props: ControlPanelProps) {
                 </Button>
               </Group>
             )}
-            <Box
-              mb="xs"
-              px="xs"
-              py={6}
-              style={{
-                border: '1px solid var(--mantine-color-default-border)',
-                borderRadius: 4,
-                background: 'transparent',
-              }}
-            >
-              <Group justify="space-between" gap="xs">
-                <Text size="xs" c="dimmed">Reward</Text>
-                <Text size="xs" fw={600}>{rewardValue.toFixed(1)}</Text>
-              </Group>
-              <RewardSparkline values={rewardTrace} />
-            </Box>
             <Button
               variant="light"
               color="red"

@@ -121,6 +121,7 @@ const MANIP_TERMINAL_HOLD_MS = 1400;
 const BEST_MANIPULATION_POLICY_ID = 'mpo_awr_prior_dyna_bon';
 const BEST_MANIPULATION_POLICY_LABEL = 'Odyn';
 const BEST_MANIPULATION_POLICY_PATH = 'policy_mpo_awr_prior_dyna_bon.onnx';
+const MAX_MANIPULATION_SEED = 0x7fffffff;
 
 function controllerFromSearch(search: string): PuzzleController {
   const value = new URLSearchParams(search).get('controller')?.toLowerCase();
@@ -133,9 +134,25 @@ function controllerFromSearch(search: string): PuzzleController {
   return 'oracle';
 }
 
-function manipulationSeedFromSearch(search: string): number {
-  const value = Number(new URLSearchParams(search).get('seed') ?? 0);
-  return Number.isFinite(value) && value >= 0 ? Math.trunc(value) : 0;
+function randomManipulationSeed(): number {
+  if (globalThis.crypto?.getRandomValues) {
+    const values = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(values);
+    return values[0] & MAX_MANIPULATION_SEED;
+  }
+  return Math.floor(Math.random() * (MAX_MANIPULATION_SEED + 1));
+}
+
+function manipulationSeedFromSearch(search: string): { seed: number; locked: boolean } {
+  const raw = new URLSearchParams(search).get('seed');
+  if (!raw || raw.trim().toLowerCase() === 'random') {
+    return { seed: randomManipulationSeed(), locked: false };
+  }
+  const value = Number(raw);
+  if (Number.isFinite(value) && value >= 0) {
+    return { seed: Math.trunc(value), locked: true };
+  }
+  return { seed: randomManipulationSeed(), locked: false };
 }
 
 function formatRuntimeError(error: unknown): string {
@@ -214,6 +231,7 @@ export class mjswanRuntime {
   private manipulationPolicyLoadSerial: number;
   private lastManipulationError: string | null;
   private manipulationSeed: number;
+  private manipulationSeedLocked: boolean;
   private statsListeners: Set<(stats: RuntimeStats) => void>;
 
   constructor(mujoco: MainModule, container: HTMLElement, options: RuntimeOptions = {}) {
@@ -328,7 +346,9 @@ export class mjswanRuntime {
     this.selectedManipulationPolicyId = null;
     this.manipulationPolicyLoadSerial = 0;
     this.lastManipulationError = null;
-    this.manipulationSeed = manipulationSeedFromSearch(window.location.search);
+    const seedConfig = manipulationSeedFromSearch(window.location.search);
+    this.manipulationSeed = seedConfig.seed;
+    this.manipulationSeedLocked = seedConfig.locked;
     this.statsListeners = new Set();
 
     // Initialize cache system (singleton shared across runtime instances)
@@ -463,7 +483,7 @@ export class mjswanRuntime {
     this.manipAutoResetAt = null;
     this.lastManipulationError = null;
     if (manipEnv) {
-      manipEnv.reset(this.manipulationSeed);
+      this.resetManipulationEnv(manipEnv, { resampleSeed: true });
       this.applyManipVisuals();
       this.lastSimState.bodies.clear();
       this.updateCachedState();
@@ -477,6 +497,16 @@ export class mjswanRuntime {
       this.policyRunner.reset(state);
     }
     console.log('[mjswanRuntime] Simulation reset');
+  }
+
+  private resetManipulationEnv(
+    manipEnv: PuzzleEnv | CubeEnv,
+    { resampleSeed = false }: { resampleSeed?: boolean } = {}
+  ): void {
+    if (resampleSeed && !this.manipulationSeedLocked) {
+      this.manipulationSeed = randomManipulationSeed();
+    }
+    manipEnv.reset(this.manipulationSeed);
   }
 
   async setSelectedMotion(motionName: string | null): Promise<boolean> {
@@ -673,7 +703,7 @@ export class mjswanRuntime {
     await this.loadSelectedManipulationPolicy();
     const manipEnv = this.puzzleEnv ?? this.cubeEnv;
     if (manipEnv) {
-      manipEnv.reset(this.manipulationSeed);
+      this.resetManipulationEnv(manipEnv, { resampleSeed: true });
       this.manipAutoResetAt = null;
       this.applyManipVisuals();
       this.lastSimState.bodies.clear();
@@ -713,7 +743,7 @@ export class mjswanRuntime {
         if (manipEnv) {
           if (this.manipAutoResetAt !== null && performance.now() >= this.manipAutoResetAt) {
             this.manipAutoResetAt = null;
-            manipEnv.reset(this.manipulationSeed);
+            this.resetManipulationEnv(manipEnv, { resampleSeed: true });
             this.applyManipVisuals();
             this.lastSimState.bodies.clear();
             this.updateCachedState();
@@ -1054,7 +1084,7 @@ export class mjswanRuntime {
     }
 
     const puzzleEnv = new PuzzleEnv(this.mujoco, this.mjModel, this.mjData, manifest);
-    puzzleEnv.reset(this.manipulationSeed);
+    this.resetManipulationEnv(puzzleEnv);
     this.puzzleEnv = puzzleEnv;
     this.manipulationSceneDir = sceneDir;
     if (this.puzzleController === 'onnx') {
@@ -1093,7 +1123,7 @@ export class mjswanRuntime {
     }
 
     const cubeEnv = new CubeEnv(this.mujoco, this.mjModel, this.mjData, manifest);
-    cubeEnv.reset(this.manipulationSeed);
+    this.resetManipulationEnv(cubeEnv);
     this.cubeEnv = cubeEnv;
     this.manipulationSceneDir = sceneDir;
     if (this.puzzleController === 'onnx') {
