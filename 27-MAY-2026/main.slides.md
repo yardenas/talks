@@ -103,49 +103,32 @@ Initial results
 
 ---
 
-# Puzzle WASM
-MuJoCo + ONNX in the browser
-
-<div class="mt-3 h-[24rem] w-full overflow-hidden rounded-[0.35rem] bg-slate-950">
-  <iframe
-    class="block h-full w-full border-0"
-    src="/mjswan/index.html?scene=Puzzle%20task4&autoplay=1&speed=1"
-    title="OGBench puzzle MuJoCo WASM demo"
-  />
-</div>
-
----
-
-# Cube WASM
-MuJoCo + oracle in the browser
-
-<div class="mt-3 h-[24rem] w-full overflow-hidden rounded-[0.35rem] bg-slate-950">
-  <iframe
-    class="block h-full w-full border-0"
-    src="/mjswan-cube/index.html?scene=Cube%20task2&autoplay=1&speed=1"
-    title="OGBench cube MuJoCo WASM demo"
-  />
-</div>
-
----
-
 # Odyn
 Harder tasks
 
-<div class="mt--10 grid min-h-[24rem] grid-cols-[1fr_0.34fr] items-center gap-8">
-
+<div class="mx-auto mt--8 flex w-[46rem] flex-col gap-[0.55rem]">
   <img
-    class="block h-[23rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    class="mx-auto block h-[12.25rem] w-[44rem] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
     src="/deck/puzzle_cube_dyna_bon_ablation_eval_success_puzzle_cube.svg"
     alt="Puzzle cube Dyna best-of-N ablation success rate"
   />
 
-  <img
-    class="block h-[10.5rem] w-[10.5rem] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/episode_0030_cpu_success.gif"
-    alt="Successful puzzle cube rollout"
-  />
-
+  <div class="mx-auto grid w-[36.5rem] grid-cols-2 gap-[0.65rem]">
+    <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
+      <iframe
+        class="block h-full w-full border-0"
+        src="/mjswan/index.html?scene=Puzzle%20task4&autoplay=1&speed=1&panel=0"
+        title="OGBench puzzle MuJoCo WASM demo"
+      />
+    </div>
+    <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
+      <iframe
+        class="block h-full w-full border-0"
+        src="/mjswan-cube/index.html?scene=Cube%20task2&autoplay=1&speed=1&panel=0"
+        title="OGBench cube MuJoCo WASM demo"
+      />
+    </div>
+  </div>
 </div>
 
 <!-- 

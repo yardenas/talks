@@ -156,7 +156,7 @@ export function createLights({
       headLuminance > 0
         ? headCombined.multiplyScalar(1 / headLuminance)
         : new THREE.Color(0, 0, 0);
-    headLight.intensity = headLuminance * Math.PI * 0.7;
+    headLight.intensity = headLuminance * Math.PI * 0.95;
     headLight.castShadow = false;
 
     mujocoRoot.add(headLight.target);

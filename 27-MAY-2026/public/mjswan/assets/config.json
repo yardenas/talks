@@ -19,7 +19,7 @@
             ],
             "distance": 1.4,
             "elevation": -28,
-            "azimuth": 132,
+            "azimuth": 0,
             "enableShadows": true
           }
         },
@@ -36,7 +36,7 @@
             ],
             "distance": 1.4,
             "elevation": -28,
-            "azimuth": 132,
+            "azimuth": 0,
             "enableShadows": true
           }
         },
@@ -53,7 +53,7 @@
             ],
             "distance": 1.4,
             "elevation": -28,
-            "azimuth": 132,
+            "azimuth": 0,
             "enableShadows": true
           }
         },
@@ -70,7 +70,7 @@
             ],
             "distance": 1.4,
             "elevation": -28,
-            "azimuth": 132,
+            "azimuth": 0,
             "enableShadows": true
           }
         },
@@ -87,7 +87,7 @@
             ],
             "distance": 1.4,
             "elevation": -28,
-            "azimuth": 132,
+            "azimuth": 0,
             "enableShadows": true
           }
         }
