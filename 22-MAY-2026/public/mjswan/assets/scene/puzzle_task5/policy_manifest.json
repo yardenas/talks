@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "env_name": "puzzle-3x3-singletask-task5-v0",
+  "checkpoint_step": 500000,
+  "default": "mpo_awr_prior_dyna_bon",
+  "policies": [
+    {
+      "id": "mpo_awr_prior_dyna_bon",
+      "label": "Odyn",
+      "path": "policy_mpo_awr_prior_dyna_bon.onnx",
+      "default": true,
+      "checkpoint_step": 500000,
+      "checkpoint": "acfql-mpo-dyna-bon-ablation/puzzle-3x3-play-singletask-task5-v0/sd000_h1_sj187649_sp0_saj183726_sat1_20260520_205706_663873_pid2916354/params_500000.pkl",
+      "metadata": {
+        "variant": "mpo_awr_prior_dyna_bon",
+        "actor_num_samples": 32,
+        "offline_dyna_enabled": null,
+        "prior_loss_type": "awr",
+        "offline_actor_loss_type": "mpo",
+        "flow_steps": 10,
+        "obs_dim": 55,
+        "full_action_dim": 25
+      }
+    }
+  ]
+}
