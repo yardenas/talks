@@ -202,7 +202,7 @@ fonts:
   </div>
   <div class="h-[17.4rem] min-w-0">
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/100K-2.mp4" type="video/mp4" />
+      <source src="/videos/100K-2-15s.mp4" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
         <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
@@ -301,10 +301,15 @@ fonts:
         Use simulators as priors.
       </div>
     </template>
+    <template #3>
+      <div class="text-[3.4rem] font-semibold leading-tight">
+        How to train in simulation a policy that is satisfies constraints zero shot in reality?
+      </div>
+    </template>
   </v-switch>
 </div>
 
----
+<!-- ---
 
 # From Simulation to Reality
 
@@ -333,6 +338,45 @@ fonts:
         <a href="/videos/first_episodes.mp4">here</a>.
       </p>
     </SlidevVideo>
+  </div>
+</div> -->
+
+---
+
+# Pessimistic Domain Randomization
+
+<div class="mt-4 flex h-[24rem] flex-col items-center justify-center text-center">
+  <div class="w-[96%]">
+    <div class="mb-2 text-[0.78rem] font-semibold opacity-60">
+      Pessimistic upper bound
+    </div>
+    <div class="text-[0.64rem] leading-tight">
+      <KatexBlock expr="C_{p^\star}(\pi)\le \underbrace{\mathbb{E}_{\xi\sim\mu} C_{\hat{p}_\xi}(\pi)}_{\text{constraint in simulation}} + \quad \underbrace{\mathbb{E}_{\xi\sim\mu}\!\left[\mathbb{E}_{(s,a)\sim d_{\hat{p}_\xi,\pi}}\left[\frac{\gamma L_C}{1-\gamma}D_W(\hat{p}_\xi,p^\star)(s,a)\right]\right]}_{\text{uncertainty w.r.t. sim-to-real gap}}" />
+    </div>
+  </div>
+
+  <div v-click>
+    <div class="my-1 text-[1.45rem] leading-none opacity-45">&darr;</div>
+    <div class="mx-auto w-[90%]">
+      <div class="mb-2 text-[0.78rem] font-semibold opacity-60">
+        Conservative surrogate cost
+      </div>
+      <div class="text-[0.96rem] leading-tight">
+        <KatexBlock expr="\tilde{c}(s,a)\triangleq c(s,a)+\underbrace{\frac{\gamma L_C}{1-\gamma}\max_{\xi\in\Xi}D_W(\hat{p}_\xi,p^\star)(s,a)}_{\text{penalty}}" />
+      </div>
+    </div>
+  </div>
+
+  <div v-click>
+    <div class="my-1 text-[1.45rem] leading-none opacity-45">&darr;</div>
+    <div class="mx-auto w-[94%]">
+      <div class="mb-2 text-[0.78rem] font-semibold opacity-60">
+        Approximate the penalty by ensemble disagreement
+      </div>
+      <div class="text-[0.78rem] leading-tight">
+        <KatexBlock expr="\begin{gathered} s_i\sim\hat{p}_{\xi_i}(\cdot\mid s,a),\quad \xi_i\overset{\mathrm{i.i.d.}}{\sim}\mu\\[0.35em]\upsilon(s,a)\triangleq\left\|\operatorname{Var}(s_1,\ldots,s_n)\right\|_1=\sum_{j=1}^{\operatorname{dim}(\mathcal{S})}\operatorname{Var}(s_{1,j},\ldots,s_{n,j}) \end{gathered}" />
+      </div>
+    </div>
   </div>
 </div>
 
