@@ -112,6 +112,207 @@ fonts:
   </div>
 </div>
 
+---
+
+# Real-World Reinforcement Learning
+
+<div class="mt-[2.3rem] h-[22rem]">
+  <img
+    class="mx-auto block h-full w-[47%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/image11.png"
+    alt="Robot setup with Realsense camera and cube pickup annotation"
+  />
+</div>
+
+---
+
+# Sim-to-Real
+
+<div class="mt-[2.1rem] grid grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
+  <div>
+    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Sim:</strong> x512 environments (MJX)</div>
+    <div class="h-[18.4rem] w-[88%]">
+      <img
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+        src="/deck/image7.png"
+        alt="Many simulated robot environments running in parallel"
+      />
+    </div>
+  </div>
+  <div>
+    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Real:</strong> x1 robot (!)</div>
+    <div class="w-[58%]">
+      <img
+        class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+        src="/deck/image4.png"
+        alt="Real robot camera view"
+      />
+    </div>
+  </div>
+</div>
+
+---
+
+# Online Learning: Franka Emika Panda
+
+<div class="mt-[2.3rem] grid grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
+  <div class="h-[19rem]">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-white object-contain" autoplay controls muted volume="0">
+      <source src="/videos/franka-learning.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="/videos/franka-learning.mp4">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="h-[18.3rem]">
+    <img
+      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+      src="/deck/image13.png"
+      alt="Online learning success plot comparing retained data and baseline"
+    />
+  </div>
+</div>
+
+---
+
+# Online Learning: Unitree Go2
+
+<div
+  class="absolute right-[4.15rem] top-[2.15rem] h-[7.75rem] w-[5.8rem]"
+>
+  <img
+    class="block h-full w-full object-contain"
+    src="/deck/image3.png"
+    alt="Stop robot abuse sign"
+  />
+</div>
+
+<div
+  class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
+>
+  <div class="h-[17.4rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/base-4.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1q2C8FrhnTGLXLsyA6-0JVwe2DRDAb72T/view">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="h-[17.4rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/100K-2.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="flex h-[17.4rem] min-w-0 items-center">
+    <div class="relative mx-auto aspect-[1643/1005] w-full">
+      <img
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+        src="/deck/image12.png"
+        alt="Return over time with cooldown periods"
+      />
+      <svg
+        class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+        viewBox="0 0 100 100"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="cooldown-arrowhead"
+            viewBox="0 0 4.2 4.2"
+            markerWidth="4.2"
+            markerHeight="4.2"
+            refX="3.8"
+            refY="2.1"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path
+              d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
+              stroke="#111111"
+              stroke-width="0.65"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </marker>
+        </defs>
+        <path
+          d="M58 53 C48.2 47.8 39.6 39.4 36.4 20.2"
+          stroke="#111111"
+          stroke-width="0.85"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#cooldown-arrowhead)"
+        />
+        <path
+          d="M58 53 C69.2 47.2 80.4 37.6 98.4 15.8"
+          stroke="#111111"
+          stroke-width="0.85"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          marker-end="url(#cooldown-arrowhead)"
+        />
+      </svg>
+      <div
+        class="pointer-events-none absolute left-[58%] top-[57.5%] -translate-x-1/2 text-center text-[0.72rem] font-medium leading-[0.92] text-black"
+      >
+        Cooldown<br />breaks🔥
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+# SOOPER
+
+<div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
+  <div class="h-[21.3rem] min-w-0">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/sooper_schematic.svg"
+      alt="SOOPER safe exploration schematic and constraint equation"
+    />
+  </div>
+  <div class="h-[21.3rem]">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="http://drive.google.com/file/d/1RsE_Z7R1L35YGs6OAk_kLwSXYu-kwE3m/view">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+</div>
+
+---
+
+# SOOPER
+
+<div class="mt-[2.3rem] grid grid-cols-2 items-center gap-[2.2rem]">
+  <div class="h-[21.3rem] min-w-0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+  <div class="h-[21.3rem] min-w-0">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/image10.png"
+      alt="SOOPER key result with performance plots and obstacle avoidance trajectory"
+    />
+  </div>
+</div>
 
 ---
 
@@ -278,207 +479,6 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 </div>
 
----
-
-# Real-world reinforcement learning
-
-<div class="mt-[2.3rem] h-[22rem]">
-  <img
-    class="mx-auto block h-full w-[47%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/image11.png"
-    alt="Robot setup with Realsense camera and cube pickup annotation"
-  />
-</div>
-
----
-
-# Sim-to-real
-
-<div class="mt-[2.1rem] grid grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
-  <div>
-    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Sim:</strong> x512 environments (MJX)</div>
-    <div class="h-[18.4rem] w-[88%]">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-        src="/deck/image7.png"
-        alt="Many simulated robot environments running in parallel"
-      />
-    </div>
-  </div>
-  <div>
-    <div class="mb-[0.55rem] text-[1.34rem] text-slate-900"><strong class="font-bold">Real:</strong> x1 robot (!)</div>
-    <div class="w-[58%]">
-      <img
-        class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image4.png"
-        alt="Real robot camera view"
-      />
-    </div>
-  </div>
-</div>
-
----
-
-# Online learning
-
-<div class="mt-[2.3rem] grid grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
-  <div class="h-[19rem]">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-white object-contain" autoplay controls muted volume="0">
-      <source src="/videos/franka-learning.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="/videos/franka-learning.mp4">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-  <div class="h-[18.3rem]">
-    <img
-      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/image13.png"
-      alt="Online learning success plot comparing retained data and baseline"
-    />
-  </div>
-</div>
-
----
-
-# Unitree Go2
-
-<div
-  class="absolute right-[4.15rem] top-[2.15rem] h-[7.75rem] w-[5.8rem]"
->
-  <img
-    class="block h-full w-full object-contain"
-    src="/deck/image3.png"
-    alt="Stop robot abuse sign"
-  />
-</div>
-
-<div
-  class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
->
-  <div class="h-[17.4rem] min-w-0">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/base-4.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="http://drive.google.com/file/d/1q2C8FrhnTGLXLsyA6-0JVwe2DRDAb72T/view">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-  <div class="h-[17.4rem] min-w-0">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/100K-2.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-  <div class="flex h-[17.4rem] min-w-0 items-center">
-    <div class="relative mx-auto aspect-[1643/1005] w-full">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image12.png"
-        alt="Return over time with cooldown periods"
-      />
-      <svg
-        class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
-        viewBox="0 0 100 100"
-        fill="none"
-        aria-hidden="true"
-      >
-        <defs>
-          <marker
-            id="cooldown-arrowhead"
-            viewBox="0 0 4.2 4.2"
-            markerWidth="4.2"
-            markerHeight="4.2"
-            refX="3.8"
-            refY="2.1"
-            orient="auto"
-            markerUnits="userSpaceOnUse"
-          >
-            <path
-              d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
-              stroke="#111111"
-              stroke-width="0.65"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </marker>
-        </defs>
-        <path
-          d="M58 53 C48.2 47.8 39.6 39.4 36.4 20.2"
-          stroke="#111111"
-          stroke-width="0.85"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          marker-end="url(#cooldown-arrowhead)"
-        />
-        <path
-          d="M58 53 C69.2 47.2 80.4 37.6 98.4 15.8"
-          stroke="#111111"
-          stroke-width="0.85"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          marker-end="url(#cooldown-arrowhead)"
-        />
-      </svg>
-      <div
-        class="pointer-events-none absolute left-[58%] top-[57.5%] -translate-x-1/2 text-center text-[0.72rem] font-medium leading-[0.92] text-black"
-      >
-        Cooldown<br />breaks🔥
-      </div>
-    </div>
-  </div>
-</div>
-
----
-
-# SOOPER
-
-<div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
-  <div class="h-[21.3rem] min-w-0">
-    <img
-      class="block h-full w-full object-contain"
-      src="/deck/sooper_schematic.svg"
-      alt="SOOPER safe exploration schematic and constraint equation"
-    />
-  </div>
-  <div class="h-[21.3rem]">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="http://drive.google.com/file/d/1RsE_Z7R1L35YGs6OAk_kLwSXYu-kwE3m/view">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-</div>
-
----
-
-# SOOPER
-
-<div class="mt-[2.3rem] grid grid-cols-2 items-center gap-[2.2rem]">
-  <div class="h-[21.3rem] min-w-0">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-  <div class="h-[21.3rem] min-w-0">
-    <img
-      class="block h-full w-full object-contain"
-      src="/deck/image10.png"
-      alt="SOOPER key result with performance plots and obstacle avoidance trajectory"
-    />
-  </div>
-</div>
 
 ---
 layout: cover
