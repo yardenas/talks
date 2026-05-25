@@ -19,98 +19,120 @@ fonts:
 .intro-bio {
   @apply font-mono opacity-90;
 }
-</style>
-
-<div class="intro-bio mt-6 leading-snug">
-  PhD student @ <a href="https://ai.ethz.ch/" target="_blank">ETH AI Center</a> & <a href="https://las.inf.ethz.ch/" target="_blank">Learning & Adaptive Systems</a>.<br>
-  Working real-world reinforcement learning and robotics.
-</div>
-
-<div class="mt-20">
-  <img src="/life.svg">
-</div>
-
-<img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
-
----
-
-<style>
-.places-title {
-  margin: 0 0 0.35rem;
-  font-size: 2.25rem;
-  line-height: 1;
+.intro-life {
+  margin-top: 4.15rem;
+  height: 12.55rem;
 }
-.places-grid {
+.intro-life img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.intro-media {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.55rem;
+  grid-template-columns: 35% 10% 47%;
+  column-gap: 0.38rem;
+  align-items: start;
+  margin-top: 0.15rem;
+  padding: 0;
 }
-.place-card {
+.intro-media-group {
+  display: grid;
+  gap: 0.28rem;
+}
+.intro-media-haifa {
+  grid-template-columns: 1.35fr 1fr;
+}
+.intro-media-ethz {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.intro-card {
   box-sizing: border-box;
-  height: 13.65rem;
+  height: 5.9rem;
   overflow: hidden;
   background: white;
-  border-radius: 22px;
-  border: 5px solid rgba(255,255,255,0.92);
-  box-shadow: 0 20px 48px rgba(15,23,42,0.12);
+  border-radius: 12px;
+  border: 3px solid rgba(255,255,255,0.94);
+  box-shadow: 0 12px 30px rgba(15,23,42,0.15);
 }
-.place-card > img,
-.place-card > iframe {
+.intro-card--map {
+  height: 5.9rem;
+}
+.intro-card > img,
+.intro-card > iframe {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
   object-fit: cover;
 }
-.place-card--portrait > img {
+.intro-card--portrait > img {
   object-position: center 18%;
 }
-.place-card--focus-right > img {
-  object-position: 35% center;
+.intro-card--focus-right > img {
+  object-position: 58% center;
+}
+.intro-profile-name {
+  position: absolute;
+  top: 12rem;
+  right: 3rem;
+  width: 10rem;
+  text-align: center;
+  font-size: 1.12rem;
+  font-weight: 650;
+  line-height: 1;
 }
 </style>
 
-<h1 class="places-title">Introduction</h1>
+<div class="intro-bio mt-5 leading-snug">
+  PhD student @ <a href="https://ai.ethz.ch/" target="_blank">ETH AI Center</a> & <a href="https://las.inf.ethz.ch/" target="_blank">Learning & Adaptive Systems</a>.<br>
+  Working real-world reinforcement learning and robotics.
+</div>
 
-<div class="places-grid mt-2">
-  <div class="place-card">
-    <iframe
-      src="https://www.google.com/maps?q=Bat%20Galim%2C%20Haifa%2C%20Israel&amp;z=13&amp;output=embed"
-      title="Map of Bat Galim, Haifa"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
+<div class="intro-life">
+  <img src="/life.svg">
+</div>
+
+<div class="intro-media">
+  <div class="intro-media-group intro-media-haifa">
+    <div class="intro-card intro-card--map">
+      <iframe
+        src="https://www.google.com/maps?q=Bat%20Galim%2C%20Haifa%2C%20Israel&amp;z=12&amp;output=embed"
+        title="Map of Bat Galim, Haifa"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+    <div class="intro-card">
+      <img src="/deck/batgalim.jpg" alt="Bat Galim">
+    </div>
   </div>
 
-  <div class="place-card">
-    <img src="/deck/batgalim.jpg" alt="Bat Galim">
+  <div class="intro-media-group intro-media-temi">
+    <div class="intro-card intro-card--portrait">
+      <img src="/deck/temi1.png" alt="Temi">
+    </div>
   </div>
 
-  <div class="place-card place-card--focus-right">
-    <img src="/deck/PXL_20230228_105749773.jpg" alt="Bat Galim, Haifa">
-  </div>
-
-  <div class="place-card">
-    <img src="/deck/roni.jpg" alt="Roni">
-  </div>
-
-  <div class="place-card">
-    <img src="/deck/ch.jpg" alt="Swiss landscape">
-  </div>
-
-  <div class="place-card">
-    <img src="/deck/ch1.jpg" alt="Swiss landscape">
-  </div>
-
-  <div class="place-card place-card--portrait">
-    <img src="/deck/temi1.png" alt="Temi">
-  </div>
-
-  <div class="place-card place-card--portrait">
-    <img src="/deck/temi2.png" alt="Temi">
+  <div class="intro-media-group intro-media-ethz">
+    <div class="intro-card">
+      <img src="/deck/ch1.jpg" alt="Swiss landscape">
+    </div>
+    <div class="intro-card">
+      <img src="/deck/ch.jpg" alt="Swiss landscape">
+    </div>
+    <div class="intro-card intro-card--focus-right">
+      <img src="/deck/PXL_20230228_105749773.jpg" alt="Bat Galim, Haifa">
+    </div>
+    <div class="intro-card">
+      <img src="/deck/roni.jpg" alt="Roni">
+    </div>
   </div>
 </div>
+
+<img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
+<div class="intro-profile-name">Yarden As</div>
 
 ---
 
@@ -294,8 +316,8 @@ A language for safe RL
 # Safety and Priors
 
 <div class="mt-16 flex h-[18rem] items-center justify-center text-center">
-  <v-switch at="0">
-    <template #1>
+  <div class="relative h-full w-full">
+    <div class="absolute inset-0 flex items-center justify-center">
       <div class="mx-auto max-w-[56rem] leading-tight">
         <div class="text-[2.35rem]">
           How can agents explore new environments without any notion of what is safe?
@@ -304,18 +326,18 @@ A language for safe RL
           Some prior knowledge is needed.
         </div>
       </div>
-    </template>
-    <template #2>
+    </div>
+    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
       <div class="text-[3.4rem] font-semibold leading-tight">
         Use simulators as priors.
       </div>
-    </template>
-    <template #3>
+    </div>
+    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
       <div class="text-[3.4rem] font-semibold leading-tight">
         How to train in simulation a policy that is satisfies constraints zero shot in reality?
       </div>
-    </template>
-  </v-switch>
+    </div>
+  </div>
 </div>
 
 <!-- ---
