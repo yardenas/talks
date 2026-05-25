@@ -268,6 +268,18 @@ fonts:
   </div>
 </div>
 
+
+---
+
+# Safety Matters in the Real World
+
+<div class="mx-auto mt-8 flex h-[20.5rem] w-[82%] items-center justify-center rounded-[0.5rem] border-[3px] border-dashed border-slate-400 bg-slate-50 text-center text-slate-500">
+  <div>
+    <div class="text-[1.2rem] font-semibold">Image placeholder</div>
+    <div class="mt-2 text-[0.95rem]">Robot undergoing open surgery</div>
+  </div>
+</div>
+
 ---
 
 # SOOPER
