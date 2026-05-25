@@ -282,6 +282,62 @@ fonts:
 
 ---
 
+# Safety and Priors
+
+<div class="mt-16 flex h-[18rem] items-center justify-center text-center">
+  <v-switch at="0">
+    <template #1>
+      <div class="mx-auto max-w-[56rem] leading-tight">
+        <div class="text-[2.35rem]">
+          How can agents explore new environments without any notion of what is safe?
+        </div>
+        <div class="mt-8 text-[2.75rem] font-semibold">
+          Some prior knowledge is needed.
+        </div>
+      </div>
+    </template>
+    <template #2>
+      <div class="text-[3.4rem] font-semibold leading-tight">
+        Use simulators as priors.
+      </div>
+    </template>
+  </v-switch>
+</div>
+
+---
+
+# From Simulation to Reality
+
+<div class="mt-12 grid grid-cols-[1fr_0.42fr_1.22fr] items-center gap-5">
+  <div class="h-[16.2rem] min-w-0 text-center">
+    <img
+      class="mx-auto block h-full w-full rounded-[0.45rem] object-contain"
+      src="/deck/rccar_sim.gif"
+      alt="Simulated RC car driving"
+    />
+  </div>
+
+  <div v-click class="text-center text-[1.55rem] font-semibold leading-tight">
+    simulation<br />
+    <div class="my-1 text-[2.9rem] leading-none">
+      <KatexBlock expr="\neq" />
+    </div>
+    reality
+  </div>
+
+  <div class="h-[16.2rem] min-w-0 translate-x-5 text-center">
+    <SlidevVideo class="mx-auto block h-full w-full rounded-[0.45rem] bg-white object-contain" autoplay loop muted volume="0">
+      <source src="/videos/first_episodes.mp4" type="video/mp4" />
+      <p>
+        Your browser does not support videos. You may download it
+        <a href="/videos/first_episodes.mp4">here</a>.
+      </p>
+    </SlidevVideo>
+  </div>
+</div>
+
+---
+
 # SOOPER
 
 <div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
