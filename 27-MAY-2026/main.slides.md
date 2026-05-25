@@ -447,11 +447,16 @@ class: text-center
 # Safe Exploration via Policy Priors
 Online rollout
 
+
 <div class="absolute right-[1.7rem] top-[3.2rem] h-[7rem] w-[18.5rem]">
   <TrainingLoop compact focus="collect" />
 </div>
 
-<div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
+<div class="absolute left-[1.3rem] top-[7.7rem] z-10 w-[54%] text-[0.92rem] leading-tight">
+  <KatexBlock expr="\Phi(s_t,a_t,c_{&lt;t},Q_{c,n}^{\hat{\pi}}) = c_{&lt;t} + \gamma^tQ_{c,n}^{\hat{\pi}}(s_t,a_t)" />
+</div>
+
+<div class="mt-[2.9rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
   <div class="h-[21.3rem] min-w-0">
     <img
       class="block h-full w-full object-contain"
