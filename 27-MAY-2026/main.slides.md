@@ -271,7 +271,7 @@ fonts:
 
 ---
 
-# Robots May Break
+# ⚠️ Robots May Break ⚠️
 
 <div class="mx-auto mt-8 flex h-[20.5rem] w-[82%] items-center justify-center rounded-[0.5rem] border-[3px] border-dashed border-slate-400 bg-slate-50 text-center text-slate-500">
   <div>
@@ -439,64 +439,28 @@ class: text-center
 # Closing the Loop
 
 <div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
-  <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1200 560" role="img" aria-label="SOOPER training loop">
-    <path d="M 350 56 H 88 Q 42 56 42 102 V 146 Q 42 168 64 168 H 116" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-    <polygon points="138,168 116,157 116,179" fill="black" />
-    <path d="M 1048 168 H 1138 Q 1184 168 1184 122 V 102 Q 1184 56 1138 56 H 880" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-    <polygon points="858,56 880,45 880,67" fill="black" />
-    <path d="M 340 168 H 472" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" />
-    <polygon points="494,168 472,157 472,179" fill="black" />
-    <path d="M 706 168 H 852" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" />
-    <polygon points="874,168 852,157 852,179" fill="black" />
-  </svg>
-  <div class="absolute left-[27%] top-0 flex h-[3.4rem] w-[46%] items-center justify-center border-[2.5px] border-black bg-white px-4">
-    <KatexBlock class="text-[0.92rem]" expr="\text{Iterate for } n=0,\ldots,N-1\text{ episodes}" />
-  </div>
-  <div class="absolute left-[8.5%] top-[6.35rem] w-[26%] text-center">
-    <div class="inline-block bg-white px-1 text-[1.22rem] font-semibold leading-none">Collect data</div>
-  </div>
-  <div class="absolute left-[40%] top-[6.35rem] w-[26%] text-center">
-    <div class="inline-block bg-white px-3 text-[1.22rem] font-semibold leading-none">Improve model</div>
-  </div>
-  <div class="absolute left-[66.5%] top-[6.35rem] w-[26%] text-center">
-    <div class="inline-block bg-white px-3 text-[1.22rem] font-semibold leading-none">Plan</div>
-  </div>
-  <div class="absolute left-[3.2%] top-[8.9rem] w-[31%] text-center text-[0.98rem] leading-tight">
-    <div>
-      Deploy <KatexBlock class="inline-block" :display="false" expr="\pi_n" /> safely and append
-    </div>
-    <div>
-      real transitions to <KatexBlock class="inline-block" :display="false" expr="\mathcal{D}_{\le n}" />.
-    </div>
-  </div>
-  <div class="absolute left-[36.5%] top-[8.9rem] w-[27%] text-center text-[0.98rem] leading-tight">
-    <div>Fit the dynamics model</div>
-    <div>from all collected data.</div>
-  </div>
-  <div class="absolute left-[70%] top-[8.9rem] w-[27%] text-center text-[0.98rem] leading-tight">
-    <div>Plan optimistically for reward,</div>
-    <div>pessimistically for cost.</div>
-    <div>
-      Return the next <KatexBlock class="inline-block" :display="false" expr="\pi_{n+1}" />.
-    </div>
-  </div>
+  <TrainingLoop />
 </div>
 
 ---
 
-# SOOPER
+# Safe Exploration via Policy Priors
 Online rollout
+
+<div class="absolute right-[1.7rem] top-[3.2rem] h-[7rem] w-[18.5rem]">
+  <TrainingLoop compact focus="collect" />
+</div>
 
 <div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
   <div class="h-[21.3rem] min-w-0">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/sooper_schematic.svg"
+      src="/deck/sooper_schematic_simplified.png"
       alt="SOOPER safe exploration schematic and constraint equation"
     />
   </div>
   <div class="h-[21.3rem]">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-contain" autoplay controls muted volume="0">
       <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
@@ -508,7 +472,7 @@ Online rollout
 
 ---
 
-# SOOPER
+# Safe Exploration via Policy Priors
 
 <div class="mt-[2.3rem] grid grid-cols-2 items-center gap-[2.2rem]">
   <div class="h-[21.3rem] min-w-0">
