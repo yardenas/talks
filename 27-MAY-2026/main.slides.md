@@ -271,13 +271,22 @@ fonts:
 
 ---
 
-# Safety Matters in the Real World
+# Robots May Break
 
 <div class="mx-auto mt-8 flex h-[20.5rem] w-[82%] items-center justify-center rounded-[0.5rem] border-[3px] border-dashed border-slate-400 bg-slate-50 text-center text-slate-500">
   <div>
     <div class="text-[1.2rem] font-semibold">Image placeholder</div>
     <div class="mt-2 text-[0.95rem]">Robot undergoing open surgery</div>
   </div>
+</div>
+
+---
+
+# Constrained Markov Decision Processes
+A language for safe RL
+
+<div class="mt-30 mx-auto w-[96%] text-[1.22rem] leading-tight">
+  <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
 </div>
 
 ---
@@ -427,9 +436,9 @@ class: text-center
 
 ---
 
-# Close the Loop
+# Closing the Loop
 
-<div class="relative mt-[2.0rem] mx-auto h-[23rem] w-[94%]">
+<div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
   <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1200 560" role="img" aria-label="SOOPER training loop">
     <path d="M 350 56 H 88 Q 42 56 42 102 V 146 Q 42 168 64 168 H 116" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
     <polygon points="138,168 116,157 116,179" fill="black" />
@@ -452,23 +461,19 @@ class: text-center
   <div class="absolute left-[66.5%] top-[6.35rem] w-[26%] text-center">
     <div class="inline-block bg-white px-3 text-[1.22rem] font-semibold leading-none">Plan</div>
   </div>
-  <div class="absolute left-[3.2%] top-[10.4rem] w-[31%] text-center text-[0.98rem] leading-tight">
+  <div class="absolute left-[3.2%] top-[8.9rem] w-[31%] text-center text-[0.98rem] leading-tight">
     <div>
       Deploy <KatexBlock class="inline-block" :display="false" expr="\pi_n" /> safely and append
     </div>
     <div>
       real transitions to <KatexBlock class="inline-block" :display="false" expr="\mathcal{D}_{\le n}" />.
     </div>
-    <KatexBlock
-      class="mt-4 text-[0.48rem]"
-      expr="\Phi(s_t,a_t,c_{&lt;t},Q_{c,n}^{\hat{\pi}})=c_{&lt;t}+\gamma^tQ_{c,n}^{\hat{\pi}}(s_t,a_t)"
-    />
   </div>
-  <div class="absolute left-[36.5%] top-[10.4rem] w-[27%] text-center text-[0.98rem] leading-tight">
+  <div class="absolute left-[36.5%] top-[8.9rem] w-[27%] text-center text-[0.98rem] leading-tight">
     <div>Fit the dynamics model</div>
     <div>from all collected data.</div>
   </div>
-  <div class="absolute left-[70%] top-[10.4rem] w-[27%] text-center text-[0.98rem] leading-tight">
+  <div class="absolute left-[70%] top-[8.9rem] w-[27%] text-center text-[0.98rem] leading-tight">
     <div>Plan optimistically for reward,</div>
     <div>pessimistically for cost.</div>
     <div>
@@ -480,6 +485,7 @@ class: text-center
 ---
 
 # SOOPER
+Online rollout
 
 <div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
   <div class="h-[21.3rem] min-w-0">
