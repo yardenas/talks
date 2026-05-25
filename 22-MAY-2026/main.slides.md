@@ -1,11 +1,16 @@
 ---
-title: Projects
+title: Yarden <> George
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Recent Projects
+# Yarden &lt;&gt; George
+<div class="abs-bl mx-14 my-12 flex">
+  <div class="ml-3 flex flex-col text-left">
+    <div class="text-sm opacity-50">May 26, 2026</div>
+  </div>
+</div>
 
 
 ---

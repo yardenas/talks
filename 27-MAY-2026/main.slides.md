@@ -323,7 +323,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 <div class="mt-[2.3rem] grid grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
   <div class="h-[19rem]">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-white object-contain" autoplay controls muted volume="0">
       <source src="/videos/franka-learning.mp4" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
@@ -442,7 +442,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
   <div class="h-[21.3rem] min-w-0">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/image8.png"
+      src="/deck/sooper_schematic.svg"
       alt="SOOPER safe exploration schematic and constraint equation"
     />
   </div>
