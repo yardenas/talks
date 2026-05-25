@@ -390,6 +390,28 @@ fonts:
 
 ---
 
+# Results
+
+<div class="mt-10 grid h-[22.5rem] grid-rows-[7.6rem_13.7rem] gap-3">
+  <div class="mx-auto min-h-0 w-[92%]">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/real-world-safety.svg"
+      alt="SPiDR real-world safety results"
+    />
+  </div>
+
+  <div class="mx-auto min-h-0 w-[92%]">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/spidr-results.png"
+      alt="SPiDR simulated safety and performance results"
+    />
+  </div>
+</div>
+
+---
+
 # SOOPER
 
 <div class="mt-[2.3rem] grid grid-cols-[1fr_0.9fr] items-center gap-[2.2rem]">
