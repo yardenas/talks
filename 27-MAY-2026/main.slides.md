@@ -1,14 +1,14 @@
 ---
-title: Yarden <> George
+title: Real-World Reinforcement Learning that Works
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Yarden &lt;&gt; George
+# Real-World Reinforcement Learning that Works
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">May 26, 2026</div>
+    <div class="text-sm opacity-50">June 16, 2026</div>
   </div>
 </div>
 
@@ -32,7 +32,7 @@ fonts:
 
 <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
 
-<!-- ---
+---
 
 <style>
 .places-title {
@@ -111,7 +111,7 @@ fonts:
     <img src="/deck/temi2.png" alt="Temi">
   </div>
 </div>
- -->
+
 
 ---
 
