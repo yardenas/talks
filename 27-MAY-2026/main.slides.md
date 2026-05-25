@@ -1,14 +1,14 @@
 ---
-title: Yarden <> Marc
+title: Yarden <> George
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Yarden &lt;&gt; Marc
+# Yarden &lt;&gt; George
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">May 27, 2026</div>
+    <div class="text-sm opacity-50">May 26, 2026</div>
   </div>
 </div>
 
@@ -23,7 +23,7 @@ fonts:
 
 <div class="intro-bio mt-6 leading-snug">
   PhD student @ <a href="https://ai.ethz.ch/" target="_blank">ETH AI Center</a> & <a href="https://las.inf.ethz.ch/" target="_blank">Learning & Adaptive Systems</a>.<br>
-  Working on safe reinforcement learning.
+  Working real-world reinforcement learning and robotics.
 </div>
 
 <div class="mt-20">
@@ -32,7 +32,7 @@ fonts:
 
 <img src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg" class="rounded-full w-40 abs-tr mt-7 mr-12"/>
 
----
+<!-- ---
 
 <style>
 .places-title {
@@ -65,6 +65,9 @@ fonts:
 .place-card--portrait > img {
   object-position: center 18%;
 }
+.place-card--focus-right > img {
+  object-position: 35% center;
+}
 </style>
 
 <h1 class="places-title">Introduction</h1>
@@ -84,7 +87,7 @@ fonts:
     <img src="/deck/batgalim.jpg" alt="Bat Galim">
   </div>
 
-  <div class="place-card">
+  <div class="place-card place-card--focus-right">
     <img src="/deck/PXL_20230228_105749773.jpg" alt="Bat Galim, Haifa">
   </div>
 
@@ -108,7 +111,7 @@ fonts:
     <img src="/deck/temi2.png" alt="Temi">
   </div>
 </div>
-
+ -->
 
 ---
 
@@ -214,14 +217,14 @@ Harder tasks
     <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
       <iframe
         class="block h-full w-full border-0"
-        src="/mjswan/index.html?scene=Puzzle%20task5&controller=onnx&autoplay=1&speed=1&seed=random&panel=0"
+        src="/mjswan/index.html?scene=Puzzle%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0"
         title="OGBench puzzle MuJoCo WASM demo"
       />
     </div>
     <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
       <iframe
         class="block h-full w-full border-0"
-        src="/mjswan-cube/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=random&panel=0"
+        src="/mjswan-cube/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0"
         title="OGBench cube MuJoCo WASM demo"
       />
     </div>

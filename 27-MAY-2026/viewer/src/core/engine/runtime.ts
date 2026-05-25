@@ -121,7 +121,7 @@ const MANIP_TERMINAL_HOLD_MS = 1400;
 const BEST_MANIPULATION_POLICY_ID = 'mpo_awr_prior_dyna_bon';
 const BEST_MANIPULATION_POLICY_LABEL = 'Odyn';
 const BEST_MANIPULATION_POLICY_PATH = 'policy_mpo_awr_prior_dyna_bon.onnx';
-const MAX_MANIPULATION_SEED = 0x7fffffff;
+const FIXED_MANIPULATION_SEED = 1;
 
 function controllerFromSearch(search: string): PuzzleController {
   const value = new URLSearchParams(search).get('controller')?.toLowerCase();
@@ -135,12 +135,7 @@ function controllerFromSearch(search: string): PuzzleController {
 }
 
 function randomManipulationSeed(): number {
-  if (globalThis.crypto?.getRandomValues) {
-    const values = new Uint32Array(1);
-    globalThis.crypto.getRandomValues(values);
-    return values[0] & MAX_MANIPULATION_SEED;
-  }
-  return Math.floor(Math.random() * (MAX_MANIPULATION_SEED + 1));
+  return FIXED_MANIPULATION_SEED;
 }
 
 function manipulationSeedFromSearch(search: string): { seed: number; locked: boolean } {
