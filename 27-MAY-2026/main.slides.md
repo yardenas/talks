@@ -411,6 +411,21 @@ fonts:
 </div>
 
 ---
+layout: center
+class: text-center
+---
+
+<div class="flex flex-col items-center justify-center">
+  <div class="text-[3.9rem] font-semibold leading-tight">
+    Can we do better?
+  </div>
+
+  <div v-click class="mt-10 text-[2.35rem] font-semibold leading-tight opacity-70">
+    close the loop, learn online
+  </div>
+</div>
+
+---
 
 # SOOPER
 
