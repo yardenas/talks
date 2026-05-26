@@ -567,6 +567,57 @@ Regret decomposition
 </div>
 
 ---
+class: takeaways-slide
+---
+
+# Takeaways
+
+<div class="takeaways-cheese-figure">
+  <img class="takeaways-cheese" src="/deck/Swiss_cheese_model_textless.svg" alt="Swiss cheese model of layered safety barriers" />
+  <div class="takeaways-cheese-ref">
+    Source: <a href="https://en.wikipedia.org/wiki/Swiss_cheese_model">Wikipedia, Swiss cheese model</a>
+  </div>
+</div>
+
+1. Good priors are critical for safe online learning
+2. Swiss cheese model for safety🇨🇭
+
+<style>
+.takeaways-slide ol {
+  margin-top: 5.4rem;
+  width: 52%;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+
+.takeaways-slide li {
+  margin-bottom: 2rem;
+  padding-left: 0.35rem;
+}
+
+.takeaways-cheese-figure {
+  position: absolute;
+  right: 1.8rem;
+  top: 7.6rem;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.32rem;
+}
+
+.takeaways-cheese {
+  width: 100%;
+}
+
+.takeaways-cheese-ref {
+  width: 100%;
+  line-height: 1;
+  text-align: center;
+}
+</style>
+
+---
 
 # Odyn: Offline-to-online Dyna
 Three pillars of model-based RL
