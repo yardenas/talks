@@ -542,11 +542,22 @@ Regret decomposition
 
 <div class="mt-[3.0rem] grid grid-cols-[0.72fr_1.28fr] items-center gap-[1.9rem]">
   <div class="flex h-[21.5rem] items-center justify-center">
-    <img
-      class="block h-full w-full object-contain"
-      src="/deck/hardware.svg"
-      alt="Real robotic system used for SOOPER experiments"
-    />
+    <div class="relative h-full aspect-[138.74227/185.78385]">
+      <img
+        class="block h-full w-full object-contain"
+        src="/deck/hardware.svg"
+        alt="Real robotic system used for SOOPER experiments"
+      />
+      <svg class="pointer-events-none absolute inset--8 h-full w-full overflow-visible" viewBox="0 0 138.74227 185.78385" aria-hidden="true">
+        <defs>
+          <marker id="unsafe-arrow" markerWidth="5" markerHeight="5" refX="4.35" refY="2.5" orient="auto" markerUnits="strokeWidth">
+            <path d="M 0 0 L 5 2.5 L 0 5 z" fill="#d52222" />
+          </marker>
+        </defs>
+        <text x="105" y="119" fill="#d52222" font-family="Inter, Arial, sans-serif" font-size="4.2" font-weight="700">unsafe</text>
+        <path d="M 105 119 C 98 123 92 126 84 140" fill="none" stroke="#d52222" stroke-width="1.1" stroke-linecap="round" marker-end="url(#unsafe-arrow)" />
+      </svg>
+    </div>
   </div>
   <div class="h-[21.5rem]">
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-contain" autoplay controls loop muted volume="0">
