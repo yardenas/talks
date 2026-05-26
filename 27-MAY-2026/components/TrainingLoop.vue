@@ -60,7 +60,8 @@ withDefaults(
       </div>
     </div>
 
-    <div v-if="compact && focus === 'collect'" class="focus-chip">rollout / collect data</div>
+    <div v-if="compact && focus === 'collect'" class="focus-chip focus-chip-collect">rollout / collect data</div>
+    <div v-if="compact && focus === 'plan'" class="focus-chip focus-chip-plan">unconstrained planning</div>
   </div>
 </template>
 
@@ -183,8 +184,6 @@ withDefaults(
 
 .focus-chip {
   position: absolute;
-  left: 8.8%;
-  top: 12.15rem;
   border-radius: 999px;
   background: #5b45a5;
   color: white;
@@ -192,6 +191,7 @@ withDefaults(
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .compact .loop-line {
@@ -237,9 +237,17 @@ withDefaults(
 }
 
 .compact .focus-chip {
-  left: 16%;
-  top: 2.95rem;
   padding: 0.08rem 0.28rem;
   font-size: 0.38rem;
+}
+
+.compact .focus-chip-collect {
+  left: 16%;
+  top: 2.95rem;
+}
+
+.compact .focus-chip-plan {
+  left: 61.6%;
+  top: 3.08rem;
 }
 </style>

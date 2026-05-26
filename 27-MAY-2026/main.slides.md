@@ -526,6 +526,17 @@ Online rollout
 
 ---
 
+# Efficient Online Learning
+Regret decomposition
+
+<div class="mx-auto flex min-h-[22rem] w-full items-center justify-center">
+  <div class="w-full text-center text-[1.22rem] leading-none">
+    <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi^*,f) - \mathcal{J}_r(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
+  </div>
+</div>
+
+---
+
 # Odyn: Offline-to-online Dyna
 Three pillars of model-based RL
 
