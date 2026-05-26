@@ -136,6 +136,59 @@ fonts:
 
 ---
 
+# Extending Beyond Priors: Autonomous Robot Learning
+
+<div class="mt-[3.75rem] grid grid-cols-[1.02fr_0.98fr] items-stretch gap-[1.15rem]">
+  <div class="flex min-h-[21.4rem] flex-col justify-center -translate-y-[0.45rem]">
+    <div class="grid gap-[0.82rem]">
+      <v-click>
+        <div class="border-l-[3px] border-black pl-[0.85rem]">
+          <div class="text-[1.18rem] font-semibold leading-tight">Humans collect data for robots? 🙃</div>
+          <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
+            Robots should assist humans, instead of relying on humans to produce all their training experience.
+          </div>
+        </div>
+      </v-click>
+      <v-click>
+        <div class="border-l-[3px] border-black pl-[0.85rem]">
+          <div class="text-[1.18rem] font-semibold leading-tight">Simulators are powerful, but incomplete</div>
+          <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
+            Soft, contact-rich, human-facing tasks are hard to model faithfully.
+          </div>
+        </div>
+      </v-click>
+      <v-click>
+        <div>
+          <div class="mb-[0.22rem] text-center text-[1.08rem] leading-none">
+            <KatexBlock expr="\Downarrow" />
+          </div>
+          <div class="border-l-[3px] border-black pl-[0.85rem]">
+            <div class="text-[1.18rem] font-semibold leading-tight">Robots must collect their own experience</div>
+            <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
+              To go beyond their priors, robots need autonomous data collection and learning during deployment.
+            </div>
+          </div>
+        </div>
+      </v-click>
+    </div>
+  </div>
+
+  <div class="flex min-h-[21.4rem] flex-col">
+    <div class="mx-auto h-[19.55rem] w-[96%]">
+      <img
+        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
+        src="/deck/GettyImages-2235362094.webp"
+        alt="Workers collecting robot training data"
+      />
+    </div>
+    <div class="takeaways-cheese-ref mt-[0.35rem] text-[0.58rem]">
+      Source: <a href="https://restofworld.org/2026/china-robots-training-centers-workers/">Rest of World</a>
+    </div>
+  </div>
+</div>
+
+---
+
 # Real-World Reinforcement Learning
 
 <div class="mt-[2.3rem] h-[22rem]">
@@ -909,35 +962,5 @@ layout: cover
     <span>SPO</span>
     <span>TreePI<sup>*</sup></span>
     <span>Odyn</span>
-  </div>
-</div>
-
----
-
-# Libero -> MJX
-
-<div class="mt-[2.3rem] grid grid-cols-[1.3fr_0.75fr] items-center gap-[2.7rem]">
-  <div class="h-[21rem]">
-    <img
-      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/image6.png"
-      alt="Throughput chart comparing CPU and MJX environments"
-    />
-  </div>
-  <div class="grid gap-[0.65rem]">
-    <div class="h-[12.1rem]">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-        src="/deck/image15.gif"
-        alt="Libero rollout animation"
-      />
-    </div>
-    <div class="h-[12.1rem]">
-      <img
-        class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-        src="/deck/image16.gif"
-        alt="MJX rollout animation"
-      />
-    </div>
   </div>
 </div>
