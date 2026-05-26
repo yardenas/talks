@@ -419,9 +419,11 @@ A language for safe RL
   </div>
 </div>
 
+<PaperTag conference="NeurIPS" year="2025" href="https://openreview.net/forum?id=Pe1ypX9gBO" />
+
 ---
 
-# Results
+# Zero-Shot Constraint Satisfaction on Real Hardware
 
 <div class="mt-10 grid h-[22.5rem] grid-rows-[7.6rem_13.7rem] gap-3">
   <div class="mx-auto min-h-0 w-[92%]">
@@ -440,6 +442,8 @@ A language for safe RL
     />
   </div>
 </div>
+
+<PaperTag conference="NeurIPS" year="2025" href="https://openreview.net/forum?id=Pe1ypX9gBO" />
 
 ---
 layout: center
@@ -497,6 +501,8 @@ Online rollout
   </div>
 </div>
 
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
+
 ---
 
 # Simulated Planning
@@ -525,6 +531,8 @@ Reduction to “standard” MDPs
   </div>
 </div>
 
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
+
 ---
 
 # Efficient Online Learning
@@ -535,6 +543,8 @@ Regret decomposition
     <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi^*,f) - \mathcal{J}_r(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
   </div>
 </div>
+
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
 
 ---
 
@@ -566,6 +576,8 @@ Regret decomposition
   </div>
 </div>
 
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
+
 ---
 class: takeaways-slide
 ---
@@ -581,7 +593,7 @@ class: takeaways-slide
 
 1. Good priors are critical for safe online learning
 2. Swiss cheese model for safety🇨🇭
-3. Optimal performance, _even when exploring under constraints!_
+3. Optimal performance, _even when exploring under constraints_
 
 <style>
 .takeaways-slide ol {
@@ -617,6 +629,8 @@ class: takeaways-slide
   text-align: center;
 }
 </style>
+
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
 
 ---
 
@@ -791,6 +805,20 @@ layout: cover
 
 ---
 
+# SOOPER Works in Practice
+
+<div class="mx-auto mt-[1.7rem] flex h-[23rem] w-[96%] items-center justify-center">
+  <img
+    class="block h-full w-full object-contain"
+    src="/deck/main_results.svg"
+    alt="SOOPER practice results"
+  />
+</div>
+
+<PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
+
+---
+
 # Taxonomy of MBRL Algorithms
 
 <div class="relative mx-auto mt-1 aspect-[1040/430] w-full max-w-[37rem]">
@@ -893,30 +921,5 @@ layout: cover
         alt="MJX rollout animation"
       />
     </div>
-  </div>
-</div>
-
----
-
-# Theory
-
-<div class="mt-[1.7rem] grid grid-rows-[auto_7.2rem] gap-[1.1rem]">
-  <ul class="m-0 w-[92%] space-y-[0.72rem] pl-[1.8rem] text-[1.36rem] leading-[1.34]">
-    <li>
-      Split episodic regret into a term that relates to performance in the simulated MDP and the performance of an optimal policy on the real MDP under the augmented policy.
-    </li>
-    <li>
-      First term: invoke theory for online learning in non-linear RKHS dynamics due to Kakade 2020.
-    </li>
-    <li>
-      Second term: show that as the model improves, the algorithm need not fall back to the prior policy.
-    </li>
-  </ul>
-  <div class="mx-auto h-full w-[72%] self-end">
-    <img
-      class="block h-full w-full object-contain"
-      src="/deck/image9.png"
-      alt="Regret decomposition formula"
-    />
   </div>
 </div>
