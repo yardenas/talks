@@ -5,7 +5,7 @@ fonts:
   serif: Lusitana
 ---
 
-# Real-World Reinforcement Learning that Works
+# Real-World Reinforcement Learning That Works
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
     <div class="text-sm opacity-50">June 16, 2026</div>
@@ -499,24 +499,28 @@ Online rollout
 
 ---
 
-# Safe Exploration via Policy Priors
+# Unconstrained Simulated Planning
 
-<div class="mt-[2.3rem] grid grid-cols-2 items-center gap-[2.2rem]">
-  <div class="h-[21.3rem] min-w-0">
-    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="/videos/timelapse.BoG5wRG9.mp4">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-  <div class="h-[21.3rem] min-w-0">
+<div class="absolute right-[1.7rem] top-[3.2rem] h-[7rem] w-[18.5rem]">
+  <TrainingLoop compact focus="plan" />
+</div>
+
+<div class="mt-[0.65rem] grid grid-cols-2 items-center gap-[0.5rem]">
+  <div class="flex h-[22rem] min-w-0 justify-center">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/image10.png"
-      alt="SOOPER key result with performance plots and obstacle avoidance trajectory"
+      src="/deck/sooper_schematic.svg"
+      alt="SOOPER unconstrained planning MDP schematic"
     />
+  </div>
+
+  <div class="pt-[4.1rem]">
+    <div v-click class="text-[0.9rem] leading-tight">
+      <KatexBlock expr="\tilde{r}(s_t,a_t) := \begin{cases} \underline{V}_r^{\hat{\pi}}(s_t) & \text{if } \Phi(a_t,s_t,c_{\lt t},Q_{c,n}^{\hat{\pi}}) \geq d,\\ 0 & \text{if } s_t = s_\dagger, \\ r(s_t,a_t) & \text{otherwise}. \end{cases}" />
+    </div>
+    <div v-click class="mt-[5.25rem] -ml-[9.9rem] w-[calc(100%+7.9rem)] text-[0.9rem] leading-tight">
+      <KatexBlock expr="\tilde{p}(s_{t+1}\mid s_t,a_t) := \begin{cases} \mathbf{1}\{s_{t+1} = s_\dagger\} & \text{if } \Phi(a_t,s_t,c_{\lt t}, Q_{c,n}^{\hat{\pi}}) \geq d \text{ or } s_t = s_\dagger,\\ p(s_{t+1}\mid s_t,a_t) & \text{otherwise}. \end{cases}" />
+    </div>
   </div>
 </div>
 

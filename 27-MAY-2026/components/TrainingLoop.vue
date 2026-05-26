@@ -228,7 +228,8 @@ withDefaults(
 }
 
 .compact .label-plan {
-  left: 77%;
+  left: 74.8%;
+  top: 1.95rem;
 }
 
 .compact .desc {
