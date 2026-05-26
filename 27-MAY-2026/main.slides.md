@@ -581,6 +581,7 @@ class: takeaways-slide
 
 1. Good priors are critical for safe online learning
 2. Swiss cheese model for safety🇨🇭
+3. Optimal performance, _even when exploring under constraints!_
 
 <style>
 .takeaways-slide ol {
