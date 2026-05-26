@@ -1,14 +1,14 @@
 ---
-title: Yarden <> George
+title: Yarden <> Alex
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Yarden &lt;&gt; George
+# Yarden &lt;&gt; Alex
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">May 26, 2026</div>
+    <div class="text-sm opacity-50">June 4th, 2026</div>
   </div>
 </div>
 
