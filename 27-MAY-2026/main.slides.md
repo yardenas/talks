@@ -499,7 +499,8 @@ Online rollout
 
 ---
 
-# Unconstrained Simulated Planning
+# Simulated Planning
+Reduction to “standard” MDPs
 
 <div class="absolute right-[1.7rem] top-[3.2rem] h-[7rem] w-[18.5rem]">
   <TrainingLoop compact focus="plan" />
@@ -532,6 +533,25 @@ Regret decomposition
 <div class="mx-auto flex min-h-[22rem] w-full items-center justify-center">
   <div class="w-full text-center text-[1.22rem] leading-none">
     <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi^*,f) - \mathcal{J}_r(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
+  </div>
+</div>
+
+---
+
+# Hardware Experiments
+
+<div class="mt-[3.0rem] grid grid-cols-[0.72fr_1.28fr] items-center gap-[1.9rem]">
+  <div class="flex h-[21.5rem] items-center justify-center">
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/hardware.svg"
+      alt="Real robotic system used for SOOPER experiments"
+    />
+  </div>
+  <div class="h-[21.5rem]">
+    <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-contain" autoplay controls loop muted volume="0">
+      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
+    </SlidevVideo>
   </div>
 </div>
 
