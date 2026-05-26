@@ -295,10 +295,28 @@ fonts:
 
 # ⚠️ Robots May Break ⚠️
 
-<div class="mx-auto mt-8 flex h-[20.5rem] w-[82%] items-center justify-center rounded-[0.5rem] border-[3px] border-dashed border-slate-400 bg-slate-50 text-center text-slate-500">
+<div class="mx-auto mt-[2.0rem] flex h-[7.7rem] w-[92%] items-center justify-center">
+  <img
+    class="block h-full w-full object-contain"
+    src="/deck/go1-crash.png"
+    alt="Unitree Go1 robot after a crash"
+  />
+</div>
+
+<div class="mx-auto mt-[1.4rem] grid w-[92%] grid-cols-2 gap-[1.2rem]">
   <div>
-    <div class="text-[1.2rem] font-semibold">Image placeholder</div>
-    <div class="mt-2 text-[0.95rem]">Robot undergoing open surgery</div>
+    <img
+      class="block aspect-video w-full rounded-[0.35rem] object-cover"
+      src="/deck/anymal.gif"
+      alt="ANYmal robot crashing into an obstacle"
+    />
+  </div>
+  <div>
+    <img
+      class="block aspect-video w-full rounded-[0.35rem] object-cover"
+      src="/deck/nikita.gif"
+      alt="Robot completing the course elegantly"
+    />
   </div>
 </div>
 
