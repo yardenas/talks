@@ -193,11 +193,13 @@ fonts:
 
 <div class="mt-[2.3rem] h-[22rem]">
   <img
-    class="mx-auto block h-full w-[47%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/image11.png"
-    alt="Robot setup with Realsense camera and cube pickup annotation"
+    class="mx-auto block h-full w-[85%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/sim-online.png"
+    alt="Simulation and online reinforcement learning setup"
   />
 </div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
 
 ---
 
@@ -226,6 +228,74 @@ fonts:
   </div>
 </div>
 
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
+---
+
+# Sim-to-Real Gap is Real!
+
+<div class="mt-[3.95rem] flex h-[20.4rem] items-center justify-center">
+  <img
+    class="block h-full w-[72%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/compare-dr-all.svg"
+    alt="Domain randomization sim-to-real gap comparison across all settings"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
+---
+
+# Number of Simulated Environment Matters
+
+
+<div class="mt-[3.9rem] flex h-[20.8rem] items-center justify-center">
+  <img
+    class="block h-full w-[40%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/compare-dr.svg"
+    alt="Domain randomization comparison showing the number of simulated environments matters"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
+---
+
+# Tradeoffs in Massively-Parallel Off-Policy Learning
+Runtime vs. Parallel Environments vs. Performance
+
+<div class="mx-auto mt-[0.55rem] grid h-[22rem] w-[37.2rem] grid-cols-[2.1rem_16.85rem_16.85rem] grid-rows-[1.05rem_10.1rem_10.1rem] items-center gap-x-[0.7rem] gap-y-[0.35rem]">
+  <div></div>
+  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Performance</div>
+  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Runtime</div>
+
+  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Franka</div>
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/franka-sweep-performance.svg"
+    alt="Franka performance sweep over eta and number of transitions"
+  />
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/franka-sweep-runtime.svg"
+    alt="Franka runtime sweep over eta and number of transitions"
+  />
+
+  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Go1</div>
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/go1-sweep-performance.svg"
+    alt="Go1 performance sweep over eta and number of transitions"
+  />
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/go1-sweep-runtime.svg"
+    alt="Go1 runtime sweep over eta and number of transitions"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
 ---
 
 # Online Learning: Franka Emika Panda
@@ -248,6 +318,8 @@ fonts:
     />
   </div>
 </div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
 
 ---
 
@@ -342,6 +414,22 @@ fonts:
     </div>
   </div>
 </div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
+---
+
+# Recycling Off-Policy Data
+
+<div class="mt-[2.0rem] flex h-[21.3rem] items-center justify-center">
+  <img
+    class="block h-full w-[94%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/rae-all.svg"
+    alt="Recycling off-policy data results"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
 
 
 ---
