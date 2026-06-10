@@ -419,7 +419,7 @@ Runtime vs. Parallel Environments vs. Performance
 
 ---
 
-# Recycling Off-Policy Data
+# Recycling Off-Policy Data Accelerates Online Learning
 
 <div class="mt-[2.0rem] flex h-[21.3rem] items-center justify-center">
   <img
@@ -541,7 +541,7 @@ A language for safe RL
       <div class="mb-1 text-[0.76rem] font-semibold opacity-60">
         Pessimistic upper bound
       </div>
-      <div class="text-[0.55rem] leading-tight">
+      <div class="text-[0.75rem] leading-tight">
         <KatexBlock expr="C_{p^\star}(\pi)\le \underbrace{\mathbb{E}_{\xi\sim\mu} C_{\hat{p}_\xi}(\pi)}_{\text{constraint in simulation}} + \quad \underbrace{\mathbb{E}_{\xi\sim\mu}\!\left[\mathbb{E}_{(s,a)\sim d_{\hat{p}_\xi,\pi}}\left[\frac{\gamma L_C}{1-\gamma}D_W(\hat{p}_\xi,p^\star)(s,a)\right]\right]}_{\text{uncertainty w.r.t. sim-to-real gap}}" />
       </div>
     </div>
@@ -801,16 +801,12 @@ Three pillars of model-based RL
   <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
   <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
   <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
-  <v-switch at="1" class="absolute inset-0 overflow-visible">
-    <template #1>
-      <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-        <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
-      </div>
-      <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-        <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
-      </div>
-    </template>
-  </v-switch>
+  <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+    <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
+  </div>
+  <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+    <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
+  </div>
 </div>
 
 
@@ -956,6 +952,23 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 </div>
 
+
+---
+layout: cover
+---
+
+# Thank you
+
+<div class="mt-[1.55rem] flex justify-end pr-[3.35rem]">
+  <div class="flex flex-col items-center">
+  <img
+    src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg"
+    class="h-40 w-40 rounded-full object-cover"
+    alt="Yarden As"
+  />
+  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none">Yarden As</div>
+  </div>
+</div>
 
 ---
 layout: cover
