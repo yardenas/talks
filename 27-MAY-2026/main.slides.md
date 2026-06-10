@@ -911,38 +911,15 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 
-# VLA Policy Extraction
+# Future Work
+VLA Policy Extraction
 
-<div class="mt-5 flex flex-col items-center">
-
-<div class="h-[10.2rem] w-full text-center text-[1.03rem] leading-tight">
-
-
-<v-switch at="0">
-  <template #1>
-    <div class="mt-4 flex justify-center">
-      <div class="py-3">
-        <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.35em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k),\quad \tau_k=\frac{k}{K}\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,a_0\sim\mathcal{N}(0,I)}\left[Q_{\phi}(s,a_K)\right]\end{gathered}" />
-      </div>
-    </div>
-  </template>
-  <template #2>
-    <div class="mt-1 grid w-full grid-cols-[0.98fr_1.02fr] items-start gap-2 text-[0.73rem] leading-tight">
-      <div class="py-2">
-        <div class="mb-1 text-[0.62rem] font-semibold uppercase tracking-[0.08em] opacity-65">BC flow matching</div>
-        <KatexBlock expr="\begin{gathered}(s,a_1)\sim\mathcal{D},\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.35em]a_t=(1-t)x_0+t a_1,\quad u_t=a_1-x_0\quad\Longleftrightarrow\quad a_1=a_t+(1-t)u_t\\[0.45em]\min_{\theta}\;\mathbb{E}\left[\left\|v_{\theta}(s,a_t,t)-u_t\right\|_2^2\right]\end{gathered}" />
-      </div>
-      <div class="py-2">
-        <div class="mb-1 text-[0.62rem] font-semibold uppercase tracking-[0.08em] opacity-65">GradFlow</div>
-        <KatexBlock expr="\begin{gathered}a_t=\operatorname{sg}\!\left(\operatorname{ODE}_K(v_\theta,s,x_0,0,t)\right),\quad x_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.45em]\hat{a}=a_t+(1-t)v_{\theta}(s,a_t,t)\\[0.45em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,x_0,\,t}\left[Q_{\phi}(s,\hat{a})\right]\end{gathered}" />
-      </div>
-    </div>
-  </template>
-</v-switch>
-
+<div class="mt-[2.45rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.2rem]">
+<div class="min-w-0 text-center text-[0.86rem] leading-tight">
+  <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.55em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,a_0\sim\mathcal{N}(0,I)}\left[Q_{\phi}(s,a_K)\right]\end{gathered}" />
 </div>
 
-<div class="mt-4 h-[12.4rem] w-[72%] min-w-0">
+<div class="h-[17.4rem] min-w-0">
   <img
     class="block h-full w-full rounded-[0.35rem] object-contain"
     src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
@@ -955,19 +932,18 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 layout: cover
+background: /deck/boston_245_9346_up.jpg
 ---
 
-# Thank you
+<h1 class="absolute left-[2.8rem] top-[2.1rem] m-0 text-white drop-shadow-lg">Thank you</h1>
 
-<div class="mt-[1.55rem] flex justify-end pr-[3.35rem]">
-  <div class="flex flex-col items-center">
+<div class="absolute bottom-[2.25rem] right-[3.35rem] flex flex-col items-center">
   <img
     src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg"
-    class="h-40 w-40 rounded-full object-cover"
+    class="h-40 w-40 rounded-full object-cover shadow-lg ring-2 ring-white/75"
     alt="Yarden As"
   />
-  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none">Yarden As</div>
-  </div>
+  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none text-white drop-shadow-lg">Yarden As</div>
 </div>
 
 ---
