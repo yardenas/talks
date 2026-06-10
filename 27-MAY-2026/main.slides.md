@@ -912,7 +912,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 ---
 
 # Future Work
-VLA Policy Extraction
+VLA policy extraction
 
 <div class="mt-[2.45rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.2rem]">
 <div class="min-w-0 text-center text-[0.86rem] leading-tight">
@@ -927,6 +927,24 @@ VLA Policy Extraction
   />
 </div>
 
+</div>
+
+
+---
+
+# Future Work
+Learning without manual resets
+
+<div class="mt-[1.4rem] flex flex-col items-center gap-[1.35rem]">
+  <img
+    class="block h-[14.8rem] w-[76%] object-contain"
+    src="/deck/recovery.png"
+    alt="Recovery effort examples for humanoid poses"
+  />
+
+  <div class="w-[92%] text-center text-[0.96rem] leading-tight">
+    <KatexBlock expr="V_{\mathcal{R}}^{\pi_r}(s) := \mathbb{E}_{\pi_r}\left[\sum_{t=0}^{\infty} -\mathbf{1}\{s_t \notin \mathcal{R}\}\,\big|\,s_0=s\right]" />
+  </div>
 </div>
 
 
