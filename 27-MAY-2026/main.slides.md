@@ -163,7 +163,7 @@ fonts:
             <KatexBlock expr="\Downarrow" />
           </div>
           <div class="border-l-[3px] border-black pl-[0.85rem]">
-            <div class="text-[1.18rem] font-semibold leading-tight">Robots must collect their own experience</div>
+            <div class="text-[1.18rem] font-semibold leading-tight">Robots must learn their own data</div>
             <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
               To go beyond their priors, robots need autonomous data collection and learning during deployment.
             </div>
@@ -792,6 +792,20 @@ class: takeaways-slide
 <PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
 
 ---
+layout: center
+class: text-center
+---
+
+<div class="flex flex-col items-center justify-center">
+  <div class="text-[3.9rem] font-semibold leading-tight">
+    Co-Learning from Simulators and Behavior Priors
+  </div>
+  <div class="mt-10 text-[2.35rem] font-semibold leading-tight opacity-70">
+    (and online RL for flow matching models)
+  </div>
+</div>
+
+---
 
 # Odyn: Offline-to-online Dyna
 Three pillars of model-based RL
@@ -813,7 +827,7 @@ Three pillars of model-based RL
 ---
 
 # Odyn
-Initial results
+Locomotion
 
 
 <div class="mt-0 grid grid-cols-2 gap-8 items-center">
@@ -843,7 +857,7 @@ Planner works on MJX, "real" runs on MuJoCo CPU
 ---
 
 # Odyn
-Initial results
+MuJoCo Wrap as simulator
 
 <div class="mx-auto mt-2">
 
