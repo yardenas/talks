@@ -338,7 +338,10 @@ Runtime vs. Parallel Environments vs. Performance
 <div
   class="absolute bottom-[6.55rem] left-[4.15rem] right-[4.15rem] grid grid-cols-3 gap-[0.55rem]"
 >
-  <div class="h-[17.4rem] min-w-0">
+  <div class="relative h-[17.4rem] min-w-0">
+    <div class="absolute -top-[2.05rem] left-0 right-0 text-center text-[1.25rem] font-bold leading-none text-[#111]">
+      Sim policy
+    </div>
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
       <source src="/videos/base-4.mp4" type="video/mp4" />
       <p>
@@ -347,7 +350,10 @@ Runtime vs. Parallel Environments vs. Performance
       </p>
     </SlidevVideo>
   </div>
-  <div class="h-[17.4rem] min-w-0">
+  <div class="relative h-[17.4rem] min-w-0">
+    <div class="absolute -top-[2.05rem] left-0 right-0 text-center text-[1.25rem] font-bold leading-none text-[#111]">
+      Fine-tuned
+    </div>
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
       <source src="/videos/100K-2-15s.mp4" type="video/mp4" />
       <p>
@@ -814,11 +820,24 @@ class: text-center
   </div>
 </div>
 
+<PaperTag conference="Initial results" year="" />
+
+---
+layout: center
+class: text-center
+---
+
+<div class="flex flex-col items-center justify-center">
+  <div class="text-[3.9rem] font-semibold leading-tight">
+    How can simulators accelerate learning from demonstrations?
+  </div>
+</div>
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
-# Odyn: Offline-to-online Dyna
-Three pillars of model-based RL
+# Three pillars of model-based RL
 
 <PaperTag conference="Initial results" year="" />
 
@@ -834,6 +853,16 @@ Three pillars of model-based RL
     <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
   </div>
 </div>
+
+---
+
+# Dyna Expansion From Demonstration States
+
+<div class="mx-auto mt-[1.5rem] h-[25rem] w-[58rem]">
+  <DemoSimulatorExpansion />
+</div>
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
@@ -858,6 +887,8 @@ Three pillars of model-based RL
 <div class="mt-[4.85rem] text-center text-[1.75rem] font-semibold leading-none">
   Off-policy RL?
 </div>
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
@@ -904,6 +935,8 @@ Three pillars of model-based RL
   </div>
 </div>
 
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
