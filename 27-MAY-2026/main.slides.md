@@ -911,7 +911,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 
-# Future Work
+# Future & Ongoing Work
 VLA policy extraction
 
 <div class="mt-[2.45rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.2rem]">
@@ -932,7 +932,7 @@ VLA policy extraction
 
 ---
 
-# Future Work
+# Future & Ongoing Work
 Learning without manual resets
 
 <div class="mt-[1.4rem] flex flex-col items-center gap-[1.35rem]">
