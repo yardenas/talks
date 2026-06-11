@@ -626,6 +626,18 @@ class: text-center
 
 ---
 
+# Challenges in Online Safe Learning
+
+<div class="mx-auto mt-[1.9rem] h-[24.5rem] w-[58rem]">
+  <SafeLearningChallenges />
+</div>
+
+<div class="mx-auto mt-[0.8rem] w-[54rem] text-center text-[1.35rem] font-bold leading-tight text-[#d52222]">
+  Given the data we have, we can't say if the optimal policy satisfies the constraint
+</div>
+
+---
+
 # Safe Exploration via Policy Priors
 Online rollout
 
@@ -805,6 +817,26 @@ class: text-center
 
 ---
 
+# Odyn: Offline-to-online Dyna
+Three pillars of model-based RL
+
+<PaperTag conference="Initial results" year="" />
+
+<div class="relative mx-auto mt-4 aspect-[1040/430] w-full max-w-[60.5rem]">
+  <img class="absolute inset-0 block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
+  <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
+  <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
+  <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
+  <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+    <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
+  </div>
+  <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
+    <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
+  </div>
+</div>
+
+---
+
 # Recap on Flow Matching
 
 <div class="mt-[4.1rem] grid grid-cols-2 items-start gap-[2.2rem]">
@@ -832,56 +864,53 @@ class: text-center
 # Flow Matching for Off-Policy RL
 
 
-<div class="mt-[6.85rem] grid grid-cols-2 gap-[1.25rem]">
-  <div class="min-w-0 border-l-[3px] border-slate-900 pl-[0.8rem]">
+<div class="relative mt-[7.25rem] grid grid-cols-2 gap-[1.25rem]">
+  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
     <div class="text-[1.15rem] font-semibold leading-none">AWR: selective BC</div>
-    <div class="mt-[0.65rem] text-[0.6rem] leading-tight">
-      <KatexBlock expr="\begin{gathered}\bar{\theta}\leftarrow\arg\min_{\theta}\;\mathbb{E}_{(s,a_1)\sim\mathcal{D},\,a_0,\,t}\left[\exp\!\left(\frac{Q_\phi(s,a_1)-V^{\bar \pi}(s)}{\beta}\right)\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]\bar{\pi}(\cdot\mid s)=\operatorname{ODE}(v_{\bar{\theta}},s,\epsilon,0,1),\quad \epsilon\sim\mathcal{N}(0,I)\end{gathered}" />
-    </div>
-    <div class="mt-[0.35rem] text-[0.76rem] leading-tight opacity-75">
-      Replay actions are weighted by advantage relative to other samples.
+    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}\bar{\theta}\leftarrow\arg\min_{\theta}\;\mathbb{E}_{(s,a_1)\sim\mathcal{D},\,a_0,\,t}\left[\exp\!\left(\frac{Q_\phi(s,a_1)-V^{\bar{\pi}}(s)}{\beta}\right)\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]\bar{\pi}(\cdot\mid s)=\operatorname{ODE}(v_{\bar{\theta}},s,\epsilon,0,1),\quad \epsilon\sim\mathcal{N}(0,I)\end{gathered}" />
     </div>
   </div>
 
-  <div class="min-w-0 border-l-[3px] border-slate-900 pl-[0.8rem]">
+  <svg class="pointer-events-none absolute left-[7%] top-[8.65rem] h-[3.5rem] w-[86%] overflow-visible" viewBox="0 0 740 150" fill="none" aria-hidden="true">
+    <defs>
+      <marker
+        id="awr-mpo-arrowhead"
+        viewBox="0 0 10 10"
+        markerWidth="8"
+        markerHeight="8"
+        refX="8.4"
+        refY="5"
+        orient="auto"
+      >
+        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </marker>
+    </defs>
+    <path
+      d="M42 24C172 136 568 136 698 24"
+      stroke="black"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      marker-end="url(#awr-mpo-arrowhead)"
+    />
+  </svg>
+
+  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
     <div class="text-[1.15rem] font-semibold leading-none">MPO: policy improvement</div>
-    <div class="mt-[0.65rem] text-[0.6rem] leading-tight">
+    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
       <KatexBlock expr="\begin{gathered}q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(\frac{Q_\phi(s,a)}{\eta^\star}\right)\\[0.65em]\theta\leftarrow\arg\min_{\theta}\;\mathbb{E}_{s\sim\mathcal{D}}\;\mathbb{E}_{a_1\sim q(\cdot\mid s),\,a_0,\,t}\left[\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\end{gathered}" />
     </div>
-    <div class="mt-[0.35rem] text-[0.76rem] leading-tight opacity-75">
-      Candidate actions come from <KatexBlock class="inline-block align-[-0.08em]" :display="false" expr="\bar{\pi}" />; Q turns them into the MPO target distribution.
-    </div>
   </div>
 </div>
 
-<div class="mt-[4.3rem] text-center text-[1.36rem] font-semibold leading-tight">
-  AWR gives a broad proposal; MPO distills Q-weighted proposal samples with the same flow-matching target.
-</div>
 
 ---
 
 # Odyn: Offline-to-online Dyna
-Three pillars of model-based RL
-
-<div class="relative mx-auto mt-4 aspect-[1040/430] w-full max-w-[60.5rem]">
-  <img class="absolute inset-0 block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
-  <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
-  <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
-  <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
-  <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-    <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
-  </div>
-  <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-    <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
-  </div>
-</div>
-
-
----
-
-# Odyn
 Locomotion
 
+<PaperTag conference="Initial results" year="" />
 
 <div class="mt-0 grid grid-cols-2 gap-8 items-center">
 
@@ -909,8 +938,10 @@ Planner works on MJX, "real" runs on MuJoCo CPU
 
 ---
 
-# Odyn
+# Odyn: Offline-to-online Dyna
 MuJoCo Wrap as simulator
+
+<PaperTag conference="Initial results" year="" />
 
 <div class="mx-auto mt-2">
 
@@ -944,8 +975,10 @@ MuJoCo Wrap as simulator
 
 ---
 
-# Odyn
+# Odyn: Offline-to-online Dyna
 Harder tasks
+
+<PaperTag conference="Initial results" year="" />
 
 <div class="mx-auto mt--8 flex w-[46rem] flex-col gap-[0.55rem]">
   <img
@@ -984,6 +1017,9 @@ VLA policy extraction
 <div class="mt-[2.45rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.2rem]">
 <div class="min-w-0 text-center text-[0.86rem] leading-tight">
   <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.55em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,a_0\sim\mathcal{N}(0,I)}\left[Q_{\phi}(s,a_K)\right]\end{gathered}" />
+  <div class="mx-auto mt-[1.15rem] w-[17rem] text-[0.88rem] font-semibold leading-tight text-slate-700">
+    Can we backprop directly from Q instead of using distillation?
+  </div>
 </div>
 
 <div class="h-[17.4rem] min-w-0">
@@ -1025,11 +1061,11 @@ background: /deck/boston_245_9346_up.jpg
 <div class="absolute left-[2.9rem] top-[9.2rem] w-[34rem] rounded-[0.35rem] bg-black/35 px-[1.25rem] py-[1.05rem] text-white shadow-lg backdrop-blur-[1px]">
   <ul class="m-0 list-disc space-y-[0.78rem] pl-[1.1rem] text-[1.32rem] leading-tight">
     <li>
-      All prior types are fair game: simulation, demonstrations, heuristics. How do we scale their usage?
+      All prior types are fair game: simulation and demonstrations. How do we scale their usage?
       Simple methods tend to scale better.
     </li>
     <li>
-      We understand safe online learning relatively well in theory. How do we translate this to production?
+      We understand safe online learning relatively well in theory. How do we translate this understanding to production?
     </li>
     <li>
       Off-policy learning is a key ingredient in real-world online RL.
