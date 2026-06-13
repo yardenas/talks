@@ -151,6 +151,12 @@ fonts:
       </v-click>
       <v-click>
         <div class="border-l-[3px] border-black pl-[0.85rem]">
+          <div class="text-[1.18rem] font-semibold leading-tight">Superhuman performance</div>
+          <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">Because we've seen that already over and over in other domains.</div>
+        </div>
+      </v-click>
+      <v-click>
+        <div class="border-l-[3px] border-black pl-[0.85rem]">
           <div class="text-[1.18rem] font-semibold leading-tight">Simulators are powerful, but incomplete</div>
           <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
             Soft, contact-rich, human-facing tasks are hard to model faithfully.
@@ -163,7 +169,7 @@ fonts:
             <KatexBlock expr="\Downarrow" />
           </div>
           <div class="border-l-[3px] border-black pl-[0.85rem]">
-            <div class="text-[1.18rem] font-semibold leading-tight">Robots must learn their own data</div>
+            <div class="text-[1.18rem] font-semibold leading-tight">Robots must obtain their own data</div>
             <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
               To go beyond their priors, robots need autonomous data collection and learning during deployment.
             </div>
@@ -189,21 +195,53 @@ fonts:
 
 ---
 
-# Real-World Reinforcement Learning
+# Training in Simulation $\rightarrow$ Training in Reality
 
-<div class="mt-[2.3rem] h-[22rem]">
-  <img
-    class="mx-auto block h-full w-[85%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/sim-online.png"
-    alt="Simulation and online reinforcement learning setup"
-  />
+<div class="mt-[4.05rem] grid grid-cols-[1.43fr_0.67fr] items-start gap-[1.65rem]">
+  <div>
+    <div class="h-[17.7rem]">
+      <img
+        class="mx-auto block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+        src="/deck/sim-online.png"
+        alt="Simulation and online reinforcement learning setup"
+      />
+    </div>
+  </div>
+
+  <div>
+    <div class="flex h-[17.7rem] items-center justify-center">
+      <img
+        class="mx-auto block h-[16.2rem] w-[92%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+        src="/deck/compare-dr-all.svg"
+        alt="Domain randomization sim-to-real gap comparison across all settings"
+      />
+    </div>
+    <div class="mt-[0.35rem] flex items-center justify-center gap-[0.85rem] text-slate-900">
+      <div class="flex items-center gap-[0.35rem]">
+        <img
+          class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
+          src="/deck/dhruva-tirumala.jpeg"
+          alt="Dhruva Tirumala"
+        />
+        <div class="text-[0.56rem] font-semibold leading-tight">Dhruva<br />Tirumala</div>
+      </div>
+      <div class="flex items-center gap-[0.35rem]">
+        <img
+          class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
+          src="/deck/markus-wulfmeier.jpg"
+          alt="Markus Wulfmeier"
+        />
+        <div class="text-[0.56rem] font-semibold leading-tight">Markus<br />Wulfmeier</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
 
 ---
 
-# Sim-to-Real
+# Different Learning Regimes
 
 <div class="mt-[2.1rem] grid grid-cols-[1.25fr_0.85fr] items-start gap-[2.1rem]">
   <div>
@@ -232,66 +270,34 @@ fonts:
 
 ---
 
-# Sim-to-Real Gap is Real!
+# Challenges in Sim-to-Online Transfer
 
-<div class="mt-[3.95rem] flex h-[20.4rem] items-center justify-center">
-  <img
-    class="block h-full w-[72%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/compare-dr-all.svg"
-    alt="Domain randomization sim-to-real gap comparison across all settings"
-  />
-</div>
+<div class="mt-[5.5rem]">
+  <div class="mx-auto mb-[0.4rem] w-[96%] text-center text-[0.92rem] font-semibold leading-tight text-slate-800">
+    Compute Q function estimation error from each state in the replay buffer
+  </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+  <div class="mx-auto flex h-[15.4rem] w-[96%] items-center justify-center">
+    <img
+      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+      src="/deck/rccar-q-mc-scatter-summary.svg"
+      alt="RCCar Q versus Monte Carlo scatter summary"
+    />
+  </div>
 
----
-
-# Number of Simulated Environment Matters
-
-
-<div class="mt-[3.9rem] flex h-[20.8rem] items-center justify-center">
-  <img
-    class="block h-full w-[40%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/compare-dr.svg"
-    alt="Domain randomization comparison showing the number of simulated environments matters"
-  />
-</div>
-
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
-
----
-
-# Tradeoffs in Massively-Parallel Off-Policy Learning
-Runtime vs. Parallel Environments vs. Performance
-
-<div class="mx-auto mt-[0.55rem] grid h-[22rem] w-[37.2rem] grid-cols-[2.1rem_16.85rem_16.85rem] grid-rows-[1.05rem_10.1rem_10.1rem] items-center gap-x-[0.7rem] gap-y-[0.35rem]">
-  <div></div>
-  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Performance</div>
-  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Runtime</div>
-
-  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Franka</div>
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/franka-sweep-performance.svg"
-    alt="Franka performance sweep over eta and number of transitions"
-  />
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/franka-sweep-runtime.svg"
-    alt="Franka runtime sweep over eta and number of transitions"
-  />
-
-  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Go1</div>
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/go1-sweep-performance.svg"
-    alt="Go1 performance sweep over eta and number of transitions"
-  />
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/go1-sweep-runtime.svg"
-    alt="Go1 runtime sweep over eta and number of transitions"
-  />
+  <div class="mx-auto mt-[1.25rem] grid w-[94%] grid-cols-3 gap-[1.05rem] text-[0.85rem] leading-tight text-slate-900">
+    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+      <div class="font-semibold">Retain sim data if possible</div>
+      <div class="mt-[0.25rem] opacity-75">Acts as a regularizer.</div>
+    </div>
+    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+      <div class="font-semibold">Update actor less frequently</div>
+    </div>
+    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+      <div class="font-semibold">Never discard off-policy data</div>
+      <div class="mt-[0.25rem] opacity-75">Every real-world experiment counts.</div>
+    </div>
+  </div>
 </div>
 
 <PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
@@ -441,6 +447,10 @@ Runtime vs. Parallel Environments vs. Performance
 ---
 
 # ⚠️ Robots May Break ⚠️
+
+<!--
+Previous result showed that we can continue training online after simulated pre-training, but can anyone guess how many robots got broken in the process?
+-->
 
 <div class="mx-auto mt-[2.0rem] flex h-[7.7rem] w-[92%] items-center justify-center">
   <img
@@ -626,6 +636,15 @@ class: text-center
 
 # Closing the Loop
 
+<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.45rem] text-slate-900">
+  <img
+    class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+    src="/deck/manuel-wendl.jpeg"
+    alt="Manuel Wendl"
+  />
+  <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
+</div>
+
 <div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
   <TrainingLoop />
 </div>
@@ -686,23 +705,12 @@ Reduction to “standard” MDPs
   <TrainingLoop compact focus="plan" />
 </div>
 
-<div class="mt-[0.65rem] grid grid-cols-2 items-center gap-[0.5rem]">
-  <div class="flex h-[22rem] min-w-0 justify-center">
-    <img
-      class="block h-full w-full object-contain"
-      src="/deck/sooper_schematic.svg"
-      alt="SOOPER unconstrained planning MDP schematic"
-    />
-  </div>
-
-  <div class="pt-[4.1rem]">
-    <div v-click class="text-[0.9rem] leading-tight">
-      <KatexBlock expr="\tilde{r}(s_t,a_t) := \begin{cases} \underline{V}_r^{\hat{\pi}}(s_t) & \text{if } \Phi(a_t,s_t,c_{\lt t},Q_{c,n}^{\hat{\pi}}) \geq d,\\ 0 & \text{if } s_t = s_\dagger, \\ r(s_t,a_t) & \text{otherwise}. \end{cases}" />
-    </div>
-    <div v-click class="mt-[5.25rem] -ml-[9.9rem] w-[calc(100%+7.9rem)] text-[0.9rem] leading-tight">
-      <KatexBlock expr="\tilde{p}(s_{t+1}\mid s_t,a_t) := \begin{cases} \mathbf{1}\{s_{t+1} = s_\dagger\} & \text{if } \Phi(a_t,s_t,c_{\lt t}, Q_{c,n}^{\hat{\pi}}) \geq d \text{ or } s_t = s_\dagger,\\ p(s_{t+1}\mid s_t,a_t) & \text{otherwise}. \end{cases}" />
-    </div>
-  </div>
+<div class="mt-[0.85rem] flex h-[23.6rem] w-full items-center justify-center">
+  <img
+    class="block h-full w-full object-contain"
+    src="/deck/sooper_schematic.svg"
+    alt="SOOPER unconstrained planning MDP schematic"
+  />
 </div>
 
 <PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
@@ -712,9 +720,52 @@ Reduction to “standard” MDPs
 # Efficient Online Learning
 Regret decomposition
 
-<div class="mx-auto flex min-h-[22rem] w-full items-center justify-center">
-  <div class="w-full text-center text-[1.22rem] leading-none">
-    <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_{\tilde r}(\pi^*,f) - \mathcal{J}_{\tilde r}(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
+<div class="relative min-h-[22rem] w-full">
+  <div class="mx-auto flex min-h-[22rem] w-full items-center justify-center">
+    <div class="w-full text-center text-[1.22rem] leading-none">
+      <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_{\tilde r}(\pi^*,f) - \mathcal{J}_{\tilde r}(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
+      <div class="mt-[1.15rem] translate-x-[-6.2rem] text-[0.78rem] font-semibold leading-none opacity-65">
+        <a href="https://arxiv.org/abs/2006.12466" target="_blank" rel="noopener noreferrer">
+          Kakade et al. (2020)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-[0.25rem] right-[0.8rem] h-[7.6rem] w-[12.7rem]">
+    <svg
+      class="pointer-events-none absolute -left-[2.75rem] top-[-1.15rem] h-[4.0rem] w-[4.4rem] overflow-visible"
+      viewBox="0 0 98 65"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <marker
+          id="regret-safety-arrowhead"
+          viewBox="0 0 10 10"
+          markerWidth="7"
+          markerHeight="7"
+          refX="8.4"
+          refY="5"
+          orient="auto"
+        >
+          <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#111111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </marker>
+      </defs>
+      <path
+        d="M8 7C34 18 58 32 92 54"
+        stroke="#111111"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        marker-end="url(#regret-safety-arrowhead)"
+      />
+    </svg>
+    <img
+      class="block h-full w-full object-contain"
+      src="/deck/sooper_schematic_simplified.png"
+      alt="SOOPER safe exploration schematic and constraint equation"
+    />
   </div>
 </div>
 
@@ -757,6 +808,15 @@ class: takeaways-slide
 ---
 
 # Takeaways
+
+<div class="takeaways-profile">
+  <img
+    class="takeaways-profile-img"
+    src="/deck/manuel-wendl.jpeg"
+    alt="Manuel Wendl"
+  />
+  <div class="takeaways-profile-name">Manuel Wendl</div>
+</div>
 
 <div class="takeaways-cheese-figure">
   <img class="takeaways-cheese" src="/deck/Swiss_cheese_model_textless.svg" alt="Swiss cheese model of layered safety barriers" />
@@ -802,6 +862,31 @@ class: takeaways-slide
   line-height: 1;
   text-align: center;
 }
+
+.takeaways-profile {
+  position: absolute;
+  right: 2.1rem;
+  top: 4.25rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #0f172a;
+}
+
+.takeaways-profile-img {
+  height: 2.05rem;
+  width: 2.05rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px #cbd5e1;
+}
+
+.takeaways-profile-name {
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
 </style>
 
 <PaperTag conference="ICLR" year="2026" href="https://openreview.net/forum?id=JC8xYAADHL" note="top 0.5%" />
@@ -813,10 +898,10 @@ class: text-center
 
 <div class="flex flex-col items-center justify-center">
   <div class="text-[3.9rem] font-semibold leading-tight">
-    Co-Learning from Simulators and Behavior Priors
+    More Expressive Policy Classes
   </div>
   <div class="mt-10 text-[2.35rem] font-semibold leading-tight opacity-70">
-    (and online RL for flow matching models)
+    (online RL with flow matching models)
   </div>
 </div>
 
@@ -837,26 +922,8 @@ class: text-center
 
 ---
 
-# Three pillars of model-based RL
-
-<PaperTag conference="Initial results" year="" />
-
-<div class="relative mx-auto mt-4 aspect-[1040/430] w-full max-w-[60.5rem]">
-  <img class="absolute inset-0 block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
-  <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Lookahead policies</div>
-  <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.4rem] font-semibold leading-none text-black">Value-expansion</div>
-  <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[1.45rem] font-semibold leading-none text-black">Dyna</div>
-  <div class="absolute left-[37.6%] top-[96%] w-[51%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-    <KatexBlock expr="\underbrace{\hspace{30em}}_{\large\text{“deep expansion” - sequential}}" />
-  </div>
-  <div class="absolute left-[75.5%] top-[96%] w-[22%] -translate-x-1/2 text-center text-[0.72rem] leading-none text-black">
-    <KatexBlock expr="\underbrace{\hspace{12em}}_{\large\text{“wide expansion” - parallel}}" />
-  </div>
-</div>
-
----
-
 # Dyna Expansion From Demonstration States
+Simulation can start from arbitrary states
 
 <div class="mx-auto mt-[1.5rem] h-[25rem] w-[58rem]">
   <DemoSimulatorExpansion />
@@ -866,7 +933,45 @@ class: text-center
 
 ---
 
-# Recap on Flow Matching
+# Odyn: Offline-to-online Dyna
+MuJoCo Wrap as simulator
+
+<PaperTag conference="Initial results" year="" />
+
+<div class="mx-auto mt-2">
+
+  #### Odyn leverages massively-parallel simulators, even on complex tasks
+</div>
+
+<div class="mt-6 grid grid-cols-[1.22fr_0.78fr] items-center gap-0">
+
+<div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/ogbench_puzzle_parallel_tile.gif"
+    alt="Parallel OGBench puzzle rollouts"
+  />
+</div>
+
+<div class="grid gap-3">
+  <img
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_ik_throughput.svg"
+    alt="Puzzle inverse kinematics throughput"
+  />
+  <img
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_mjx_backend_throughput.svg"
+    alt="Puzzle MJX backend throughput"
+  />
+</div>
+
+</div>
+
+---
+
+
+# Flow Matching Recap
 
 <div class="mt-[4.1rem] grid grid-cols-2 items-start gap-[2.2rem]">
   <div class="min-w-0 text-center">
@@ -938,78 +1043,11 @@ class: text-center
 
 <PaperTag conference="Initial results" year="" />
 
----
-
-# Odyn: Offline-to-online Dyna
-Locomotion
-
-<PaperTag conference="Initial results" year="" />
-
-<div class="mt-0 grid grid-cols-2 gap-8 items-center">
-
-<div class="h-[20rem] overflow-hidden rounded">
-  <img
-    class="w-full h-[24rem] object-contain -translate-y-[5rem]"
-    src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif"
-    alt="pi cubed trajectory rollout"
-  />
-</div>
-
-<div>
-  <img
-    class="w-full h-[24rem] object-contain rounded"
-    src="/deck/h1_mpo_vs_odyn.svg"
-    alt="Comparison plot of MPO versus pi cubed"
-  />
-</div>
-
-</div>
-<!--  
-Planner works on MJX, "real" runs on MuJoCo CPU
--->
-
 
 ---
 
-# Odyn: Offline-to-online Dyna
-MuJoCo Wrap as simulator
-
-<PaperTag conference="Initial results" year="" />
-
-<div class="mx-auto mt-2">
-
-  #### Odyn leverages massively-parallel simulators, even on complex tasks
-</div>
-
-<div class="mt-6 grid grid-cols-[1.22fr_0.78fr] items-center gap-0">
-
-<div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/ogbench_puzzle_parallel_tile.gif"
-    alt="Parallel OGBench puzzle rollouts"
-  />
-</div>
-
-<div class="grid gap-3">
-  <img
-    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_ik_throughput.svg"
-    alt="Puzzle inverse kinematics throughput"
-  />
-  <img
-    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_mjx_backend_throughput.svg"
-    alt="Puzzle MJX backend throughput"
-  />
-</div>
-
-</div>
-
----
-
-# Odyn: Offline-to-online Dyna
-Harder tasks
+# Odyn: Offline-to-Online Dyna
+Manipulation
 
 <PaperTag conference="Initial results" year="" />
 
@@ -1041,6 +1079,36 @@ Harder tasks
 <!-- 
 I have an implementation of MPO that works with flow matching models, I believe co-training could be an interesting angle.
  -->
+
+---
+
+# Odyn: Offline-to-online Dyna
+Locomotion
+
+<PaperTag conference="Initial results" year="" />
+
+<div class="mt-0 grid grid-cols-2 gap-8 items-center">
+
+<div class="h-[20rem] overflow-hidden rounded">
+  <img
+    class="w-full h-[24rem] object-contain -translate-y-[5rem]"
+    src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif"
+    alt="pi cubed trajectory rollout"
+  />
+</div>
+
+<div>
+  <img
+    class="w-full h-[24rem] object-contain rounded"
+    src="/deck/h1_mpo_vs_odyn.svg"
+    alt="Comparison plot of MPO versus pi cubed"
+  />
+</div>
+
+</div>
+<!--  
+Planner works on MJX, "real" runs on MuJoCo CPU
+-->
 
 ---
 
@@ -1119,6 +1187,58 @@ background: /deck/boston_245_9346_up.jpg
 layout: cover
 ---
 # Appendix & Misc
+
+---
+
+# Number of Simulated Environment Matters
+
+
+<div class="mt-[3.9rem] flex h-[20.8rem] items-center justify-center">
+  <img
+    class="block h-full w-[40%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/compare-dr.svg"
+    alt="Domain randomization comparison showing the number of simulated environments matters"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+
+---
+
+# Tradeoffs in Massively-Parallel Off-Policy Learning
+Runtime vs. Parallel Environments vs. Performance
+
+<div class="mx-auto mt-[0.55rem] grid h-[22rem] w-[37.2rem] grid-cols-[2.1rem_16.85rem_16.85rem] grid-rows-[1.05rem_10.1rem_10.1rem] items-center gap-x-[0.7rem] gap-y-[0.35rem]">
+  <div></div>
+  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Performance</div>
+  <div class="text-center text-[0.72rem] font-semibold text-slate-700">Runtime</div>
+
+  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Franka</div>
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/franka-sweep-performance.svg"
+    alt="Franka performance sweep over eta and number of transitions"
+  />
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/franka-sweep-runtime.svg"
+    alt="Franka runtime sweep over eta and number of transitions"
+  />
+
+  <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Go1</div>
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/go1-sweep-performance.svg"
+    alt="Go1 performance sweep over eta and number of transitions"
+  />
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/go1-sweep-runtime.svg"
+    alt="Go1 runtime sweep over eta and number of transitions"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
 
 ---
 

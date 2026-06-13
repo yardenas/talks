@@ -73,7 +73,6 @@
 
       <g class="demo-label">
         <text x="102" y="438">demonstration rollout</text>
-        <text x="102" y="465">collected with the demonstration policy</text>
       </g>
     </svg>
   </div>
