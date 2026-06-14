@@ -8,7 +8,7 @@ fonts:
 # Real-World Reinforcement Learning That Works
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">June 16, 2026</div>
+    <div class="text-sm opacity-50">Eka, June 16, 2026</div>
   </div>
 </div>
 
@@ -145,7 +145,7 @@ fonts:
         <div class="border-l-[3px] border-black pl-[0.85rem]">
           <div class="text-[1.18rem] font-semibold leading-tight">Humans collect data for robots? 🙃</div>
           <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
-            Robots should assist humans, instead of relying on humans to produce all their training experience.
+            Robots should assist humans, instead of relying on humans to produce their training data.
           </div>
         </div>
       </v-click>
@@ -157,7 +157,7 @@ fonts:
       </v-click>
       <v-click>
         <div class="border-l-[3px] border-black pl-[0.85rem]">
-          <div class="text-[1.18rem] font-semibold leading-tight">Simulators are powerful, but incomplete</div>
+          <div class="text-[1.18rem] font-semibold leading-tight">Simulators are powerful, but limited</div>
           <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
             Soft, contact-rich, human-facing tasks are hard to model faithfully.
           </div>
@@ -278,22 +278,18 @@ fonts:
   </div>
 
   <div class="mx-auto flex h-[15.4rem] w-[96%] items-center justify-center">
-    <img
-      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/rccar-q-mc-scatter-summary.svg"
-      alt="RCCar Q versus Monte Carlo scatter summary"
-    />
+    <RccarQMcPlots />
   </div>
 
   <div class="mx-auto mt-[1.25rem] grid w-[94%] grid-cols-3 gap-[1.05rem] text-[0.85rem] leading-tight text-slate-900">
-    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+    <div class="border-l-[3px] border-black pl-[0.7rem]">
       <div class="font-semibold">Retain sim data if possible</div>
       <div class="mt-[0.25rem] opacity-75">Acts as a regularizer.</div>
     </div>
-    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+    <div class="border-l-[3px] border-black pl-[0.7rem]">
       <div class="font-semibold">Update actor less frequently</div>
     </div>
-    <div v-click class="border-l-[3px] border-black pl-[0.7rem]">
+    <div class="border-l-[3px] border-black pl-[0.7rem]">
       <div class="font-semibold">Never discard off-policy data</div>
       <div class="mt-[0.25rem] opacity-75">Every real-world experiment counts.</div>
     </div>
@@ -913,9 +909,18 @@ class: text-center
 ---
 
 <div class="flex flex-col items-center justify-center">
-  <div class="text-[3.9rem] font-semibold leading-tight">
-    How can simulators accelerate learning from demonstrations?
-  </div>
+  <v-switch at="0">
+    <template #0>
+      <div class="text-[3.9rem] font-semibold leading-tight">
+        Offline RL is Hard!
+      </div>
+    </template>
+    <template #1>
+      <div class="text-[3.9rem] font-semibold leading-tight">
+        How can simulators accelerate learning from demonstrations?
+      </div>
+    </template>
+  </v-switch>
 </div>
 
 <PaperTag conference="Initial results" year="" />
@@ -933,116 +938,94 @@ Simulation can start from arbitrary states
 
 ---
 
-# Odyn: Offline-to-online Dyna
-MuJoCo Wrap as simulator
+# Soft Action Targets
 
 <PaperTag conference="Initial results" year="" />
 
-<div class="mx-auto mt-2">
-
-  #### Odyn leverages massively-parallel simulators, even on complex tasks
-</div>
-
-<div class="mt-6 grid grid-cols-[1.22fr_0.78fr] items-center gap-0">
-
-<div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
-  <img
-    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/ogbench_puzzle_parallel_tile.gif"
-    alt="Parallel OGBench puzzle rollouts"
-  />
-</div>
-
-<div class="grid gap-3">
-  <img
-    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_ik_throughput.svg"
-    alt="Puzzle inverse kinematics throughput"
-  />
-  <img
-    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_mjx_backend_throughput.svg"
-    alt="Puzzle MJX backend throughput"
-  />
-</div>
-
-</div>
-
----
-
-
-# Flow Matching Recap
-
-<div class="mt-[4.1rem] grid grid-cols-2 items-start gap-[2.2rem]">
-  <div class="min-w-0 text-center">
-    <div class="mb-[1.05rem] text-[1.3rem] font-semibold leading-none">Training</div>
-    <div class="text-[0.82rem] leading-tight">
-      <KatexBlock expr="\begin{gathered}(s,a_1)\sim\mathcal{D},\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]a_t=(1-t)a_0+t a_1,\quad u_t=a_1-a_0\\[0.65em]\min_{\theta}\;\mathbb{E}\left[\left\|v_{\theta}(s,a_t,t)-u_t\right\|_2^2\right]\end{gathered}" />
-    </div>
-  </div>
-
-  <div class="min-w-0 text-center">
-    <div class="mb-[1.05rem] text-[1.3rem] font-semibold leading-none">Inference</div>
-    <div class="text-[0.82rem] leading-tight">
-      <KatexBlock expr="\begin{gathered}a_0\sim\mathcal{N}(0,I),\quad a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.55em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.35em]\tau_k=\frac{k}{K}\end{gathered}" />
-    </div>
-  </div>
-</div>
-
-<div class="mt-[4.85rem] text-center text-[1.75rem] font-semibold leading-none">
-  Off-policy RL?
-</div>
-
-<PaperTag conference="Initial results" year="" />
-
----
-
-# Flow Matching for Off-Policy RL
-
-
-<div class="relative mt-[7.25rem] grid grid-cols-2 gap-[1.25rem]">
-  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
-    <div class="text-[1.15rem] font-semibold leading-none">AWR: selective BC</div>
-    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
-      <KatexBlock expr="\begin{gathered}\bar{\theta}\leftarrow\arg\min_{\theta}\;\mathbb{E}_{(s,a_1)\sim\mathcal{D},\,a_0,\,t}\left[\exp\!\left(\frac{Q_\phi(s,a_1)-V^{\bar{\pi}}(s)}{\beta}\right)\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]\bar{\pi}(\cdot\mid s)=\operatorname{ODE}(v_{\bar{\theta}},s,\epsilon,0,1),\quad \epsilon\sim\mathcal{N}(0,I)\end{gathered}" />
-    </div>
-  </div>
-
-  <svg class="pointer-events-none absolute left-[7%] top-[8.65rem] h-[3.5rem] w-[86%] overflow-visible" viewBox="0 0 740 150" fill="none" aria-hidden="true">
+<div class="relative mx-auto mt-[4.45rem] h-[19.4rem] w-[54rem] text-slate-900">
+  <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 864 310" fill="none" aria-hidden="true">
     <defs>
-      <marker
-        id="awr-mpo-arrowhead"
-        viewBox="0 0 10 10"
-        markerWidth="8"
-        markerHeight="8"
-        refX="8.4"
-        refY="5"
-        orient="auto"
-      >
-        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      <marker id="acfql-black-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
+        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </marker>
     </defs>
-    <path
-      d="M42 24C172 136 568 136 698 24"
-      stroke="black"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      marker-end="url(#awr-mpo-arrowhead)"
-    />
+    <path d="M174 113H224" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
+    <path d="M403 113H453" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
+    <path d="M632 113H682" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
   </svg>
 
-  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
-    <div class="text-[1.15rem] font-semibold leading-none">MPO: policy improvement</div>
-    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
-      <KatexBlock expr="\begin{gathered}q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(\frac{Q_\phi(s,a)}{\eta^\star}\right)\\[0.65em]\theta\leftarrow\arg\min_{\theta}\;\mathbb{E}_{s\sim\mathcal{D}}\;\mathbb{E}_{a_1\sim q(\cdot\mid s),\,a_0,\,t}\left[\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\end{gathered}" />
+  <div class="absolute left-0 top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
+    <div class="text-[0.78rem] font-semibold leading-tight">1. Proposal actions</div>
+    <div class="relative mx-auto mt-[0.72rem] h-[4.0rem] w-[7.6rem]">
+      <div class="absolute left-[3.55rem] top-[1.65rem] h-[0.9rem] w-[0.9rem] rounded-full bg-slate-900"></div>
+      <div class="absolute left-[0.5rem] top-[0.5rem] h-[0.62rem] w-[0.62rem] rounded-full bg-slate-400"></div>
+      <div class="absolute left-[1.2rem] top-[2.75rem] h-[0.62rem] w-[0.62rem] rounded-full bg-slate-400"></div>
+      <div class="absolute left-[3.1rem] top-[0.05rem] h-[0.62rem] w-[0.62rem] rounded-full bg-slate-400"></div>
+      <div class="absolute left-[5.25rem] top-[0.75rem] h-[0.62rem] w-[0.62rem] rounded-full bg-emerald-600"></div>
+      <div class="absolute left-[5.85rem] top-[2.85rem] h-[0.62rem] w-[0.62rem] rounded-full bg-slate-400"></div>
+      <div class="absolute left-[3.6rem] top-[3.15rem] h-[0.62rem] w-[0.62rem] rounded-full bg-slate-400"></div>
+    </div>
+    <div class="mt-[0.38rem] text-center text-[0.48rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
+      from the flow actor
     </div>
   </div>
+
+  <div class="absolute left-[14.3rem] top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
+    <div class="text-[0.78rem] font-semibold leading-tight">2. Score with critic</div>
+    <div class="mx-auto mt-[0.62rem] flex h-[4.4rem] w-[7.1rem] items-end justify-center gap-[0.32rem] border-b-[2px] border-l-[2px] border-slate-900 pb-[0.18rem] pl-[0.25rem]">
+      <span class="block h-[1.0rem] w-[0.66rem] bg-slate-400"></span>
+      <span class="block h-[2.8rem] w-[0.66rem] bg-slate-700"></span>
+      <span class="block h-[1.55rem] w-[0.66rem] bg-slate-500"></span>
+      <span class="block h-[3.9rem] w-[0.66rem] bg-emerald-600"></span>
+      <span class="block h-[2.25rem] w-[0.66rem] bg-slate-600"></span>
+    </div>
+    <div class="mt-[0.28rem] text-center text-[0.6rem] leading-none text-slate-600">
+      <KatexBlock expr="Q(s,a_j)" />
+    </div>
+  </div>
+
+  <div class="absolute left-[28.6rem] top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
+    <div class="text-[0.78rem] font-semibold leading-tight">3. Importance weights</div>
+    <div class="mt-[0.75rem] text-center text-[0.82rem] leading-tight">
+      <KatexBlock expr="w_j\propto \exp(Q(s,a_j)/\eta)" />
+    </div>
+    <div class="mx-auto mt-[0.55rem] grid h-[2.3rem] w-[7.1rem] grid-cols-5 items-end gap-[0.32rem]">
+      <span class="block h-[0.38rem] bg-slate-300"></span>
+      <span class="block h-[0.85rem] bg-slate-500"></span>
+      <span class="block h-[0.48rem] bg-slate-400"></span>
+      <span class="block h-[2.15rem] bg-emerald-600"></span>
+      <span class="block h-[0.65rem] bg-slate-500"></span>
+    </div>
+    <div class="mt-[0.35rem] text-center text-[0.48rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
+      normalize across candidates
+    </div>
+  </div>
+
+  <div class="absolute left-[42.9rem] top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
+    <div class="text-[0.78rem] font-semibold leading-tight">4. Weighted flow matching</div>
+    <div class="mt-[0.56rem] text-[0.5rem] font-semibold uppercase tracking-[0.08em] text-slate-500">before</div>
+    <div class="mt-[0.18rem] flex h-[1.15rem] items-end justify-center gap-[0.32rem]">
+      <span class="block h-[0.62rem] w-[0.66rem] bg-slate-300"></span>
+      <span class="block h-[0.62rem] w-[0.66rem] bg-slate-300"></span>
+      <span class="block h-[0.62rem] w-[0.66rem] bg-slate-300"></span>
+      <span class="block h-[0.62rem] w-[0.66rem] bg-slate-300"></span>
+      <span class="block h-[0.62rem] w-[0.66rem] bg-slate-300"></span>
+    </div>
+    <div class="mx-auto mt-[0.35rem] h-[0.58rem] w-[0.58rem] rotate-45 border-b-[3px] border-r-[3px] border-slate-900"></div>
+    <div class="mt-[0.12rem] text-[0.5rem] font-semibold uppercase tracking-[0.08em] text-slate-500">after</div>
+    <div class="mt-[0.16rem] flex h-[1.75rem] items-end justify-center gap-[0.32rem]">
+      <span class="block h-[0.32rem] w-[0.66rem] bg-slate-300"></span>
+      <span class="block h-[0.70rem] w-[0.66rem] bg-slate-500"></span>
+      <span class="block h-[0.40rem] w-[0.66rem] bg-slate-400"></span>
+      <span class="block h-[1.55rem] w-[0.66rem] bg-emerald-600"></span>
+      <span class="block h-[0.55rem] w-[0.66rem] bg-slate-500"></span>
+    </div>
+  </div>
+
+  <div class="absolute left-1/2 top-[13.1rem] w-[39rem] -translate-x-1/2 border-l-[3px] border-slate-900 bg-white/80 py-[0.58rem] pl-[0.9rem] text-[0.93rem] font-semibold leading-tight text-slate-800">
+    Turn critic scores into soft targets; weighted flow matching moves the actor toward high-value candidate actions.
+  </div>
 </div>
-
-
-<PaperTag conference="Initial results" year="" />
-
 
 ---
 
@@ -1187,6 +1170,117 @@ background: /deck/boston_245_9346_up.jpg
 layout: cover
 ---
 # Appendix & Misc
+
+---
+
+# Odyn: Offline-to-online Dyna
+MuJoCo Wrap as simulator
+
+<PaperTag conference="Initial results" year="" />
+
+<div class="mx-auto mt-2">
+
+  #### Odyn leverages massively-parallel simulators, even on complex tasks
+</div>
+
+<div class="mt-6 grid grid-cols-[1.22fr_0.78fr] items-center gap-0">
+
+<div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/ogbench_puzzle_parallel_tile.gif"
+    alt="Parallel OGBench puzzle rollouts"
+  />
+</div>
+
+<div class="grid gap-3">
+  <img
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_ik_throughput.svg"
+    alt="Puzzle inverse kinematics throughput"
+  />
+  <img
+    class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/puzzle_mjx_backend_throughput.svg"
+    alt="Puzzle MJX backend throughput"
+  />
+</div>
+
+</div>
+
+---
+
+# Flow Matching Recap
+
+<div class="mt-[4.1rem] grid grid-cols-2 items-start gap-[2.2rem]">
+  <div class="min-w-0 text-center">
+    <div class="mb-[1.05rem] text-[1.3rem] font-semibold leading-none">Training</div>
+    <div class="text-[0.82rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}(s,a_1)\sim\mathcal{D},\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]a_t=(1-t)a_0+t a_1,\quad u_t=a_1-a_0\\[0.65em]\min_{\theta}\;\mathbb{E}\left[\left\|v_{\theta}(s,a_t,t)-u_t\right\|_2^2\right]\end{gathered}" />
+    </div>
+  </div>
+
+  <div class="min-w-0 text-center">
+    <div class="mb-[1.05rem] text-[1.3rem] font-semibold leading-none">Inference</div>
+    <div class="text-[0.82rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}a_0\sim\mathcal{N}(0,I),\quad a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.55em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.35em]\tau_k=\frac{k}{K}\end{gathered}" />
+    </div>
+  </div>
+</div>
+
+<div class="mt-[4.85rem] text-center text-[1.75rem] font-semibold leading-none">
+  Off-policy RL?
+</div>
+
+<PaperTag conference="Initial results" year="" />
+
+---
+
+# Flow Matching for Off-Policy RL
+
+
+<div class="relative mt-[7.25rem] grid grid-cols-2 gap-[1.25rem]">
+  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
+    <div class="text-[1.15rem] font-semibold leading-none">AWR: selective BC</div>
+    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}\bar{\theta}\leftarrow\arg\min_{\theta}\;\mathbb{E}_{(s,a_1)\sim\mathcal{D},\,a_0,\,t}\left[\exp\!\left(\frac{Q_\phi(s,a_1)-V^{\bar{\pi}}(s)}{\beta}\right)\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\\[0.55em]\bar{\pi}(\cdot\mid s)=\operatorname{ODE}(v_{\bar{\theta}},s,\epsilon,0,1),\quad \epsilon\sim\mathcal{N}(0,I)\end{gathered}" />
+    </div>
+  </div>
+
+  <svg class="pointer-events-none absolute left-[7%] top-[8.65rem] h-[3.5rem] w-[86%] overflow-visible" viewBox="0 0 740 150" fill="none" aria-hidden="true">
+    <defs>
+      <marker
+        id="awr-mpo-arrowhead"
+        viewBox="0 0 10 10"
+        markerWidth="8"
+        markerHeight="8"
+        refX="8.4"
+        refY="5"
+        orient="auto"
+      >
+        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </marker>
+    </defs>
+    <path
+      d="M42 24C172 136 568 136 698 24"
+      stroke="black"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      marker-end="url(#awr-mpo-arrowhead)"
+    />
+  </svg>
+
+  <div class="flex min-h-[9.0rem] min-w-0 flex-col border-l-[3px] border-slate-900 py-[0.3rem] pl-[0.8rem]">
+    <div class="text-[1.15rem] font-semibold leading-none">MPO: policy improvement</div>
+    <div class="mt-[0.95rem] text-[0.6rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(\frac{Q_\phi(s,a)}{\eta^\star}\right)\\[0.65em]\theta\leftarrow\arg\min_{\theta}\;\mathbb{E}_{s\sim\mathcal{D}}\;\mathbb{E}_{a_1\sim q(\cdot\mid s),\,a_0,\,t}\left[\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\\[0.55em]a_t=(1-t)a_0+t a_1,\quad a_0\sim\mathcal{N}(0,I),\quad t\sim\mathrm{Uniform}(0,1)\end{gathered}" />
+    </div>
+  </div>
+</div>
+
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
