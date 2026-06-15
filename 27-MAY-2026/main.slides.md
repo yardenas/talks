@@ -996,9 +996,6 @@ Simulation can start from arbitrary states
       <span class="block h-[2.15rem] bg-emerald-600"></span>
       <span class="block h-[0.65rem] bg-slate-500"></span>
     </div>
-    <div class="mt-[0.35rem] text-center text-[0.48rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
-      normalize across candidates
-    </div>
   </div>
 
   <div class="absolute left-[42.9rem] top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
@@ -1035,10 +1032,8 @@ Manipulation
 <PaperTag conference="Initial results" year="" />
 
 <div class="mx-auto mt--8 flex w-[46rem] flex-col gap-[0.55rem]">
-  <img
+  <PuzzleCubeBonAblationReveal
     class="mx-auto block h-[12.25rem] w-[44rem] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_cube_dyna_bon_ablation_eval_success_puzzle_cube.svg"
-    alt="Puzzle cube Dyna best-of-N ablation success rate"
   />
 
   <div class="mx-auto grid w-[36.5rem] grid-cols-2 gap-[0.65rem]">
