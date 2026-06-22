@@ -484,29 +484,6 @@ A language for safe RL
 
 ---
 
-# Safety and Priors
-
-<div class="mt-16 flex h-[18rem] items-center justify-center text-center">
-  <div class="relative h-full w-full">
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="mx-auto max-w-[56rem] leading-tight">
-        <div class="mt-8 text-[3.4rem] font-semibold">
-          How to avoid unsafe situations without ever having experienced them?
-        </div>
-      </div>
-    </div>
-    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
-      <div class="text-[3.4rem] font-semibold leading-tight">
-        Simulate first!
-      </div>
-    </div>
-    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
-      <div class="text-[3.4rem] font-semibold leading-tight">
-        Can we train policies that satisfy constraints zero shot?
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- ---
 
@@ -655,6 +632,27 @@ class: text-center
 
 <div class="mx-auto mt-[0.8rem] w-[54rem] text-center text-[1.35rem] font-bold leading-tight text-[#d52222]">
   Given the data we have, we can't say if the optimal policy satisfies the constraint
+</div>
+
+---
+
+# Safety and Priors
+
+<div class="mt-16 flex h-[18rem] items-center justify-center text-center">
+  <div class="relative h-full w-full">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="mx-auto max-w-[56rem] leading-tight">
+        <div class="mt-8 text-[3.4rem] font-semibold">
+          How to avoid unsafe situations without ever having experienced them?
+        </div>
+      </div>
+    </div>
+    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
+      <div class="text-[3.4rem] font-semibold leading-tight">
+        Simulate first!
+      </div>
+    </div>
+  </div>
 </div>
 
 ---

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 430" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Three pillars of model-based reinforcement learning</title>
+  <desc id="desc">A simple black and white line drawing of three taller classical pillars labelled Lookahead policies, Value-expansion, and Dyna.</desc>
+  <rect width="1040" height="430" fill="white" />
+  <g stroke="black" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M105 30H935" />
+    <path d="M132 30H908L878 70H162L132 30Z" fill="white" />
+    <path d="M86 402H954" />
+    <path d="M118 364H922" />
+    <path d="M86 402L118 364H922L954 402H86Z" fill="white" />
+
+    <g>
+      <rect x="158" y="70" width="194" height="28" fill="white" />
+      <path d="M146 98H364L345 132H165L146 98Z" fill="white" />
+      <path d="M202 132V344H308V132" />
+      <path d="M232 154V322M255 144V332M278 154V322" />
+      <rect x="184" y="344" width="142" height="20" fill="white" />
+      <rect x="135" y="236" width="240" height="72" rx="8" fill="white" />
+    </g>
+
+    <g>
+      <rect x="423" y="70" width="194" height="28" fill="white" />
+      <path d="M411 98H629L610 132H430L411 98Z" fill="white" />
+      <path d="M467 132V344H573V132" />
+      <path d="M497 154V322M520 144V332M543 154V322" />
+      <rect x="449" y="344" width="142" height="20" fill="white" />
+      <rect x="400" y="236" width="240" height="72" rx="8" fill="white" />
+    </g>
+
+    <g>
+      <rect x="688" y="70" width="194" height="28" fill="white" />
+      <path d="M676 98H894L875 132H695L676 98Z" fill="white" />
+      <path d="M732 132V344H838V132" />
+      <path d="M762 154V322M785 144V332M808 154V322" />
+      <rect x="714" y="344" width="142" height="20" fill="white" />
+      <rect x="665" y="236" width="240" height="72" rx="8" fill="white" />
+    </g>
+  </g>
+
+</svg>
