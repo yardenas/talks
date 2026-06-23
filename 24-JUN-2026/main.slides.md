@@ -475,15 +475,6 @@ Previous result showed that we can continue training online after simulated pre-
 
 ---
 
-# Constrained Markov Decision Processes
-A language for safe RL
-
-<div class="mt-30 mx-auto w-[96%] text-[1.22rem] leading-tight">
-  <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
-</div>
-
----
-
 
 <!-- ---
 
@@ -609,17 +600,41 @@ class: text-center
 
 # Closing the Loop
 
-<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.45rem] text-slate-900">
-  <img
-    class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-    src="/deck/manuel-wendl.jpeg"
-    alt="Manuel Wendl"
-  />
-  <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
-</div>
-
 <div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
   <TrainingLoop />
+</div>
+
+---
+
+# Constrained Markov Decision Processes
+A language for safe RL
+
+<div class="relative mt-30 mx-auto h-[14rem] w-[96%] text-[1.22rem] leading-tight">
+  <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
+  <svg
+    class="pointer-events-none absolute left-[68.5%] top-[6.05rem] h-[4.8rem] w-[10.8rem] overflow-visible"
+    viewBox="0 0 172 76"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M148 68C116 62 78 45 44 16"
+      stroke="#000000"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M58 16L44 16L50 29"
+      stroke="#000000"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <div class="absolute left-[77.5%] top-[10.5rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
+    satisfy <span class="italic">during</span> learning
+  </div>
 </div>
 
 ---
@@ -717,7 +732,7 @@ Regret decomposition
 <div class="relative min-h-[22rem] w-full">
   <div class="mx-auto flex min-h-[22rem] w-full items-center justify-center">
     <div class="w-full text-center text-[1.22rem] leading-none">
-      <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(\mathcal{J}_{\tilde r}(\pi^*,f) - \mathcal{J}_{\tilde r}(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(\mathcal{J}_r(\pi_c^*,f) - \mathcal{J}_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
+      <KatexBlock expr="R(N) \leq \underbrace{\sum_{n=1}^N \left(J_{\tilde r}(\pi^*,f) - J_{\tilde r}(\pi_n,f)\right)}_{\text{“optimality under the learned model”}} + \underbrace{\sum_{n=1}^N \left(J_r(\pi_c^*,f) - J_r(\bar{\pi}_{c,n}^*,f)\right)}_{\text{“price of safety”}}" />
       <div class="mt-[1.15rem] translate-x-[-6.2rem] text-[0.78rem] font-semibold leading-none opacity-65">
         <a href="https://arxiv.org/abs/2006.12466" target="_blank" rel="noopener noreferrer">
           Kakade et al. (2020)
