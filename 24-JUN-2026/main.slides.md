@@ -1,14 +1,14 @@
 ---
-title: Real-World Reinforcement Learning that Works
+title: "Beyond Priors: Reinforcement Learning During Deployment"
 fonts:
   sans: Lusitana
   serif: Lusitana
 ---
 
-# Real-World Reinforcement Learning That Works
+# Beyond Priors: Reinforcement Learning During Deployment
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">June 24, 2026</div>
+    <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div>
   </div>
 </div>
 
@@ -136,7 +136,8 @@ fonts:
 
 ---
 
-# Beyond Priors: Robots Learning Autonomously
+# On the Path to AGI...
+Fully autonomous robot leaerning
 
 <div class="mt-[3.75rem] grid grid-cols-[1.02fr_0.98fr] items-stretch gap-[1.15rem]">
   <div class="flex min-h-[21.4rem] flex-col justify-center -translate-y-[0.45rem]">
@@ -169,7 +170,7 @@ fonts:
             <KatexBlock expr="\Downarrow" />
           </div>
           <div class="border-l-[3px] border-black pl-[0.85rem]">
-            <div class="text-[1.18rem] font-semibold leading-tight">Robots must obtain their own data</div>
+            <div class="text-[1.18rem] font-semibold leading-tight">Robots must obtain their own data in the real world</div>
             <div class="mt-[0.42rem] text-[0.88rem] leading-tight opacity-80">
               To go beyond their priors, robots need autonomous data collection and learning during deployment.
             </div>
@@ -216,7 +217,7 @@ fonts:
         alt="Domain randomization sim-to-real gap comparison across all settings"
       />
     </div>
-    <div class="mt-[0.35rem] flex items-center justify-center gap-[0.85rem] text-slate-900">
+    <div class="mt-[0.35rem] flex items-center justify-center gap-[2.05rem] text-slate-900">
       <div class="flex items-center gap-[0.35rem]">
         <img
           class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
@@ -233,11 +234,27 @@ fonts:
         />
         <div class="text-[0.56rem] font-semibold leading-tight">Markus<br />Wulfmeier</div>
       </div>
+      <div class="flex items-center gap-[0.35rem]">
+        <img
+          class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
+          src="/deck/avatar_hu14165578538708235153.png"
+          alt="Chenhao Li"
+        />
+        <div class="text-[0.56rem] font-semibold leading-tight">Chenhao<br />Li</div>
+      </div>
+      <div class="flex items-center gap-[0.35rem]">
+        <img
+          class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
+          src="/deck/rene.jpeg"
+          alt="René Zurbrügg"
+        />
+        <div class="text-[0.56rem] font-semibold leading-tight">René<br />Zurbrügg</div>
+      </div>
     </div>
   </div>
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -266,7 +283,7 @@ fonts:
   </div>
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -296,7 +313,7 @@ fonts:
   </div>
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -321,7 +338,7 @@ fonts:
   </div>
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -423,7 +440,7 @@ fonts:
   </div>
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -437,7 +454,7 @@ fonts:
   />
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 
 ---
@@ -473,7 +490,60 @@ Previous result showed that we can continue training online after simulated pre-
   </div>
 </div>
 
+
 ---
+
+# Constrained Markov Decision Processes
+A language for safe RL
+
+<div class="relative mt-30 mx-auto h-[14rem] w-[96%] text-[1.22rem] leading-tight">
+  <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
+  <svg
+    class="pointer-events-none absolute left-[68.5%] top-[6.05rem] h-[4.8rem] w-[10.8rem] overflow-visible"
+    viewBox="0 0 172 76"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M148 68C116 62 78 45 44 16"
+      stroke="#000000"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M58 16L44 16L50 29"
+      stroke="#000000"
+      stroke-width="3.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <div class="absolute left-[77.5%] top-[10.5rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
+    satisfy <span class="italic">during</span> learning
+  </div>
+</div>
+
+---
+
+# Safety and Priors
+
+<div class="mt-16 flex h-[18rem] items-center justify-center text-center">
+  <div class="relative h-full w-full">
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="mx-auto max-w-[56rem] leading-tight">
+        <div class="mt-8 text-[3.4rem] font-semibold">
+          How to avoid unsafe situations without ever having experienced them?
+        </div>
+      </div>
+    </div>
+    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
+      <div class="text-[3.4rem] font-semibold leading-tight">
+        Simulate first!
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- ---
@@ -600,41 +670,27 @@ class: text-center
 
 # Closing the Loop
 
-<div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
-  <TrainingLoop />
+<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.85rem] text-slate-900">
+  <div class="flex items-center gap-[0.45rem]">
+    <img
+      class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+      src="/deck/manuel-wendl.jpeg"
+      alt="Manuel Wendl"
+    />
+    <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
+  </div>
+  <div class="flex items-center gap-[0.45rem]">
+    <img
+      class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+      src="/deck/manish.jpeg"
+      alt="Manish Prajapat"
+    />
+    <div class="text-[0.68rem] font-semibold leading-tight">Manish<br />Prajapat</div>
+  </div>
 </div>
 
----
-
-# Constrained Markov Decision Processes
-A language for safe RL
-
-<div class="relative mt-30 mx-auto h-[14rem] w-[96%] text-[1.22rem] leading-tight">
-  <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
-  <svg
-    class="pointer-events-none absolute left-[68.5%] top-[6.05rem] h-[4.8rem] w-[10.8rem] overflow-visible"
-    viewBox="0 0 172 76"
-    fill="none"
-    aria-hidden="true"
-  >
-    <path
-      d="M148 68C116 62 78 45 44 16"
-      stroke="#000000"
-      stroke-width="3.2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-    <path
-      d="M58 16L44 16L50 29"
-      stroke="#000000"
-      stroke-width="3.2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </svg>
-  <div class="absolute left-[77.5%] top-[10.5rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
-    satisfy <span class="italic">during</span> learning
-  </div>
+<div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
+  <TrainingLoop />
 </div>
 
 ---
@@ -647,27 +703,6 @@ A language for safe RL
 
 <div class="mx-auto mt-[0.8rem] w-[54rem] text-center text-[1.35rem] font-bold leading-tight text-[#d52222]">
   Given the data we have, we can't say if the optimal policy satisfies the constraint
-</div>
-
----
-
-# Safety and Priors
-
-<div class="mt-16 flex h-[18rem] items-center justify-center text-center">
-  <div class="relative h-full w-full">
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="mx-auto max-w-[56rem] leading-tight">
-        <div class="mt-8 text-[3.4rem] font-semibold">
-          How to avoid unsafe situations without ever having experienced them?
-        </div>
-      </div>
-    </div>
-    <div v-click class="absolute inset-0 flex items-center justify-center bg-white">
-      <div class="text-[3.4rem] font-semibold leading-tight">
-        Simulate first!
-      </div>
-    </div>
-  </div>
 </div>
 
 ---
@@ -819,12 +854,22 @@ class: takeaways-slide
 # Takeaways
 
 <div class="takeaways-profile">
-  <img
-    class="takeaways-profile-img"
-    src="/deck/manuel-wendl.jpeg"
-    alt="Manuel Wendl"
-  />
-  <div class="takeaways-profile-name">Manuel Wendl</div>
+  <div class="takeaways-profile-person">
+    <img
+      class="takeaways-profile-img"
+      src="/deck/manuel-wendl.jpeg"
+      alt="Manuel Wendl"
+    />
+    <div class="takeaways-profile-name">Manuel Wendl</div>
+  </div>
+  <div class="takeaways-profile-person">
+    <img
+      class="takeaways-profile-img"
+      src="/deck/manish.jpeg"
+      alt="Manish Prajapat"
+    />
+    <div class="takeaways-profile-name">Manish<br />Prajapat</div>
+  </div>
 </div>
 
 <div class="takeaways-cheese-figure">
@@ -879,8 +924,14 @@ class: takeaways-slide
   z-index: 20;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.85rem;
   color: #0f172a;
+}
+
+.takeaways-profile-person {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .takeaways-profile-img {
@@ -1032,9 +1083,6 @@ Simulation can start from arbitrary states
     </div>
   </div>
 
-  <div class="absolute left-1/2 top-[13.1rem] w-[39rem] -translate-x-1/2 border-l-[3px] border-slate-900 bg-white/80 py-[0.58rem] pl-[0.9rem] text-[0.93rem] font-semibold leading-tight text-slate-800">
-    Turn critic scores into soft targets; weighted flow matching moves the actor toward high-value candidate actions.
-  </div>
 </div>
 
 ---
@@ -1145,33 +1193,48 @@ Learning without manual resets
 
 ---
 layout: cover
-background: /deck/boston_245_9346_up.jpg
 ---
 
-<h1 class="absolute left-[2.8rem] top-[2.1rem] m-0 text-white drop-shadow-lg">Thank you</h1>
+<div class="absolute inset-0 bg-white"></div>
 
-<div class="absolute left-[2.9rem] top-[9.2rem] w-[34rem] rounded-[0.35rem] bg-black/35 px-[1.25rem] py-[1.05rem] text-white shadow-lg backdrop-blur-[1px]">
-  <ul class="m-0 list-disc space-y-[0.78rem] pl-[1.1rem] text-[1.32rem] leading-tight">
-    <li>
-      All prior types are fair game: simulation and demonstrations. How do we scale their usage?
-      Simple methods tend to scale better.
-    </li>
-    <li>
-      We understand safe online learning relatively well in theory. How do we translate this understanding to production?
-    </li>
-    <li>
-      Off-policy learning is a key ingredient in real-world online RL.
-    </li>
-  </ul>
+<div class="absolute bottom-0 right-0 top-0 w-[43%] overflow-hidden border-l border-slate-200 bg-white">
+  <img
+    src="/deck/london-tube-abstract.svg"
+    class="absolute left-0 top-[-4.4rem] h-[112%] w-full object-cover"
+    style="object-position: 58% center;"
+    alt=""
+  />
 </div>
 
-<div class="absolute bottom-[2.25rem] right-[3.35rem] flex flex-col items-center">
+<div class="absolute left-[0.85rem] top-[1.25rem] z-10 w-[32.5rem] text-slate-950">
+  <h1 class="m-0 text-[2.5rem] font-semibold leading-none">Thank you. Questions?</h1>
+
+  <div class="mt-[0.55rem]">
+    <ul class="m-0 list-disc space-y-[0.55rem] pl-[1.45rem] text-[1.24rem] leading-tight">
+      <li v-click>
+        Optimal performance can be obtained even under constrained exploration.
+      </li>
+      <li v-click>
+        All prior types are useful: simulation and demonstrations. How do we scale their usage?
+        Simple methods tend to scale better.
+      </li>
+      <li v-click>
+        Still, in the long run, robots must <em>collect their own</em> training data, extending beyond priors.
+      </li>
+      <li v-click>
+        Off-policy RL might play a major role towards this vision.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="absolute right-[2rem] bottom-[0.75rem] z-20 flex flex-col items-center">
   <img
     src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg"
-    class="h-40 w-40 rounded-full object-cover shadow-lg ring-2 ring-white/75"
+    class="h-40 w-40 rounded-full object-cover shadow-lg ring-2 ring-black/15"
     alt="Yarden As"
   />
-  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none text-white drop-shadow-lg">Yarden As</div>
+  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none text-slate-950">Yarden As</div>
 </div>
 
 ---
@@ -1303,7 +1366,7 @@ MuJoCo Wrap as simulator
   />
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
@@ -1340,7 +1403,7 @@ Runtime vs. Parallel Environments vs. Performance
   />
 </div>
 
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" note="(Google DeepMind)" />
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
