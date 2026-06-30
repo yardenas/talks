@@ -530,6 +530,13 @@ A language for safe RL
   <div class="absolute left-[73.5%] top-[7.2rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
     satisfy <span class="italic">during</span> learning <br>hard without any prior knowledge.
   </div>
+  <div class="absolute left-[8%] top-[10.85rem] w-[78%] text-[1.02rem] font-semibold leading-tight text-black">
+    <div class="mb-[0.35rem] text-left text-black">Prior work:</div>
+    <ul class="m-0 list-disc space-y-[0.32rem] pl-[1.3rem]">
+      <li>Constraint satisfaction, but no optimality.</li>
+      <li>Optimality at convergence, but not during learning.</li>
+    </ul>
+  </div>
 </div>
 
 ---
