@@ -498,8 +498,16 @@ A language for safe RL
 
 <div class="relative mt-30 mx-auto h-[14rem] w-[96%] text-[1.22rem] leading-tight">
   <KatexBlock expr="\pi_c^* \in \arg \max_\pi \; \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t r(s_t, a_t)\right]}_{J_r(\pi,f)} \quad \text{ s.t. } \quad \underbrace{\mathbb{E}_\pi \left[\sum_{t = 0}^{\infty} \gamma^t c(s_t, a_t)\right]}_{J_c(\pi,f)} \leq d" />
+</div>
+
+---
+
+# Learning Objective
+
+<div class="relative mx-auto mt-34 h-[15rem] w-[96%] text-[1.12rem] leading-tight">
+  <KatexBlock expr="R(N) = \sum_{n=1}^N \left( J_r(\pi_c^*,f) - J_r(\pi_n,f) \right) \quad \text{s.t.} \quad J_c(\pi_n,f) \leq d,\ \forall n \in \{1,\dots,N\}." />
   <svg
-    class="pointer-events-none absolute left-[68.5%] top-[6.05rem] h-[4.8rem] w-[10.8rem] overflow-visible"
+    class="pointer-events-none absolute left-[64.5%] top-[2.75rem] h-[4.8rem] w-[10.8rem] overflow-visible"
     viewBox="0 0 172 76"
     fill="none"
     aria-hidden="true"
@@ -519,8 +527,8 @@ A language for safe RL
       stroke-linejoin="round"
     />
   </svg>
-  <div class="absolute left-[77.5%] top-[10.5rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
-    satisfy <span class="italic">during</span> learning
+  <div class="absolute left-[73.5%] top-[7.2rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
+    satisfy <span class="italic">during</span> learning <br>hard without any prior knowledge.
   </div>
 </div>
 
@@ -1215,7 +1223,7 @@ layout: cover
         Optimal performance can be obtained even under constrained exploration.
       </li>
       <li v-click>
-        All prior types are useful: simulation and demonstrations. How do we scale their usage?
+        All prior types are useful: simulation and demonstrations. How can we scale their usage in synergy?
         Simple methods tend to scale better.
       </li>
       <li v-click>
