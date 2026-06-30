@@ -8,7 +8,7 @@ fonts:
 # Beyond Priors: Reinforcement Learning During Deployment
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div>
+    <!-- <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div> -->
   </div>
 </div>
 
@@ -631,12 +631,17 @@ A language for safe RL
     </div>
   </div>
 
-  <div class="flex h-full items-center justify-center">
-    <img
-      class="block w-full max-w-none object-contain"
-      src="/deck/teaser.svg"
-      alt="Pessimistic domain randomization teaser"
-    />
+  <div v-click class="flex h-full flex-col items-center justify-center gap-[0.35rem]">
+    <div class="h-[13.2rem] w-full">
+      <img
+        class="block h-full w-full max-w-none object-contain"
+        src="/deck/teaser.svg"
+        alt="Pessimistic domain randomization teaser"
+      />
+    </div>
+    <div class="h-[9.6rem] w-[104%]">
+      <StatePropagation />
+    </div>
   </div>
 </div>
 
@@ -1213,12 +1218,12 @@ layout: cover
 <div class="absolute inset-0 bg-white"></div>
 
 <div class="absolute bottom-0 right-0 top-0 w-[43%] overflow-hidden border-l border-slate-200 bg-white">
-  <img
+  <!-- <img
     src="/deck/london-tube-abstract.svg"
     class="absolute left-0 top-[-4.4rem] h-[112%] w-full object-cover"
     style="object-position: 58% center;"
     alt=""
-  />
+  /> -->
 </div>
 
 <div class="absolute left-[0.85rem] top-[1.25rem] z-10 w-[32.5rem] text-slate-950">
