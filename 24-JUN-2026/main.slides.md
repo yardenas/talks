@@ -519,7 +519,7 @@ A language for safe RL
     <div class="mb-[0.35rem] text-left text-black">Prior work:</div>
     <ul class="m-0 list-disc space-y-[0.32rem] pl-[1.3rem]">
       <li>Constraint satisfaction, but no optimality.</li>
-      <li>Optimality at convergence, but arbitrary performance during learning (aka “simple” regret).</li>
+      <li>Optimality at convergence, but arbitrarily bad performance during learning (aka “simple” regret).</li>
     </ul>
   </div>
 </div>
@@ -589,7 +589,7 @@ A language for safe RL
 
 ---
 
-# Zero-Shot Constraint Satisfaction on Real Hardware
+# Zero-Shot Performance on Hardware
 
 <div class="mt-10 grid h-[22.5rem] grid-rows-[7.6rem_13.7rem] gap-3">
   <div class="mx-auto min-h-0 w-[92%]">
@@ -807,7 +807,7 @@ Regret decomposition
 class: takeaways-slide
 ---
 
-# Takeaways
+# What We Learn From Safe Online RL?
 
 <div class="takeaways-profile">
   <div class="takeaways-profile-person">
@@ -934,7 +934,7 @@ class: text-center
 ---
 
 # Behavior Cloning Through Flow Matching
-BC fits a vector field from noise to demonstrated actions
+How to use demonstrations? 
 
 <div class="mx-auto mt-[3.35rem] grid w-[52rem] grid-cols-[18.5rem_1fr] items-center gap-[2.0rem] text-slate-900">
   <div class="relative h-[18.2rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
@@ -1047,7 +1047,7 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
         <path d="M0 151H43" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-target-arrow)" />
       </svg>
       <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Off-policy RL</div>
-      <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">judge actions by value</div>
+      <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">Evaluate actions with a critic</div>
       <div class="absolute left-[2.05rem] right-[1.55rem] top-[4.25rem] h-[8.0rem] border-b-[3px] border-l-[3px] border-slate-900">
         <div class="absolute bottom-0 left-[1.15rem] h-[1.7rem] w-[1.05rem] bg-slate-300"></div>
         <div class="absolute bottom-0 left-[3.2rem] h-[5.4rem] w-[1.05rem] bg-emerald-600"></div>
@@ -1059,17 +1059,6 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
     </div>
   </v-click>
 </div>
-
-<PaperTag conference="Initial results" year="" />
-
----
-
-# Why Not Just Backprop From Q?
-
-<div class="mx-auto mt-[6.0rem] w-[43rem] text-center text-[0.96rem] leading-tight">
-  <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.6em]\text{backprop through time: }\nabla_\theta Q_\phi(s,a_K)\end{gathered}" />
-</div>
-
 
 <PaperTag conference="Initial results" year="" />
 
@@ -1102,15 +1091,17 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
 </div>
 
 <div class="relative mx-auto mt-[1.1rem] h-[17.9rem] w-[54rem] text-slate-900">
-  <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 864 310" fill="none" aria-hidden="true">
-    <defs>
-      <marker id="acfql-black-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
-        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-      </marker>
-    </defs>
-    <path d="M174 113H224" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
-    <path d="M403 113H453" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
-    <path d="M632 113H682" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#acfql-black-arrow)" />
+  <svg class="pointer-events-none absolute left-[11.25rem] top-[5.45rem] h-[1.45rem] w-[2.35rem] overflow-visible" viewBox="0 0 38 24" fill="none" aria-hidden="true">
+    <path d="M2 12H31" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 4L32 12L22 20" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <svg class="pointer-events-none absolute left-[25.55rem] top-[5.45rem] h-[1.45rem] w-[2.35rem] overflow-visible" viewBox="0 0 38 24" fill="none" aria-hidden="true">
+    <path d="M2 12H31" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 4L32 12L22 20" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <svg class="pointer-events-none absolute left-[39.85rem] top-[5.45rem] h-[1.45rem] w-[2.35rem] overflow-visible" viewBox="0 0 38 24" fill="none" aria-hidden="true">
+    <path d="M2 12H31" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M22 4L32 12L22 20" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 
   <div class="absolute left-0 top-[0.8rem] h-[10.4rem] w-[10.6rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.65rem] py-[0.65rem]">
@@ -1314,6 +1305,17 @@ layout: cover
 layout: cover
 ---
 # Appendix & Misc
+
+---
+
+# Why Not Just Backprop From Q?
+
+<div class="mx-auto mt-[6.0rem] w-[43rem] text-center text-[0.96rem] leading-tight">
+  <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.6em]\text{backprop through time: }\nabla_\theta Q_\phi(s,a_K)\end{gathered}" />
+</div>
+
+
+<PaperTag conference="Initial results" year="" />
 
 ---
 
