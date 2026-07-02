@@ -541,6 +541,18 @@ A language for safe RL
 
 ---
 
+# Challenges in Online Safe Learning
+
+<div class="mx-auto mt-[1.9rem] h-[24.5rem] w-[58rem]">
+  <SafeLearningChallenges />
+</div>
+
+<div class="mx-auto mt-[0.8rem] w-[54rem] text-center text-[1.35rem] font-bold leading-tight text-[#d52222]">
+  Given the data we have, we can't say if the optimal policy satisfies the constraint
+</div>
+
+---
+
 # Safety and Priors
 
 <div class="mt-16 flex h-[18rem] items-center justify-center text-center">
@@ -679,18 +691,6 @@ class: text-center
 
 <div class="relative mt-[6.0rem] mx-auto h-[23rem] w-[94%]">
   <TrainingLoop />
-</div>
-
----
-
-# Challenges in Online Safe Learning
-
-<div class="mx-auto mt-[1.9rem] h-[24.5rem] w-[58rem]">
-  <SafeLearningChallenges />
-</div>
-
-<div class="mx-auto mt-[0.8rem] w-[54rem] text-center text-[1.35rem] font-bold leading-tight text-[#d52222]">
-  Given the data we have, we can't say if the optimal policy satisfies the constraint
 </div>
 
 ---
@@ -1102,11 +1102,11 @@ No reparameterization trick for flow matching policies
 
 ---
 
-# MPO Turns Q Into Soft Action Targets
+# Soft Targets and Distillation
 
 <PaperTag conference="Initial results" year="" />
 
-<div class="mx-auto mt-[0.9rem] grid w-[54rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.4rem] text-slate-900">
+<div class="mx-auto mt-[3.9rem] grid w-[54rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.4rem] text-slate-900">
   <div class="rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[1rem] py-[0.7rem] text-center text-[0.98rem] leading-tight">
     <KatexBlock expr="q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(Q_{\phi}(s,a)/\eta\right)" />
   </div>
@@ -1115,7 +1115,7 @@ No reparameterization trick for flow matching policies
       <div class="font-semibold">AWR</div>
       <div class="mt-[0.18rem] text-slate-600">Selective BC through flow matching.</div>
     </div>
-    <div class="border-l-[3px] border-emerald-700 pl-[0.55rem]">
+    <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
       <div class="font-semibold">MPO</div>
       <div class="mt-[0.18rem] text-slate-600">Policy improvement, then distillation.</div>
     </div>
@@ -1274,33 +1274,29 @@ Planner works on MJX, "real" runs on MuJoCo CPU
 ---
 
 # Future & Ongoing Work
-Scaling to larger VLAs
+Scaling to larger models
 
-<div class="mt-[2.0rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.4rem]">
-  <div class="min-w-0">
-    <div class="border-l-[3px] border-slate-900 pl-[0.75rem] text-[1.24rem] font-semibold leading-tight text-slate-900">
-      Critic-guided flow targets can extract stronger policies from larger action priors.
-    </div>
-    <div class="mt-[1.0rem] border-l-[3px] border-emerald-700 pl-[0.75rem] text-[0.94rem] leading-tight text-slate-700">
-      The generator can scale, while AWR and MPO keep the update supervised by value.
-    </div>
-  </div>
-
-  <div class="h-[18.4rem] min-w-0">
-    <img
-      class="block h-full w-full rounded-[0.35rem] object-contain"
-      src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
-      alt="Q-guided flow matching rollout for VLA scaling"
-    />
-  </div>
+<div class="mx-auto mt-[2.3rem] flex h-[20.2rem] w-[54rem] items-center justify-center">
+  <img
+    class="block h-full w-full rounded-[0.35rem] object-contain"
+    src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
+    alt="Q-guided flow matching rollout for VLA scaling"
+  />
 </div>
-
-<PaperTag conference="Initial results" year="" />
 
 ---
 
 # Future & Ongoing Work
-Learning without manual resets
+Learning without manual resets, relation to CMDPs
+
+<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.45rem] text-slate-900">
+  <img
+    class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+    src="/deck/manuel-wendl.jpeg"
+    alt="Manuel Wendl"
+  />
+  <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
+</div>
 
 <div class="mt-[1.4rem] flex flex-col items-center gap-[1.35rem]">
   <img
@@ -1365,6 +1361,21 @@ layout: cover
 layout: cover
 ---
 # Appendix & Misc
+
+---
+
+# SPiDR Simulated Performance
+The performance argument is broad simulated coverage, not one cherry-picked task
+
+<div class="mx-auto mt-[2.2rem] flex h-[21.3rem] w-[56rem] items-center justify-center">
+  <img
+    class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/simulated.svg"
+    alt="SPiDR simulated performance across tasks"
+  />
+</div>
+
+<PaperTag conference="NeurIPS" year="2025" href="https://openreview.net/forum?id=Pe1ypX9gBO" />
 
 ---
 
