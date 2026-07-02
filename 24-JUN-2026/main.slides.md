@@ -561,38 +561,6 @@ A language for safe RL
 </div>
 
 
-<!-- ---
-
-# From Simulation to Reality
-
-<div class="mt-12 grid grid-cols-[1fr_0.42fr_1.22fr] items-center gap-5">
-  <div class="h-[16.2rem] min-w-0 text-center">
-    <img
-      class="mx-auto block h-full w-full rounded-[0.45rem] object-contain"
-      src="/deck/rccar_sim.gif"
-      alt="Simulated RC car driving"
-    />
-  </div>
-
-  <div v-click class="text-center text-[1.55rem] font-semibold leading-tight">
-    simulation<br />
-    <div class="my-1 text-[2.9rem] leading-none">
-      <KatexBlock expr="\neq" />
-    </div>
-    reality
-  </div>
-
-  <div class="h-[16.2rem] min-w-0 translate-x-5 text-center">
-    <SlidevVideo class="mx-auto block h-full w-full rounded-[0.45rem] bg-white object-contain" autoplay loop muted volume="0">
-      <source src="/videos/first_episodes.mp4" type="video/mp4" />
-      <p>
-        Your browser does not support videos. You may download it
-        <a href="/videos/first_episodes.mp4">here</a>.
-      </p>
-    </SlidevVideo>
-  </div>
-</div> -->
-
 ---
 
 # Pessimistic Domain Randomization
@@ -978,55 +946,189 @@ class: text-center
 
 <div class="flex flex-col items-center justify-center">
   <div class="text-[3.9rem] font-semibold leading-tight">
-    More Expressive Policy Classes
+    Demonstrations + Simulation?
   </div>
   <div class="mt-10 text-[2.35rem] font-semibold leading-tight opacity-70">
-    (online RL with flow matching models)
+    scaling both priors with off-policy RL
   </div>
 </div>
 
 <PaperTag conference="Initial results" year="" />
 
 ---
-layout: center
-class: text-center
----
 
-<div class="flex flex-col items-center justify-center">
-  <v-switch at="0">
-    <template #0>
-      <div class="text-[3.9rem] font-semibold leading-tight">
-        Offline RL is Hard!
+# Behavior Cloning Through Flow Matching
+BC fits a vector field from noise to demonstrated actions
+
+<div class="mx-auto mt-[3.35rem] grid w-[52rem] grid-cols-[18.5rem_1fr] items-center gap-[2.0rem] text-slate-900">
+  <div class="relative h-[18.2rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
+    <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Demonstrations</div>
+    <svg class="absolute inset-x-[1.1rem] top-[3.0rem] h-[11.2rem] w-[calc(100%-2.2rem)] overflow-visible" viewBox="0 0 300 180" fill="none" aria-hidden="true">
+      <path d="M30 142 C72 103 98 95 134 108 C173 122 197 96 248 58" stroke="#e5e7eb" stroke-width="23" stroke-linecap="round" />
+      <path d="M34 154 C78 128 109 132 145 116 C181 100 205 104 258 88" stroke="#e5e7eb" stroke-width="19" stroke-linecap="round" />
+      <path d="M30 142 C72 103 98 95 134 108 C173 122 197 96 248 58" stroke="#111827" stroke-width="4.8" stroke-linecap="round" />
+      <path d="M28 128 C72 83 106 82 146 101 C183 118 204 87 264 50" stroke="#111827" stroke-width="3.4" stroke-linecap="round" opacity="0.72" />
+      <path d="M34 154 C78 128 109 132 145 116 C181 100 205 104 258 88" stroke="#475569" stroke-width="3.6" stroke-linecap="round" opacity="0.82" />
+      <path d="M24 150 C67 113 101 114 137 124 C178 136 202 117 258 100" stroke="#475569" stroke-width="3.1" stroke-linecap="round" opacity="0.58" />
+      <path d="M42 136 C82 97 112 99 148 110 C185 121 209 95 266 66" stroke="#111827" stroke-width="3.1" stroke-linecap="round" opacity="0.48" />
+      <path d="M56 146 C93 132 119 108 152 90 C192 68 226 39 274 28" stroke="#059669" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 9" />
+      <circle cx="30" cy="142" r="6.5" fill="#fff" stroke="#111827" stroke-width="3" />
+      <circle cx="134" cy="108" r="6.5" fill="#fff" stroke="#111827" stroke-width="3" />
+      <circle cx="248" cy="58" r="6.5" fill="#fff" stroke="#111827" stroke-width="3" />
+      <circle cx="34" cy="154" r="5.8" fill="#fff" stroke="#475569" stroke-width="2.5" />
+      <circle cx="145" cy="116" r="5.8" fill="#fff" stroke="#475569" stroke-width="2.5" />
+      <circle cx="258" cy="88" r="5.8" fill="#fff" stroke="#475569" stroke-width="2.5" />
+      <circle cx="274" cy="28" r="8" fill="#fff" stroke="#059669" stroke-width="3.4" />
+      <path d="M274 17.5L277.1 24.4L284.6 25.1L279 30.1L280.7 37.5L274 33.6L267.3 37.5L269 30.1L263.4 25.1L270.9 24.4L274 17.5Z" fill="#059669" opacity="0.14" />
+      <text x="238" y="22" fill="#059669" style="font-size: 10px; font-weight: 700; letter-spacing: 0.6px;">goal</text>
+    </svg>
+  </div>
+
+  <div class="relative h-[18.2rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[1.05rem] py-[0.9rem]">
+    <div class="text-[1rem] font-semibold leading-none">Flow-matching BC loss</div>
+    <div class="mt-[2.05rem] px-[0.9rem] py-[1.0rem] text-center text-[0.82rem] leading-tight">
+      <KatexBlock expr="\begin{gathered}(s,a_1)\sim\mathcal{D},\quad a_0\sim\mathcal{N}(0,I),\quad t\sim U[0,1]\\[0.45em]a_t=(1-t)a_0+t a_1\\[0.55em]\mathcal{L}_{\mathrm{FM}}(\theta)=\mathbb{E}\!\left[\left\|v_\theta(s,a_t,t)-(a_1-a_0)\right\|_2^2\right]\end{gathered}" />
+    </div>
+    <div v-click class="absolute bottom-[0.9rem] left-[1.1rem] right-[1.1rem] border-l-[3px] border-slate-900 pl-[0.65rem] text-slate-800">
+      <div class="flex items-baseline justify-between gap-[1rem]">
+        <div class="text-[0.78rem] font-semibold leading-none">Compounding error</div>
+        <a class="text-[0.62rem] font-semibold leading-none opacity-65" href="https://arxiv.org/abs/1011.0686" target="_blank" rel="noopener noreferrer">
+          DAgger: Ross et al. (2011)
+        </a>
       </div>
-    </template>
-    <template #1>
-      <div class="text-[3.9rem] font-semibold leading-tight">
-        How can simulators accelerate learning from demonstrations?
+      <div class="mt-[0.35rem] text-center text-[0.68rem] leading-tight">
+        <KatexBlock expr="\epsilon=\mathbb{E}_{s\sim d^{\pi^*}}\!\left[\ell(s,\pi)\right]\quad\Longrightarrow\quad J(\pi)-J(\pi^*)=\mathcal{O}(T^2\epsilon)" />
       </div>
-    </template>
-  </v-switch>
+      <div class="mt-[0.22rem] text-[0.66rem] leading-tight text-slate-600">
+        One wrong action can leave expert support; after that, BC has no labels and mistakes can persist.
+      </div>
+    </div>
+  </div>
 </div>
 
 <PaperTag conference="Initial results" year="" />
 
 ---
 
-# Dyna Expansion From Demonstration States
-Simulation can start from arbitrary states
+# Demos Give Intent, Sim Gives Coverage
+Demonstrations seed useful states; simulation branches from them
 
-<div class="mx-auto mt-[1.5rem] h-[25rem] w-[58rem]">
+<div class="mx-auto mt-[0.35rem] h-[20.2rem] w-[53rem]">
   <DemoSimulatorExpansion />
 </div>
 
+<div class="mx-auto mt-[0.15rem] grid w-[38rem] grid-cols-2 gap-[1.05rem] text-[0.78rem] leading-tight text-slate-800">
+  <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
+    <div class="font-semibold">Demonstrations</div>
+    <div class="mt-[0.2rem] opacity-75">Put the policy on task-relevant states.</div>
+  </div>
+  <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
+    <div class="font-semibold">Simulator</div>
+    <div class="mt-[0.2rem] opacity-75">Expands local coverage around those states.</div>
+  </div>
+</div>
+
 <PaperTag conference="Initial results" year="" />
 
 ---
 
-# Soft Action Targets
+# Simulation Gives Coverage, Not Correctness
+Current-policy rollouts are data; suboptimal actions are not expert labels
+
+<div class="mx-auto mt-[3.35rem] grid w-[54rem] grid-cols-[20.5rem_8rem_20.5rem] items-center gap-[2.5rem] text-slate-900">
+  <div class="relative h-[18.9rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
+    <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Simulator rollouts</div>
+    <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">collected by the current policy</div>
+    <svg class="absolute inset-x-[0.95rem] top-[3.25rem] h-[10.85rem] w-[calc(100%-1.9rem)] overflow-visible" viewBox="0 0 300 170" fill="none" aria-hidden="true">
+      <path d="M18 118 C55 83 88 86 124 105 C164 127 190 95 262 44" stroke="#e5e7eb" stroke-width="10" stroke-linecap="round" />
+      <path d="M18 118 C55 83 88 86 124 105 C164 127 190 95 262 44" stroke="#111827" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M82 91 C58 56 58 33 84 16" stroke="#5c489c" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M126 105 C160 78 197 74 260 103" stroke="#07865a" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M188 96 C188 137 216 151 256 151" stroke="#d97706" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="84" cy="16" r="6.5" fill="#fff" stroke="#5c489c" stroke-width="3.2" />
+      <circle cx="260" cy="103" r="6.5" fill="#fff" stroke="#07865a" stroke-width="3.2" />
+      <circle cx="256" cy="151" r="6.5" fill="#fff" stroke="#d97706" stroke-width="3.2" />
+      <circle cx="82" cy="91" r="8" fill="#fff" stroke="#111827" stroke-width="3.4" />
+      <circle cx="126" cy="105" r="8" fill="#fff" stroke="#111827" stroke-width="3.4" />
+      <circle cx="188" cy="96" r="8" fill="#fff" stroke="#111827" stroke-width="3.4" />
+    </svg>
+    <div class="absolute left-[13.25rem] top-[7.95rem] rounded-[0.22rem] bg-white/90 px-[0.34rem] py-[0.14rem] text-[0.6rem] font-semibold leading-none text-emerald-700 shadow-[0_0_0_1px_rgba(5,150,105,0.18)]">optimal</div>
+    <div class="absolute left-[13.8rem] top-[11.85rem] rounded-[0.22rem] bg-white/90 px-[0.34rem] py-[0.14rem] text-[0.6rem] font-semibold leading-none text-amber-700 shadow-[0_0_0_1px_rgba(217,119,6,0.18)]">suboptimal</div>
+  </div>
+
+  <div class="relative h-[18.9rem] overflow-visible">
+    <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 128 302" fill="none" aria-hidden="true">
+      <defs>
+        <marker id="sim-rl-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
+          <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </marker>
+      </defs>
+      <path d="M-32 151H37" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-arrow)" />
+      <path d="M91 151H160" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-arrow)" />
+    </svg>
+    <div class="absolute left-[0.55rem] top-1/2 w-[6.9rem] -translate-y-1/2 rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.55rem] py-[0.6rem] text-center shadow-[0_0_0_6px_white]">
+      <div class="text-[0.9rem] font-semibold leading-none">Replay</div>
+      <div class="mt-[0.32rem] text-[0.58rem] font-semibold uppercase tracking-[0.07em] text-slate-500">reward + critic</div>
+    </div>
+  </div>
+
+  <div class="relative h-[18.9rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
+    <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Off-policy RL target</div>
+    <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">judge actions by value</div>
+    <div class="absolute left-[2.05rem] right-[1.55rem] top-[4.25rem] h-[8.0rem] border-b-[3px] border-l-[3px] border-slate-900">
+      <div class="absolute bottom-0 left-[1.15rem] h-[1.7rem] w-[1.05rem] bg-slate-300"></div>
+      <div class="absolute bottom-0 left-[3.2rem] h-[5.4rem] w-[1.05rem] bg-emerald-600"></div>
+      <div class="absolute bottom-0 left-[5.25rem] h-[2.9rem] w-[1.05rem] bg-slate-400"></div>
+      <div class="absolute bottom-0 left-[7.3rem] h-[6.6rem] w-[1.05rem] bg-emerald-700"></div>
+      <div class="absolute bottom-0 left-[9.35rem] h-[2.1rem] w-[1.05rem] bg-slate-300"></div>
+      <div class="absolute bottom-0 left-[11.4rem] h-[4.0rem] w-[1.05rem] bg-slate-600"></div>
+    </div>
+  </div>
+</div>
 
 <PaperTag conference="Initial results" year="" />
 
-<div class="relative mx-auto mt-[4.45rem] h-[19.4rem] w-[54rem] text-slate-900">
+---
+
+# Why Not Just Backprop From Q?
+No reparameterization trick for flow matching policies
+
+<div class="mx-auto mt-[6.0rem] w-[43rem] text-center text-[0.96rem] leading-tight">
+  <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.6em]\text{backprop through time: }\nabla_\theta Q_\phi(s,a_K)\end{gathered}" />
+</div>
+
+
+<PaperTag conference="Initial results" year="" />
+
+---
+
+# MPO Turns Q Into Soft Action Targets
+
+<PaperTag conference="Initial results" year="" />
+
+<div class="mx-auto mt-[0.9rem] grid w-[54rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.4rem] text-slate-900">
+  <div class="rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[1rem] py-[0.7rem] text-center text-[0.98rem] leading-tight">
+    <KatexBlock expr="q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(Q_{\phi}(s,a)/\eta\right)" />
+  </div>
+  <div class="grid grid-cols-2 gap-[0.6rem] text-[0.72rem] leading-tight">
+    <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
+      <div class="font-semibold">AWR</div>
+      <div class="mt-[0.18rem] text-slate-600">Selective BC through flow matching.</div>
+    </div>
+    <div class="border-l-[3px] border-emerald-700 pl-[0.55rem]">
+      <div class="font-semibold">MPO</div>
+      <div class="mt-[0.18rem] text-slate-600">Policy improvement, then distillation.</div>
+    </div>
+  </div>
+</div>
+
+<div class="mx-auto mt-[0.35rem] w-[54rem] text-right text-[0.68rem] font-semibold leading-none opacity-65">
+  <a href="https://arxiv.org/abs/2002.08396" target="_blank" rel="noopener noreferrer">
+    ABM prior: Siegel et al. (2020)
+  </a>
+</div>
+
+<div class="relative mx-auto mt-[1.1rem] h-[17.9rem] w-[54rem] text-slate-900">
   <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 864 310" fill="none" aria-hidden="true">
     <defs>
       <marker id="acfql-black-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
@@ -1141,7 +1243,7 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 
-# Odyn: Offline-to-online Dyna
+# Odyn: Offline-to-Online Dyna
 Locomotion
 
 <PaperTag conference="Initial results" year="" />
@@ -1172,26 +1274,28 @@ Planner works on MJX, "real" runs on MuJoCo CPU
 ---
 
 # Future & Ongoing Work
-VLA policy extraction
+Scaling to larger VLAs
 
-<div class="mt-[2.45rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.2rem]">
-<div class="min-w-0 text-center text-[0.86rem] leading-tight">
-  <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.55em]\max_{\theta}\;\mathbb{E}_{s\sim\mathcal{D},\,a_0\sim\mathcal{N}(0,I)}\left[Q_{\phi}(s,a_K)\right]\end{gathered}" />
-  <div class="mx-auto mt-[1.15rem] w-[17rem] text-[0.88rem] font-semibold leading-tight text-slate-700">
-    Can we backprop directly from Q instead of using distillation?
+<div class="mt-[2.0rem] grid grid-cols-[18.5rem_1fr] items-center gap-[2.4rem]">
+  <div class="min-w-0">
+    <div class="border-l-[3px] border-slate-900 pl-[0.75rem] text-[1.24rem] font-semibold leading-tight text-slate-900">
+      Critic-guided flow targets can extract stronger policies from larger action priors.
+    </div>
+    <div class="mt-[1.0rem] border-l-[3px] border-emerald-700 pl-[0.75rem] text-[0.94rem] leading-tight text-slate-700">
+      The generator can scale, while AWR and MPO keep the update supervised by value.
+    </div>
+  </div>
+
+  <div class="h-[18.4rem] min-w-0">
+    <img
+      class="block h-full w-full rounded-[0.35rem] object-contain"
+      src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
+      alt="Q-guided flow matching rollout for VLA scaling"
+    />
   </div>
 </div>
 
-<div class="h-[17.4rem] min-w-0">
-  <img
-    class="block h-full w-full rounded-[0.35rem] object-contain"
-    src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
-    alt="Q-guided flow matching rollout"
-  />
-</div>
-
-</div>
-
+<PaperTag conference="Initial results" year="" />
 
 ---
 
