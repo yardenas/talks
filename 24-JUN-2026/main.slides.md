@@ -137,7 +137,7 @@ fonts:
 ---
 
 # On the Path to AGI...
-Fully autonomous robot leaerning
+Fully autonomous robot learning
 
 <div class="mt-[3.75rem] grid grid-cols-[1.02fr_0.98fr] items-stretch gap-[1.15rem]">
   <div class="flex min-h-[21.4rem] flex-col justify-center -translate-y-[0.45rem]">
@@ -444,21 +444,6 @@ Fully autonomous robot leaerning
 
 ---
 
-# Recycling Off-Policy Data Accelerates Online Learning
-
-<div class="mt-[2.0rem] flex h-[21.3rem] items-center justify-center">
-  <img
-    class="block h-full w-[94%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/rae-all.svg"
-    alt="Recycling off-policy data results"
-  />
-</div>
-
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
-
-
----
-
 # ⚠️ Robots May Break ⚠️
 
 <!--
@@ -505,7 +490,7 @@ A language for safe RL
 # Learning Objective
 
 <div class="relative mx-auto mt-34 h-[15rem] w-[96%] text-[1.12rem] leading-tight">
-  <KatexBlock expr="R(N) = \sum_{n=1}^N \left( J_r(\pi_c^*,f) - J_r(\pi_n,f) \right) \quad \text{s.t.} \quad J_c(\pi_n,f) \leq d,\ \forall n \in \{1,\dots,N\}." />
+  <KatexBlock expr="R(N) = \underbrace{\sum_{n=1}^N \left( J_r(\pi_c^*,f) - J_r(\pi_n,f) \right)}_{\substack{\text{cumulative regret due to}\\\text{suboptimal performance during learning}}} \quad \text{s.t.} \quad J_c(\pi_n,f) \leq d,\ \forall n \in \{1,\dots,N\}." />
   <svg
     class="pointer-events-none absolute left-[64.5%] top-[2.75rem] h-[4.8rem] w-[10.8rem] overflow-visible"
     viewBox="0 0 172 76"
@@ -530,11 +515,11 @@ A language for safe RL
   <div class="absolute left-[73.5%] top-[7.2rem] -translate-x-1/16 text-center text-[0.86rem] font-semibold leading-none">
     satisfy <span class="italic">during</span> learning <br>hard without any prior knowledge.
   </div>
-  <div class="absolute left-[8%] top-[10.85rem] w-[78%] text-[1.02rem] font-semibold leading-tight text-black">
+  <div class="absolute left-[8%] top-[10.85rem] w-[88%] text-[1.02rem] font-semibold leading-tight text-black">
     <div class="mb-[0.35rem] text-left text-black">Prior work:</div>
     <ul class="m-0 list-disc space-y-[0.32rem] pl-[1.3rem]">
       <li>Constraint satisfaction, but no optimality.</li>
-      <li>Optimality at convergence, but not during learning.</li>
+      <li>Optimality at convergence, but arbitrary performance during learning (aka “simple” regret).</li>
     </ul>
   </div>
 </div>
@@ -575,52 +560,27 @@ A language for safe RL
 
 ---
 
-# Pessimistic Domain Randomization
+# Pessimistic Simulation Priors via Domain Randomization
 
-<div class="mt-4 grid h-[22.5rem] grid-cols-[1.22fr_0.78fr] items-center gap-4">
-  <div class="flex h-full flex-col justify-center text-center">
-    <div class="w-full">
-      <div class="mb-1 text-[0.76rem] font-semibold opacity-60">
-        Pessimistic upper bound
-      </div>
-      <div class="text-[0.75rem] leading-tight">
-        <KatexBlock expr="C_{p^\star}(\pi)\le \underbrace{\mathbb{E}_{\xi\sim\mu} C_{\hat{p}_\xi}(\pi)}_{\text{constraint in simulation}} + \quad \underbrace{\mathbb{E}_{\xi\sim\mu}\!\left[\mathbb{E}_{(s,a)\sim d_{\hat{p}_\xi,\pi}}\left[\frac{\gamma L_C}{1-\gamma}D_W(\hat{p}_\xi,p^\star)(s,a)\right]\right]}_{\text{uncertainty w.r.t. sim-to-real gap}}" />
-      </div>
-    </div>
-    <div v-click>
-      <div class="my-[0.2rem] text-[1.1rem] leading-none opacity-45">&darr;</div>
-      <div class="mx-auto w-[96%]">
-        <div class="mb-1 text-[0.76rem] font-semibold opacity-60">
-          Conservative surrogate cost
-        </div>
-        <div class="text-[0.86rem] leading-tight">
-          <KatexBlock expr="\tilde{c}(s,a)\triangleq c(s,a)+\underbrace{\frac{\gamma L_C}{1-\gamma}\max_{\xi\in\Xi}D_W(\hat{p}_\xi,p^\star)(s,a)}_{\text{penalty}}" />
-        </div>
-      </div>
-    </div>
-    <div v-click>
-      <div class="my-[0.2rem] text-[1.1rem] leading-none opacity-45">&darr;</div>
-      <div class="mx-auto w-[98%]">
-        <div class="mb-1 text-[0.76rem] font-semibold opacity-60">
-          Approximate the penalty by ensemble disagreement
-        </div>
-        <div class="text-[0.66rem] leading-tight">
-          <KatexBlock expr="\begin{gathered} s_i\sim\hat{p}_{\xi_i}(\cdot\mid s,a),\quad \xi_i\overset{\mathrm{i.i.d.}}{\sim}\mu\\[0.35em]\upsilon(s,a)\triangleq\left\|\operatorname{Var}(s_1,\ldots,s_n)\right\|_1=\sum_{j=1}^{\operatorname{dim}(\mathcal{S})}\operatorname{Var}(s_{1,j},\ldots,s_{n,j}) \end{gathered}" />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div v-click class="flex h-full flex-col items-center justify-center gap-[0.35rem]">
-    <div class="h-[13.2rem] w-full">
+<div class="mt-[3.1rem] grid h-[22.7rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.3rem]">
+  <div class="flex h-full flex-col items-center justify-center gap-[0.45rem]">
+    <div class="h-[12.85rem] w-full">
       <img
         class="block h-full w-full max-w-none object-contain"
         src="/deck/teaser.svg"
         alt="Pessimistic domain randomization teaser"
       />
     </div>
-    <div class="h-[9.6rem] w-[104%]">
+    <div class="h-[9.2rem] w-full">
       <StatePropagation />
+    </div>
+  </div>
+
+  <div class="flex h-full flex-col justify-center">
+    <div class="mt-[1.0rem] text-center text-[1.34rem] leading-tight">
+      <KatexBlock expr="\tilde{c}(s,a)=c(s,a)+\lambda\,\underbrace{\nu(s,a)}_{\substack{\text{simulator}\\\text{disagreement}}}" />
+    </div>
+    <div class="mt-[1.05rem] grid grid-cols-3 gap-[0.65rem] text-[0.72rem] leading-tight text-slate-600">
     </div>
   </div>
 </div>
@@ -686,6 +646,14 @@ class: text-center
       alt="Manish Prajapat"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Manish<br />Prajapat</div>
+  </div>
+  <div class="flex items-center gap-[0.45rem]">
+    <img
+      class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+      src="/deck/Andreas-Krause-2025.jpg"
+      alt="Andreas Krause"
+    />
+    <div class="text-[0.68rem] font-semibold leading-tight">Andreas<br />Krause</div>
   </div>
 </div>
 
@@ -858,6 +826,14 @@ class: takeaways-slide
     />
     <div class="takeaways-profile-name">Manish<br />Prajapat</div>
   </div>
+  <div class="takeaways-profile-person">
+    <img
+      class="takeaways-profile-img"
+      src="/deck/Andreas-Krause-2025.jpg"
+      alt="Andreas Krause"
+    />
+    <div class="takeaways-profile-name">Andreas<br />Krause</div>
+  </div>
 </div>
 
 <div class="takeaways-cheese-figure">
@@ -946,10 +922,10 @@ class: text-center
 
 <div class="flex flex-col items-center justify-center">
   <div class="text-[3.9rem] font-semibold leading-tight">
-    Demonstrations + Simulation?
+    What Priors Might Look Like at Scale?
   </div>
   <div class="mt-10 text-[2.35rem] font-semibold leading-tight opacity-70">
-    scaling both priors with off-policy RL
+    demonstrations + simulation
   </div>
 </div>
 
@@ -1017,17 +993,6 @@ Demonstrations seed useful states; simulation branches from them
   <DemoSimulatorExpansion />
 </div>
 
-<div class="mx-auto mt-[0.15rem] grid w-[38rem] grid-cols-2 gap-[1.05rem] text-[0.78rem] leading-tight text-slate-800">
-  <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
-    <div class="font-semibold">Demonstrations</div>
-    <div class="mt-[0.2rem] opacity-75">Put the policy on task-relevant states.</div>
-  </div>
-  <div class="border-l-[3px] border-slate-900 pl-[0.55rem]">
-    <div class="font-semibold">Simulator</div>
-    <div class="mt-[0.2rem] opacity-75">Expands local coverage around those states.</div>
-  </div>
-</div>
-
 <PaperTag conference="Initial results" year="" />
 
 ---
@@ -1056,34 +1021,43 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
     <div class="absolute left-[13.8rem] top-[11.85rem] rounded-[0.22rem] bg-white/90 px-[0.34rem] py-[0.14rem] text-[0.6rem] font-semibold leading-none text-amber-700 shadow-[0_0_0_1px_rgba(217,119,6,0.18)]">suboptimal</div>
   </div>
 
-  <div class="relative h-[18.9rem] overflow-visible">
-    <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 128 302" fill="none" aria-hidden="true">
-      <defs>
-        <marker id="sim-rl-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
-          <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </marker>
-      </defs>
-      <path d="M-32 151H37" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-arrow)" />
-      <path d="M91 151H160" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-arrow)" />
-    </svg>
-    <div class="absolute left-[0.55rem] top-1/2 w-[6.9rem] -translate-y-1/2 rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.55rem] py-[0.6rem] text-center shadow-[0_0_0_6px_white]">
-      <div class="text-[0.9rem] font-semibold leading-none">Replay</div>
-      <div class="mt-[0.32rem] text-[0.58rem] font-semibold uppercase tracking-[0.07em] text-slate-500">reward + critic</div>
-    </div>
-  </div>
 
-  <div class="relative h-[18.9rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
-    <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Off-policy RL target</div>
-    <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">judge actions by value</div>
-    <div class="absolute left-[2.05rem] right-[1.55rem] top-[4.25rem] h-[8.0rem] border-b-[3px] border-l-[3px] border-slate-900">
-      <div class="absolute bottom-0 left-[1.15rem] h-[1.7rem] w-[1.05rem] bg-slate-300"></div>
-      <div class="absolute bottom-0 left-[3.2rem] h-[5.4rem] w-[1.05rem] bg-emerald-600"></div>
-      <div class="absolute bottom-0 left-[5.25rem] h-[2.9rem] w-[1.05rem] bg-slate-400"></div>
-      <div class="absolute bottom-0 left-[7.3rem] h-[6.6rem] w-[1.05rem] bg-emerald-700"></div>
-      <div class="absolute bottom-0 left-[9.35rem] h-[2.1rem] w-[1.05rem] bg-slate-300"></div>
-      <div class="absolute bottom-0 left-[11.4rem] h-[4.0rem] w-[1.05rem] bg-slate-600"></div>
+  <v-click>
+    <div class="relative h-[18.9rem] overflow-visible">
+      <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 128 302" fill="none" aria-hidden="true">
+        <defs>
+          <marker id="sim-rl-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
+            <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path d="M-32 151H37" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-arrow)" />
+      </svg>
+      <div class="absolute left-[0.55rem] top-1/2 w-[6.9rem] -translate-y-1/2 rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[0.55rem] py-[0.6rem] text-center shadow-[0_0_0_6px_white]">
+        <div class="text-[0.9rem] font-semibold leading-none">Replay</div>
+        <div class="mt-[0.32rem] text-[0.58rem] font-semibold uppercase tracking-[0.07em] text-slate-500">reward + critic</div>
+      </div>
     </div>
-  </div>
+    <div class="relative h-[18.9rem] rounded-[0.35rem] border-[2px] border-slate-900 bg-white">
+      <svg class="pointer-events-none absolute left-[-3.15rem] top-0 h-full w-[3.35rem] overflow-visible" viewBox="0 0 54 302" fill="none" aria-hidden="true">
+        <defs>
+          <marker id="sim-rl-target-arrow" viewBox="0 0 10 10" markerWidth="8" markerHeight="8" refX="8.6" refY="5" orient="auto">
+            <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </marker>
+        </defs>
+        <path d="M0 151H43" stroke="#0f172a" stroke-width="3.5" stroke-linecap="round" marker-end="url(#sim-rl-target-arrow)" />
+      </svg>
+      <div class="absolute left-[1rem] top-[0.85rem] text-[1rem] font-semibold leading-none">Off-policy RL</div>
+      <div class="absolute left-[1rem] top-[2.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">judge actions by value</div>
+      <div class="absolute left-[2.05rem] right-[1.55rem] top-[4.25rem] h-[8.0rem] border-b-[3px] border-l-[3px] border-slate-900">
+        <div class="absolute bottom-0 left-[1.15rem] h-[1.7rem] w-[1.05rem] bg-slate-300"></div>
+        <div class="absolute bottom-0 left-[3.2rem] h-[5.4rem] w-[1.05rem] bg-emerald-600"></div>
+        <div class="absolute bottom-0 left-[5.25rem] h-[2.9rem] w-[1.05rem] bg-slate-400"></div>
+        <div class="absolute bottom-0 left-[7.3rem] h-[6.6rem] w-[1.05rem] bg-emerald-700"></div>
+        <div class="absolute bottom-0 left-[9.35rem] h-[2.1rem] w-[1.05rem] bg-slate-300"></div>
+        <div class="absolute bottom-0 left-[11.4rem] h-[4.0rem] w-[1.05rem] bg-slate-600"></div>
+      </div>
+    </div>
+  </v-click>
 </div>
 
 <PaperTag conference="Initial results" year="" />
@@ -1091,7 +1065,6 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
 ---
 
 # Why Not Just Backprop From Q?
-No reparameterization trick for flow matching policies
 
 <div class="mx-auto mt-[6.0rem] w-[43rem] text-center text-[0.96rem] leading-tight">
   <KatexBlock expr="\begin{gathered}a_K=\operatorname{ODE}_K(v_\theta,s,a_0,0,1)\\[0.45em]\text{where}\quad a_{k+1}=a_k+\frac{1}{K}v_{\theta}(s,a_k,\tau_k)\\[0.3em]\tau_k=\frac{k}{K}\\[0.6em]\text{backprop through time: }\nabla_\theta Q_\phi(s,a_K)\end{gathered}" />
@@ -1243,38 +1216,8 @@ I have an implementation of MPO that works with flow matching models, I believe 
 
 ---
 
-# Odyn: Offline-to-Online Dyna
-Locomotion
-
-<PaperTag conference="Initial results" year="" />
-
-<div class="mt-0 grid grid-cols-2 gap-8 items-center">
-
-<div class="h-[20rem] overflow-hidden rounded">
-  <img
-    class="w-full h-[24rem] object-contain -translate-y-[5rem]"
-    src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif"
-    alt="pi cubed trajectory rollout"
-  />
-</div>
-
-<div>
-  <img
-    class="w-full h-[24rem] object-contain rounded"
-    src="/deck/h1_mpo_vs_odyn.svg"
-    alt="Comparison plot of MPO versus pi cubed"
-  />
-</div>
-
-</div>
-<!--  
-Planner works on MJX, "real" runs on MuJoCo CPU
--->
-
----
-
 # Future & Ongoing Work
-Scaling to larger models
+Scaling to foundation models
 
 <div class="mx-auto mt-[2.3rem] flex h-[20.2rem] w-[54rem] items-center justify-center">
   <img
@@ -1289,24 +1232,37 @@ Scaling to larger models
 # Future & Ongoing Work
 Learning without manual resets, relation to CMDPs
 
-<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.45rem] text-slate-900">
-  <img
-    class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-    src="/deck/manuel-wendl.jpeg"
-    alt="Manuel Wendl"
-  />
-  <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
+<div class="absolute right-[2.1rem] top-[4.1rem] z-20 flex items-center gap-[0.85rem] text-slate-900">
+  <div class="flex items-center gap-[0.45rem]">
+    <img
+      class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+      src="/deck/manuel-wendl.jpeg"
+      alt="Manuel Wendl"
+    />
+    <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
+  </div>
+  <div class="flex items-center gap-[0.45rem]">
+    <img
+      class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
+      src="/deck/Andreas-Krause-2025.jpg"
+      alt="Andreas Krause"
+    />
+    <div class="text-[0.68rem] font-semibold leading-tight">Andreas<br />Krause</div>
+  </div>
 </div>
 
-<div class="mt-[1.4rem] flex flex-col items-center gap-[1.35rem]">
-  <img
-    class="block h-[14.8rem] w-[76%] object-contain"
-    src="/deck/recovery.png"
-    alt="Recovery effort examples for humanoid poses"
-  />
+<div class="mt-[3.15rem] flex flex-col items-center gap-[0.95rem]">
+  <div class="grid w-[92%] grid-cols-[1.15fr_0.85fr] items-center gap-[2.05rem]">
+    <img
+      class="block h-[13.4rem] w-full object-contain"
+      src="/deck/recovery.png"
+      alt="Recovery effort examples for humanoid poses"
+    />
+    <div class="h-[13.4rem] overflow-hidden rounded-[0.35rem] bg-slate-950"><img class="block h-[17rem] w-full -translate-y-[3.25rem] object-contain" src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif" alt="Odyn locomotion rollout" /></div>
+  </div>
 
-  <div class="w-[92%] text-center text-[0.96rem] leading-tight">
-    <KatexBlock expr="V_{\mathcal{R}}^{\pi_r}(s) := \mathbb{E}_{\pi_r}\left[\sum_{t=0}^{\infty} -\mathbf{1}\{s_t \notin \mathcal{R}\}\,\big|\,s_0=s\right]" />
+  <div class="w-[92%] mt-[2rem] text-center text-[0.9rem] leading-tight">
+    <KatexBlock expr="V_{\mathcal{R}}^{\pi_r}(s) := \mathbb{E}_{\pi_r}\left[\sum_{t=0}^{\infty} \mathbf{1}\{s_t \notin \mathcal{R}\}\,\big|\,s_0=s\right]" />
   </div>
 </div>
 
@@ -1329,8 +1285,8 @@ layout: cover
 <div class="absolute left-[0.85rem] top-[1.25rem] z-10 w-[32.5rem] text-slate-950">
   <h1 class="m-0 text-[2.5rem] font-semibold leading-none">Thank you. Questions?</h1>
 
-  <div class="mt-[0.55rem]">
-    <ul class="m-0 list-disc space-y-[0.55rem] pl-[1.45rem] text-[1.24rem] leading-tight">
+  <div class="mt-[2.55rem]">
+    <ul class="m-0 list-disc space-y-[0.85rem] pl-[1.45rem] text-[1.24rem] leading-tight">
       <li v-click>
         Optimal performance can be obtained even under constrained exploration.
       </li>
@@ -1339,10 +1295,7 @@ layout: cover
         Simple methods tend to scale better.
       </li>
       <li v-click>
-        Still, in the long run, robots must <em>collect their own</em> training data, extending beyond priors.
-      </li>
-      <li v-click>
-        Off-policy RL might play a major role towards this vision.
+        Still, in the long run, robots must collect their own training data, extending beyond priors.
       </li>
     </ul>
   </div>
@@ -1364,6 +1317,20 @@ layout: cover
 
 ---
 
+# Recycling Off-Policy Data Accelerates Online Learning
+
+<div class="mt-[2.0rem] flex h-[21.3rem] items-center justify-center">
+  <img
+    class="block h-full w-[94%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+    src="/deck/rae-all.svg"
+    alt="Recycling off-policy data results"
+  />
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
+
+---
+
 # SPiDR Simulated Performance
 The performance argument is broad simulated coverage, not one cherry-picked task
 
@@ -1373,6 +1340,41 @@ The performance argument is broad simulated coverage, not one cherry-picked task
     src="/deck/simulated.svg"
     alt="SPiDR simulated performance across tasks"
   />
+</div>
+
+<PaperTag conference="NeurIPS" year="2025" href="https://openreview.net/forum?id=Pe1ypX9gBO" />
+
+---
+
+# Pessimistic Simulation Priors: Derivation
+
+<div class="mt-[3.15rem] flex flex-col gap-[0.85rem] text-center">
+  <div>
+    <div class="mb-[0.2rem] text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
+      Pessimistic upper bound
+    </div>
+    <div class="text-[0.72rem] leading-tight">
+      <KatexBlock expr="C_{p^\star}(\pi)\le \underbrace{\mathbb{E}_{\xi\sim\mu} C_{\hat{p}_\xi}(\pi)}_{\text{constraint in simulation}} + \quad \underbrace{\mathbb{E}_{\xi\sim\mu}\!\left[\mathbb{E}_{(s,a)\sim d_{\hat{p}_\xi,\pi}}\left[\frac{\gamma L_C}{1-\gamma}D_W(\hat{p}_\xi,p^\star)(s,a)\right]\right]}_{\text{uncertainty w.r.t. sim-to-real gap}}" />
+    </div>
+  </div>
+
+  <div>
+    <div class="mb-[0.2rem] text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
+      Conservative surrogate cost
+    </div>
+    <div class="text-[0.86rem] leading-tight">
+      <KatexBlock expr="\tilde{c}(s,a)\triangleq c(s,a)+\underbrace{\frac{\gamma L_C}{1-\gamma}\max_{\xi\in\Xi}D_W(\hat{p}_\xi,p^\star)(s,a)}_{\text{penalty}}" />
+    </div>
+  </div>
+
+  <div>
+    <div class="mb-[0.2rem] text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-slate-500">
+      Approximate the penalty by ensemble disagreement
+    </div>
+    <div class="text-[0.66rem] leading-tight">
+      <KatexBlock expr="\begin{gathered} s_i\sim\hat{p}_{\xi_i}(\cdot\mid s,a),\quad \xi_i\overset{\mathrm{i.i.d.}}{\sim}\mu\\[0.35em]\upsilon(s,a)\triangleq\left\|\operatorname{Var}(s_1,\ldots,s_n)\right\|_1=\sum_{j=1}^{\operatorname{dim}(\mathcal{S})}\operatorname{Var}(s_{1,j},\ldots,s_{n,j}) \end{gathered}" />
+    </div>
+  </div>
 </div>
 
 <PaperTag conference="NeurIPS" year="2025" href="https://openreview.net/forum?id=Pe1ypX9gBO" />
