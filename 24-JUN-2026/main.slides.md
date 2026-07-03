@@ -8,7 +8,7 @@ fonts:
 # Beyond Priors: Reinforcement Learning During Deployment
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <!-- <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div> -->
+    <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div>
   </div>
 </div>
 
@@ -289,12 +289,22 @@ Fully autonomous robot learning
 
 # Challenges in Sim-to-Online Transfer
 
-<div class="mt-[5.5rem]">
-  <div class="mx-auto mb-[0.4rem] w-[96%] text-center text-[0.92rem] font-semibold leading-tight text-slate-800">
-    Compute Q function estimation error from each state in the replay buffer
+<div class="mt-[4.9rem]">
+  <div class="mx-auto mb-[0.3rem] w-[96%] text-center text-[0.92rem] font-semibold leading-tight text-slate-800">
+    Critic error distribution over the replay buffer
+  </div>
+  <div class="mx-auto mb-[0.55rem] flex w-[86%] items-center justify-center gap-[0.55rem] text-[0.65rem] font-semibold uppercase tracking-[0.045em] text-slate-500">
+    <span>x = episode</span>
+    <span class="h-[0.18rem] w-[0.18rem] rounded-full bg-slate-400"></span>
+    <span>y = Q-error magnitude</span>
+    <span class="h-[0.18rem] w-[0.18rem] rounded-full bg-slate-400"></span>
+    <span class="flex items-center gap-[0.35rem] normal-case tracking-normal text-slate-600">
+      <span class="h-[0.42rem] w-[3.15rem] rounded-full" style="background: linear-gradient(90deg, #171026 0%, #314a95 52%, #58d8ff 100%);"></span>
+      brighter = more replay samples
+    </span>
   </div>
 
-  <div class="mx-auto flex h-[15.4rem] w-[96%] items-center justify-center">
+  <div class="mx-auto flex h-[15.2rem] w-[96%] items-center justify-center">
     <RccarQMcPlots />
   </div>
 
@@ -490,7 +500,7 @@ A language for safe RL
 # Learning Objective
 
 <div class="relative mx-auto mt-34 h-[15rem] w-[96%] text-[1.12rem] leading-tight">
-  <KatexBlock expr="R(N) = \underbrace{\sum_{n=1}^N \left( J_r(\pi_c^*,f) - J_r(\pi_n,f) \right)}_{\substack{\text{cumulative regret due to}\\\text{suboptimal performance during learning}}} \quad \text{s.t.} \quad J_c(\pi_n,f) \leq d,\ \forall n \in \{1,\dots,N\}." />
+  <KatexBlock expr="R(N) = \sum_{n=1}^N \left( J_r(\pi_c^*,f) - J_r(\pi_n,f) \right) \quad \text{s.t.} \quad J_c(\pi_n,f) \leq d,\ \forall n \in \{1,\dots,N\}." />
   <svg
     class="pointer-events-none absolute left-[64.5%] top-[2.75rem] h-[4.8rem] w-[10.8rem] overflow-visible"
     viewBox="0 0 172 76"
@@ -537,8 +547,6 @@ A language for safe RL
 </div>
 
 ---
-
-# Safety and Priors
 
 <div class="mt-16 flex h-[18rem] items-center justify-center text-center">
   <div class="relative h-full w-full">
@@ -845,7 +853,7 @@ class: takeaways-slide
 
 1. Good priors are critical for safe online learning
 2. Swiss cheese model for safety🇨🇭
-3. Optimal performance, _even when exploring under constraints_
+3. Optimal learning, _even when exploring under constraints_
 
 <style>
 .takeaways-slide ol {
@@ -973,7 +981,7 @@ How to use demonstrations?
         </a>
       </div>
       <div class="mt-[0.35rem] text-center text-[0.68rem] leading-tight">
-        <KatexBlock expr="\epsilon=\mathbb{E}_{s\sim d^{\pi^*}}\!\left[\ell(s,\pi)\right]\quad\Longrightarrow\quad J(\pi)-J(\pi^*)=\mathcal{O}(T^2\epsilon)" />
+        <KatexBlock expr="\epsilon=\mathbb{E}_{s\sim d^{\pi^*}}\!\left[\ell(s,\pi)\right]\quad\Longrightarrow\quad J(\pi)-J(\pi^*)\approx\mathcal{O}(T^2\epsilon)" />
       </div>
       <div class="mt-[0.22rem] text-[0.66rem] leading-tight text-slate-600">
         One wrong action can leave expert support; after that, BC has no labels and mistakes can persist.
@@ -1068,7 +1076,36 @@ Current-policy rollouts are data; suboptimal actions are not expert labels
 
 <PaperTag conference="Initial results" year="" />
 
-<div class="mx-auto mt-[3.9rem] grid w-[54rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.4rem] text-slate-900">
+<div class="relative mx-auto mt-[3.9rem] grid w-[54rem] grid-cols-[1.05fr_0.95fr] items-center gap-[1.4rem] text-slate-900">
+  <svg
+    v-click
+    class="pointer-events-none absolute left-0 top-[-1.55rem] z-20 h-[5.3rem] w-full overflow-visible"
+    viewBox="0 0 864 86"
+    fill="none"
+    aria-hidden="true"
+  >
+    <defs>
+      <marker
+        id="awr-bar-pi-arrowhead"
+        viewBox="0 0 10 10"
+        markerWidth="6"
+        markerHeight="6"
+        refX="8.4"
+        refY="5"
+        orient="auto"
+      >
+        <path d="M1.5 1.5L8.5 5L1.5 8.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </marker>
+    </defs>
+    <path
+      d="M485 32C420 -4 285 -4 198 39"
+      stroke="black"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      marker-end="url(#awr-bar-pi-arrowhead)"
+    />
+  </svg>
   <div class="rounded-[0.35rem] border-[2px] border-slate-900 bg-white px-[1rem] py-[0.7rem] text-center text-[0.98rem] leading-tight">
     <KatexBlock expr="q(a\mid s)\propto \bar{\pi}(a\mid s)\exp\!\left(Q_{\phi}(s,a)/\eta\right)" />
   </div>
@@ -1219,6 +1256,99 @@ Scaling to foundation models
 </div>
 
 ---
+layout: cover
+---
+
+<div class="absolute inset-0 bg-white"></div>
+
+<div class="absolute bottom-0 right-0 top-0 w-[43%] overflow-hidden border-l border-slate-200 bg-white">
+  <img
+    src="/deck/london-tube-abstract.svg"
+    class="absolute left-0 top-[-4.4rem] h-[112%] w-full object-cover"
+    style="object-position: 58% center;"
+    alt=""
+  />
+</div>
+
+<div class="absolute left-[0.85rem] top-[1.25rem] z-10 w-[32.5rem] text-slate-950">
+  <h1 class="m-0 text-[2.5rem] font-semibold leading-none">Thank you. Questions?</h1>
+
+  <div class="mt-[2.55rem]">
+    <ul class="m-0 list-disc space-y-[0.85rem] pl-[1.45rem] text-[1.24rem] leading-tight">
+      <li v-click>
+        Optimal performance can be obtained even under constrained exploration.
+      </li>
+      <li v-click>
+        All prior types are useful: simulation and demonstrations. How can we scale their usage in synergy?
+        Simple methods tend to scale better.
+      </li>
+      <li v-click>
+        Still, in the long run, robots must collect their own training data, extending beyond priors.
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="absolute right-[2rem] bottom-[0.75rem] z-20 flex flex-col items-center">
+  <img
+    src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg"
+    class="h-40 w-40 rounded-full object-cover shadow-lg ring-2 ring-black/15"
+    alt="Yarden As"
+  />
+  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none text-slate-950">Yarden As</div>
+</div>
+
+---
+layout: cover
+---
+# Appendix & Misc
+
+---
+
+# Critic Lag from Linearized SGD
+Taylor expand critic SGD around an optimum under replay distribution $\mathcal{D}$
+
+<div class="mt-[1.15rem] space-y-[0.78rem] text-slate-900">
+  <div class="grid grid-cols-[0.92fr_1.08fr] gap-[1.2rem]">
+    <div class="min-w-0 border-l-[3px] border-slate-900 pl-[0.72rem]">
+      <div class="mb-[0.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">Critic SGD</div>
+      <div class="text-[0.74rem] leading-tight">
+        <KatexBlock expr="\phi_{k+1}=\phi_k-\eta_Q\nabla_\phi \bar{\ell}_{\mathcal D}(\phi_k;\theta)" />
+      </div>
+    </div>
+    <div class="min-w-0 border-l-[3px] border-slate-900 pl-[0.72rem]">
+      <div class="mb-[0.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">Local coordinates</div>
+      <div class="text-[0.62rem] leading-tight">
+        <KatexBlock expr="\delta\phi_k=\phi_k-\phi^\star,\qquad \delta\theta=\theta-\theta^\star,\qquad \nabla_\phi\bar{\ell}_{\mathcal D}(\phi^\star;\theta^\star)=0" />
+      </div>
+    </div>
+  </div>
+  <div class="border-l-[3px] border-slate-900 pl-[0.72rem]">
+    <div class="mb-[0.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">Linearized critic gradient</div>
+    <div class="text-center text-[0.68rem] leading-tight">
+      <KatexBlock expr="\nabla_\phi\bar{\ell}_{\mathcal D}(\phi^\star+\delta\phi_k;\theta^\star+\delta\theta)= A_{\mathcal D}\delta\phi_k+B_{\mathcal D}\delta\theta+\mathcal O(\|\delta\phi_k\|^2)" />
+    </div>
+  </div>
+  <div class="border-l-[3px] border-slate-900 pl-[0.72rem]">
+    <div class="mb-[0.25rem] text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-slate-500">Replay distribution sets critic curvature</div>
+    <div class="pt-[0.1rem] text-center text-[0.78rem] leading-tight">
+      <KatexBlock expr="A_{\mathcal D}\;\approx\;\mathbb E_{(s,a,r,s')\sim\mathcal D}\!\left[\nabla_\phi Q_{\phi^\star}(s,a)\,\nabla_\phi Q_{\phi^\star}(s,a)^{\top}\right]" />
+    </div>
+  </div>
+  <div class="space-y-[1.45rem] border-t border-slate-300 pt-[0.64rem] text-center leading-tight">
+    <div class="text-[0.9rem]">
+      <KatexBlock expr="\delta\phi_{k+1}=\underbrace{(I-\eta_QA_{\mathcal D})\delta\phi_k}_{\text{critic contraction}}\;-\;\underbrace{\eta_QB_{\mathcal D}\delta\theta}_{\text{actor moves critic target}}" />
+    </div>
+    <div class="text-[0.9rem]">
+      <KatexBlock expr="\delta\theta^+=\underbrace{(I+\eta_\pi J_{\mathrm{red}})\delta\theta}_{\text{perfect critic dynamics}}\;+\;\underbrace{E_M\delta\theta}_{\text{finite critic lag}}" />
+    </div>
+    <div class="text-[0.9rem]">
+      <KatexBlock expr="\|E_M\|\;\lesssim\;\underbrace{\mathrm{const.}\,\|A_{\mathcal D}^{-1}\|}_{\text{curvature amplification}}\;\underbrace{\exp\!\left(-\eta_Q M/\|A_{\mathcal D}^{-1}\|\right)}_{\text{critic catch-up after }M\text{ steps}}" />
+    </div>
+  </div>
+</div>
+
+---
 
 # Future & Ongoing Work
 Learning without manual resets, relation to CMDPs
@@ -1256,55 +1386,6 @@ Learning without manual resets, relation to CMDPs
     <KatexBlock expr="V_{\mathcal{R}}^{\pi_r}(s) := \mathbb{E}_{\pi_r}\left[\sum_{t=0}^{\infty} \mathbf{1}\{s_t \notin \mathcal{R}\}\,\big|\,s_0=s\right]" />
   </div>
 </div>
-
-
----
-layout: cover
----
-
-<div class="absolute inset-0 bg-white"></div>
-
-<div class="absolute bottom-0 right-0 top-0 w-[43%] overflow-hidden border-l border-slate-200 bg-white">
-  <!-- <img
-    src="/deck/london-tube-abstract.svg"
-    class="absolute left-0 top-[-4.4rem] h-[112%] w-full object-cover"
-    style="object-position: 58% center;"
-    alt=""
-  /> -->
-</div>
-
-<div class="absolute left-[0.85rem] top-[1.25rem] z-10 w-[32.5rem] text-slate-950">
-  <h1 class="m-0 text-[2.5rem] font-semibold leading-none">Thank you. Questions?</h1>
-
-  <div class="mt-[2.55rem]">
-    <ul class="m-0 list-disc space-y-[0.85rem] pl-[1.45rem] text-[1.24rem] leading-tight">
-      <li v-click>
-        Optimal performance can be obtained even under constrained exploration.
-      </li>
-      <li v-click>
-        All prior types are useful: simulation and demonstrations. How can we scale their usage in synergy?
-        Simple methods tend to scale better.
-      </li>
-      <li v-click>
-        Still, in the long run, robots must collect their own training data, extending beyond priors.
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="absolute right-[2rem] bottom-[0.75rem] z-20 flex flex-col items-center">
-  <img
-    src="https://las.inf.ethz.ch/wp-content/uploads/2024/03/yardas.jpeg"
-    class="h-40 w-40 rounded-full object-cover shadow-lg ring-2 ring-black/15"
-    alt="Yarden As"
-  />
-  <div class="mt-[0.65rem] text-center text-[1.12rem] font-semibold leading-none text-slate-950">Yarden As</div>
-</div>
-
----
-layout: cover
----
-# Appendix & Misc
 
 ---
 

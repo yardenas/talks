@@ -1,10 +1,11 @@
 <template>
   <div class="rccar-qmc-plots">
+    <div class="qmc-y-label" aria-hidden="true">Q-error magnitude</div>
     <figure
       class="rccar-qmc-plot"
       style="--plot-ratio: 1.2; --crop-offset: -68.9%"
     >
-      <div class="rccar-qmc-crop" role="img" aria-label="Unstable action-value error plot">
+      <div class="rccar-qmc-crop" role="img" aria-label="Unstable action-value error plot; vertical axis is Q-error magnitude and brightness indicates replay sample count">
         <img class="rccar-qmc-source" src="/deck/rccar-q-mc-scatter-summary.svg" alt="" />
       </div>
     </figure>
@@ -13,7 +14,7 @@
       class="rccar-qmc-plot"
       style="--plot-ratio: 1.32; --crop-offset: -35.70%"
     >
-      <div v-click class="rccar-qmc-crop" role="img" aria-label="Stable action-value error plot">
+      <div v-click class="rccar-qmc-crop" role="img" aria-label="Stable action-value error plot; vertical axis is Q-error magnitude and brightness indicates replay sample count">
         <img class="rccar-qmc-source" src="/deck/rccar-q-mc-scatter-summary.svg" alt="" />
       </div>
     </figure>
@@ -31,12 +32,29 @@
 
 <style scoped>
 .rccar-qmc-plots {
+  position: relative;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1.2fr 1.32fr 1.34fr;
   column-gap: 1.18rem;
   align-items: center;
   width: 100%;
   height: 100%;
+  padding-left: 1.15rem;
+}
+
+.qmc-y-label {
+  position: absolute;
+  left: 0.03rem;
+  top: 49%;
+  transform: translateY(-50%) rotate(180deg);
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  color: #475569;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1;
 }
 
 .rccar-qmc-plot {
