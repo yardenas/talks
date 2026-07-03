@@ -1342,8 +1342,13 @@ Taylor expand critic SGD around an optimum under replay distribution $\mathcal{D
     <div class="text-[0.9rem]">
       <KatexBlock expr="\delta\theta^+=\underbrace{(I+\eta_\pi J_{\mathrm{red}})\delta\theta}_{\text{perfect critic dynamics}}\;+\;\underbrace{E_M\delta\theta}_{\text{finite critic lag}}" />
     </div>
-    <div class="text-[0.9rem]">
-      <KatexBlock expr="\|E_M\|\;\lesssim\;\underbrace{\mathrm{const.}\,\|A_{\mathcal D}^{-1}\|}_{\text{curvature amplification}}\;\underbrace{\exp\!\left(-\eta_Q M/\|A_{\mathcal D}^{-1}\|\right)}_{\text{critic catch-up after }M\text{ steps}}" />
+    <div class="flex items-center justify-center gap-[0.7rem]">
+      <div class="shrink-0 text-[0.9rem]">
+        <KatexBlock expr="\|E_M\|\;\lesssim\;\underbrace{\mathrm{const.}\,\|A_{\mathcal D}^{-1}\|}_{\text{curvature amplification}}\;\underbrace{\exp\!\left(-\eta_Q M/\|A_{\mathcal D}^{-1}\|\right)}_{\text{critic catch-up after }M\text{ steps}}" />
+      </div>
+      <div class="shrink-0 text-[0.9rem] ml-10 leading-tight">
+        <KatexBlock expr="\eta_QM\gg\|A_{\mathcal D}^{-1}\|\;\Longrightarrow\;\|E_M\|\to0" />
+      </div>
     </div>
   </div>
 </div>
