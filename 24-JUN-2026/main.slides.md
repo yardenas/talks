@@ -454,6 +454,82 @@ Fully autonomous robot learning
 
 ---
 
+# Data “Flywheel” Through Off-Policy RL
+
+<div class="mt-[3.0rem] flex h-[21.3rem] items-center justify-center">
+  <div class="relative aspect-[392.15953/127.08591] w-[94%] max-h-full">
+    <img
+      class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
+      src="/deck/rae-all.svg"
+      alt="Recycling off-policy data results"
+    />
+    <svg
+      class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+      viewBox="0 0 392.15953 127.08591"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <marker
+          id="trial-flywheel-arrowhead"
+          viewBox="0 0 4.2 4.2"
+          markerWidth="4.2"
+          markerHeight="4.2"
+          refX="3.8"
+          refY="2.1"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
+        >
+          <path
+            d="M0.8 0.8 L3.8 2.1 L0.8 3.4"
+            stroke="#111111"
+            stroke-width="0.65"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </marker>
+      </defs>
+      <path
+        d="M264.5 3.6 C253 -9.2 234 -9.4 221.7 3.8"
+        stroke="#111111"
+        stroke-width="0.85"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        marker-end="url(#trial-flywheel-arrowhead)"
+      />
+      <path
+        d="M264.5 3.0 C244 -11.0 197 -11.2 175.7 4.2"
+        stroke="#111111"
+        stroke-width="0.85"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        marker-end="url(#trial-flywheel-arrowhead)"
+      />
+      <path
+        d="M264.5 2.4 C234 -12.8 159 -13.0 129.7 4.6"
+        stroke="#111111"
+        stroke-width="0.85"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        marker-end="url(#trial-flywheel-arrowhead)"
+      />
+      <text
+        x="197"
+        y="-14"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-size="3"
+        fill="#111111"
+      >
+        ♻️
+      </text>
+    </svg>
+  </div>
+</div>
+
+<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
+---
+
 # ⚠️ Robots May Break ⚠️
 
 <!--
@@ -1407,19 +1483,6 @@ Learning without manual resets, relation to CMDPs
 
 <PaperTag conference="Initial results" year="" />
 
----
-
-# Recycling Off-Policy Data Accelerates Online Learning
-
-<div class="mt-[2.0rem] flex h-[21.3rem] items-center justify-center">
-  <img
-    class="block h-full w-[94%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/rae-all.svg"
-    alt="Recycling off-policy data results"
-  />
-</div>
-
-<PaperTag conference="Preprint" year="" href="https://arxiv.org/abs/2602.20220" />
 
 ---
 
