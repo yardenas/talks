@@ -815,7 +815,7 @@ Regret decomposition
 class: takeaways-slide
 ---
 
-# What We Learn From Safe Online RL?
+# Broader Principles That Carry Over?
 
 <div class="takeaways-profile">
   <div class="takeaways-profile-person">
@@ -1351,6 +1351,10 @@ Taylor expand critic SGD around an optimum under replay distribution $\mathcal{D
       </div>
     </div>
   </div>
+</div>
+
+<div class="absolute bottom-[0.72rem] left-[2.15rem] text-[0.52rem] leading-tight text-slate-500">
+  <a href="https://link.springer.com/book/10.1007/978-93-86279-38-5">Vivek S. Borkar (2008)</a>
 </div>
 
 ---
