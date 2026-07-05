@@ -464,7 +464,7 @@ Fully autonomous robot learning
       alt="Recycling off-policy data results"
     />
     <svg
-      class="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+      class="pointer-events-none absolute inset--1 h-full w-full overflow-visible"
       viewBox="0 0 392.15953 127.08591"
       fill="none"
       aria-hidden="true"
