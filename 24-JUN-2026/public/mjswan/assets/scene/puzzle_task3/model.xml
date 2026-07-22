@@ -1,5 +1,5 @@
 <mujoco model="button_inner">
-  <compiler angle="radian"/>
+  <compiler angle="radian" meshdir="../../common/meshes" texturedir="../../common/textures"/>
 
   <option impratio="10" integrator="implicitfast" cone="elliptic"/>
 

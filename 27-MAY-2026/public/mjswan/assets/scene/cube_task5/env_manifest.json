@@ -1,0 +1,529 @@
+{
+  "version": 1,
+  "source": "/Users/yardas/talks/27-MAY-2026/scripts/export_cube_wasm_assets.py",
+  "source_backend": "ogbench",
+  "env_name": "cube-double-singletask-task5-v0",
+  "seed": 0,
+  "model": {
+    "xml": "model.xml",
+    "assets": [
+      "../../common/meshes/base.stl",
+      "../../common/meshes/base_0.obj",
+      "../../common/meshes/base_1.obj",
+      "../../common/meshes/base_mount.stl",
+      "../../common/meshes/coupler.stl",
+      "../../common/meshes/driver.stl",
+      "../../common/meshes/follower.stl",
+      "../../common/meshes/forearm_0.obj",
+      "../../common/meshes/forearm_1.obj",
+      "../../common/meshes/forearm_2.obj",
+      "../../common/meshes/forearm_3.obj",
+      "../../common/meshes/pad.stl",
+      "../../common/meshes/shoulder_0.obj",
+      "../../common/meshes/shoulder_1.obj",
+      "../../common/meshes/shoulder_2.obj",
+      "../../common/meshes/silicone_pad.stl",
+      "../../common/meshes/spring_link.stl",
+      "../../common/meshes/upperarm_0.obj",
+      "../../common/meshes/upperarm_1.obj",
+      "../../common/meshes/upperarm_2.obj",
+      "../../common/meshes/upperarm_3.obj",
+      "../../common/meshes/wrist1_0.obj",
+      "../../common/meshes/wrist1_1.obj",
+      "../../common/meshes/wrist1_2.obj",
+      "../../common/meshes/wrist2_0.obj",
+      "../../common/meshes/wrist2_1.obj",
+      "../../common/meshes/wrist2_2.obj",
+      "../../common/meshes/wrist3.obj"
+    ],
+    "nq": 28,
+    "nv": 26,
+    "nu": 7,
+    "nbody": 28,
+    "ngeom": 66,
+    "nsite": 6,
+    "nlight": 2
+  },
+  "timing": {
+    "sim_dt": 0.002,
+    "ctrl_dt": 0.05,
+    "n_substeps": 25,
+    "episode_length": 500
+  },
+  "ids": {
+    "arm_joint_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "arm_qposadr": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "arm_dofadr": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "arm_actuator_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "gripper_actuator_ids": [
+      6
+    ],
+    "gripper_opening_qposadr": 6,
+    "pinch_site_id": 3,
+    "attach_site_id": 2,
+    "right_pad_body_id": 16,
+    "cube_qposadr": [
+      14,
+      21
+    ],
+    "cube_target_mocap_ids": [
+      0,
+      1
+    ],
+    "cube_geom_ids_list": [
+      [
+        62
+      ],
+      [
+        64
+      ]
+    ],
+    "cube_target_geom_ids_list": [
+      [
+        63
+      ],
+      [
+        65
+      ]
+    ]
+  },
+  "names": {
+    "body": [
+      "world",
+      "ur5e/",
+      "ur5e/base",
+      "ur5e/shoulder_link",
+      "ur5e/upper_arm_link",
+      "ur5e/forearm_link",
+      "ur5e/wrist_1_link",
+      "ur5e/wrist_2_link",
+      "ur5e/wrist_3_link",
+      "ur5e/robotiq/",
+      "ur5e/robotiq/base_mount",
+      "ur5e/robotiq/base",
+      "ur5e/robotiq/right_driver",
+      "ur5e/robotiq/right_coupler",
+      "ur5e/robotiq/right_spring_link",
+      "ur5e/robotiq/right_follower",
+      "ur5e/robotiq/right_pad",
+      "ur5e/robotiq/right_silicone_pad",
+      "ur5e/robotiq/left_driver",
+      "ur5e/robotiq/left_coupler",
+      "ur5e/robotiq/left_spring_link",
+      "ur5e/robotiq/left_follower",
+      "ur5e/robotiq/left_pad",
+      "ur5e/robotiq/left_silicone_pad",
+      "object_0",
+      "object_target_0",
+      "object_1",
+      "object_target_1"
+    ],
+    "geom": [
+      "floor",
+      "wall_0",
+      "wall_1",
+      "wall_2",
+      "wall_3",
+      "ur5e//unnamed_geom_0",
+      "ur5e//unnamed_geom_1",
+      "ur5e//unnamed_geom_2",
+      "ur5e//unnamed_geom_3",
+      "ur5e//unnamed_geom_4",
+      "ur5e//unnamed_geom_5",
+      "ur5e//unnamed_geom_6",
+      "ur5e//unnamed_geom_7",
+      "ur5e//unnamed_geom_8",
+      "ur5e//unnamed_geom_9",
+      "ur5e//unnamed_geom_10",
+      "ur5e//unnamed_geom_11",
+      "ur5e//unnamed_geom_12",
+      "ur5e//unnamed_geom_13",
+      "ur5e//unnamed_geom_14",
+      "ur5e//unnamed_geom_15",
+      "ur5e//unnamed_geom_16",
+      "ur5e//unnamed_geom_17",
+      "ur5e//unnamed_geom_18",
+      "ur5e//unnamed_geom_19",
+      "ur5e//unnamed_geom_20",
+      "ur5e//unnamed_geom_21",
+      "ur5e//unnamed_geom_22",
+      "ur5e//unnamed_geom_23",
+      "ur5e//unnamed_geom_24",
+      "ur5e//unnamed_geom_25",
+      "ur5e//unnamed_geom_26",
+      "ur5e//unnamed_geom_27",
+      "ur5e//unnamed_geom_28",
+      "ur5e/robotiq//unnamed_geom_0",
+      "ur5e/robotiq//unnamed_geom_1",
+      "ur5e/robotiq//unnamed_geom_2",
+      "ur5e/robotiq//unnamed_geom_3",
+      "ur5e/robotiq//unnamed_geom_4",
+      "ur5e/robotiq//unnamed_geom_5",
+      "ur5e/robotiq//unnamed_geom_6",
+      "ur5e/robotiq//unnamed_geom_7",
+      "ur5e/robotiq//unnamed_geom_8",
+      "ur5e/robotiq//unnamed_geom_9",
+      "ur5e/robotiq//unnamed_geom_10",
+      "ur5e/robotiq//unnamed_geom_11",
+      "ur5e/robotiq/right_pad1",
+      "ur5e/robotiq/right_pad2",
+      "ur5e/robotiq//unnamed_geom_14",
+      "ur5e/robotiq//unnamed_geom_15",
+      "ur5e/robotiq//unnamed_geom_16",
+      "ur5e/robotiq//unnamed_geom_17",
+      "ur5e/robotiq//unnamed_geom_18",
+      "ur5e/robotiq//unnamed_geom_19",
+      "ur5e/robotiq//unnamed_geom_20",
+      "ur5e/robotiq//unnamed_geom_21",
+      "ur5e/robotiq//unnamed_geom_22",
+      "ur5e/robotiq//unnamed_geom_23",
+      "ur5e/robotiq/left_pad1",
+      "ur5e/robotiq/left_pad2",
+      "ur5e/robotiq//unnamed_geom_26",
+      "ur5e/robotiq//unnamed_geom_27",
+      "object_0",
+      "target_object_0",
+      "object_1",
+      "target_object_1"
+    ],
+    "joint": [
+      "ur5e/shoulder_pan_joint",
+      "ur5e/shoulder_lift_joint",
+      "ur5e/elbow_joint",
+      "ur5e/wrist_1_joint",
+      "ur5e/wrist_2_joint",
+      "ur5e/wrist_3_joint",
+      "ur5e/robotiq/right_driver_joint",
+      "ur5e/robotiq/right_coupler_joint",
+      "ur5e/robotiq/right_spring_link_joint",
+      "ur5e/robotiq/right_follower_joint",
+      "ur5e/robotiq/left_driver_joint",
+      "ur5e/robotiq/left_coupler_joint",
+      "ur5e/robotiq/left_spring_link_joint",
+      "ur5e/robotiq/left_follower_joint",
+      "object_joint_0",
+      "object_joint_1"
+    ],
+    "actuator": [
+      "ur5e/shoulder_pan",
+      "ur5e/shoulder_lift",
+      "ur5e/elbow",
+      "ur5e/wrist_1",
+      "ur5e/wrist_2",
+      "ur5e/wrist_3",
+      "ur5e/robotiq/fingers_actuator"
+    ],
+    "site": [
+      "object_bounds",
+      "arm_bounds",
+      "ur5e/attachment_site",
+      "ur5e/robotiq/pinch",
+      "com_0",
+      "com_1"
+    ],
+    "light": [
+      "global",
+      "spotlight"
+    ],
+    "camera": [
+      "front",
+      "front_pixels"
+    ]
+  },
+  "reset": {
+    "qpos": [
+      -1.297672519612915,
+      -1.3288830783691787,
+      1.4024930660805477,
+      -1.6444063145062773,
+      -1.570796326794897,
+      -1.1688456128409175,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.42587249982930847,
+      -0.19129855152424466,
+      0.02,
+      -0.8372765699643177,
+      0.0,
+      0.0,
+      0.546779613179558,
+      0.41505477000340296,
+      0.2071480855317514,
+      0.02,
+      0.9944387504201954,
+      0.0,
+      0.0,
+      0.1053165308141152
+    ],
+    "qvel": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ctrl": [
+      -2.2092687082981746,
+      -1.5856021047491053,
+      2.078063705939797,
+      -2.0632581813799376,
+      -1.5707963372706106,
+      2.0999382073050223,
+      238.3204944941071
+    ],
+    "mocap_pos": [
+      0.425,
+      0.0,
+      0.02,
+      0.425,
+      0.0,
+      0.06
+    ],
+    "mocap_quat": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "target_xyzs": [
+      [
+        0.425,
+        0.0,
+        0.02
+      ],
+      [
+        0.425,
+        0.0,
+        0.06
+      ]
+    ],
+    "target_quats": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "successes": [
+      false,
+      false
+    ],
+    "observation": [
+      -1.297672519612915,
+      -1.3288830783691787,
+      1.4024930660805477,
+      -1.6444063145062773,
+      -1.570796326794897,
+      -1.1688456128409175,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0963491884299588,
+      2.8892232203391006,
+      2.909955365868766,
+      0.12847085914596731,
+      0.9917132843469916,
+      0.0,
+      0.0,
+      0.008724998293084818,
+      -1.9129855152424466,
+      0.2,
+      -0.8372765699643177,
+      0.0,
+      0.0,
+      0.546779613179558,
+      0.4020641092224257,
+      -0.9156115180987936,
+      -0.09945229996597027,
+      2.071480855317514,
+      0.2,
+      0.9944387504201954,
+      0.0,
+      0.0,
+      0.1053165308141152,
+      0.9778168566745591,
+      0.20946167860275744
+    ]
+  },
+  "constants": {
+    "action_low": [
+      -0.05,
+      -0.05,
+      -0.05,
+      -0.3,
+      -1.0
+    ],
+    "action_high": [
+      0.05,
+      0.05,
+      0.05,
+      0.3,
+      1.0
+    ],
+    "down_quat": [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    "xyz_center": [
+      0.425,
+      0.0,
+      0.0
+    ],
+    "workspace_bounds": [
+      [
+        0.25,
+        -0.35,
+        0.02
+      ],
+      [
+        0.6,
+        0.35,
+        0.35
+      ]
+    ],
+    "t_pa_pos": [
+      -8.326672684688674e-17,
+      0.0,
+      -0.1557999999999997
+    ],
+    "t_pa_quat": [
+      0.707106781186547,
+      1.1438961843189937e-16,
+      -1.1438961843189937e-16,
+      0.7071067811865468
+    ],
+    "ctrl_low": [
+      -6.2831,
+      -6.2831,
+      -3.1415,
+      -6.2831,
+      -6.2831,
+      -6.2831,
+      0.0
+    ],
+    "ctrl_high": [
+      6.2831,
+      6.2831,
+      3.1415,
+      6.2831,
+      6.2831,
+      6.2831,
+      255.0
+    ],
+    "arm_sampling_bounds": [
+      [
+        0.25,
+        -0.35,
+        0.2
+      ],
+      [
+        0.6,
+        0.35,
+        0.35
+      ]
+    ],
+    "cube_colors": [
+      [
+        0.96,
+        0.26,
+        0.33,
+        1.0
+      ],
+      [
+        0.35,
+        0.55,
+        0.91,
+        1.0
+      ]
+    ],
+    "cube_success_colors": [
+      [
+        0.99,
+        0.85,
+        0.86,
+        1.0
+      ],
+      [
+        0.86,
+        0.9,
+        0.98,
+        1.0
+      ]
+    ],
+    "num_cubes": 2,
+    "success_threshold": 0.04,
+    "observation_size": 37,
+    "action_size": 5
+  }
+}

@@ -3,10 +3,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "npm run build:mjswan && npm run build:mjswan-cube && slidev build main.slides.md",
+    "build": "npm run build:mjswan && slidev build main.slides.md",
+    "prebuild:mjswan": "node scripts/clean-viewer-build.mjs",
     "build:mjswan": "vite build --config viewer/vite.config.ts",
-    "build:mjswan-cube": "vite build --config viewer/vite.cube.config.ts",
-    "dev": "slidev main.slides.md --open",
+    "clean": "node scripts/clean-viewer-build.mjs --all",
+    "dev": "npm run build:mjswan && slidev main.slides.md --open",
     "export": "slidev export main.slides.md"
   },
   "dependencies": {

@@ -1,0 +1,10 @@
+/node_modules/
+/dist/
+/.uv-cache/
+/acfql-mpo-dyna-bon-ablation/
+__pycache__/
+*.py[cod]
+
+# The viewer app is generated in place beside its canonical runtime assets.
+/public/mjswan/index.html
+/public/mjswan/static/

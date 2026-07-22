@@ -8,7 +8,8 @@ fonts:
 # Beyond Priors: Reinforcement Learning During Deployment
 <div class="abs-bl mx-14 my-12 flex">
   <div class="ml-3 flex flex-col text-left">
-    <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div>
+    <!-- <div class="text-sm opacity-50">Google DeepMind, July 6, 2026</div> -->
+    <div class="text-sm opacity-50">Yarden <> Abhishek, July 21, 2026</div>
   </div>
 </div>
 
@@ -90,7 +91,7 @@ fonts:
 </div>
 
 <div class="intro-life">
-  <img src="/life.svg">
+  <img :src="'/life.svg'">
 </div>
 
 <div class="intro-media">
@@ -105,28 +106,28 @@ fonts:
       ></iframe>
     </div>
     <div class="intro-card">
-      <img src="/deck/batgalim.jpg" alt="Bat Galim">
+      <img :src="'/deck/batgalim.jpg'" alt="Bat Galim">
     </div>
   </div>
 
   <div class="intro-media-group intro-media-temi">
     <div class="intro-card intro-card--portrait">
-      <img src="/deck/temi1.png" alt="Temi">
+      <img :src="'/deck/temi1.png'" alt="Temi">
     </div>
   </div>
 
   <div class="intro-media-group intro-media-ethz">
     <div class="intro-card">
-      <img src="/deck/ch1.jpg" alt="Swiss landscape">
+      <img :src="'/deck/ch1.jpg'" alt="Swiss landscape">
     </div>
     <div class="intro-card">
-      <img src="/deck/ch.jpg" alt="Swiss landscape">
+      <img :src="'/deck/ch.jpg'" alt="Swiss landscape">
     </div>
     <div class="intro-card intro-card--focus-right">
-      <img src="/deck/PXL_20230228_105749773.jpg" alt="Bat Galim, Haifa">
+      <img :src="'/deck/PXL_20230228_105749773.jpg'" alt="Bat Galim, Haifa">
     </div>
     <div class="intro-card">
-      <img src="/deck/roni.jpg" alt="Roni">
+      <img :src="'/deck/roni.jpg'" alt="Roni">
     </div>
   </div>
 </div>
@@ -184,7 +185,7 @@ Fully autonomous robot learning
     <div class="mx-auto h-[19.55rem] w-[96%]">
       <img
         class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-        src="/deck/GettyImages-2235362094.webp"
+        :src="'/deck/GettyImages-2235362094.webp'"
         alt="Workers collecting robot training data"
       />
     </div>
@@ -203,7 +204,7 @@ Fully autonomous robot learning
     <div class="h-[17.7rem]">
       <img
         class="mx-auto block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/sim-online.png"
+        :src="'/deck/sim-online.png'"
         alt="Simulation and online reinforcement learning setup"
       />
     </div>
@@ -213,7 +214,7 @@ Fully autonomous robot learning
     <div class="flex h-[17.7rem] items-center justify-center">
       <img
         class="mx-auto block h-[16.2rem] w-[92%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/compare-dr-all.svg"
+        :src="'/deck/compare-dr-all.svg'"
         alt="Domain randomization sim-to-real gap comparison across all settings"
       />
     </div>
@@ -221,7 +222,7 @@ Fully autonomous robot learning
       <div class="flex items-center gap-[0.35rem]">
         <img
           class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
-          src="/deck/dhruva-tirumala.jpeg"
+          :src="'/deck/dhruva-tirumala.jpeg'"
           alt="Dhruva Tirumala"
         />
         <div class="text-[0.56rem] font-semibold leading-tight">Dhruva<br />Tirumala</div>
@@ -229,7 +230,7 @@ Fully autonomous robot learning
       <div class="flex items-center gap-[0.35rem]">
         <img
           class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
-          src="/deck/markus-wulfmeier.jpg"
+          :src="'/deck/markus-wulfmeier.jpg'"
           alt="Markus Wulfmeier"
         />
         <div class="text-[0.56rem] font-semibold leading-tight">Markus<br />Wulfmeier</div>
@@ -237,7 +238,7 @@ Fully autonomous robot learning
       <div class="flex items-center gap-[0.35rem]">
         <img
           class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
-          src="/deck/avatar_hu14165578538708235153.png"
+          :src="'/deck/avatar_hu14165578538708235153.png'"
           alt="Chenhao Li"
         />
         <div class="text-[0.56rem] font-semibold leading-tight">Chenhao<br />Li</div>
@@ -245,7 +246,7 @@ Fully autonomous robot learning
       <div class="flex items-center gap-[0.35rem]">
         <img
           class="h-[2rem] w-[2rem] rounded-full object-cover ring-[1px] ring-slate-300"
-          src="/deck/rene.jpeg"
+          :src="'/deck/rene.jpeg'"
           alt="René Zurbrügg"
         />
         <div class="text-[0.56rem] font-semibold leading-tight">René<br />Zurbrügg</div>
@@ -266,7 +267,7 @@ Fully autonomous robot learning
     <div class="h-[18.4rem] w-[88%]">
       <img
         class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-cover shadow-none"
-        src="/deck/image7.png"
+        :src="'/deck/image7.png'"
         alt="Many simulated robot environments running in parallel"
       />
     </div>
@@ -276,7 +277,7 @@ Fully autonomous robot learning
     <div class="w-[58%]">
       <img
         class="block h-auto w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image4.png"
+        :src="'/deck/image4.png'"
         alt="Real robot camera view"
       />
     </div>
@@ -332,7 +333,7 @@ Fully autonomous robot learning
 <div class="mt-[2.3rem] grid grid-cols-[1.18fr_1fr] items-center gap-[2.2rem]">
   <div class="h-[19rem]">
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-white object-contain" autoplay controls muted volume="0">
-      <source src="/videos/franka-learning.mp4" type="video/mp4" />
+      <source :src="'/videos/franka-learning.mp4'" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
         <a href="/videos/franka-learning.mp4">here</a>.
@@ -342,7 +343,7 @@ Fully autonomous robot learning
   <div class="h-[18.3rem]">
     <img
       class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/image13.png"
+      :src="'/deck/image13.png'"
       alt="Online learning success plot comparing retained data and baseline"
     />
   </div>
@@ -359,7 +360,7 @@ Fully autonomous robot learning
 >
   <img
     class="block h-full w-full object-contain"
-    src="/deck/image3.png"
+    :src="'/deck/image3.png'"
     alt="Stop robot abuse sign"
   />
 </div>
@@ -372,7 +373,7 @@ Fully autonomous robot learning
       Sim policy
     </div>
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/base-4.mp4" type="video/mp4" />
+      <source :src="'/videos/base-4.mp4'" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
         <a href="http://drive.google.com/file/d/1q2C8FrhnTGLXLsyA6-0JVwe2DRDAb72T/view">here</a>.
@@ -384,7 +385,7 @@ Fully autonomous robot learning
       Fine-tuned
     </div>
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-cover" autoplay controls muted volume="0">
-      <source src="/videos/100K-2-15s.mp4" type="video/mp4" />
+      <source :src="'/videos/100K-2-15s.mp4'" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
         <a href="http://drive.google.com/file/d/1pxbbmzqoZ8KKQM6YVZu84B2ry60oJjFV/view">here</a>.
@@ -395,7 +396,7 @@ Fully autonomous robot learning
     <div class="relative mx-auto aspect-[1643/1005] w-full">
       <img
         class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-        src="/deck/image12.png"
+        :src="'/deck/image12.png'"
         alt="Return over time with cooldown periods"
       />
       <svg
@@ -460,7 +461,7 @@ Fully autonomous robot learning
   <div class="relative aspect-[392.15953/127.08591] w-[94%] max-h-full">
     <img
       class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-      src="/deck/rae-all.svg"
+      :src="'/deck/rae-all.svg'"
       alt="Recycling off-policy data results"
     />
     <svg
@@ -539,7 +540,7 @@ Previous result showed that we can continue training online after simulated pre-
 <div class="mx-auto mt-[2.0rem] flex h-[7.7rem] w-[92%] items-center justify-center">
   <img
     class="block h-full w-full object-contain"
-    src="/deck/go1-crash.png"
+    :src="'/deck/go1-crash.png'"
     alt="Unitree Go1 robot after a crash"
   />
 </div>
@@ -548,14 +549,14 @@ Previous result showed that we can continue training online after simulated pre-
   <div>
     <img
       class="block aspect-video w-full rounded-[0.35rem] object-cover"
-      src="/deck/anymal.gif"
+      :src="'/deck/anymal.gif'"
       alt="ANYmal robot crashing into an obstacle"
     />
   </div>
   <div>
     <img
       class="block aspect-video w-full rounded-[0.35rem] object-cover"
-      src="/deck/nikita.gif"
+      :src="'/deck/nikita.gif'"
       alt="Robot completing the course elegantly"
     />
   </div>
@@ -651,7 +652,7 @@ A language for safe RL
     <div class="h-[12.85rem] w-full">
       <img
         class="block h-full w-full max-w-none object-contain"
-        src="/deck/teaser.svg"
+        :src="'/deck/teaser.svg'"
         alt="Pessimistic domain randomization teaser"
       />
     </div>
@@ -679,7 +680,7 @@ A language for safe RL
   <div class="mx-auto min-h-0 w-[92%]">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/real-world-safety.svg"
+      :src="'/deck/real-world-safety.svg'"
       alt="SPiDR real-world safety results"
     />
   </div>
@@ -687,7 +688,7 @@ A language for safe RL
   <div class="mx-auto min-h-0 w-[92%]">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/spidr-results.png"
+      :src="'/deck/spidr-results.png'"
       alt="SPiDR simulated safety and performance results"
     />
   </div>
@@ -718,7 +719,7 @@ class: text-center
   <div class="flex items-center gap-[0.45rem]">
     <img
       class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-      src="/deck/manuel-wendl.jpeg"
+      :src="'/deck/manuel-wendl.jpeg'"
       alt="Manuel Wendl"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
@@ -726,7 +727,7 @@ class: text-center
   <div class="flex items-center gap-[0.45rem]">
     <img
       class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-      src="/deck/manish.jpeg"
+      :src="'/deck/manish.jpeg'"
       alt="Manish Prajapat"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Manish<br />Prajapat</div>
@@ -734,7 +735,7 @@ class: text-center
   <div class="flex items-center gap-[0.45rem]">
     <img
       class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-      src="/deck/Andreas-Krause-2025.jpg"
+      :src="'/deck/Andreas-Krause-2025.jpg'"
       alt="Andreas Krause"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Andreas<br />Krause</div>
@@ -763,13 +764,13 @@ Online rollout
   <div class="h-[21.3rem] min-w-0">
     <img
       class="block h-full w-full object-contain"
-      src="/deck/sooper_schematic_simplified.png"
+      :src="'/deck/sooper_schematic_simplified.png'"
       alt="SOOPER safe exploration schematic and constraint equation"
     />
   </div>
   <div class="h-[21.3rem]">
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-contain" autoplay controls muted volume="0">
-      <source src="/videos/sooper-demo.DWH0Dlo-.mp4" type="video/mp4" />
+      <source :src="'/videos/sooper-demo.DWH0Dlo-.mp4'" type="video/mp4" />
       <p>
         Your browser does not support videos. You may download it
         <a href="http://drive.google.com/file/d/1RsE_Z7R1L35YGs6OAk_kLwSXYu-kwE3m/view">here</a>.
@@ -792,7 +793,7 @@ Reduction to “standard” MDPs
 <div class="mt-[0.85rem] flex h-[23.6rem] w-full items-center justify-center">
   <img
     class="block h-full w-full object-contain"
-    src="/deck/sooper_schematic.svg"
+    :src="'/deck/sooper_schematic.svg'"
     alt="SOOPER unconstrained planning MDP schematic"
   />
 </div>
@@ -847,7 +848,7 @@ Regret decomposition
     </svg>
     <img
       class="block h-full w-full object-contain"
-      src="/deck/sooper_schematic_simplified.png"
+      :src="'/deck/sooper_schematic_simplified.png'"
       alt="SOOPER safe exploration schematic and constraint equation"
     />
   </div>
@@ -864,7 +865,7 @@ Regret decomposition
     <div class="relative h-full aspect-[138.74227/185.78385]">
       <img
         class="block h-full w-full object-contain"
-        src="/deck/hardware.svg"
+        :src="'/deck/hardware.svg'"
         alt="Real robotic system used for SOOPER experiments"
       />
       <svg class="pointer-events-none absolute inset--8 h-full w-full overflow-visible" viewBox="0 0 138.74227 185.78385" aria-hidden="true">
@@ -880,7 +881,7 @@ Regret decomposition
   </div>
   <div class="h-[21.5rem]">
     <SlidevVideo class="block h-full w-full rounded-[0.35rem] bg-slate-950 object-contain" autoplay controls loop muted volume="0">
-      <source src="/videos/timelapse.BoG5wRG9.mp4" type="video/mp4" />
+      <source :src="'/videos/timelapse.BoG5wRG9.mp4'" type="video/mp4" />
     </SlidevVideo>
   </div>
 </div>
@@ -897,7 +898,7 @@ class: takeaways-slide
   <div class="takeaways-profile-person">
     <img
       class="takeaways-profile-img"
-      src="/deck/manuel-wendl.jpeg"
+      :src="'/deck/manuel-wendl.jpeg'"
       alt="Manuel Wendl"
     />
     <div class="takeaways-profile-name">Manuel Wendl</div>
@@ -905,7 +906,7 @@ class: takeaways-slide
   <div class="takeaways-profile-person">
     <img
       class="takeaways-profile-img"
-      src="/deck/manish.jpeg"
+      :src="'/deck/manish.jpeg'"
       alt="Manish Prajapat"
     />
     <div class="takeaways-profile-name">Manish<br />Prajapat</div>
@@ -913,7 +914,7 @@ class: takeaways-slide
   <div class="takeaways-profile-person">
     <img
       class="takeaways-profile-img"
-      src="/deck/Andreas-Krause-2025.jpg"
+      :src="'/deck/Andreas-Krause-2025.jpg'"
       alt="Andreas Krause"
     />
     <div class="takeaways-profile-name">Andreas<br />Krause</div>
@@ -921,7 +922,7 @@ class: takeaways-slide
 </div>
 
 <div class="takeaways-cheese-figure">
-  <img class="takeaways-cheese" src="/deck/Swiss_cheese_model_textless.svg" alt="Swiss cheese model of layered safety barriers" />
+  <img class="takeaways-cheese" :src="'/deck/Swiss_cheese_model_textless.svg'" alt="Swiss cheese model of layered safety barriers" />
   <div class="takeaways-cheese-ref">
     Source: <a href="https://en.wikipedia.org/wiki/Swiss_cheese_model">Wikipedia, Swiss cheese model</a>
   </div>
@@ -1300,14 +1301,14 @@ Manipulation
     <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
       <iframe
         class="block h-full w-full border-0"
-        src="/mjswan/index.html?scene=Puzzle%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0"
+        :src="'/mjswan/index.html?scene=Puzzle%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0'"
         title="OGBench puzzle MuJoCo WASM demo"
       />
     </div>
     <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
       <iframe
         class="block h-full w-full border-0"
-        src="/mjswan-cube/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0"
+        :src="'/mjswan/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=1&panel=0'"
         title="OGBench cube MuJoCo WASM demo"
       />
     </div>
@@ -1326,7 +1327,7 @@ Scaling to foundation models
 <div class="mx-auto mt-[2.3rem] flex h-[20.2rem] w-[54rem] items-center justify-center">
   <img
     class="block h-full w-full rounded-[0.35rem] object-contain"
-    src="/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif"
+    :src="'/videos/560167437-1f72ccca-5b90-4d6c-86c5-a423b686314c.gif'"
     alt="Q-guided flow matching rollout for VLA scaling"
   />
 </div>
@@ -1339,7 +1340,7 @@ layout: cover
 
 <div class="absolute bottom-0 right-0 top-0 w-[43%] overflow-hidden border-l border-slate-200 bg-white">
   <img
-    src="/deck/london-tube-abstract.svg"
+    :src="'/deck/london-tube-abstract.svg'"
     class="absolute left-0 top-[-4.4rem] h-[112%] w-full object-cover"
     style="object-position: 58% center;"
     alt=""
@@ -1442,7 +1443,7 @@ Learning without manual resets, relation to CMDPs
   <div class="flex items-center gap-[0.45rem]">
     <img
       class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-      src="/deck/manuel-wendl.jpeg"
+      :src="'/deck/manuel-wendl.jpeg'"
       alt="Manuel Wendl"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Manuel Wendl</div>
@@ -1450,7 +1451,7 @@ Learning without manual resets, relation to CMDPs
   <div class="flex items-center gap-[0.45rem]">
     <img
       class="h-[2.05rem] w-[2.05rem] rounded-full object-cover ring-[1px] ring-slate-300"
-      src="/deck/Andreas-Krause-2025.jpg"
+      :src="'/deck/Andreas-Krause-2025.jpg'"
       alt="Andreas Krause"
     />
     <div class="text-[0.68rem] font-semibold leading-tight">Andreas<br />Krause</div>
@@ -1461,10 +1462,10 @@ Learning without manual resets, relation to CMDPs
   <div class="grid w-[92%] grid-cols-[1.15fr_0.85fr] items-center gap-[2.05rem]">
     <img
       class="block h-[13.4rem] w-full object-contain"
-      src="/deck/recovery.png"
+      :src="'/deck/recovery.png'"
       alt="Recovery effort examples for humanoid poses"
     />
-    <div class="h-[13.4rem] overflow-hidden rounded-[0.35rem] bg-slate-950"><img class="block h-[17rem] w-full -translate-y-[3.25rem] object-contain" src="/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif" alt="Odyn locomotion rollout" /></div>
+    <div class="h-[13.4rem] overflow-hidden rounded-[0.35rem] bg-slate-950"><img class="block h-[17rem] w-full -translate-y-[3.25rem] object-contain" :src="'/deck/rank_02_cand_01_traj_000_start_5492_pi_expansion.gif'" alt="Odyn locomotion rollout" /></div>
   </div>
 
   <div class="w-[92%] mt-[2rem] text-center text-[0.9rem] leading-tight">
@@ -1492,7 +1493,7 @@ The performance argument is broad simulated coverage, not one cherry-picked task
 <div class="mx-auto mt-[2.2rem] flex h-[21.3rem] w-[56rem] items-center justify-center">
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/simulated.svg"
+    :src="'/deck/simulated.svg'"
     alt="SPiDR simulated performance across tasks"
   />
 </div>
@@ -1551,7 +1552,7 @@ MuJoCo Wrap as simulator
 <div class="h-[21.3rem] min-w-0 rounded-[0.35rem]">
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/ogbench_puzzle_parallel_tile.gif"
+    :src="'/deck/ogbench_puzzle_parallel_tile.gif'"
     alt="Parallel OGBench puzzle rollouts"
   />
 </div>
@@ -1559,12 +1560,12 @@ MuJoCo Wrap as simulator
 <div class="grid gap-3">
   <img
     class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_ik_throughput.svg"
+    :src="'/deck/puzzle_ik_throughput.svg'"
     alt="Puzzle inverse kinematics throughput"
   />
   <img
     class="block h-[9.25rem] w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/puzzle_mjx_backend_throughput.svg"
+    :src="'/deck/puzzle_mjx_backend_throughput.svg'"
     alt="Puzzle MJX backend throughput"
   />
 </div>
@@ -1653,7 +1654,7 @@ MuJoCo Wrap as simulator
 <div class="mt-[3.9rem] flex h-[20.8rem] items-center justify-center">
   <img
     class="block h-full w-[40%] rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/compare-dr.svg"
+    :src="'/deck/compare-dr.svg'"
     alt="Domain randomization comparison showing the number of simulated environments matters"
   />
 </div>
@@ -1673,24 +1674,24 @@ Runtime vs. Parallel Environments vs. Performance
   <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Franka</div>
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/franka-sweep-performance.svg"
+    :src="'/deck/franka-sweep-performance.svg'"
     alt="Franka performance sweep over eta and number of transitions"
   />
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/franka-sweep-runtime.svg"
+    :src="'/deck/franka-sweep-runtime.svg'"
     alt="Franka runtime sweep over eta and number of transitions"
   />
 
   <div class="text-right text-[0.68rem] font-semibold leading-tight text-slate-700">Go1</div>
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/go1-sweep-performance.svg"
+    :src="'/deck/go1-sweep-performance.svg'"
     alt="Go1 performance sweep over eta and number of transitions"
   />
   <img
     class="block h-full w-full rounded-[0.35rem] border-0 bg-transparent object-contain shadow-none"
-    src="/deck/go1-sweep-runtime.svg"
+    :src="'/deck/go1-sweep-runtime.svg'"
     alt="Go1 runtime sweep over eta and number of transitions"
   />
 </div>
@@ -1704,7 +1705,7 @@ Runtime vs. Parallel Environments vs. Performance
 <div class="mx-auto mt-[1.7rem] flex h-[23rem] w-[96%] items-center justify-center">
   <img
     class="block h-full w-full object-contain"
-    src="/deck/main_results.svg"
+    :src="'/deck/main_results.svg'"
     alt="SOOPER practice results"
   />
 </div>
@@ -1716,7 +1717,7 @@ Runtime vs. Parallel Environments vs. Performance
 # Taxonomy of MBRL Algorithms
 
 <div class="relative mx-auto mt-1 aspect-[1040/430] w-full max-w-[37rem]">
-  <img class="absolute inset-0 block h-full w-full object-contain" src="/deck/model_based_rl_pillars.svg" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
+  <img class="absolute inset-0 block h-full w-full object-contain" :src="'/deck/model_based_rl_pillars.svg'" alt="Three classical pillars labelled Lookahead policies, Value-expansion, and Dyna" />
   <div class="absolute left-[24.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.84rem] font-semibold leading-none text-black">Lookahead policies</div>
   <div class="absolute left-1/2 top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.84rem] font-semibold leading-none text-black">Value-expansion</div>
   <div class="absolute left-[75.5%] top-[63.2%] w-[21%] -translate-x-1/2 -translate-y-1/2 text-center text-[0.88rem] font-semibold leading-none text-black">Dyna</div>

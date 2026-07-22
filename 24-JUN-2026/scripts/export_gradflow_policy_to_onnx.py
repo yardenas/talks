@@ -16,8 +16,8 @@ from onnx import TensorProto, helper, numpy_helper
 
 ROOT = Path(__file__).resolve().parents[1]
 DYNA_MPO = Path("/Users/yardas/dyna-mpo")
-DEFAULT_MANIFEST = ROOT / "viewer/public/assets/scene/puzzle_task4/env_manifest.json"
-DEFAULT_OUTPUT = ROOT / "viewer/public/assets/scene/puzzle_task4/policy.onnx"
+DEFAULT_MANIFEST = ROOT / "public/mjswan/assets/scene/puzzle_task4/env_manifest.json"
+DEFAULT_OUTPUT = ROOT / "public/mjswan/assets/scene/puzzle_task4/policy.onnx"
 
 
 def _tensor(name: str, value: np.ndarray) -> onnx.TensorProto:

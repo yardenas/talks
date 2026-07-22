@@ -18,11 +18,11 @@ DEFAULT_RUN_ROOT = ROOT / "acfql-mpo-dyna-bon-ablation"
 
 TASKS = {
     "puzzle-3x3-play-singletask-task5-v0": {
-        "asset_dir": ROOT / "viewer/public/assets/scene/puzzle_task5",
+        "asset_dir": ROOT / "public/mjswan/assets/scene/puzzle_task5",
         "manifest_env": "puzzle-3x3-singletask-task5-v0",
     },
     "cube-double-play-singletask-task5-v0": {
-        "asset_dir": ROOT / "viewer/public-cube/assets/scene/cube_task5",
+        "asset_dir": ROOT / "public/mjswan/assets/scene/cube_task5",
         "manifest_env": "cube-double-singletask-task5-v0",
     },
 }
@@ -53,6 +53,13 @@ def _variant_name(flags: dict[str, Any]) -> str:
 
 def _safe_filename(name: str) -> str:
     return "".join(ch if ch.isalnum() or ch in "._-" else "_" for ch in name)
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 def _actor_params(payload: dict[str, Any]) -> dict[str, dict[str, np.ndarray]]:
@@ -212,7 +219,7 @@ def _export_task(
                 "path": output_name,
                 "default": variant == BEST_POLICY,
                 "checkpoint_step": checkpoint_step,
-                "checkpoint": str(checkpoint.relative_to(ROOT)),
+                "checkpoint": _display_path(checkpoint),
                 "metadata": {
                     "variant": variant,
                     "actor_num_samples": agent_flags.get("actor_num_samples"),

@@ -18,8 +18,10 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 DYNA_MPO = Path("/Users/yardas/dyna-mpo")
-DEFAULT_OUTPUT = ROOT / "viewer/public-cube/assets/scene/cube_task2"
+DEFAULT_OUTPUT = ROOT / "public/mjswan/assets/scene/cube_task2"
 DEFAULT_ENV_NAME = "cube-double-singletask-task2-v0"
+COMMON_MESH_DIR = ROOT / "public/mjswan/assets/common/meshes"
+COMMON_TEXTURE_DIR = ROOT / "public/mjswan/assets/common/textures"
 
 
 def _json_array(value: Any) -> list[Any]:
@@ -52,7 +54,7 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def _copy_referenced_assets(xml_path: Path, output_dir: Path) -> list[str]:
+def _copy_referenced_assets(xml_path: Path) -> list[str]:
     import ogbench
 
     ogbench_root = Path(ogbench.__file__).resolve().parent / "manipspace/descriptions"
@@ -69,8 +71,18 @@ def _copy_referenced_assets(xml_path: Path, output_dir: Path) -> list[str]:
         source = asset_index.get(name)
         if source is None:
             raise FileNotFoundError(f"Could not locate MuJoCo asset {name!r} under {ogbench_root}")
-        shutil.copy2(source, output_dir / name)
-        copied.append(name)
+        destination_dir = (
+            COMMON_TEXTURE_DIR
+            if source.suffix.lower() in {".png", ".jpg", ".jpeg"}
+            else COMMON_MESH_DIR
+        )
+        destination_dir.mkdir(parents=True, exist_ok=True)
+        destination = destination_dir / name
+        shutil.copy2(source, destination)
+        relative = Path(os.path.relpath(destination, xml_path.parent)).as_posix()
+        xml = xml.replace(f'file="{name}"', f'file="{relative}"')
+        copied.append(relative)
+    xml_path.write_text(xml)
     return copied
 
 
@@ -98,12 +110,10 @@ def main() -> None:
 
     args.output_dir.mkdir(parents=True, exist_ok=True)
     xml_path = args.output_dir / "model.xml"
-    mjb_path = args.output_dir / "model.mjb"
     manifest_path = args.output_dir / "env_manifest.json"
 
     mujoco.mj_saveLastXML(str(xml_path), model)
-    mujoco.mj_saveModel(model, str(mjb_path), None)
-    assets = _copy_referenced_assets(xml_path, args.output_dir)
+    assets = _copy_referenced_assets(xml_path)
 
     target_xyzs = np.asarray(
         [data.mocap_pos[mocap_id].copy() for mocap_id in env._cube_target_mocap_ids],
@@ -127,7 +137,6 @@ def main() -> None:
         "seed": args.seed,
         "model": {
             "xml": "model.xml",
-            "mjb": "model.mjb",
             "assets": assets,
             "nq": int(model.nq),
             "nv": int(model.nv),
@@ -199,14 +208,17 @@ def main() -> None:
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
     public_root = args.output_dir.parents[2] if len(args.output_dir.parents) >= 3 else args.output_dir.parent
-    asset_manifest = sorted(
+    asset_manifest = {
         path.relative_to(public_root).as_posix()
         for path in args.output_dir.iterdir()
         if path.is_file() and path.name != "index.json"
+    }
+    asset_manifest.update(
+        (args.output_dir / path).resolve().relative_to(public_root.resolve()).as_posix()
+        for path in assets
     )
-    (args.output_dir / "index.json").write_text(json.dumps(asset_manifest, indent=2))
+    (args.output_dir / "index.json").write_text(json.dumps(sorted(asset_manifest), indent=2))
     print(f"saved {xml_path}")
-    print(f"saved {mjb_path}")
     print(f"saved {manifest_path}")
     print(f"copied {len(assets)} assets")
     print(f"observation_size {manifest['constants']['observation_size']}")

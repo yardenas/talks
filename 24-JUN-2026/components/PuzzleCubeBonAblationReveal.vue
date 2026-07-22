@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useSlideContext } from '@slidev/client'
-import plotSvg from '../public/deck/puzzle_cube_dyna_bon_ablation_eval_success_puzzle_cube.svg?raw'
 
 const { $clicks } = useSlideContext()
 
+const plotSvg = ref('')
 const stageClass = computed(() => `stage-${Math.min($clicks.value, 3)}`)
+
+onMounted(async () => {
+  const response = await fetch('/deck/puzzle_cube_dyna_bon_ablation_eval_success_puzzle_cube.svg')
+  plotSvg.value = await response.text()
+})
 </script>
 
 <template>

@@ -6,7 +6,7 @@
       style="--plot-ratio: 1.2; --crop-offset: -68.9%"
     >
       <div class="rccar-qmc-crop" role="img" aria-label="Unstable action-value error plot; vertical axis is Q-error magnitude and brightness indicates replay sample count">
-        <img class="rccar-qmc-source" src="/deck/rccar-q-mc-scatter-summary.svg" alt="" />
+        <img class="rccar-qmc-source" :src="'/deck/rccar-q-mc-scatter-summary.svg'" alt="" />
       </div>
     </figure>
 
@@ -15,7 +15,7 @@
       style="--plot-ratio: 1.32; --crop-offset: -35.70%"
     >
       <div v-click class="rccar-qmc-crop" role="img" aria-label="Stable action-value error plot; vertical axis is Q-error magnitude and brightness indicates replay sample count">
-        <img class="rccar-qmc-source" src="/deck/rccar-q-mc-scatter-summary.svg" alt="" />
+        <img class="rccar-qmc-source" :src="'/deck/rccar-q-mc-scatter-summary.svg'" alt="" />
       </div>
     </figure>
 
@@ -24,7 +24,7 @@
       style="--plot-ratio: 1.34; --crop-offset: 0%"
     >
       <div v-click class="rccar-qmc-crop" role="img" aria-label="Stable and unstable return summary plot">
-        <img class="rccar-qmc-source" src="/deck/rccar-q-mc-scatter-summary.svg" alt="" />
+        <img class="rccar-qmc-source" :src="'/deck/rccar-q-mc-scatter-summary.svg'" alt="" />
       </div>
     </figure>
   </div>

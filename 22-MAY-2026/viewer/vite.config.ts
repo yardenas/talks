@@ -5,10 +5,11 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export default defineConfig({
   root: "viewer",
+  publicDir: false,
   base: "/mjswan/",
   plugins: [react(), vanillaExtractPlugin()],
   define: {
-    __APP_VERSION__: JSON.stringify("0.5.1-puzzle"),
+    __APP_VERSION__: JSON.stringify("0.5.1"),
     __MUJOCO_MT__: JSON.stringify(false),
   },
   resolve: {
@@ -18,9 +19,9 @@ export default defineConfig({
   },
   build: {
     outDir: "../public/mjswan",
-    emptyOutDir: true,
+    emptyOutDir: false,
     target: "es2022",
-    assetsDir: "assets",
+    assetsDir: "static",
     chunkSizeWarningLimit: 11000,
     rollupOptions: {
       input: path.resolve("viewer/index.html"),

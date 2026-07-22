@@ -1,8 +1,8 @@
 {
-  "version": "0.5.1-puzzle",
+  "version": "0.5.1",
   "projects": [
     {
-      "name": "Puzzle WASM",
+      "name": "Manipulation WASM",
       "id": null,
       "metadata": {},
       "scenes": [
@@ -87,6 +87,91 @@
             ],
             "distance": 1.4,
             "elevation": -28,
+            "azimuth": 0,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Cube task1",
+          "metadata": {},
+          "path": "assets/scene/cube_task1/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.35,
+            "elevation": -24,
+            "azimuth": 0,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Cube task2",
+          "metadata": {},
+          "path": "assets/scene/cube_task2/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.35,
+            "elevation": -24,
+            "azimuth": 0,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Cube task3",
+          "metadata": {},
+          "path": "assets/scene/cube_task3/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.35,
+            "elevation": -24,
+            "azimuth": 0,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Cube task4",
+          "metadata": {},
+          "path": "assets/scene/cube_task4/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.35,
+            "elevation": -24,
+            "azimuth": 0,
+            "enableShadows": true
+          }
+        },
+        {
+          "name": "Cube task5",
+          "metadata": {},
+          "path": "assets/scene/cube_task5/model.xml",
+          "policies": [],
+          "camera": {
+            "lookat": [
+              0.42,
+              0.0,
+              0.14
+            ],
+            "distance": 1.35,
+            "elevation": -24,
             "azimuth": 0,
             "enableShadows": true
           }

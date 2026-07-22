@@ -1,5 +1,9 @@
 */dist/
 */node_modules/
+**/.uv-cache/
+**/acfql-mpo-dyna-bon-ablation/
+**/__pycache__/
+*.py[cod]
 
 
 */.vscode

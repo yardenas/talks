@@ -124,7 +124,7 @@ Harder tasks
     <div class="h-[12.35rem] overflow-hidden rounded-[0.35rem] bg-slate-950">
       <iframe
         class="block h-full w-full border-0"
-        src="/mjswan-cube/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=random&panel=0"
+        src="/mjswan/index.html?scene=Cube%20task5&controller=onnx&autoplay=1&speed=1&seed=random&panel=0"
         title="OGBench cube MuJoCo WASM demo"
       />
     </div>
