@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract London Tube map</title>
+  <desc id="desc">A stylized abstract Tube-map composition with colored transit lines and station nodes on a white London map background.</desc>
+  <defs>
+    <style>
+      .line {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .station {
+        fill: #ffffff;
+        stroke: #0f172a;
+        stroke-width: 5;
+      }
+      .interchange {
+        fill: #ffffff;
+        stroke: #0f172a;
+        stroke-width: 7;
+      }
+      .label {
+        fill: #0f172a;
+        font-family: Inter, Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .small-label {
+        fill: #334155;
+        font-family: Inter, Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 650;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff" />
+
+  <g transform="translate(120 42)">
+    <path class="line" d="M40 540H244L340 444H526L608 362H852L938 276H1300" stroke="#e32017" stroke-width="22" />
+    <path class="line" d="M96 698L272 522L420 522L560 382L730 382L904 208L1270 208" stroke="#003688" stroke-width="22" />
+    <path class="line" d="M166 228H372L472 328H660L800 468H1034L1216 650" stroke="#0098d4" stroke-width="20" />
+    <path class="line" d="M102 648H360L468 540H654L786 408H1038L1198 248" stroke="#00782a" stroke-width="22" />
+    <path class="line" d="M430 166L558 294V518L692 652H1110" stroke="#b36305" stroke-width="20" />
+    <path class="line" d="M646 122V294L520 420V592L650 722H930L1058 594V414L1226 246" stroke="#ffd300" stroke-width="18" />
+    <path class="line" d="M312 750L488 574L676 574L830 420L1008 420L1224 636" stroke="#a0a5a9" stroke-width="20" />
+    <path class="line" d="M246 126L432 312V492L572 632L762 632L902 492V300L1078 124" stroke="#9b0056" stroke-width="18" />
+    <path class="line" d="M708 770L708 612L828 492L828 310L952 186" stroke="#000000" stroke-width="24" />
+    <path class="line" d="M708 770L708 612L828 492L828 310L952 186" stroke="#f8fafc" stroke-width="8" opacity="0.72" />
+  </g>
+
+  <g transform="translate(120 42)">
+    <circle class="station" cx="244" cy="540" r="13" />
+    <circle class="station" cx="340" cy="444" r="13" />
+    <circle class="interchange" cx="608" cy="362" r="17" />
+    <circle class="station" cx="852" cy="362" r="13" />
+    <circle class="interchange" cx="938" cy="276" r="17" />
+    <circle class="station" cx="272" cy="522" r="13" />
+    <circle class="station" cx="560" cy="382" r="13" />
+    <circle class="interchange" cx="730" cy="382" r="17" />
+    <circle class="station" cx="904" cy="208" r="13" />
+    <circle class="station" cx="372" cy="228" r="13" />
+    <circle class="interchange" cx="472" cy="328" r="17" />
+    <circle class="station" cx="660" cy="328" r="13" />
+    <circle class="station" cx="800" cy="468" r="13" />
+    <circle class="interchange" cx="1034" cy="468" r="17" />
+    <circle class="station" cx="360" cy="648" r="13" />
+    <circle class="station" cx="468" cy="540" r="13" />
+    <circle class="interchange" cx="786" cy="408" r="17" />
+    <circle class="station" cx="1038" cy="408" r="13" />
+    <circle class="station" cx="558" cy="294" r="13" />
+    <circle class="interchange" cx="558" cy="518" r="17" />
+    <circle class="station" cx="692" cy="652" r="13" />
+    <circle class="station" cx="1110" cy="652" r="13" />
+    <circle class="interchange" cx="646" cy="294" r="17" />
+    <circle class="station" cx="520" cy="420" r="13" />
+    <circle class="station" cx="650" cy="722" r="13" />
+    <circle class="station" cx="930" cy="722" r="13" />
+    <circle class="station" cx="1058" cy="594" r="13" />
+    <circle class="interchange" cx="1226" cy="246" r="17" />
+    <circle class="station" cx="488" cy="574" r="13" />
+    <circle class="station" cx="676" cy="574" r="13" />
+    <circle class="station" cx="830" cy="420" r="13" />
+    <circle class="station" cx="1008" cy="420" r="13" />
+    <circle class="station" cx="432" cy="312" r="13" />
+    <circle class="interchange" cx="572" cy="632" r="17" />
+    <circle class="station" cx="762" cy="632" r="13" />
+    <circle class="station" cx="902" cy="492" r="13" />
+    <circle class="station" cx="828" cy="492" r="13" />
+    <circle class="station" cx="828" cy="310" r="13" />
+    <circle class="station" cx="952" cy="186" r="13" />
+  </g>
+
+  <g transform="translate(120 42)">
+    <text class="label" x="562" y="337">Oxford Circus</text>
+    <text class="label" x="736" y="354">Bank</text>
+    <text class="label" x="966" y="257">Liverpool St</text>
+    <text class="small-label" x="1005" y="446">Canary Wharf</text>
+    <text class="small-label" x="1092" y="628">Greenwich</text>
+    <text class="small-label" x="656" y="748">Victoria</text>
+    <text class="small-label" x="604" y="544">Waterloo</text>
+    <text class="small-label" x="454" y="303">Paddington</text>
+    <text class="small-label" x="876" y="182">King's Cross</text>
+    <text class="small-label" x="1150" y="222">Stratford</text>
+  </g>
+</svg>

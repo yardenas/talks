@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/Inter-VariableFont_slnt,wght.ttf") format("truetype");
+  font-weight: 1 100 200 300 400 500 600 700 800 900 1000;
+  font-style: normal italic;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--mantine-color-body);
+  color: var(--mantine-color-text);
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.viewer {
+  position: absolute;
+  inset: 0;
+}
+
+.viewer canvas {
+  display: block;
+}
+
+.reward-hud {
+  position: absolute;
+  left: 0.45rem;
+  bottom: 0.45rem;
+  z-index: 6;
+  width: 8.25rem;
+  padding: 0.28rem 0.36rem 0.32rem;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(3, 8, 18, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.45rem 1.4rem rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(5px);
+}
+
+.reward-hud-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.05rem;
+  font-size: 0.56rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.reward-hud-header strong {
+  font-size: 0.62rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.reward-hud-sparkline {
+  display: block;
+  width: 100%;
+  height: 1.45rem;
+  overflow: visible;
+}
+
+.reward-hud-sparkline polyline {
+  fill: none;
+  stroke: #78c8ff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+.hud-error {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 16px 18px;
+  background: rgba(92, 16, 16, 0.9);
+  border: 1px solid rgba(255, 106, 106, 0.45);
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  max-width: min(420px, calc(100vw - 48px));
+}
+
+.hud-title {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+}
+
+.hud-message {
+  margin: 0;
+  opacity: 0.6;
+}

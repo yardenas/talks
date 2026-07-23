@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract Golden Gate Bridge</title>
+  <desc id="desc">A clean, cartoon-style illustration of the Golden Gate Bridge over blue water, with rolling hills and clouds.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dff5ff" />
+      <stop offset="1" stop-color="#f8fcff" />
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#78c8df" />
+      <stop offset="1" stop-color="#167ca6" />
+    </linearGradient>
+    <style>
+      .ink { stroke: #0f172a; stroke-linecap: round; stroke-linejoin: round; }
+      .cable { fill: none; stroke: #d8422b; stroke-width: 10; stroke-linecap: round; }
+      .suspender { stroke: #d8422b; stroke-width: 5; }
+      .wave { fill: none; stroke: #d9f5ff; stroke-width: 7; stroke-linecap: round; opacity: .78; }
+    </style>
+  </defs>
+
+  <rect width="800" height="1200" fill="url(#sky)" />
+
+  <g fill="#ffffff" opacity=".9">
+    <path d="M58 190c17-39 75-43 100-8 24-25 74-11 76 29H38c0-10 8-19 20-21Z" />
+    <path d="M518 112c24-48 91-48 116-4 37-25 90 1 89 42H487c0-19 12-34 31-38Z" />
+    <path d="M302 295c14-29 59-34 80-7 25-18 64 1 63 31H280c0-12 8-21 22-24Z" />
+  </g>
+
+  <path d="M0 505C116 434 203 443 309 508c94 58 163 63 245 8 92-63 161-52 246-8v227H0Z" fill="#76956b" />
+  <path d="M0 557c116-60 214-51 314 20 82 59 179 61 267 0 74-51 143-52 219-17v192H0Z" fill="#476b58" />
+  <path d="M0 655c129-34 238-25 341 28 92 47 187 45 277-2 62-33 123-37 182-20v113H0Z" fill="#2e5147" />
+
+  <path d="M0 714c196-31 401-24 800 10v476H0Z" fill="url(#water)" />
+  <g class="wave">
+    <path d="M45 821c73-22 142-22 211 0" />
+    <path d="M332 783c77-20 149-18 216 4" />
+    <path d="M556 896c66-21 127-20 186 1" />
+    <path d="M78 1017c93-28 182-26 266 3" />
+    <path d="M403 1092c91-24 181-20 270 10" />
+  </g>
+
+  <g>
+    <path class="cable" d="M-45 588C116 588 194 512 254 355" />
+    <path class="cable" d="M254 355c90 262 205 262 295 0" />
+    <path class="cable" d="M549 355c67 157 147 233 296 233" />
+
+    <g class="suspender">
+      <path d="M38 574v91M88 562v103M138 536v129M188 492v173" />
+      <path d="M305 482v183M358 553v112M412 557v108M466 486v179" />
+      <path d="M613 493v172M663 535v130M713 562v103M763 576v89" />
+    </g>
+
+    <g fill="#e65436" class="ink" stroke-width="9">
+      <path d="M207 667h94l-12-400h-70Zm20-315h54v70h-54Zm2 122h50v72h-50Z" />
+      <path d="M502 667h94l-12-400h-70Zm20-315h54v70h-54Zm2 122h50v72h-50Z" />
+    </g>
+
+    <path d="M-30 646H830v48H-30Z" fill="#e65436" class="ink" stroke-width="8" />
+    <path d="M-30 670H830" fill="none" class="ink" stroke-width="8" />
+    <g fill="#f8fafc">
+      <rect x="25" y="656" width="55" height="10" rx="5" />
+      <rect x="118" y="656" width="55" height="10" rx="5" />
+      <rect x="337" y="656" width="55" height="10" rx="5" />
+      <rect x="420" y="656" width="55" height="10" rx="5" />
+      <rect x="632" y="656" width="55" height="10" rx="5" />
+      <rect x="722" y="656" width="55" height="10" rx="5" />
+    </g>
+  </g>
+
+  <g transform="translate(108 930)">
+    <path d="M0 64c49-31 103-31 162 0l-12 22H13Z" fill="#f8fafc" class="ink" stroke-width="7" />
+    <path d="M81 5v59" class="ink" fill="none" stroke-width="7" />
+    <path d="M81 13 129 59H81Z" fill="#f4b740" class="ink" stroke-width="6" />
+    <path d="M81 20 43 59h38Z" fill="#ffffff" class="ink" stroke-width="6" />
+  </g>
+</svg>
